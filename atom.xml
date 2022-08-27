@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Song`s Blog</title>
+  
+  
+  <link href="https://songxwn.com/atom.xml" rel="self"/>
+  
+  <link href="https://songxwn.com/"/>
+  <updated>2022-08-27T03:44:17.404Z</updated>
+  <id>https://songxwn.com/</id>
+  
+  <author>
+    <name>Song</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Ubuntu netplan配置工具</title>
+    <link href="https://songxwn.com/netplan/"/>
+    <id>https://songxwn.com/netplan/</id>
+    <published>2022-08-27T02:54:00.000Z</published>
+    <updated>2022-08-27T03:44:17.404Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;netplan 从Ubuntu 18.04开始使用&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://netplan.io/examples&quot;&gt;官方配置指南&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Ubuntu" scheme="https://songxwn.com/categories/Ubuntu/"/>
+    
+    
+    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OSI七层网络参考模型 随笔</title>
+    <link href="https://songxwn.com/OSI/"/>
+    <id>https://songxwn.com/OSI/</id>
+    <published>2022-06-12T13:54:00.000Z</published>
+    <updated>2022-08-27T03:44:17.404Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;开放式系统互联模型（英语：Open System Interconnection Model，缩写：OSI；简称为OSI模型）是一种概念模型，由国际标准化组织提出，一个试图使各种计算机在世界范围内互连为网络的标准框架。定义于ISO&amp;#x2F;IEC 7498-1。&lt;/p&gt;
+&lt;p&gt;该模型将通信系统中的数据流划分为七个层，从分布式应用程序数据的最高层表示到跨通信介质传输数据的物理实现。每个中间层为其上一层提供功能，其自身功能则由其下一层提供。功能的类别通过标准的通信协议在软件中实现。&lt;/p&gt;
+&lt;p&gt;开放式系统互联模型的开发始于上世纪70年代后期，用以支持各种计算机联网方法的出现。在上世纪80年代，该模型成为国际标准化组织（ISO）开放系统互连小组的工作产品。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>QinQ 随笔</title>
+    <link href="https://songxwn.com/QINQ/"/>
+    <id>https://songxwn.com/QINQ/</id>
+    <published>2022-04-11T07:31:00.000Z</published>
+    <updated>2022-08-27T03:44:17.404Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;QinQ（802.1Q-in-802.1Q），也叫做VLAN Stacking或Double VLAN，由IEEE 802.1ad标准定义，&lt;br&gt;是一项扩展VLAN空间的技术，通过在802.1Q标签报文的基础上再增加一层802.1Q的Tag来达到扩展VLAN空间的目的。&lt;br&gt;一般应用在骨干网中，通过将用户私网VLAN Tag封装在公网VLAN Tag中，使报文带着两层VLAN Tag穿越运营商的骨干网络（公网），扩充VLAN数量，实现对用户的精细化管理。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="vpn" scheme="https://songxwn.com/tags/vpn/"/>
+    
+    <category term="vlan" scheme="https://songxwn.com/tags/vlan/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MPLS VPN随笔（L3 单域）</title>
+    <link href="https://songxwn.com/MPLS_VPN/"/>
+    <id>https://songxwn.com/MPLS_VPN/</id>
+    <published>2022-03-31T07:31:00.000Z</published>
+    <updated>2022-08-27T03:44:17.404Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;全称应该叫BGP&amp;#x2F;MPLS IP VPN，是一个多协议集合的三层VPN解决方案。&lt;/p&gt;
+&lt;p&gt;它使用MP-BGP在服务提供商骨干网上发布VPN路由，使用MPLS在服务提供商骨干网上转发VPN报文。&lt;/p&gt;
+&lt;p&gt;其中，MPLS标签由MP-BGP(内网)和LDP（公网）分发，公网标签也可以使用RSVP分发，用于流量工程。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="mpls" scheme="https://songxwn.com/tags/mpls/"/>
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="vpn" scheme="https://songxwn.com/tags/vpn/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>VXLAN 随笔</title>
+    <link href="https://songxwn.com/VXLAN/"/>
+    <id>https://songxwn.com/VXLAN/</id>
+    <published>2022-03-28T17:54:00.000Z</published>
+    <updated>2022-08-27T03:44:17.404Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;VXLAN（Virtual eXtensible Local Area Network，虚拟扩展局域网），&lt;br&gt;是由IETF定义的NVO3（Network Virtualization over Layer 3）标准技术之一，（还有NVGRE、STT等技术）&lt;br&gt;是对传统VLAN协议的一种扩展。VXLAN的特点是将L2的以太帧封装到UDP报文（即L2 over L4）中，并在L3网络中传输。&lt;/p&gt;
+&lt;p&gt;VXLAN本质上是一种隧道技术，在源网络设备与目的网络设备之间的IP网络上，建立一条逻辑隧道，&lt;br&gt;将用户侧报文经过特定的封装后通过这条隧道转发。从用户的角度来看，&lt;br&gt;接入网络的服务器就像是连接到了一个虚拟的二层交换机的不同端口上，&lt;br&gt;可以方便地进行二层通信。&lt;br&gt;已经是事实上的网络虚拟化标准，公有云（阿里云、华为云、AWS等）的VPC大多数都是用VXLAN来作为数据转发层面。&lt;br&gt;不止在虚拟化环境，还有园区网络、运营商网络也开始使用。(灵活的二层接入)&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="vxlan" scheme="https://songxwn.com/tags/vxlan/"/>
+    
+    <category term="l2vpn" scheme="https://songxwn.com/tags/l2vpn/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux下的网络测试</title>
+    <link href="https://songxwn.com/network-test/"/>
+    <id>https://songxwn.com/network-test/</id>
+    <published>2022-02-01T07:04:00.000Z</published>
+    <updated>2022-08-27T03:44:17.405Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;本文章介绍了 Linux下iperf3（点对点测试），speedtest（公网测试）的安装和使用方法。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Linux" scheme="https://songxwn.com/categories/Linux/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IPv6的ICMPv6协议</title>
+    <link href="https://songxwn.com/ipv6-icmpv6/"/>
+    <id>https://songxwn.com/ipv6-icmpv6/</id>
+    <published>2022-01-29T17:54:00.000Z</published>
+    <updated>2022-08-27T03:44:17.405Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;ICMPv6是IPv6的基础协议之一，协议类型号（即IPv6 Next Header）为58。&lt;br&gt;除了提供基本的检测网络连通性功能外，还提供了邻居发现(NDP)、无状态地址配置(SLAAC)、&lt;br&gt;重复地址检测（DAD）、PMTU等新功能。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="IPv6" scheme="https://songxwn.com/tags/IPv6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Windows上的IPv6</title>
+    <link href="https://songxwn.com/ipv6-Windows/"/>
+    <id>https://songxwn.com/ipv6-Windows/</id>
+    <published>2022-01-09T12:54:00.000Z</published>
+    <updated>2022-08-27T03:44:17.405Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;Windows和EUI-64&quot;&gt;&lt;a href=&quot;#Windows和EUI-64&quot; class=&quot;headerlink&quot; title=&quot;Windows和EUI-64&quot;&gt;&lt;/a&gt;Windows和EUI-64&lt;/h1&gt;&lt;p&gt;通常情况下，链路本地地址的接口ID是由MAC地址来生成的，标准叫做EUI-64。（RFC 2373）&lt;br&gt;生成的64bit接口ID,叫做接口标识符。&lt;br&gt;SLAAC（无状态分配）所产生的地址，其接口ID也会使用接口标识符。与链路本地地址的接口ID一样。&lt;br&gt;而这只是在Windows Vista和Windows 2008之前的情况下。&lt;br&gt;为了安全，Windows开始使用了随机化接口ID和临时地址。（RFC 3041）&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="IPv6" scheme="https://songxwn.com/tags/IPv6/"/>
+    
+    <category term="windows" scheme="https://songxwn.com/tags/windows/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IPv6 简笔</title>
+    <link href="https://songxwn.com/ipv6/"/>
+    <id>https://songxwn.com/ipv6/</id>
+    <published>2022-01-09T06:54:00.000Z</published>
+    <updated>2022-08-27T03:44:17.404Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;IPv6简介&quot;&gt;&lt;a href=&quot;#IPv6简介&quot; class=&quot;headerlink&quot; title=&quot;IPv6简介&quot;&gt;&lt;/a&gt;IPv6简介&lt;/h1&gt;&lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h2&gt;&lt;p&gt;本质上IPv6就是为了解决IPv4地址空间不够而出现的。&lt;br&gt;长度由IPv4的32bit，扩展到了128bit。可以说IPv6地址数量近乎无限，以万亿为单位都显不足，如沧海一粟一般。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="IPv6" scheme="https://songxwn.com/tags/IPv6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Windows 部署私有KMS服务器。</title>
+    <link href="https://songxwn.com/KMS-Windows/"/>
+    <id>https://songxwn.com/KMS-Windows/</id>
+    <published>2021-11-27T12:56:00.000Z</published>
+    <updated>2022-08-27T03:44:17.405Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;程序下载地址：&lt;a href=&quot;https://github.com/Wind4/vlmcsd&quot;&gt;https://github.com/Wind4/vlmcsd&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;此文章介绍，怎么在Windows上运行vlmcsd，并注册为服务。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="KMS" scheme="https://songxwn.com/categories/KMS/"/>
+    
+    
+    <category term="Windows" scheme="https://songxwn.com/tags/Windows/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>部署私有KMS服务器，并设置自动激活Windows和office</title>
+    <link href="https://songxwn.com/KMS/"/>
+    <id>https://songxwn.com/KMS/</id>
+    <published>2021-11-23T15:18:00.000Z</published>
+    <updated>2022-08-27T03:44:17.404Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;#Docker镜像地址： &lt;a href=&quot;https://hub.docker.com/r/mogeko/vlmcsd&quot;&gt;https://hub.docker.com/r/mogeko/vlmcsd&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;#此程序的单独地址： &lt;a href=&quot;https://github.com/Wind4/vlmcsd&quot;&gt;https://github.com/Wind4/vlmcsd&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;准备环境：&quot;&gt;&lt;a href=&quot;#准备环境：&quot; class=&quot;headerlink&quot; title=&quot;准备环境：&quot;&gt;&lt;/a&gt;准备环境：&lt;/h2&gt;&lt;p&gt;一台支持Docker的Linux服务器【运行KMS服务器】，运行在内网的DNS服务器【SRV记录】，DHCP服务器【分配DNS域名】。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="KMS" scheme="https://songxwn.com/categories/KMS/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://songxwn.com/hello-world/"/>
+    <id>https://songxwn.com/hello-world/</id>
+    <published>2021-11-22T22:44:34.000Z</published>
+    <updated>2022-08-27T03:44:17.404Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;欢迎来到我的博客！&quot;&gt;&lt;a href=&quot;#欢迎来到我的博客！&quot; class=&quot;headerlink&quot; title=&quot;欢迎来到我的博客！&quot;&gt;&lt;/a&gt;欢迎来到我的博客！&lt;/h2&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+</feed>
