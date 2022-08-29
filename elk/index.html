@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www.elastic.co/static-res/images/elk/elk-stack-elkb-diagram.svg">
 <meta property="article:published_time" content="2022-08-29T01:59:00.000Z">
-<meta property="article:modified_time" content="2022-08-29T02:17:56.298Z">
+<meta property="article:modified_time" content="2022-08-29T02:40:32.141Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="elk">
@@ -249,7 +249,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.2k 字
+          4.4k 字
         
       </span>
     
@@ -260,7 +260,7 @@
         
         
         
-          35 分钟
+          37 分钟
         
       </span>
     
@@ -305,7 +305,8 @@
                 
                 <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>“ELK”是三个开源项目的首字母缩写，这三个项目分别是：Elasticsearch、Logstash 和 Kibana。Elasticsearch 是一个搜索和分析引擎。Logstash 是服务器端数据处理管道，能够同时从多个来源采集数据，转换数据，然后将数据发送到诸如 Elasticsearch 等“存储库”中。Kibana 则可以让用户在 Elasticsearch 中使用图形和图表对数据进行可视化。</p>
 <p>目前最新的名字叫 Elastic Stack 是 ELK Stack 的更新换代产品。（增加了Beats）</p>
-<p><img src="https://www.elastic.co/static-res/images/elk/elk-stack-elkb-diagram.svg" srcset="/img/loading.gif" lazyload alt="upload successful"></p>
+<p><img src="https://www.elastic.co/static-res/images/elk/elk-stack-elkb-diagram.svg" srcset="/img/loading.gif" lazyload alt="示意图"></p>
+<p>注意：本文章主要用于syslog类型的日志收集，取消ES的加密访问是为了方便接入frostmourne进行日志告警。</p>
 <span id="more"></span>
 
 <h1 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h1><p>系统： AlmaLinux 9 （关闭SE Linux）</p>
@@ -315,7 +316,7 @@
 <p>官网文档：<a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rpm.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/rpm.html</a></p>
 <h1 id="官网下载地址"><a href="#官网下载地址" class="headerlink" title="官网下载地址"></a>官网下载地址</h1><p><a target="_blank" rel="noopener" href="https://www.elastic.co/cn/downloads/elasticsearch">Download Elasticsearch | Elastic</a></p>
 <p>下载RPM包</p>
-<h2 id="使用清华大学镜像源进行安装"><a href="#使用清华大学镜像源进行安装" class="headerlink" title="使用清华大学镜像源进行安装"></a>使用清华大学镜像源进行安装</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">[</span>elasticsearch<span class="hljs-punctuation">]</span><br>name=Elasticsearch repository for <span class="hljs-number">8.</span>x packages<br>baseurl=https<span class="hljs-punctuation">:</span><span class="hljs-comment">//mirrors.tuna.tsinghua.edu.cn/elasticstack/8.x/yum</span><br>gpgcheck=<span class="hljs-number">0</span><br>enabled=<span class="hljs-number">1</span><br>autorefresh=<span class="hljs-number">1</span><br>type=rpm-md<br></code></pre></td></tr></table></figure>
+<h2 id="使用清华大学镜像源进行安装"><a href="#使用清华大学镜像源进行安装" class="headerlink" title="使用清华大学镜像源进行安装"></a>使用清华大学镜像源进行安装</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs conf">[elasticsearch]<br>name=Elasticsearch repository for 8.x packages<br>baseurl=https://mirrors.tuna.tsinghua.edu.cn/elasticstack/8.x/yum<br>gpgcheck=0<br>enabled=1<br>autorefresh=1<br>type=rpm-md<br></code></pre></td></tr></table></figure>
 
 
 
@@ -334,7 +335,7 @@
 
 
 
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-comment">--------------------------- Security autoconfiguration information ------------------------------</span><br><br>Authentication <span class="hljs-keyword">and</span> authorization are enabled.<br>TLS <span class="hljs-keyword">for</span> <span class="hljs-keyword">the</span> transport <span class="hljs-keyword">and</span> HTTP layers is enabled <span class="hljs-keyword">and</span> configured.<br><br>The generated password <span class="hljs-keyword">for</span> <span class="hljs-keyword">the</span> elastic built-<span class="hljs-keyword">in</span> superuser is : wm7khlFyj3VrHKOtb5S9<br><br>If this node should join <span class="hljs-keyword">an</span> existing cluster, you can reconfigure this <span class="hljs-keyword">with</span><br><span class="hljs-string">&#x27;/usr/share/elasticsearch/bin/elasticsearch-reconfigure-node --enrollment-token &lt;token-here&gt;&#x27;</span><br><span class="hljs-keyword">after</span> creating <span class="hljs-keyword">an</span> enrollment <span class="hljs-keyword">token</span> <span class="hljs-keyword">on</span> <span class="hljs-title">your</span> <span class="hljs-title">existing</span> <span class="hljs-title">cluster</span>.<br><br>You can complete <span class="hljs-keyword">the</span> following actions <span class="hljs-keyword">at</span> <span class="hljs-keyword">any</span> <span class="hljs-built_in">time</span>:<br><br>Reset <span class="hljs-keyword">the</span> password <span class="hljs-keyword">of</span> <span class="hljs-keyword">the</span> elastic built-<span class="hljs-keyword">in</span> superuser <span class="hljs-keyword">with</span> <br><span class="hljs-string">&#x27;/usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic&#x27;</span>.<br><br>Generate <span class="hljs-keyword">an</span> enrollment <span class="hljs-keyword">token</span> <span class="hljs-keyword">for</span> Kibana instances <span class="hljs-keyword">with</span> <br> <span class="hljs-string">&#x27;/usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s kibana&#x27;</span>.<br><br>Generate <span class="hljs-keyword">an</span> enrollment <span class="hljs-keyword">token</span> <span class="hljs-keyword">for</span> Elasticsearch nodes <span class="hljs-keyword">with</span> <br><span class="hljs-string">&#x27;/usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s node&#x27;</span>.<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs log">--------------------------- Security autoconfiguration information ------------------------------<br><br>Authentication and authorization are enabled.<br>TLS for the transport and HTTP layers is enabled and configured.<br><br>The generated password for the elastic built-in superuser is : wm7khlFyj3VrHKOtb5S9<br><br>If this node should join an existing cluster, you can reconfigure this with<br>&#x27;/usr/share/elasticsearch/bin/elasticsearch-reconfigure-node --enrollment-token &lt;token-here&gt;&#x27;<br>after creating an enrollment token on your existing cluster.<br><br>You can complete the following actions at any time:<br><br>Reset the password of the elastic built-in superuser with <br>&#x27;/usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic&#x27;.<br><br>Generate an enrollment token for Kibana instances with <br> &#x27;/usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s kibana&#x27;.<br><br>Generate an enrollment token for Elasticsearch nodes with <br>&#x27;/usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s node&#x27;.<br></code></pre></td></tr></table></figure>
 
 <h3 id="访问测试"><a href="#访问测试" class="headerlink" title="访问测试"></a>访问测试</h3><p><a target="_blank" rel="noopener" href="https://192.168.198.6:9200/">https://192.168.198.6:9200</a> 使用HTTPS访问测试，用管理员账号密码。</p>
 <h1 id="Elasticsearch-配置"><a href="#Elasticsearch-配置" class="headerlink" title="Elasticsearch 配置"></a>Elasticsearch 配置</h1><h3 id="切换客户API为不加密，HTTP访问。"><a href="#切换客户API为不加密，HTTP访问。" class="headerlink" title="切换客户API为不加密，HTTP访问。"></a>切换客户API为不加密，HTTP访问。</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim /etc/elasticsearch/elasticsearch.yml <br></code></pre></td></tr></table></figure>
@@ -369,7 +370,11 @@
 <p>&#x3D;&#x3D;修改systemd服务文件。&#x3D;&#x3D;</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[Service]</span><br><span class="hljs-attr">Type</span>=simple<br><span class="hljs-attr">User</span>=root<br><span class="hljs-attr">Group</span>=root<br></code></pre></td></tr></table></figure>
 
-<p>需要修改启用用户为ROOT才能使用小于1024的端口号。</p>
+<p>需要修改启动用户为ROOT才能使用小于1024的端口号。</p>
+<h1 id="Kibana-WEB配置"><a href="#Kibana-WEB配置" class="headerlink" title="Kibana WEB配置"></a>Kibana WEB配置</h1><h2 id="创建数据视图"><a href="#创建数据视图" class="headerlink" title="创建数据视图"></a>创建数据视图</h2><p>在主菜单-Stack Management-Kibana-数据视图里面创建</p>
+<p>参考文档： <a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/kibana/current/data-views.html">https://www.elastic.co/guide/en/kibana/current/data-views.html</a></p>
+<p>使用类似 syslog* 匹配索引和日期。</p>
+<h2 id="索引管理"><a href="#索引管理" class="headerlink" title="索引管理"></a>索引管理</h2><p>在主菜单-Stack Management-数据-索引管理里面查看所有索引。</p>
 
                 
               </div>
