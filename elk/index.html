@@ -23,10 +23,10 @@
 <meta property="og:site_name" content="Song&#96;s Blog">
 <meta property="og:description" content="介绍“ELK”是三个开源项目的首字母缩写，这三个项目分别是：Elasticsearch、Logstash 和 Kibana。Elasticsearch 是一个搜索和分析引擎。Logstash 是服务器端数据处理管道，能够同时从多个来源采集数据，转换数据，然后将数据发送到诸如 Elasticsearch 等“存储库”中。Kibana 则可以让用户在 Elasticsearch 中使用图形和图表对数据">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-08-28T07:31:00.000Z">
-<meta property="article:modified_time" content="2022-08-29T01:58:35.021Z">
+<meta property="article:published_time" content="2022-08-29T01:59:00.000Z">
+<meta property="article:modified_time" content="2022-08-29T02:15:29.946Z">
 <meta property="article:author" content="Song">
-<meta property="article:tag" content="linux">
+<meta property="article:tag" content="Linux">
 <meta property="article:tag" content="elk">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -235,8 +235,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-08-28 15:31" pubdate>
-          2022年8月28日 下午
+        <time datetime="2022-08-29 09:59" pubdate>
+          2022年8月29日 上午
         </time>
       </span>
     
@@ -258,7 +258,7 @@
         
         
         
-          36 分钟
+          35 分钟
         
       </span>
     
@@ -320,8 +320,7 @@
 <p>#注意：关闭了GPG认证</p>
 <p>PS: <a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/8.3/rpm.html#rpm-repo">使用 RPM |安装 Elasticsearch弹性搜索指南 [8.3]</a></p>
 <p><code>dnf install elasticsearch logstash kibana</code></p>
-<p>#使用dnf进行安装</p>
-<p><code>systemctl enable --now elasticsearch.service kibana.service logstash.service </code></p>
+<h2 id="使用dnf进行安装"><a href="#使用dnf进行安装" class="headerlink" title="使用dnf进行安装"></a>使用dnf进行安装</h2><p><code>systemctl enable --now elasticsearch.service kibana.service logstash.service </code></p>
 <p>#启动并设定开机启动。</p>
 <h3 id="默认初始化配置"><a href="#默认初始化配置" class="headerlink" title="默认初始化配置"></a>默认初始化配置</h3><p>使用dnf安装的时候，需要检查输入日志，会有类似以下的输出。</p>
 <p>默认开启HTTPS，并生成默认管理员账号elastic账号的密码。可以使用下面命令进行重置密码。</p>
@@ -334,7 +333,7 @@
 
 <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-comment">--------------------------- Security autoconfiguration information ------------------------------</span><br><br>Authentication <span class="hljs-keyword">and</span> authorization are enabled.<br>TLS <span class="hljs-keyword">for</span> <span class="hljs-keyword">the</span> transport <span class="hljs-keyword">and</span> HTTP layers is enabled <span class="hljs-keyword">and</span> configured.<br><br>The generated password <span class="hljs-keyword">for</span> <span class="hljs-keyword">the</span> elastic built-<span class="hljs-keyword">in</span> superuser is : wm7khlFyj3VrHKOtb5S9<br><br>If this node should join <span class="hljs-keyword">an</span> existing cluster, you can reconfigure this <span class="hljs-keyword">with</span><br><span class="hljs-string">&#x27;/usr/share/elasticsearch/bin/elasticsearch-reconfigure-node --enrollment-token &lt;token-here&gt;&#x27;</span><br><span class="hljs-keyword">after</span> creating <span class="hljs-keyword">an</span> enrollment <span class="hljs-keyword">token</span> <span class="hljs-keyword">on</span> <span class="hljs-title">your</span> <span class="hljs-title">existing</span> <span class="hljs-title">cluster</span>.<br><br>You can complete <span class="hljs-keyword">the</span> following actions <span class="hljs-keyword">at</span> <span class="hljs-keyword">any</span> <span class="hljs-built_in">time</span>:<br><br>Reset <span class="hljs-keyword">the</span> password <span class="hljs-keyword">of</span> <span class="hljs-keyword">the</span> elastic built-<span class="hljs-keyword">in</span> superuser <span class="hljs-keyword">with</span> <br><span class="hljs-string">&#x27;/usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic&#x27;</span>.<br><br>Generate <span class="hljs-keyword">an</span> enrollment <span class="hljs-keyword">token</span> <span class="hljs-keyword">for</span> Kibana instances <span class="hljs-keyword">with</span> <br> <span class="hljs-string">&#x27;/usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s kibana&#x27;</span>.<br><br>Generate <span class="hljs-keyword">an</span> enrollment <span class="hljs-keyword">token</span> <span class="hljs-keyword">for</span> Elasticsearch nodes <span class="hljs-keyword">with</span> <br><span class="hljs-string">&#x27;/usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s node&#x27;</span>.<br></code></pre></td></tr></table></figure>
 
-<h3 id="访问测试"><a href="#访问测试" class="headerlink" title="访问测试"></a>访问测试</h3><p><a target="_blank" rel="noopener" href="https://192.168.198.6:9200/">&#x3D;&#x3D;https://192.168.198.6:9200==</a> &#x3D;&#x3D;使用HTTPS访问测试，用管理员账号密码。&#x3D;&#x3D;</p>
+<h3 id="访问测试"><a href="#访问测试" class="headerlink" title="访问测试"></a>访问测试</h3><p><a target="_blank" rel="noopener" href="https://192.168.198.6:9200/">https://192.168.198.6:9200</a> 使用HTTPS访问测试，用管理员账号密码。</p>
 <h1 id="Elasticsearch-配置"><a href="#Elasticsearch-配置" class="headerlink" title="Elasticsearch 配置"></a>Elasticsearch 配置</h1><h3 id="切换客户API为不加密，HTTP访问。"><a href="#切换客户API为不加密，HTTP访问。" class="headerlink" title="切换客户API为不加密，HTTP访问。"></a>切换客户API为不加密，HTTP访问。</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim /etc/elasticsearch/elasticsearch.yml <br></code></pre></td></tr></table></figure>
 
 <p>打开文件</p>
@@ -358,7 +357,7 @@
 <p>PS： 参考 <a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-minimal-setup.html#add-built-in-users">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-minimal-setup.html#add-built-in-users</a></p>
 <h1 id="Logstash-配置"><a href="#Logstash-配置" class="headerlink" title="Logstash 配置"></a>Logstash 配置</h1><h2 id="开启syslog，将数据转发给ES"><a href="#开启syslog，将数据转发给ES" class="headerlink" title="开启syslog，将数据转发给ES."></a>开启syslog，将数据转发给ES.</h2><p><code>vim /etc/logstash/conf.d/syslog.conf</code></p>
 <p>创建修改syslog配置文件</p>
-<figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs puppet"><span class="hljs-keyword">input</span> &#123;<br>  syslog &#123;<br>    <span class="hljs-attr">type</span> =&gt; <span class="hljs-string">&quot;system-syslog&quot;</span><br>    <span class="hljs-attr">port</span> =&gt; <span class="hljs-number">514</span><br>  &#125;<br>&#125;<br><br><span class="hljs-keyword">output</span> &#123;<br>  elasticsearch &#123;<br>    <span class="hljs-attr">hosts</span> =&gt; [<span class="hljs-string">&quot;http://127.0.0.1:9200&quot;</span>]<br>    <span class="hljs-attr">index</span> =&gt; <span class="hljs-string">&quot;system-syslog-%&#123;+YYYY.MM&#125;&quot;</span><br> <span class="hljs-attr">user</span> =&gt; <span class="hljs-string">&quot;elastic&quot;</span><br>    <span class="hljs-attr">password</span> =&gt; <span class="hljs-string">&quot;2H*Y9rL5D=xFbvLAz_Nr&quot;</span><br>  &#125;<br>&#125; <br><br></code></pre></td></tr></table></figure>
+<figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs puppet"><span class="hljs-keyword">input</span> &#123;<br>  syslog &#123;<br>    <span class="hljs-attr">type</span> =&gt; <span class="hljs-string">&quot;system-syslog&quot;</span><br>    <span class="hljs-attr">port</span> =&gt; <span class="hljs-number">514</span><br>  &#125;<br>&#125;<br><br><span class="hljs-keyword">output</span> &#123;<br>  elasticsearch &#123;<br>    <span class="hljs-attr">hosts</span> =&gt; [<span class="hljs-string">&quot;http://127.0.0.1:9200&quot;</span>]<br>    <span class="hljs-attr">index</span> =&gt; <span class="hljs-string">&quot;system-syslog-%&#123;+YYYY.MM&#125;&quot;</span><br>    <span class="hljs-attr">user</span> =&gt; <span class="hljs-string">&quot;elastic&quot;</span><br>    <span class="hljs-attr">password</span> =&gt; <span class="hljs-string">&quot;2H*Y9rL5D=xFbvLAz_Nr&quot;</span><br>  &#125;<br>&#125; <br><br></code></pre></td></tr></table></figure>
 
 <p>配置为syslog输入，端口为默认的514。</p>
 <p>将数据输出到ES，配置索引前缀为 system-syslog，按月分割索引。</p>
@@ -401,7 +400,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/linux/">#linux</a>
+        <a href="/tags/Linux/">#Linux</a>
       
         <a href="/tags/elk/">#elk</a>
       
@@ -428,7 +427,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年8月28日</div>
+          <div>2022年8月29日</div>
         </div>
       
       
