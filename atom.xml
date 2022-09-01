@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2022-08-29T02:40:32.141Z</updated>
+  <updated>2022-09-01T15:01:35.254Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Sublime Text4 4126 安装激活</title>
+    <link href="https://songxwn.com/Sublime_Text4/"/>
+    <id>https://songxwn.com/Sublime_Text4/</id>
+    <published>2022-09-01T15:00:00.000Z</published>
+    <updated>2022-09-01T15:01:35.254Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;此教程用于Windows 下Sublime Text4 4126版本的安装和激活。&lt;/p&gt;
+&lt;p&gt;官网： &lt;a href=&quot;https://www.sublimetext.com/&quot;&gt;https://www.sublimetext.com&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="IDE" scheme="https://songxwn.com/categories/IDE/"/>
+    
+    
+    <category term="Windows" scheme="https://songxwn.com/tags/Windows/"/>
+    
+    <category term="IDE" scheme="https://songxwn.com/tags/IDE/"/>
+    
+  </entry>
   
   <entry>
     <title>ELK Stack 安装教程，RHEL及衍生系统。</title>
