@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2022-09-06T06:42:36.345Z</updated>
+  <updated>2022-09-30T09:06:25.581Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Juniper MPLS L3VPN</title>
+    <link href="https://songxwn.com/Juniper_L3-MPLS/"/>
+    <id>https://songxwn.com/Juniper_L3-MPLS/</id>
+    <published>2022-09-30T01:59:00.000Z</published>
+    <updated>2022-09-30T09:06:25.581Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="vpn" scheme="https://songxwn.com/tags/vpn/"/>
+    
+    <category term="juniper" scheme="https://songxwn.com/tags/juniper/"/>
+    
+  </entry>
   
   <entry>
     <title>Sublime Text4 4126 安装激活</title>

@@ -16,26 +16,26 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Windows和EUI-64通常情况下，链路本地地址的接口ID是由MAC地址来生成的，标准叫做EUI-64。（RFC 2373）生成的64bit接口ID,叫做接口标识符。SLAAC（无状态分配）所产生的地址，其接口ID也会使用接口标识符。与链路本地地址的接口ID一样。而这只是在Windows Vista和Windows 2008之前的情况下。为了安全，Windows开始使用了随机化接口ID和临时地">
+    <meta name="description" content="实验说明使用Juniper vMX进行实验 ISIS L2 作为 IGP打通底层路由。 LDP 作为公网MPLS标签分发。 PE之间使用MP-IBGP。 PS: 只有PE的配置 配置ISIS123456789101112131415161718192021222324252627set interfaces lo0 unit 0 family inet address 192.168.0.1&#x2F;32">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Windows上的IPv6">
-<meta property="og:url" content="https://songxwn.com/ipv6-Windows/index.html">
+<meta property="og:title" content="Juniper MPLS L3VPN">
+<meta property="og:url" content="https://songxwn.com/Juniper_L3-MPLS/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="Windows和EUI-64通常情况下，链路本地地址的接口ID是由MAC地址来生成的，标准叫做EUI-64。（RFC 2373）生成的64bit接口ID,叫做接口标识符。SLAAC（无状态分配）所产生的地址，其接口ID也会使用接口标识符。与链路本地地址的接口ID一样。而这只是在Windows Vista和Windows 2008之前的情况下。为了安全，Windows开始使用了随机化接口ID和临时地">
+<meta property="og:description" content="实验说明使用Juniper vMX进行实验 ISIS L2 作为 IGP打通底层路由。 LDP 作为公网MPLS标签分发。 PE之间使用MP-IBGP。 PS: 只有PE的配置 配置ISIS123456789101112131415161718192021222324252627set interfaces lo0 unit 0 family inet address 192.168.0.1&#x2F;32">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-01-09T12:54:00.000Z">
-<meta property="article:modified_time" content="2022-08-27T03:44:17.405Z">
+<meta property="article:published_time" content="2022-09-30T01:59:00.000Z">
+<meta property="article:modified_time" content="2022-09-30T09:06:25.581Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
-<meta property="article:tag" content="IPv6">
-<meta property="article:tag" content="windows">
+<meta property="article:tag" content="vpn">
+<meta property="article:tag" content="juniper">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Windows上的IPv6 - Song`s Blog</title>
+  <title>Juniper MPLS L3VPN - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -225,7 +225,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Windows上的IPv6"></span>
+            <span id="subtitle" data-typed-text="Juniper MPLS L3VPN"></span>
           
         </div>
 
@@ -236,8 +236,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-01-09 20:54" pubdate>
-          2022年1月9日 晚上
+        <time datetime="2022-09-30 09:59" pubdate>
+          2022年9月30日 上午
         </time>
       </span>
     
@@ -248,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.1k 字
+          2.6k 字
         
       </span>
     
@@ -259,7 +259,7 @@
         
         
         
-          18 分钟
+          22 分钟
         
       </span>
     
@@ -297,28 +297,38 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Windows上的IPv6</h1>
+            <h1 style="display: none">Juniper MPLS L3VPN</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Windows和EUI-64"><a href="#Windows和EUI-64" class="headerlink" title="Windows和EUI-64"></a>Windows和EUI-64</h1><p>通常情况下，链路本地地址的接口ID是由MAC地址来生成的，标准叫做EUI-64。（RFC 2373）<br>生成的64bit接口ID,叫做接口标识符。<br>SLAAC（无状态分配）所产生的地址，其接口ID也会使用接口标识符。与链路本地地址的接口ID一样。<br>而这只是在Windows Vista和Windows 2008之前的情况下。<br>为了安全，Windows开始使用了随机化接口ID和临时地址。（RFC 3041）</p>
-<span id="more"></span>
+                <h1 id="实验说明"><a href="#实验说明" class="headerlink" title="实验说明"></a>实验说明</h1><p>使用Juniper vMX进行实验</p>
+<p>ISIS L2 作为 IGP打通底层路由。</p>
+<p>LDP 作为公网MPLS标签分发。</p>
+<p>PE之间使用MP-IBGP。</p>
+<p>PS: 只有PE的配置</p>
+<h1 id="配置ISIS"><a href="#配置ISIS" class="headerlink" title="配置ISIS"></a>配置ISIS</h1><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">set</span> interfaces lo0 unit <span class="hljs-number">0</span> family inet address <span class="hljs-number">192.168.0.1</span>/<span class="hljs-number">32</span><br><span class="hljs-attribute">set</span> interfaces lo0 unit <span class="hljs-number">0</span> family iso address <span class="hljs-number">49</span>.<span class="hljs-number">0002</span>.<span class="hljs-number">0192</span>.<span class="hljs-number">0168</span>.<span class="hljs-number">0001</span>.<span class="hljs-number">00</span><br><span class="hljs-comment"># 配置ISO的 NET地址，用于ISIS</span><br><span class="hljs-attribute">set</span> protocols isis interface lo0.<span class="hljs-number">0</span> passive<br><br><span class="hljs-attribute">set</span> protocols isis level <span class="hljs-number">2</span> wide-metrics-only<br><span class="hljs-comment"># 开启L2路由器的宽度量值计算</span><br><span class="hljs-attribute">set</span> protocols isis level <span class="hljs-number">1</span> disable<br><span class="hljs-comment"># 关闭L1路由器</span><br><span class="hljs-attribute">set</span> interfaces ge-<span class="hljs-number">0</span>/<span class="hljs-number">0</span>/<span class="hljs-number">1</span> unit <span class="hljs-number">0</span> family inet address <span class="hljs-number">12.1.1.2</span>/<span class="hljs-number">24</span><br><span class="hljs-attribute">set</span> interfaces ge-<span class="hljs-number">0</span>/<span class="hljs-number">0</span>/<span class="hljs-number">1</span> unit <span class="hljs-number">0</span> family iso<br><span class="hljs-comment"># 开启物理接口的ISO，用于ISIS。</span><br><br><span class="hljs-attribute">set</span> protocols isis interface ge-<span class="hljs-number">0</span>/<span class="hljs-number">0</span>/<span class="hljs-number">1</span><br><br><span class="hljs-comment"># 宣告 物理接口</span><br><br><span class="hljs-attribute">set</span> protocols isis interface ge-<span class="hljs-number">0</span>/<span class="hljs-number">0</span>/<span class="hljs-number">1</span> point-to-point<br><br><span class="hljs-comment"># 配置邻居类型为P2P</span><br><br><span class="hljs-attribute">set</span> protocols isis interface ge-<span class="hljs-number">0</span>/<span class="hljs-number">0</span>/<span class="hljs-number">1</span> hello-padding disable<br><br><span class="hljs-comment"># 关闭Hello 报文填充</span><br><br><span class="hljs-attribute">set</span> protocols isis interface ge-<span class="hljs-number">0</span>/<span class="hljs-number">0</span>/<span class="hljs-number">1</span> level <span class="hljs-number">2</span> metric <span class="hljs-number">1000</span><br><span class="hljs-comment"># 配置ISIS 接口度量值</span><br></code></pre></td></tr></table></figure>
 
-<h1 id="随机标识符-x2F-接口ID"><a href="#随机标识符-x2F-接口ID" class="headerlink" title="随机标识符&#x2F;接口ID"></a>随机标识符&#x2F;接口ID</h1><p>由于EUI-64生成的接口标识符,是由MAC地址生成。所以很容易根据IPv6地址来推断出设备的MAC地址。<br>EUI-64 是将48bit的MAC地址，其第七位取反，然后中间填充FFFE组成64bit的接口ID。<br>所以Windows会随机生成 64bit的接口标识符。看下面的输出，链路本地地址明显是和MAC地址无关的。<br>此地址是固定，一般生成之后，不会改变。</p>
-<blockquote>
-<p>C:\Users\admin&gt; ipconfig &#x2F;all<br>  描述. . . . . . . . . . . . . . . : Intel(R) Wi-Fi 6 AX200 160MHz<br>  物理地址. . . . . . . . . . . . . : 46-68-5C-AA-41-11<br>  DHCP 已启用 . . . . . . . . . . . : 是<br>  自动配置已启用. . . . . . . . . . : 是<br>  本地链接 IPv6 地址. . . . . . . . : fe80::1e2:5910:14f3:a9d5%13(首选)</p>
-</blockquote>
-<h1 id="临时地址"><a href="#临时地址" class="headerlink" title="临时地址"></a>临时地址</h1><p>由于SLAAC产生的地址的接口ID，是接口标识符的，所以后64bit是基本不变的，这样很容易被跟踪。<br>所以需要临时地址。<br>临时地址也是一样随机生成64bit接口ID，用于主机作为源IP主动访问网站和应用。但为了安全，会经常变化。<br>如在接口重新连接的时候，或者临时IPv6生存期到期的时候。会重新随机生成另一个临时IPv6地址。<br>在某种情况下，你会看到多个临时IPv6地址。这是因为旧的临时地址过期的时候，旧地址还有建立的连接。</p>
-<h1 id="查看IPv6协议配置"><a href="#查看IPv6协议配置" class="headerlink" title="查看IPv6协议配置"></a>查看IPv6协议配置</h1><p>使用 Powershell命令 <code>get-netipv6protocol</code> </p>
-<blockquote>
-<p>DefaultHopLimit               : 128<br>NeighborCacheLimit(Entries)   : 256<br>RouteCacheLimit(Entries)      : 4096<br>ReassemblyLimit(Bytes)        : 262676960<br>IcmpRedirects                 : Enabled<br>SourceRoutingBehavior         : DontForward<br>DhcpMediaSense                : Enabled<br>MediaSenseEventLog            : Disabled<br>MldLevel                      : All<br>MldVersion                    : Version2<br>MulticastForwarding           : Disabled<br>GroupForwardedFragments       : Disabled<br>RandomizeIdentifiers          : Enabled  &#x2F;&#x2F;随机接口ID开启<br>AddressMaskReply              : Disabled<br>UseTemporaryAddresses         : Enabled  &#x2F;&#x2F;临时IPv6地址开启<br>MaxTemporaryDadAttempts       : 3        &#x2F;&#x2F;临时IPv6的重复地址检测尝试次数<br>MaxTemporaryValidLifetime     : 7.00:00:00 &#x2F;&#x2F;临时地址最大有效时间。<br>MaxTemporaryPreferredLifetime : 7.00:00:00<br>TemporaryRegenerateTime       : 00:00:05<br>MaxTemporaryDesyncTime        : 00:10:00<br>DeadGatewayDetection          : Enabled</p>
-</blockquote>
-<h1 id="SLAAC的DNS服务器地址分配–RDNSS"><a href="#SLAAC的DNS服务器地址分配–RDNSS" class="headerlink" title="SLAAC的DNS服务器地址分配–RDNSS"></a>SLAAC的DNS服务器地址分配–RDNSS</h1><p>源于一个较新的IPv6标准(RFC 8106)。从Windows 10 1703开始，Windows支持使用无状态获取DNS服务器了。<br>不过，DHCPv6 获取的DNS服务器优于通过RA报文获取的DNS服务器。<br>Android 从4.2开始支持，iOS 从4.1开始支持，MacOS从 10.7开始支持。</p>
-<p>PS：Android至今都不支持DHCPv6，很气人。</p>
-<p>来源： <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Comparison_of_IPv6_support_in_operating_systems">https://en.wikipedia.org/wiki/Comparison_of_IPv6_support_in_operating_systems</a></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc8106">https://datatracker.ietf.org/doc/html/rfc8106</a><br><a target="_blank" rel="noopener" href="https://www.networkacademy.io/ccna/ipv6/ipv6-on-windows">https://www.networkacademy.io/ccna/ipv6/ipv6-on-windows</a><br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/powershell/module/nettcpip/get-netipv6protocol?view=windowsserver2022-ps">https://docs.microsoft.com/en-us/powershell/module/nettcpip/get-netipv6protocol?view=windowsserver2022-ps</a></p>
-<p>PS：随机标识符和临时地址，其他系统也会使用，如MacOS从10.7也开始使用了，Android iOS Linux等系统较新版本可能会支持。</p>
+<h2 id="验证ISIS"><a href="#验证ISIS" class="headerlink" title="验证ISIS"></a>验证ISIS</h2><p><code>show isis adjacency </code></p>
+<p>#确认状态为UP</p>
+<p><code>show route protocol isis</code></p>
+<p>#查看通过ISIS学习的路由表</p>
+<h1 id="配置LDP"><a href="#配置LDP" class="headerlink" title="配置LDP"></a>配置LDP</h1><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs routeros"> <br><span class="hljs-built_in">set</span> protocols<span class="hljs-built_in"> ldp interface </span>all<br><span class="hljs-built_in">set</span> protocols<span class="hljs-built_in"> ldp interface </span>lo0.0<br><br><span class="hljs-comment"># 开启接口的LDP协议</span><br><span class="hljs-built_in">set</span> protocols<span class="hljs-built_in"> mpls interface </span>lo0.0<br><span class="hljs-built_in">set</span> protocols<span class="hljs-built_in"> mpls interface </span>all<br><br><span class="hljs-comment"># 开启接口的MPLS</span><br><br><br><span class="hljs-built_in">set</span> interfaces ge-0/0/9 unit 0 family<span class="hljs-built_in"> mpls </span><br><br><span class="hljs-comment"># 开启接口的MPLS</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="验证LDP"><a href="#验证LDP" class="headerlink" title="验证LDP"></a>验证LDP</h2><p><code>show ldp session</code></p>
+<p>##正常状态为：  Operational</p>
+<h1 id="配置MP-BGP"><a href="#配置MP-BGP" class="headerlink" title="配置MP-BGP"></a>配置MP-BGP</h1><figure class="highlight fsharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs fsharp"><span class="hljs-operator">|</span> <span class="hljs-operator">&lt;</span>br<span class="hljs-operator">&gt;</span><span class="hljs-built_in">set</span> routing<span class="hljs-operator">-</span>options router<span class="hljs-operator">-</span><span class="hljs-built_in">id</span> <span class="hljs-number">1.1</span><span class="hljs-number">.1</span><span class="hljs-number">.1</span><span class="hljs-operator">&lt;</span>br<span class="hljs-operator">&gt;</span># 配置全局的路由ID<span class="hljs-operator">&lt;</span>br<span class="hljs-operator">&gt;</span><span class="hljs-built_in">set</span> routing<span class="hljs-operator">-</span>options autonomous<span class="hljs-operator">-</span>system <span class="hljs-number">100</span><span class="hljs-operator">&lt;</span>br<span class="hljs-operator">&gt;</span># 配置全局的 AS号<span class="hljs-operator">&lt;</span>br<span class="hljs-operator">&gt;</span><span class="hljs-built_in">set</span> protocols bgp group RR <span class="hljs-keyword">type</span> <span class="hljs-title class_">internal</span><span class="hljs-operator">&lt;</span>br<span class="hljs-operator">&gt;</span><span class="hljs-operator">&lt;</span>br<span class="hljs-operator">&gt;</span># 建立BGP组，配置标签为IBGP<span class="hljs-operator">&lt;</span>br<span class="hljs-operator">&gt;</span><span class="hljs-built_in">set</span> protocols bgp group RR local-address 1.1.1.1<span class="hljs-operator">&lt;</span>br<span class="hljs-operator">&gt;</span><span class="hljs-operator">&lt;</span>br<span class="hljs-operator">&gt;</span># 配置BGP的源IP为 Lookback 地址。<span class="hljs-operator">&lt;</span>br<span class="hljs-operator">&gt;</span><span class="hljs-built_in">set</span> protocols bgp group RR family inet unicast<span class="hljs-operator">&lt;</span>br<span class="hljs-operator">&gt;</span><span class="hljs-built_in">set</span> protocols bgp group RR family inet-vpn unicast<span class="hljs-operator">&lt;</span>br<span class="hljs-operator">&gt;</span><span class="hljs-operator">&lt;</span>br<span class="hljs-operator">&gt;</span># 开启单播IPv4地址族，开启VPNv4地址族。<span class="hljs-operator">&lt;</span>br<span class="hljs-operator">&gt;</span><span class="hljs-built_in">set</span> protocols bgp group RR neighbor 4.4.4.4<span class="hljs-operator">&lt;</span>br<span class="hljs-operator">&gt;</span><span class="hljs-operator">&lt;</span>br<span class="hljs-operator">&gt;</span># 配置BGP邻居。||<br><span class="hljs-operator">|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-|</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="验证BGP"><a href="#验证BGP" class="headerlink" title="验证BGP"></a>验证BGP</h2><p><code> show bgp neighbor</code></p>
+<p>#查看BGP邻居</p>
+<h1 id="VRF配置"><a href="#VRF配置" class="headerlink" title="VRF配置"></a>VRF配置</h1><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">set</span> routing-instances VLL-VPN1 instance-type vrf<br><br><span class="hljs-comment"># 配置路由实例标签为VRF</span><br><span class="hljs-built_in">set</span> routing-instances VLL-VPN1<span class="hljs-built_in"> interface </span>ge-0/0/0.0<br><br><span class="hljs-comment"># 配置接口加入到路由实例</span><br><span class="hljs-built_in">set</span> routing-instances VLL-VPN1 route-distinguisher 100:1<br><span class="hljs-built_in">set</span> routing-instances VLL-VPN1 vrf-target target:100:1<br><br><span class="hljs-comment">#配置RD RT值，用于路由区分，和路由导入</span><br><span class="hljs-built_in">set</span> routing-instances VLL-VPN1 vrf-table-label<br><br><span class="hljs-comment">#开启标签</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>##在VRF路由表里面的，都会发送到对的的MP-BGP邻居</p>
+<h2 id="验证VPN路由传递"><a href="#验证VPN路由传递" class="headerlink" title="验证VPN路由传递"></a>验证VPN路由传递</h2><p><code>show route table VLL-VPN1.inet</code></p>
+<p>#查看VPN路由表，是否传递到对端PE。</p>
+<p>参考： <a target="_blank" rel="noopener" href="https://supportportal.juniper.net/s/article/SRX-Example-Configuring-L3VPN-over-MPLS?language=en_US">https://supportportal.juniper.net/s/article/SRX-Example-Configuring-L3VPN-over-MPLS?language=en_US</a></p>
 
                 
               </div>
@@ -354,9 +364,9 @@
       
         <a href="/tags/network/">#network</a>
       
-        <a href="/tags/IPv6/">#IPv6</a>
+        <a href="/tags/vpn/">#vpn</a>
       
-        <a href="/tags/windows/">#windows</a>
+        <a href="/tags/juniper/">#juniper</a>
       
     </div>
   
@@ -368,8 +378,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Windows上的IPv6</div>
-      <div>https://songxwn.com/ipv6-Windows/</div>
+      <div>Juniper MPLS L3VPN</div>
+      <div>https://songxwn.com/Juniper_L3-MPLS/</div>
     </div>
     <div class="license-meta">
       
@@ -381,7 +391,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年1月9日</div>
+          <div>2022年9月30日</div>
         </div>
       
       
@@ -413,18 +423,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/ipv6-icmpv6/" title="IPv6的ICMPv6协议">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">IPv6的ICMPv6协议</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/ipv6/" title="IPv6 简笔">
-                        <span class="hidden-mobile">IPv6 简笔</span>
+                      <a href="/Sublime_Text4/" title="Sublime Text4 4126 安装激活">
+                        <span class="hidden-mobile">Sublime Text4 4126 安装激活</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
