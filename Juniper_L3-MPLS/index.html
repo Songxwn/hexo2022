@@ -16,15 +16,15 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="">
   
-    <meta name="description" content="实验说明使用Juniper vMX进行实验 ISIS L2 作为 IGP打通底层路由。 LDP 作为公网MPLS标签分发。 PE之间使用MP-IBGP。 PS: 只有PE的配置 配置ISIS123456789101112131415161718192021222324252627set interfaces lo0 unit 0 family inet address 192.168.0.1&#x2F;32">
+    <meta name="description" content="实验说明使用Juniper vMX进行实验。 ISIS L2 作为 IGP打通底层路由，LDP 作为公网MPLS标签分发，PE之间使用MP-IBGP PS: 此文章只有PE的配置，用于学习和理解Juniper配置。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Juniper MPLS L3VPN">
 <meta property="og:url" content="https://songxwn.com/Juniper_L3-MPLS/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="实验说明使用Juniper vMX进行实验 ISIS L2 作为 IGP打通底层路由。 LDP 作为公网MPLS标签分发。 PE之间使用MP-IBGP。 PS: 只有PE的配置 配置ISIS123456789101112131415161718192021222324252627set interfaces lo0 unit 0 family inet address 192.168.0.1&#x2F;32">
+<meta property="og:description" content="实验说明使用Juniper vMX进行实验。 ISIS L2 作为 IGP打通底层路由，LDP 作为公网MPLS标签分发，PE之间使用MP-IBGP PS: 此文章只有PE的配置，用于学习和理解Juniper配置。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-09-30T01:59:00.000Z">
-<meta property="article:modified_time" content="2022-09-30T09:06:25.581Z">
+<meta property="article:published_time" content="2022-09-30T09:09:00.000Z">
+<meta property="article:modified_time" content="2022-09-30T09:10:14.653Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="vpn">
@@ -236,8 +236,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-09-30 09:59" pubdate>
-          2022年9月30日 上午
+        <time datetime="2022-09-30 17:09" pubdate>
+          2022年9月30日 下午
         </time>
       </span>
     
@@ -302,11 +302,12 @@
             
               <div class="markdown-body">
                 
-                <h1 id="实验说明"><a href="#实验说明" class="headerlink" title="实验说明"></a>实验说明</h1><p>使用Juniper vMX进行实验</p>
-<p>ISIS L2 作为 IGP打通底层路由。</p>
-<p>LDP 作为公网MPLS标签分发。</p>
-<p>PE之间使用MP-IBGP。</p>
-<p>PS: 只有PE的配置</p>
+                <h1 id="实验说明"><a href="#实验说明" class="headerlink" title="实验说明"></a>实验说明</h1><p>使用Juniper vMX进行实验。</p>
+<p>ISIS L2 作为 IGP打通底层路由，LDP 作为公网MPLS标签分发，PE之间使用MP-IBGP</p>
+<p>PS: 此文章只有PE的配置，用于学习和理解Juniper配置。</p>
+<span id="more"></span>
+
+
 <h1 id="配置ISIS"><a href="#配置ISIS" class="headerlink" title="配置ISIS"></a>配置ISIS</h1><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">set</span> interfaces lo0 unit <span class="hljs-number">0</span> family inet address <span class="hljs-number">192.168.0.1</span>/<span class="hljs-number">32</span><br><span class="hljs-attribute">set</span> interfaces lo0 unit <span class="hljs-number">0</span> family iso address <span class="hljs-number">49</span>.<span class="hljs-number">0002</span>.<span class="hljs-number">0192</span>.<span class="hljs-number">0168</span>.<span class="hljs-number">0001</span>.<span class="hljs-number">00</span><br><span class="hljs-comment"># 配置ISO的 NET地址，用于ISIS</span><br><span class="hljs-attribute">set</span> protocols isis interface lo0.<span class="hljs-number">0</span> passive<br><br><span class="hljs-attribute">set</span> protocols isis level <span class="hljs-number">2</span> wide-metrics-only<br><span class="hljs-comment"># 开启L2路由器的宽度量值计算</span><br><span class="hljs-attribute">set</span> protocols isis level <span class="hljs-number">1</span> disable<br><span class="hljs-comment"># 关闭L1路由器</span><br><span class="hljs-attribute">set</span> interfaces ge-<span class="hljs-number">0</span>/<span class="hljs-number">0</span>/<span class="hljs-number">1</span> unit <span class="hljs-number">0</span> family inet address <span class="hljs-number">12.1.1.2</span>/<span class="hljs-number">24</span><br><span class="hljs-attribute">set</span> interfaces ge-<span class="hljs-number">0</span>/<span class="hljs-number">0</span>/<span class="hljs-number">1</span> unit <span class="hljs-number">0</span> family iso<br><span class="hljs-comment"># 开启物理接口的ISO，用于ISIS。</span><br><br><span class="hljs-attribute">set</span> protocols isis interface ge-<span class="hljs-number">0</span>/<span class="hljs-number">0</span>/<span class="hljs-number">1</span><br><br><span class="hljs-comment"># 宣告 物理接口</span><br><br><span class="hljs-attribute">set</span> protocols isis interface ge-<span class="hljs-number">0</span>/<span class="hljs-number">0</span>/<span class="hljs-number">1</span> point-to-point<br><br><span class="hljs-comment"># 配置邻居类型为P2P</span><br><br><span class="hljs-attribute">set</span> protocols isis interface ge-<span class="hljs-number">0</span>/<span class="hljs-number">0</span>/<span class="hljs-number">1</span> hello-padding disable<br><br><span class="hljs-comment"># 关闭Hello 报文填充</span><br><br><span class="hljs-attribute">set</span> protocols isis interface ge-<span class="hljs-number">0</span>/<span class="hljs-number">0</span>/<span class="hljs-number">1</span> level <span class="hljs-number">2</span> metric <span class="hljs-number">1000</span><br><span class="hljs-comment"># 配置ISIS 接口度量值</span><br></code></pre></td></tr></table></figure>
 
 <h2 id="验证ISIS"><a href="#验证ISIS" class="headerlink" title="验证ISIS"></a>验证ISIS</h2><p><code>show isis adjacency </code></p>
