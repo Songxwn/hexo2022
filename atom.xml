@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2022-09-30T09:22:20.110Z</updated>
+  <updated>2022-09-30T09:26:41.243Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Juniper MPLS L3VPN</title>
+    <title>Juniper MPLS L3VPN实验配置</title>
     <link href="https://songxwn.com/Juniper_L3-MPLS/"/>
     <id>https://songxwn.com/Juniper_L3-MPLS/</id>
     <published>2022-09-30T09:09:00.000Z</published>
-    <updated>2022-09-30T09:22:20.110Z</updated>
+    <updated>2022-09-30T09:26:41.243Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;实验说明&quot;&gt;&lt;a href=&quot;#实验说明&quot; class=&quot;headerlink&quot; title=&quot;实验说明&quot;&gt;&lt;/a&gt;实验说明&lt;/h1&gt;&lt;p&gt;使用Juniper vMX进行实验。&lt;/p&gt;
