@@ -16,15 +16,15 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="">
   
-    <meta name="description" content="介绍全称应该叫BGP&#x2F;MPLS IP VPN，是一个多协议集合的三层VPN解决方案。 它使用MP-BGP在服务提供商骨干网上发布VPN路由，使用MPLS在服务提供商骨干网上转发VPN报文。 其中，MPLS标签由MP-BGP(内网)和LDP（公网）分发，公网标签也可以使用RSVP分发，用于流量工程。">
+    <meta name="description" content="介绍全称应该叫BGP&#x2F;MPLS IP VPN，是一个多协议集合的三层VPN解决方案。(适用于专网) 它使用MP-BGP在服务提供商骨干网上发布VPN路由，使用MPLS在服务提供商骨干网上转发VPN报文。 其中，MPLS标签由MP-BGP(内网)和LDP（公网）分发，公网标签也可以使用RSVP分发，用于流量工程（MPLS-TE）。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MPLS VPN随笔（L3 单域）">
 <meta property="og:url" content="https://songxwn.com/MPLS_VPN/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="介绍全称应该叫BGP&#x2F;MPLS IP VPN，是一个多协议集合的三层VPN解决方案。 它使用MP-BGP在服务提供商骨干网上发布VPN路由，使用MPLS在服务提供商骨干网上转发VPN报文。 其中，MPLS标签由MP-BGP(内网)和LDP（公网）分发，公网标签也可以使用RSVP分发，用于流量工程。">
+<meta property="og:description" content="介绍全称应该叫BGP&#x2F;MPLS IP VPN，是一个多协议集合的三层VPN解决方案。(适用于专网) 它使用MP-BGP在服务提供商骨干网上发布VPN路由，使用MPLS在服务提供商骨干网上转发VPN报文。 其中，MPLS标签由MP-BGP(内网)和LDP（公网）分发，公网标签也可以使用RSVP分发，用于流量工程（MPLS-TE）。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-31T07:31:00.000Z">
-<meta property="article:modified_time" content="2022-08-27T03:44:17.404Z">
+<meta property="article:modified_time" content="2022-10-02T15:11:00.000Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="mpls">
 <meta property="article:tag" content="network">
@@ -248,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          2k 字
         
       </span>
     
@@ -259,7 +259,7 @@
         
         
         
-          10 分钟
+          17 分钟
         
       </span>
     
@@ -302,14 +302,21 @@
             
               <div class="markdown-body">
                 
-                <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>全称应该叫BGP&#x2F;MPLS IP VPN，是一个多协议集合的三层VPN解决方案。</p>
+                <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>全称应该叫BGP&#x2F;MPLS IP VPN，是一个多协议集合的三层VPN解决方案。(适用于专网)</p>
 <p>它使用MP-BGP在服务提供商骨干网上发布VPN路由，使用MPLS在服务提供商骨干网上转发VPN报文。</p>
-<p>其中，MPLS标签由MP-BGP(内网)和LDP（公网）分发，公网标签也可以使用RSVP分发，用于流量工程。</p>
+<p>其中，MPLS标签由MP-BGP(内网)和LDP（公网）分发，公网标签也可以使用RSVP分发，用于流量工程（MPLS-TE）。</p>
 <span id="more"></span>
 
 <h2 id="CE-PE-P-设备角色"><a href="#CE-PE-P-设备角色" class="headerlink" title="CE-PE-P 设备角色"></a>CE-PE-P 设备角色</h2><p>CE 用户边缘设备，用于连接PE，与MPLS VPN无直接关系。<br>只用于对接PE，交换路由信息。使用静态路由、OSPF RIP ISIS BGP等交换路由表。</p>
 <p>PE 运营商边缘设备，与CE直连，通过MP-BGP连接对端PE.<br>运行 MP-BGP，使用VRF通过绑定与CE连接的接口。隔离本地不同用户的路由表，打上RD和RT标签。<br>使用RD在BGP传输的过程中区分路由。<br>使用RT（VPN Target），确保导入对端PE的VRF。</p>
 <p>P 运营商骨干设备，与PE设备连接。只需要转发MPLS数据,使用IGP打通底层路由。</p>
+<h2 id="RD、RT、VRF说明"><a href="#RD、RT、VRF说明" class="headerlink" title="RD、RT、VRF说明"></a>RD、RT、VRF说明</h2><h3 id="VRF-Virtual-Route-Forwarding"><a href="#VRF-Virtual-Route-Forwarding" class="headerlink" title="VRF(Virtual Route Forwarding):"></a>VRF(Virtual Route Forwarding):</h3><p>VRF的目的是解决不同企业私网地址段相同，为了防止冲突，采用将相同私网地址放到不同的VRF表中。VRF区分不同CE端进来边界PE的相同私网路由，路由器的每一个VRF都自动生成相应VRF表，比如show route vrf A ，show route vrf B。对于每一个VRF表，都具有路由区分符(Route Distinguisher：RD)和路由目标(Route Target：RT)两大属性。</p>
+<h3 id="RD-Route-Distinguisher"><a href="#RD-Route-Distinguisher" class="headerlink" title="RD(Route-Distinguisher):"></a>RD(Route-Distinguisher):</h3><p>8个字节的RD+4个字节的IPv4地址组成96位VPNv4路由，使不唯一的IPv4地址转化为唯一的VPN-IPv4地址,该VPNv4路由在ISP域内传递（区分），RD给某VRF里面的路由打上标签，进而实现地址的复用而不产生冲突。RD用来区分本地VRF，该属性仅本地有效。</p>
+<h3 id="RT-Route-Tagert"><a href="#RT-Route-Tagert" class="headerlink" title="RT(Route Tagert):"></a>RT(Route Tagert):</h3><p>BGP的扩展团体属性，它分成Import RT和Export RT，分别用于路由的导入、导出策略。也即RT是控制这个VRF里面可以发出和接受什么样的路由。RT具有全局唯一性，并且只能被一个VPN使用。<br>关于RT，新人还要注意的点：<br>当从VRF表中导出VPN路由给BGP邻居时，要用Export RT对VPN路由进行标记；在往BGP邻居的VRF表中导入VPN路由时，只有所带RT标记与VRF表中任意一个Import RT相符的路由才会被导入到VRF表中。RT使得PE路由器只包含和其直接相连的VPN的路由，而不是全网所有VPN的路由，从而节省了PE路由器的资源，提高了网络拓展性。（将connect路由发给BGP邻居，而）</p>
+<p>通过配置import和export RT，来控制收发路由。</p>
+<p>1.当从VRF表中导出VPN路由时，要用Export RT对VPN路由进行标记。</p>
+<p>2.当往VRF表中导入VPN路由时，只有所带RT标记与VRF表中任意一个Import RT相符的路由才会被导入到VRF表中。</p>
+<p>RD,这条路由是谁发出来的，因此每一个vrf有它的rd值<br>RT,这条路由从从哪来，要去哪里。（接收方和发送方这个值一样，区别是一个是export,一个是inport）</p>
 <h2 id="MPLS-VPN路由发布"><a href="#MPLS-VPN路由发布" class="headerlink" title="MPLS VPN路由发布"></a>MPLS VPN路由发布</h2><p>CE到PE之间的路由交换（使用静态或动态路由）</p>
 <p>PE将接收的路由，注入指定的VRF (VRF与和CE连接的接口绑定)</p>
 <p>PE将VRF的路由注入MP-BGP（打上RD和RT标签，还有MPLS私网标签）成为VPNv4路由<br>其中RD和RT为手动指定，MPLS私网标签为MP-BGP分配。</p>
