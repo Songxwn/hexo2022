@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s3.bmp.ovh/imgs/2022/10/04/623eaaf6ba57d122.png">
 <meta property="article:published_time" content="2022-09-30T09:09:00.000Z">
-<meta property="article:modified_time" content="2022-10-04T01:55:23.789Z">
+<meta property="article:modified_time" content="2022-10-05T07:37:34.774Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="vpn">
@@ -250,7 +250,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k 字
+          2.4k 字
         
       </span>
     
@@ -261,7 +261,7 @@
         
         
         
-          20 分钟
+          21 分钟
         
       </span>
     
@@ -328,6 +328,9 @@
 
 <h2 id="验证LDP"><a href="#验证LDP" class="headerlink" title="验证LDP"></a>验证LDP</h2><p><code>show ldp session</code></p>
 <p>##正常状态为：  Operational</p>
+<p><code>show route table inet.3</code></p>
+<p>#查看公网LDP分配的标签。</p>
+<p>PS： LDP转发路径完全依赖与IGP路由的选路，且FEC默认只会匹配&#x2F;32路由建立LSP。</p>
 <h1 id="配置MP-BGP"><a href="#配置MP-BGP" class="headerlink" title="配置MP-BGP"></a>配置MP-BGP</h1><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">set</span> routing-options router-id 1.1.1.1<br><span class="hljs-comment"># 配置全局的路由ID</span><br><br><span class="hljs-built_in">set</span> routing-options autonomous-system 100<br><span class="hljs-comment"># 配置全局的 AS号</span><br><br><span class="hljs-built_in">set</span> protocols<span class="hljs-built_in"> bgp group </span>RR<span class="hljs-built_in"> type </span>internal<br><span class="hljs-comment"># 建立BGP组，配置标签为IBGP</span><br><br><span class="hljs-built_in">set</span> protocols<span class="hljs-built_in"> bgp group </span>RR local-address 1.1.1.1<br><span class="hljs-comment"># 配置BGP的源IP为 Lookback 地址。</span><br><br><span class="hljs-built_in">set</span> protocols<span class="hljs-built_in"> bgp group </span>RR family inet unicast<br><span class="hljs-built_in">set</span> protocols<span class="hljs-built_in"> bgp group </span>RR family inet-vpn unicast<br><span class="hljs-comment"># 开启单播IPv4地址族，开启VPNv4地址族。</span><br><br><span class="hljs-built_in">set</span> protocols<span class="hljs-built_in"> bgp group </span>RR<span class="hljs-built_in"> neighbor </span>4.4.4.4<br><span class="hljs-comment"># 配置BGP邻居。</span><br></code></pre></td></tr></table></figure>
 
 <h2 id="验证BGP"><a href="#验证BGP" class="headerlink" title="验证BGP"></a>验证BGP</h2><p><code> show bgp neighbor</code></p>
@@ -338,7 +341,7 @@
 
 <p>##在VRF路由表里面的，都会建立LSP发送路由到对端的MP-BGP邻居</p>
 <h2 id="验证VPN路由传递"><a href="#验证VPN路由传递" class="headerlink" title="验证VPN路由传递"></a>验证VPN路由传递</h2><p><code>show route table VLL-VPN1.inet</code></p>
-<p>#查看VPN路由表，是否传递到对端PE。</p>
+<p>#查看VPN路由表，是否传递到对端PE。也可以查其分配的内网MPLS标签。</p>
 <p>参考： <a target="_blank" rel="noopener" href="https://supportportal.juniper.net/s/article/SRX-Example-Configuring-L3VPN-over-MPLS?language=en_US">https://supportportal.juniper.net/s/article/SRX-Example-Configuring-L3VPN-over-MPLS?language=en_US</a></p>
 <h1 id="配置BGP-反射器"><a href="#配置BGP-反射器" class="headerlink" title="配置BGP 反射器"></a>配置BGP 反射器</h1><h2 id="反射器配置"><a href="#反射器配置" class="headerlink" title="反射器配置"></a>反射器配置</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">set</span> protocols<span class="hljs-built_in"> bgp group </span>RR cluster 2.2.2.2<br><span class="hljs-comment">#配置自己为路由反射器</span><br><span class="hljs-built_in">set</span> protocols<span class="hljs-built_in"> bgp group </span>RR<span class="hljs-built_in"> neighbor </span>4.4.4.4<br><span class="hljs-comment">#与客户端建立对等体</span><br></code></pre></td></tr></table></figure>
 
