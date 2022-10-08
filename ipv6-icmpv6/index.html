@@ -79,7 +79,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"songxwn.com","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"songxwn.com","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -343,7 +343,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="地址解析过程"><a href="#地址解析过程" class="headerlink" title="地址解析过程"></a>地址解析过程</h3><p><img src="/images/NDP.png" srcset="/img/loading.gif" lazyload alt="upload successful"></p>
+<h3 id="地址解析过程"><a href="#地址解析过程" class="headerlink" title="地址解析过程"></a>地址解析过程</h3><p><img src="/images/NDP.png" alt="upload successful"></p>
 <p>如上图</p>
 <ul>
 <li>假设PC想要解析R1的2001::2这个地址对应的MAC地址，详细过程如下：<ul>
@@ -356,10 +356,10 @@
 </ul>
 <h3 id="邻居状态机"><a href="#邻居状态机" class="headerlink" title="邻居状态机"></a>邻居状态机</h3><p>通过邻居或到达邻居的通信，会因各种原因而中断，包括硬件故障、接口卡的热插入等。如果目的地失效，则恢复是不可能的，通信失败；如果路径失效，则恢复是可能的。 因此节点需要维护一张邻居表，每个邻居都有相应的状态，状态之间可以迁移。(IPv4 的ARP仅靠倒计时去维护)</p>
 <p>RFC中定义了5种邻居状态，分别是：未完成（Incomplete）、可达（Reachable）、陈旧（Stale）、延迟（Delay）、探查（Probe）。</p>
-<p><img src="/images/NS.png" srcset="/img/loading.gif" lazyload alt="upload successful"></p>
+<p><img src="/images/NS.png" alt="upload successful"></p>
 <p>• R1先发送NS报文，并生成缓存条目，此时，邻居状态为Incomplete。<br>• 若收到R2回复的NA报文，则邻居状态由Incomplete变为Reachable，<br>否则固定时间后邻居状态由Incomplete变为Empty。<br>• 经过邻居可达时间（默认30s），邻居状态由Reachable变为Stale，即<br>未知是否可达。<br>• 如果在Reachable状态，R1收到R2的非请求NA报文，且其中携带的R2的链路<br>层地址和表项中不同，则邻居状态马上变为Stale。<br>• 在Stale状态若R1要向R2发送数据，则邻居状态由Stale变为Delay，并<br>发送NS请求。<br>• 在经过一段固定时间后，邻居状态由Delay变为Probe，其间若有NA应<br>答，则邻居状态由Delay变为Reachable。<br>• 在Probe状态，R1每隔一定时间间隔（默认1s）发送单播NS，发送固定<br>次数后，有应答则邻居状态变为Reachable，否则邻居状态变为Empty。</p>
 <h2 id="重复地址检测DAD"><a href="#重复地址检测DAD" class="headerlink" title="重复地址检测DAD"></a>重复地址检测DAD</h2><p>当设备获取到IPv6地址后，一定会使用ICMPv6报文进行DAD。且当DAD通过之后，才会使用该地址。（无论通过那种方法获取）</p>
-<p><img src="/images/DAD.png" srcset="/img/loading.gif" lazyload alt="upload successful"></p>
+<p><img src="/images/DAD.png" alt="upload successful"></p>
 <ul>
 <li>假设R1为已在线设备，IPv6地址为2001::FFFF&#x2F;64。PC上线之后，也配置了相同的IPv6地址，在正式使用这个地址之前，PC会对此地址做DAD，过程如下:<ul>
 <li>PC向链路上以组播的方式发送一个NS报文，该NS的源IPv6地址为“::”，目的IPv6地址为要进行DAD的2001::FFFF对应的被请求节点组播地址，也就是FF02::1:FF00:FFFF。这个NS里包含着要做DAD的目标地址2001::FFFF。</li>
@@ -368,15 +368,15 @@
 </ul>
 </li>
 </ul>
-<h2 id="IPv6的无状态地址配置"><a href="#IPv6的无状态地址配置" class="headerlink" title="IPv6的无状态地址配置"></a>IPv6的无状态地址配置</h2><p><img src="/images/SLACC.jpg" srcset="/img/loading.gif" lazyload alt="upload successful"></p>
+<h2 id="IPv6的无状态地址配置"><a href="#IPv6的无状态地址配置" class="headerlink" title="IPv6的无状态地址配置"></a>IPv6的无状态地址配置</h2><p><img src="/images/SLACC.jpg" alt="upload successful"></p>
 <p>主机根据RA中的地址前缀，并结合本地生成的64 bit接口标识（例如EUI-64），生成单播地址。<br>仅可以获得IPv6地址信息，（较新标准可以获取DNS）无法获得NIS、SNTP服务器等参数，需要配合DHCPv6或者手工配置来获取其他配置信息。</p>
 <h1 id="Path-MTU"><a href="#Path-MTU" class="headerlink" title="Path MTU"></a>Path MTU</h1><p>在IPv4中，报文如果过大，必须要分片进行发送，所以在每个节点发送报文之前，设备都会根据发送接口的最大传输单元MTU（Maximum Transmission Unit）来对报文进行分片。但是在IPv6中，为了减少中间转发设备的处理压力，中间转发设备不对IPv6报文进行分片，报文的分片将在源节点进行。当中间转发设备的接口收到一个报文后，如果发现报文长度比转发接口的MTU值大，则会将其丢弃；同时将转发接口的MTU值通过ICMPv6报文的“Packet Too Big”消息发给源端主机，源端主机以该值重新发送IPv6报文，这样带来了额外流量开销。PMTU发现协议可以动态发现整条传输路径上各链路的MTU值，减少由于重传带来的额外流量开销。</p>
 <p>PMTU协议是通过ICMPv6的Packet Too Big报文来完成的。首先源节点假设PMTU就是其出接口的MTU，发出一个试探性的报文，当转发路径上存在一个小于当前假设的PMTU时，转发设备就会向源节点发送Packet Too Big报文，并且携带自己的MTU值，此后源节点将PMTU的假设值更改为新收到的MTU值继续发送报文。如此反复，直到报文到达目的地之后，源节点就能知道到达目的地的PMTU了。</p>
-<p><img src="/images/PMTU.png" srcset="/img/loading.gif" lazyload alt="upload successful"></p>
+<p><img src="/images/PMTU.png" alt="upload successful"></p>
 <p>如上图，整条传输路径需要通过4条链路，每条链路的MTU分别是1500、1500、1400、1300，当源节点发送一个分片报文的时候，首先按照PMTU为1500进行分片并发送分片报文，当到达MTU为1400的出接口时，设备返回Packet Too Big错误，同时携带MTU值为1400的信息。<br>源节点接收到之后会将报文重新按照PMTU为1400进行分片并再次发送一个分片报文，当分片报文到达MTU值为1300的出接口时，同样返回Packet Too Big错误，携带MTU值为1300的信息。之后源节点重新按照PMTU为1300进行分片并发送分片报文，最终到达目的地，这样就找到了该路径的PMTU。</p>
 <p>PS：IPv6 要求链路层最低MTU为 1280。</p>
 <h1 id="路由重定向"><a href="#路由重定向" class="headerlink" title="路由重定向"></a>路由重定向</h1><p>重定向是指网关设备发现报文从其它网关设备转发更优，它就会发送重定向报文告知报文<br>的发送者，让报文发送者选择另一个网关设备。</p>
-<p><img src="/images/icmp-re.png" srcset="/img/loading.gif" lazyload alt="upload successful"></p>
+<p><img src="/images/icmp-re.png" alt="upload successful"></p>
 <p>1、PC1希望发送报文到服务器，于是根据配置的默认网关地址向网关R2发送报文。</p>
 <p>2、网关R2收到报文后，检查报文信息，发现报文应该 转发到与PC1在同一网段的另一个网关设备R1,此 转发路径是更优的路径，于是R2会向PC1发送一个 重定向消息，通知PC1去往服务器的报文应直接发给R1。<br>3、PC1收到重定向消息后，会向R1发送报文，R1再将该报文转发至服务器。</p>
 
@@ -493,7 +493,7 @@
             </div>
 
             
-  <article id="comments" lazyload>
+  <article id="comments">
     
   <div class="disqus" style="width:100%">
     <div id="disqus_thread"></div>
@@ -680,7 +680,9 @@
 
 
   
-    <script  src="/js/img-lazyload.js" ></script>
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
   
 
 
