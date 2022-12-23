@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2022-10-02T15:55:19.329Z</updated>
+  <updated>2022-12-23T07:04:52.503Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>交换机基本原理</title>
+    <link href="https://songxwn.com/switch/"/>
+    <id>https://songxwn.com/switch/</id>
+    <published>2022-12-23T07:09:00.000Z</published>
+    <updated>2022-12-23T07:04:52.503Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;1、交换机的作用&quot;&gt;&lt;a href=&quot;#1、交换机的作用&quot; class=&quot;headerlink&quot; title=&quot;1、交换机的作用&quot;&gt;&lt;/a&gt;1、交换机的作用&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;连接多个以太网物理段，隔离冲突域&lt;/li&gt;
+&lt;li&gt;对以太网帧进行高速而透明的交换转发&lt;/li&gt;
+&lt;li&gt;自行学习和维护MAC地址表&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;交换机工作在二层，可以用来隔离冲突域，在OSI参考模型中，二层的作用是寻址，这边寻址指的是MAC地址，而交换机就是对MAC地址进行转发，在每个交换机中，都有一张MAC地址表，这个表是交换机自动学习的。&lt;/p&gt;
+&lt;p&gt;所以，总得来说交换机的作用是寻址和转发，这边需要注意的是寻址和转发都是MAC地址，需要路由器区分开来，路由器寻址寻的是IP地址，而交换机是MAC地址。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+  </entry>
   
   <entry>
     <title>MPLS VPN随笔（L3 单域）</title>
