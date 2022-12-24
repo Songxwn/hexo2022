@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2022-12-24T05:49:54.265Z</updated>
+  <updated>2022-12-24T05:52:34.088Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -20,8 +20,8 @@
     <title>红帽的重复数据删除VDO</title>
     <link href="https://songxwn.com/vdo/"/>
     <id>https://songxwn.com/vdo/</id>
-    <published>2022-12-24T05:09:00.000Z</published>
-    <updated>2022-12-24T05:49:54.265Z</updated>
+    <published>2022-12-24T05:52:00.000Z</published>
+    <updated>2022-12-24T05:52:34.088Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;Virtual Data Optimizer(VDO)以重复数据删除（deduplication）、压缩和精简置备的形式为 Linux 提供内联数据降低。当您设置 VDO 卷时，您可以指定一个块设备来构建 VDO 卷以及您要存在的逻辑存储量。&lt;/p&gt;
@@ -39,7 +39,7 @@
     
     <category term="linux" scheme="https://songxwn.com/tags/linux/"/>
     
-    <category term="data" scheme="https://songxwn.com/tags/data/"/>
+    <category term="storage" scheme="https://songxwn.com/tags/storage/"/>
     
   </entry>
   
