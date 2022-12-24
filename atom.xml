@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2022-12-23T07:56:16.406Z</updated>
+  <updated>2022-12-24T05:49:54.265Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>红帽的重复数据删除VDO</title>
+    <link href="https://songxwn.com/vdo/"/>
+    <id>https://songxwn.com/vdo/</id>
+    <published>2022-12-24T05:09:00.000Z</published>
+    <updated>2022-12-24T05:49:54.265Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;Virtual Data Optimizer(VDO)以重复数据删除（deduplication）、压缩和精简置备的形式为 Linux 提供内联数据降低。当您设置 VDO 卷时，您可以指定一个块设备来构建 VDO 卷以及您要存在的逻辑存储量。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当托管活动的虚拟机或容器时，红帽建议按 10:1 的逻辑与物理比例配置存储：也就是说，如果您使用 1TB 的物理存储，则将其显示为 10TB 的逻辑存储。&lt;/li&gt;
+&lt;li&gt;对于对象存储，如 Ceph 提供的类型，红帽建议使用 3:1 的逻辑与物理比例：1TB 的物理存储将显示为 3TB 的逻辑存储。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在这两种情况下，您只需将文件系统放在 VDO 提供的逻辑设备之上，然后直接使用它，或将其作为分布式云存储架构的一部分。&lt;/p&gt;
+&lt;p&gt;由于 VDO 是迅速置备的，所以文件系统和应用程序只会看到使用中的逻辑空间，且不知道可用的实际物理空间。使用脚本来监控实际的可用空间，并在使用超过阈值时产生一个报警：例如，当 VDO 卷已满 80% 时。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
+    
+    
+    <category term="linux" scheme="https://songxwn.com/tags/linux/"/>
+    
+    <category term="data" scheme="https://songxwn.com/tags/data/"/>
+    
+  </entry>
   
   <entry>
     <title>Sublime Text4 4143 安装激活</title>
