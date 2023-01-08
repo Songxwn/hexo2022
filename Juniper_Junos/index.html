@@ -16,28 +16,29 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="">
   
-    <meta name="description" content="简介1、本教程仅适用于Juniper MX系列和QFX系列设备。（验证过） 2、提交配置时候，建议使用可自动回退的提交，防止无法远程管理。 3、本教程主要用于Juniper设备的登录防护，限制IP登录SSH或Telnet等远程控制协议。 PS：设备如果有公网IP，几乎无时不刻都有扫描和登录攻击。而且Juniper某些版本有Bug可能因此重启。">
+    <meta name="description" content="介绍Junos OS 是支持瞻博网络广泛的物理和虚拟网络及安全产品组合的单一操作系统。 Junos OS 包括以下架构变化：  裸机上允许的 Junos OS FreeBSD 6。这是基于 FreeBSD 6 内核的 Junos OS。（很老版本） Junos OS FreeBSD 10 或更高版本的裸机上。这是基于升级后的 FreeBSD 内核的 Junos OS。从 Junos OS 15.1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Juniper RE防护-过滤SSH&amp;Telnet登录">
-<meta property="og:url" content="https://songxwn.com/Juniper_RE-Protect/index.html">
+<meta property="og:title" content="Juniper Junos系统架构和命令模式浅谈">
+<meta property="og:url" content="https://songxwn.com/Juniper_Junos/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="简介1、本教程仅适用于Juniper MX系列和QFX系列设备。（验证过） 2、提交配置时候，建议使用可自动回退的提交，防止无法远程管理。 3、本教程主要用于Juniper设备的登录防护，限制IP登录SSH或Telnet等远程控制协议。 PS：设备如果有公网IP，几乎无时不刻都有扫描和登录攻击。而且Juniper某些版本有Bug可能因此重启。">
+<meta property="og:description" content="介绍Junos OS 是支持瞻博网络广泛的物理和虚拟网络及安全产品组合的单一操作系统。 Junos OS 包括以下架构变化：  裸机上允许的 Junos OS FreeBSD 6。这是基于 FreeBSD 6 内核的 Junos OS。（很老版本） Junos OS FreeBSD 10 或更高版本的裸机上。这是基于升级后的 FreeBSD 内核的 Junos OS。从 Junos OS 15.1">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/01/04/b1ed677d2a242699.png">
-<meta property="article:published_time" content="2023-01-04T14:14:23.000Z">
-<meta property="article:modified_time" content="2023-01-04T14:24:50.553Z">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/01/08/3970a17ad7f51440.png">
+<meta property="article:published_time" content="2023-01-08T03:42:00.000Z">
+<meta property="article:modified_time" content="2023-01-08T03:45:45.641Z">
 <meta property="article:author" content="Song">
-<meta property="article:tag" content="network">
+<meta property="article:tag" content="linux">
 <meta property="article:tag" content="juniper">
-<meta property="article:tag" content="ssh">
+<meta property="article:tag" content="freebsd">
+<meta property="article:tag" content="netwrok">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2023/01/04/b1ed677d2a242699.png">
+<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2023/01/08/3970a17ad7f51440.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Juniper RE防护-过滤SSH&amp;Telnet登录 - Song`s Blog</title>
+  <title>Juniper Junos系统架构和命令模式浅谈 - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -222,13 +223,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://s3.bmp.ovh/imgs/2023/01/04/12e5d8a811824ec7.png') no-repeat center center; background-size: cover;">
+     style="background: url('https://s3.bmp.ovh/imgs/2023/01/08/be6849479b05fc5e.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Juniper RE防护-过滤SSH&amp;Telnet登录"></span>
+            <span id="subtitle" data-typed-text="Juniper Junos系统架构和命令模式浅谈"></span>
           
         </div>
 
@@ -239,8 +240,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-01-04 22:14" pubdate>
-          2023年1月4日 晚上
+        <time datetime="2023-01-08 11:42" pubdate>
+          2023年1月8日 中午
         </time>
       </span>
     
@@ -251,7 +252,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          1.2k 字
         
       </span>
     
@@ -262,7 +263,7 @@
         
         
         
-          17 分钟
+          11 分钟
         
       </span>
     
@@ -308,54 +309,49 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Juniper RE防护-过滤SSH&amp;Telnet登录</h1>
+            <h1 style="display: none">Juniper Junos系统架构和命令模式浅谈</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>1、本教程仅适用于Juniper MX系列和QFX系列设备。（验证过）</p>
-<p>2、提交配置时候，建议使用可自动回退的提交，防止无法远程管理。</p>
-<p>3、本教程主要用于Juniper设备的登录防护，限制IP登录SSH或Telnet等远程控制协议。</p>
-<p>PS：设备如果有公网IP，几乎无时不刻都有扫描和登录攻击。而且Juniper某些版本有Bug可能因此重启。</p>
+                <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Junos OS 是支持瞻博网络广泛的物理和虚拟网络及安全产品组合的单一操作系统。</p>
+<p>Junos OS 包括以下架构变化：</p>
+<ul>
+<li>裸机上允许的 Junos OS FreeBSD 6。这是基于 FreeBSD 6 内核的 Junos OS。（很老版本）</li>
+<li>Junos OS FreeBSD 10 或更高版本的裸机上。这是基于升级后的 FreeBSD 内核的 Junos OS。从 Junos OS 15.1 版开始，某些硬件平台运行升级版 FreeBSD 的 Junos OS。从 Junos OS 版本 16.1 开始，升级版 FreeBSD 的 Junos OS 可作为访客虚拟机 （VM） 在 Linux 虚拟机主机上运行。有关运行具有升级后的 FreeBSD 的 Junos OS 的更多信息，请在功能探索器中搜索 <strong>Junos 内核升级到 FreeBSD 10+</strong> ： <a target="_blank" rel="noopener" href="https://apps.juniper.net/feature-explorer/feature-info.html?fKey=6880&fn=Junos+kernel+upgrade+to+FreeBSD+10+">Junos 内核升级到 FreeBSD 10+</a> 。（现有设备版本，裸机跑Linux，KVM虚拟化跑RE引擎）</li>
+<li>Junos OS Evolved。有关 <a target="_blank" rel="noopener" href="https://www.juniper.net/documentation/us/en/software/junos/evo-overview/index.html">Junos OS Evolved 的详细信息，请参阅 Junos® OS Evolved</a> 和 <a target="_blank" rel="noopener" href="https://www.juniper.net/documentation/us/en/software/junos/evo-install-upgrade/index.html">Junos® OS Evolved 软件安装和升级指南</a> 。（裸机直接跑Junos OS，更开放，可以运行第三方容器）</li>
+</ul>
 <span id="more"></span>
 
-<h1 id="配置命令"><a href="#配置命令" class="headerlink" title="配置命令"></a>配置命令</h1><h2 id="编写过滤规则"><a href="#编写过滤规则" class="headerlink" title="编写过滤规则"></a>编写过滤规则</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs none">set firewall family inet filter RE-Protect term management_permit from source-address 192.168.2.0/24<br>set firewall family inet filter RE-Protect term management_permit from source-address 172.16.0.1/24<br>set firewall family inet filter RE-Protect term management_permit from protocol tcp<br>set firewall family inet filter RE-Protect term management_permit from destination-port telnet<br>set firewall family inet filter RE-Protect term management_permit from destination-port ssh<br>set firewall family inet filter RE-Protect term management_permit from destination-port ftp<br>set firewall family inet filter RE-Protect term management_permit then accept<br>set firewall family inet filter RE-Protect term management_deny from protocol tcp<br>set firewall family inet filter RE-Protect term management_deny from destination-port telnet<br>set firewall family inet filter RE-Protect term management_deny from destination-port ssh<br>set firewall family inet filter RE-Protect term management_deny from destination-port ftp<br>set firewall family inet filter RE-Protect term management_deny then reject<br>set firewall family inet filter RE-Protect term other-permit then accept<br><br></code></pre></td></tr></table></figure>
+<h2 id="架构概述"><a href="#架构概述" class="headerlink" title="架构概述"></a>架构概述</h2><p>下图为Junos OS的架构图</p>
+<p><img src="https://s3.bmp.ovh/imgs/2023/01/08/337d34067c7d54d2.png" srcset="/img/loading.gif" lazyload></p>
+<p>使用Intel X86 CPU硬件，运行Linux，使用<a target="_blank" rel="noopener" href="https://www.redhat.com/zh/topics/virtualization/what-is-KVM">KVM虚拟化</a>运行 RE（路由引擎），RE系统为用户直接接触的系统，基于FreeBSD内核。</p>
+<p>Linux去控制FPC 转发，控制物理接口。RE与FPC通信下发转发。</p>
+<p><img src="https://s3.bmp.ovh/imgs/2023/01/08/29e620d0cbe24bc7.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="命令行模式"><a href="#命令行模式" class="headerlink" title="命令行模式"></a>命令行模式</h1><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs 1c">root<span class="hljs-meta">#</span><br>root<span class="hljs-meta"># uname </span><br>FreeBSD<br><br></code></pre></td></tr></table></figure>
+
+<p>Junos shell模式 （FreeBSD 下sh），使用root登录的默认模式。</p>
+<p>处于Junos底层，可以操作FreeBSD系统。</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs gauss">root<span class="hljs-meta"># cli</span><br>root<span class="hljs-comment">@&gt;</span><br><span class="hljs-comment">root@</span>&gt; <span class="hljs-keyword">show</span> version <br><br></code></pre></td></tr></table></figure>
+
+<p>传统网络设备的CLI，操作模式。</p>
+<p>使用此模式显示设备的当前状态。在操作模式下，您输入命令来监控网络操作系统、设备和网络连接并对其进行故障排除。</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-symbol">root@</span>&gt; configure <br>Entering configuration mode<br><br><span class="hljs-symbol">root@</span># <br><br></code></pre></td></tr></table></figure>
+
+<p>传统网络设备的CLI，配置模式。</p>
+<p>使用此模式配置设备。在此模式下，您输入语句以配置设备的所有属性，包括接口、常规路由信息、路由协议、用户访问以及多个系统和硬件属性。 Junos OS 将配置存储为配置语句的层次结构。</p>
+<h2 id="切换"><a href="#切换" class="headerlink" title="切换"></a>切换</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">user</span><span class="hljs-variable">@host</span><span class="hljs-operator">&gt;</span> <br><span class="hljs-keyword">user</span><span class="hljs-variable">@host</span><span class="hljs-operator">&gt;</span> <span class="hljs-keyword">start</span> shell<br><span class="hljs-operator">%</span><br><span class="hljs-operator">%</span> su<br>Password:<br><br>root#<br><br></code></pre></td></tr></table></figure>
 
 
 
-<ul>
-<li>management_permit 语句匹配指定源地址访问SSH Telnet ftp协议允许。</li>
-<li>management_deny 语句匹配访问SSH Telnet ftp协议拒绝。</li>
-<li>other-permit 语句允许所有。</li>
-</ul>
-<p><strong>注意：此规则只匹配了IPv4</strong></p>
-<h2 id="应用到lo0口"><a href="#应用到lo0口" class="headerlink" title="应用到lo0口"></a>应用到lo0口</h2><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">set</span> interfaces lo0 unit <span class="hljs-number">0</span> <span class="hljs-keyword">family</span> <span class="hljs-type">inet</span> <span class="hljs-keyword">filter</span> <span class="hljs-keyword">input</span> RE-Protect<br><br></code></pre></td></tr></table></figure>
+<p>非root账号登录，进入CLI操作模式。输入命令可以进入FreeBSD shell模式，访问Junos底层。</p>
+<p>但账号权限是普通账号，可以使用su,切换为root账号，提高权限。</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs elixir">root<span class="hljs-comment"># uname </span><br><span class="hljs-title class_">FreeBSD</span><br>root<span class="hljs-comment"># vhclient -s</span><br>root<span class="hljs-variable">@host</span><span class="hljs-symbol">:~</span><span class="hljs-comment"># uname</span><br><span class="hljs-title class_">Linux</span><br><br></code></pre></td></tr></table></figure>
 
-<ul>
-<li>一般情况下，将过滤规则应用到 lo0.0口的入方向，即可全局生效。</li>
-</ul>
-<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">show</span> firewall log<br><br><span class="hljs-attribute">Log</span>:<br><span class="hljs-attribute">Time</span>      Filter  Action  Interface     Protocol   Src Addr        Dest Addr<br><span class="hljs-attribute">15</span>:<span class="hljs-number">17</span>:<span class="hljs-number">11</span>  pfe     R       ge-<span class="hljs-number">0</span>/<span class="hljs-number">0</span>/<span class="hljs-number">0</span>.<span class="hljs-number">0</span>    TCP        <span class="hljs-number">192.168.255.1</span>   <span class="hljs-number">192.168.255.2</span><br><span class="hljs-attribute">15</span>:<span class="hljs-number">12</span>:<span class="hljs-number">04</span>  pfe     R       ge-<span class="hljs-number">0</span>/<span class="hljs-number">0</span>/<span class="hljs-number">0</span>.<span class="hljs-number">0</span>    TCP        <span class="hljs-number">192.168.255.1</span>   <span class="hljs-number">192.168.255.2</span><br><br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>输出确认来自 192.168.255.1 源地址 的信息流与过滤器术语匹配。列<code>Action</code>显示一个<code>R</code>来指示这些数据包被拒绝。还列出了接口、传输协议以及 源和目标地址。这些结果确认此示例的防火墙过滤器工作正常。</li>
-</ul>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vim">show <span class="hljs-built_in">log</span> <span class="hljs-keyword">messages</span> | <span class="hljs-keyword">last</span> <span class="hljs-number">100</span> | <span class="hljs-keyword">match</span> ssh <br><br></code></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>查看日志匹配ssh，可查看是否有ssh登录失败日志。无则生效。</li>
-</ul>
-<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gauss"><span class="hljs-keyword">show</span> <span class="hljs-keyword">system</span> connections    <br><br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>可查看监听端口与建立的连接。</li>
-</ul>
-<h2 id="lo口加入VRF导致SSH过滤不生效"><a href="#lo口加入VRF导致SSH过滤不生效" class="headerlink" title="lo口加入VRF导致SSH过滤不生效"></a>lo口加入VRF导致SSH过滤不生效</h2><ul>
-<li>将过滤规则应用到lo0.0 的确可以全局生效，但是在没有lo0其他子接口未被配置到其他routing-instances情况。如果配置了，此routing-instances的IP是不受匹配规则影响。</li>
-<li>只需要单独匹配加入routing-instances的lo0的过滤规则即可。</li>
-</ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.juniper.net/documentation/cn/zh/software/junos/routing-policy/topics/example/firewall-filter-stateless-example-trusted-source-block-telnet-and-ssh-access.html">Juniper文档</a></p>
+<p>进入Linux shell模式</p>
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p> <a target="_blank" rel="noopener" href="https://www.juniper.net/documentation/cn/zh/software/junos/junos-overview/index.html">Junos 概述</a></p>
+<p> <a target="_blank" rel="noopener" href="https://www.juniper.net/documentation/cn/zh/software/junos/cli/topics/topic-map/cli-overview.html">CLI概要</a></p>
+<p> <a target="_blank" rel="noopener" href="https://www.juniper.net/documentation/cn/zh/software/junos/junos-install-upgrade/topics/topic-map/vm-host-overview.html">虚拟主机</a></p>
 
                 
               </div>
@@ -374,7 +370,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/network/" class="category-chain-item">network</a>
+  <a href="/categories/netwrok/" class="category-chain-item">netwrok</a>
   
   
 
@@ -389,11 +385,13 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/network/">#network</a>
+        <a href="/tags/linux/">#linux</a>
       
         <a href="/tags/juniper/">#juniper</a>
       
-        <a href="/tags/ssh/">#ssh</a>
+        <a href="/tags/freebsd/">#freebsd</a>
+      
+        <a href="/tags/netwrok/">#netwrok</a>
       
     </div>
   
@@ -405,8 +403,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Juniper RE防护-过滤SSH&amp;Telnet登录</div>
-      <div>https://songxwn.com/Juniper_RE-Protect/</div>
+      <div>Juniper Junos系统架构和命令模式浅谈</div>
+      <div>https://songxwn.com/Juniper_Junos/</div>
     </div>
     <div class="license-meta">
       
@@ -418,7 +416,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年1月4日</div>
+          <div>2023年1月8日</div>
         </div>
       
       
@@ -450,18 +448,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Juniper_Junos/" title="Juniper Junos系统架构和命令模式浅谈">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Juniper Junos系统架构和命令模式浅谈</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/ospf-route-c/" title="HCIE Datacom-01.2 IGP高级特性-OSPF-路由控制">
-                        <span class="hidden-mobile">HCIE Datacom-01.2 IGP高级特性-OSPF-路由控制</span>
+                      <a href="/Juniper_RE-Protect/" title="Juniper RE防护-过滤SSH&amp;Telnet登录">
+                        <span class="hidden-mobile">Juniper RE防护-过滤SSH&amp;Telnet登录</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -481,8 +473,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://songxwn.com/Juniper_RE-Protect/';
-          this.page.identifier = '/Juniper_RE-Protect/';
+          this.page.url = 'https://songxwn.com/Juniper_Junos/';
+          this.page.identifier = '/Juniper_Junos/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
