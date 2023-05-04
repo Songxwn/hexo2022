@@ -1,0 +1,796 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/images/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Song">
+  <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
+  
+    <meta name="description" content="简介本教程教大家自建一个递归DNS服务器，让所有DNS请求向权威服务器进行查询。 DNS服务器软件使用unbound 系统使用Rocky Linux8 关闭防火墙和SElinux 注意：本教程只是简单的建立一个可用的DNS递归服务器，可以小规模使用，用于学习解析过程。注意：国内若对公网开放，需要进行备案。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="建立自有递归DNS服务器">
+<meta property="og:url" content="https://songxwn.com/DNS_recursive_Server/index.html">
+<meta property="og:site_name" content="Song&#96;s Blog">
+<meta property="og:description" content="简介本教程教大家自建一个递归DNS服务器，让所有DNS请求向权威服务器进行查询。 DNS服务器软件使用unbound 系统使用Rocky Linux8 关闭防火墙和SElinux 注意：本教程只是简单的建立一个可用的DNS递归服务器，可以小规模使用，用于学习解析过程。注意：国内若对公网开放，需要进行备案。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/05/02/8d0882eda048b2ba.png">
+<meta property="article:published_time" content="2023-04-12T03:54:00.000Z">
+<meta property="article:modified_time" content="2023-05-02T00:23:00.712Z">
+<meta property="article:author" content="Song">
+<meta property="article:tag" content="dns">
+<meta property="article:tag" content="network">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2023/05/02/8d0882eda048b2ba.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>建立自有递归DNS服务器 - Song`s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/scroll.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"songxwn.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":130,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Song`s Blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Song`s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/books/">
+                <i class="iconfont icon-books"></i>
+                <span>读书</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                <span>RSS</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="建立自有递归DNS服务器"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-12 11:54" pubdate>
+          2023年4月12日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          29 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">建立自有递归DNS服务器</h1>
+            
+              <p class="note note-danger">
+                
+                  
+                    本文最后更新于：2023年5月2日 早上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>本教程教大家自建一个递归DNS服务器，让所有DNS请求向权威服务器进行查询。</p>
+<p>DNS服务器软件使用unbound</p>
+<p>系统使用Rocky Linux8</p>
+<p>关闭防火墙和SElinux</p>
+<p>注意：本教程只是简单的建立一个可用的DNS递归服务器，可以小规模使用，用于学习解析过程。<br>注意：国内若对公网开放，需要进行备案。</p>
+<span id="more"></span>
+
+<h2 id="递归DNS服务器与权威DNS服务器"><a href="#递归DNS服务器与权威DNS服务器" class="headerlink" title="递归DNS服务器与权威DNS服务器"></a>递归DNS服务器与权威DNS服务器</h2><p><strong>1.权威DNS：</strong></p>
+<p>权威DNS是经过上一级授权对域名进行解析的服务器，同时它可以把解析授权转授给其他人，如COM顶级服务器可以授权dns.com这个域名的的权威服务器为NS.ABC.COM，同时NS.ABC.COM还可以把授权转授给NS.DDD.COM，这样NS.DDD.COM就成了ABC.COM实际上的权威服务器了。平时我们解析域名的结果都源自权威DNS。比如dns.com的权威DNS服务器就是ns1.dns.com、ns2.dns.com。然后通过ns1.dns.com即可查询域名的具体IP地址或其他记录。</p>
+<p><strong>2.递归DNS:</strong></p>
+<p>负责接受用户对任意域名查询，并返回结果给用户。递归DNS可以缓存结果以避免重复向上查询。我们平时使用最多的就是这类DNS，他对公众开放服务，一般由网络运营商提供，大家都自己可以架递归DNS提供服务。递归DNS一定要有可靠的互联网连接方可使用。比如谷歌的8.8.8.8和8.8.4.4以及114的114.114.114.114和114.114.115.115都属于这一类DNS。你本地电脑上设置的DNS就是这类DNS。</p>
+<p><strong>3.转发DNS:</strong></p>
+<p>负责接受用户查询，并返回结果给用户。但这个结果不是按标准的域名解析过程得到的，而是直接把递归DNS的结果转发给用户。它也具备缓存功能。他主要使用在没有直接的互联网连接，但可以连接到一个递归DNS那里，这时使用转发DNS就比较合适。其缺陷是：直接受递归DNS的影响，服务品质较差。比如我们用的路由器里面的DNS就是这一类，用路由器的朋友可以看下本地电脑的DNS一般都是192.168.1.1。</p>
+<h2 id="查看DNS递归服务器解析过程跟踪"><a href="#查看DNS递归服务器解析过程跟踪" class="headerlink" title="查看DNS递归服务器解析过程跟踪"></a>查看DNS递归服务器解析过程跟踪</h2><figure class="highlight mercury"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><code class="hljs mercury">dig +<span class="hljs-keyword">trace</span> baidu.com<br><br><br>; &lt;&lt;&gt;&gt; DiG <span class="hljs-number">9.11</span>.<span class="hljs-number">36</span>-RedHat-<span class="hljs-number">9.11</span>.<span class="hljs-number">36</span>-<span class="hljs-number">5</span>.el8_7.<span class="hljs-number">2</span> &lt;&lt;&gt;&gt; +<span class="hljs-keyword">trace</span> baidu.com<br>;; global options: +cmd<br>.			<span class="hljs-number">9981</span>	IN	NS	g.root-servers.net.<br>.			<span class="hljs-number">9981</span>	IN	NS	j.root-servers.net.<br>.			<span class="hljs-number">9981</span>	IN	NS	c.root-servers.net.<br>.			<span class="hljs-number">9981</span>	IN	NS	m.root-servers.net.<br>.			<span class="hljs-number">9981</span>	IN	NS	i.root-servers.net.<br>.			<span class="hljs-number">9981</span>	IN	NS	k.root-servers.net.<br>.			<span class="hljs-number">9981</span>	IN	NS	b.root-servers.net.<br>.			<span class="hljs-number">9981</span>	IN	NS	f.root-servers.net.<br>.			<span class="hljs-number">9981</span>	IN	NS	d.root-servers.net.<br>.			<span class="hljs-number">9981</span>	IN	NS	l.root-servers.net.<br>.			<span class="hljs-number">9981</span>	IN	NS	e.root-servers.net.<br>.			<span class="hljs-number">9981</span>	IN	NS	h.root-servers.net.<br>.			<span class="hljs-number">9981</span>	IN	NS	a.root-servers.net.<br><br># 通过<span class="hljs-number">114</span>获取到root C的IP地址<br><br>;; Received <span class="hljs-number">824</span> bytes from <span class="hljs-number">114.114</span>.<span class="hljs-number">114.114</span>#<span class="hljs-number">53</span>(<span class="hljs-number">114.114</span>.<span class="hljs-number">114.114</span>) in <span class="hljs-number">0</span> ms<br><br>com.			<span class="hljs-number">172800</span>	IN	NS	a.gtld-servers.net.<br>com.			<span class="hljs-number">172800</span>	IN	NS	d.gtld-servers.net.<br>com.			<span class="hljs-number">172800</span>	IN	NS	l.gtld-servers.net.<br>com.			<span class="hljs-number">172800</span>	IN	NS	c.gtld-servers.net.<br>com.			<span class="hljs-number">172800</span>	IN	NS	m.gtld-servers.net.<br>com.			<span class="hljs-number">172800</span>	IN	NS	h.gtld-servers.net.<br>com.			<span class="hljs-number">172800</span>	IN	NS	e.gtld-servers.net.<br>com.			<span class="hljs-number">172800</span>	IN	NS	j.gtld-servers.net.<br>com.			<span class="hljs-number">172800</span>	IN	NS	b.gtld-servers.net.<br>com.			<span class="hljs-number">172800</span>	IN	NS	i.gtld-servers.net.<br>com.			<span class="hljs-number">172800</span>	IN	NS	g.gtld-servers.net.<br>com.			<span class="hljs-number">172800</span>	IN	NS	f.gtld-servers.net.<br>com.			<span class="hljs-number">172800</span>	IN	NS	k.gtld-servers.net.<br><br># 通过root C服务器，获取到所有.com 权威服务器<br><br>;; Received <span class="hljs-number">1197</span> bytes from <span class="hljs-number">192.33</span>.<span class="hljs-number">4.12</span>#<span class="hljs-number">53</span>(c.root-servers.net) in <span class="hljs-number">197</span> ms<br><br>baidu.com.		<span class="hljs-number">172800</span>	IN	NS	ns2.baidu.com.<br>baidu.com.		<span class="hljs-number">172800</span>	IN	NS	ns3.baidu.com.<br>baidu.com.		<span class="hljs-number">172800</span>	IN	NS	ns4.baidu.com.<br>baidu.com.		<span class="hljs-number">172800</span>	IN	NS	ns1.baidu.com.<br>baidu.com.		<span class="hljs-number">172800</span>	IN	NS	ns7.baidu.com.<br><br># 通过.com 权威服务器，获取到baidu.com的权威服务器。<br><br>;; Received <span class="hljs-number">845</span> bytes from <span class="hljs-number">192.43</span>.<span class="hljs-number">172.30</span>#<span class="hljs-number">53</span>(i.gtld-servers.net) in <span class="hljs-number">237</span> ms<br><br>baidu.com.		<span class="hljs-number">600</span>	IN	A	<span class="hljs-number">39.156</span>.<span class="hljs-number">66.10</span><br>baidu.com.		<span class="hljs-number">600</span>	IN	A	<span class="hljs-number">110.242</span>.<span class="hljs-number">68.66</span><br>baidu.com.		<span class="hljs-number">86400</span>	IN	NS	dns.baidu.com.<br>baidu.com.		<span class="hljs-number">86400</span>	IN	NS	ns7.baidu.com.<br>baidu.com.		<span class="hljs-number">86400</span>	IN	NS	ns4.baidu.com.<br>baidu.com.		<span class="hljs-number">86400</span>	IN	NS	ns2.baidu.com.<br>baidu.com.		<span class="hljs-number">86400</span>	IN	NS	ns3.baidu.com.<br><br># 通过 ns3.baidu.com 权威服务器，获取到 baidu.com的ip解析为<span class="hljs-number">112.80</span>.<span class="hljs-number">248.64</span><br><br>;; Received <span class="hljs-number">356</span> bytes from <span class="hljs-number">112.80</span>.<span class="hljs-number">248.64</span>#<span class="hljs-number">53</span>(ns3.baidu.com) in <span class="hljs-number">26</span> ms<br><br></code></pre></td></tr></table></figure>
+
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><p> <a target="_blank" rel="noopener" href="https://www.menandmice.com/glossary/dns-root-server">DNS 根服务器介绍</a></p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmake">dnf <span class="hljs-keyword">install</span> unbound -y<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">vim</span> /etc/unbound/unbound.conf<br><br><span class="hljs-attribute">server</span>:<br>    <span class="hljs-attribute">interface</span>: <span class="hljs-number">0.0.0.0</span><br>    <span class="hljs-attribute">interface</span>: ::<span class="hljs-number">0</span><br>    <br>    <span class="hljs-attribute">access</span>-control: <span class="hljs-number">0.0.0.0</span>/<span class="hljs-number">0</span> <span class="hljs-literal">allow</span><br>    <span class="hljs-attribute">access</span>-control: ::/<span class="hljs-number">0</span> <span class="hljs-literal">allow</span><br>    <br>    <br><span class="hljs-comment"># 在server下，修改如上配置，监听所有IPv4和IPv6地址，和允许所有IPv4地址和IPv6访问使用DNS服务器。    </span><br><br></code></pre></td></tr></table></figure>
+
+<h2 id="启动和验证"><a href="#启动和验证" class="headerlink" title="启动和验证"></a>启动和验证</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">systemctl enable --now unbound<br><br><span class="hljs-comment"># 启动服务并设置开机启动</span><br><br>systemctl status unbound<br><br><span class="hljs-comment"># 查看服务状态</span><br><br>dnf <span class="hljs-keyword">install </span><span class="hljs-keyword">bind-utils </span>-y<br><br><span class="hljs-keyword">dig </span>@localhost www.qq.com<br><br><span class="hljs-comment"># 安装dig，指定本地dns服务器，查询域名测试可用性。</span><br><br><span class="hljs-keyword">dig </span>+<span class="hljs-keyword">short </span>TXT whoami.ds.akahelp.net  @<span class="hljs-number">127</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">1</span><br><br><span class="hljs-comment"># 查询dns服务器访问权威服务器使用的公网IP。</span><br><br></code></pre></td></tr></table></figure>
+
+<h1 id="抓包验证"><a href="#抓包验证" class="headerlink" title="抓包验证"></a>抓包验证</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">tcpdump -i eth0  port domain -w ./dns.pcap <br><br><span class="hljs-comment"># 可在服务器指定接口抓包dns报文进行分析，使用Wireshark 打开。</span><br><br></code></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/8/html/managing_networking_infrastructure_services/assembly_setting-up-an-unbound-dns-server_networking-infrastructure-services">红帽文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.dns.com/supports/681.html">https://www.dns.com/supports/681.html</a> </p>
+<p><a target="_blank" rel="noopener" href="https://www.cloudflare-cn.com/learning/dns/what-is-dns/">https://www.cloudflare-cn.com/learning/dns/what-is-dns/</a> </p>
+<div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a target="_blank" rel="noopener" href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="https://songxwn.com/zabbix_data/">Zabbix：历史数据与趋势数据</a></li><li><a href="https://songxwn.com/ospf-route-FA/">HCIE Datacom-01.3 IGP高级特性-OSPF-其他特性</a></li><li><a href="https://songxwn.com/Juniper_RE-Protect/">Juniper RE防护-过滤SSH&Telnet登录</a></li></ul></div>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/network/" class="category-chain-item">network</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/dns/">#dns</a>
+      
+        <a href="/tags/network/">#network</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>建立自有递归DNS服务器</div>
+      <div>https://songxwn.com/DNS_recursive_Server/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Song</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年4月12日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年5月2日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/ESXi8_IPMI/" title="VMware ESXi 8 使用IPMITool">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">VMware ESXi 8 使用IPMITool</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/zabbix_data/" title="Zabbix：历史数据与趋势数据">
+                        <span class="hidden-mobile">Zabbix：历史数据与趋势数据</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments">
+      
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script>
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          Fluid.utils.createCssLink('https://lib.baomitu.com/disqusjs/1.3.0/disqusjs.css');
+          Fluid.utils.createScript('https://lib.baomitu.com/disqusjs/1.3.0/disqus.js', function() {
+            new DisqusJS({
+              shortname: 'songxwn',
+              apikey: ''
+            });
+          });
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <a href="https://www.foreverblog.cn/go.html" target="_blank"> <img src="https://img.foreverblog.cn/wormhole_1_tp.gif" alt="" style="width:auto;height:32px;" title="穿梭虫洞-随机访问十年之约友链博客"></a>,<a href="https://www.vultr.com/?ref=7199488" target="_blank"> <img src="https://www.vultr.com/media/logo_ondark.svg" alt="" style="width:auto;height:32px;" title="注册vultr获取免费10美元体验额度"></a>,<a href="https://www.vultr.com/?ref=9293176-8H" target="_blank"> <img src="https://www.vultr.com/media/logo_mono_onwhite.png" alt="" style="width:auto;height:32px;" title="注册vultr获取免费100美元体验额度"></a>
+        </div>
+      </div>
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

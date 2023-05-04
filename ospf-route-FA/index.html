@@ -1,0 +1,878 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/images/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Song">
+  <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
+  
+    <meta name="description" content="简介本文章包括多进程、BGP联动问题（延迟收敛）、FA地址。 本教程参考华为认证系列PPT。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HCIE Datacom-01.3 IGP高级特性-OSPF-其他特性">
+<meta property="og:url" content="https://songxwn.com/ospf-route-FA/index.html">
+<meta property="og:site_name" content="Song&#96;s Blog">
+<meta property="og:description" content="简介本文章包括多进程、BGP联动问题（延迟收敛）、FA地址。 本教程参考华为认证系列PPT。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/03/27/bcadee2439cbf4a0.png">
+<meta property="article:published_time" content="2023-03-27T02:52:23.000Z">
+<meta property="article:modified_time" content="2023-03-27T03:56:11.122Z">
+<meta property="article:author" content="Song">
+<meta property="article:tag" content="network">
+<meta property="article:tag" content="ospf">
+<meta property="article:tag" content="datacom">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2023/03/27/bcadee2439cbf4a0.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>HCIE Datacom-01.3 IGP高级特性-OSPF-其他特性 - Song`s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/scroll.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"songxwn.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":130,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Song`s Blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Song`s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/books/">
+                <i class="iconfont icon-books"></i>
+                <span>读书</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                <span>RSS</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s3.bmp.ovh/imgs/2022/12/31/099a0d542a9372cc.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="HCIE Datacom-01.3 IGP高级特性-OSPF-其他特性"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-27 10:52" pubdate>
+          2023年3月27日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          29 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">HCIE Datacom-01.3 IGP高级特性-OSPF-其他特性</h1>
+            
+              <p class="note note-danger">
+                
+                  
+                    本文最后更新于：2023年3月27日 中午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>本文章包括多进程、BGP联动问题（延迟收敛）、FA地址。</p>
+<p>本教程参考华为认证系列PPT。</p>
+<span id="more"></span>
+
+<h1 id="OSPF-多进程"><a href="#OSPF-多进程" class="headerlink" title="OSPF 多进程"></a>OSPF 多进程</h1><ul>
+<li>OSPF支持多进程，在同一台路由器上可以运行多个不同的OSPF进程，它们之间互不影响，彼此独立。不同OSPF进程之间的路由交互相当于不同路由协议之间的路由交互。</li>
+<li>路由器的一个接口只能属于某一个OSPF进程。</li>
+</ul>
+<p><img src="https://s3.bmp.ovh/imgs/2023/03/27/f5049d99b6316e39.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>应用场景：</li>
+<li>OSPF多进程的一个典型应用就是在VPN场景。</li>
+<li>如图，同一台PE设备连接了两个不同的VPN客户，并且PE和CE之间均部署OSPF，因此可以通过在PE设备上部署多进程实现VPN客户之间的隔离。</li>
+</ul>
+<p>PS：</p>
+<ul>
+<li>VPN：Virtual Private Network，虚拟专用网络。这里单指MPLS VPN</li>
+<li>创建OSPF进程时，如果指定了VPN实例，那么OSPF进程属于此实例，否则属于全局实例 (路由表)。</li>
+<li>OSPF的进程号仅有本地意义。OSPFv3可以配置实例ID，通过报文区分。</li>
+</ul>
+<h1 id="OSPF与BGP联动（等待收敛）"><a href="#OSPF与BGP联动（等待收敛）" class="headerlink" title="OSPF与BGP联动（等待收敛）"></a>OSPF与BGP联动（等待收敛）</h1><h2 id="现象说明"><a href="#现象说明" class="headerlink" title="现象说明"></a>现象说明</h2><ul>
+<li>当有新的设备加入到网络中，或者设备重启时，可能会出现在BGP收敛期间内网络流量丢失的现象。这是IGP收敛速度比BGP快造成的。</li>
+<li>当OSPF收敛完成的时候，BGP并没有收敛完成，造成路由黑洞，而OSPF收敛完成后会把流量引用过来，导致丢包。</li>
+</ul>
+<p>R1、R2、R3和R4运行OSPF，并建立IBGP全互联。其中R3是R2的备份设备。</p>
+<p>当网络环境稳定时，R1访问10.1.5.5&#x2F;32的流量路径为：R1-R2-R4-R5。</p>
+<p><img src="https://i.328888.xyz/2023/03/27/iUpELX.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li>当R2故障时，流量路径切换到：R1-R3-R4-R5。</li>
+<li>当R2故障恢复后，由于IGP收敛速度比BGP快，因此OSPF先收敛。此时R1若要访问10.1.5.5&#x2F;32，先查BGP路由，下一跳为R5；再查IGP路由，会根据IGP路由传递给R2。</li>
+<li>R2收到该流量后，会查BGP路由。由于BGP还未完成收敛，发现没有到达10.1.5.5&#x2F;32的路由，则不会转发数据，造成流量丢失。</li>
+</ol>
+<h2 id="解决BGP收敛慢导致路由黑洞的解决配置"><a href="#解决BGP收敛慢导致路由黑洞的解决配置" class="headerlink" title="解决BGP收敛慢导致路由黑洞的解决配置"></a>解决BGP收敛慢导致路由黑洞的解决配置</h2><ul>
+<li>通过使能OSPF与BGP联动特性，可以解决流量丢失问题。</li>
+<li>使能了OSPF与BGP联动特性的设备会在设定的联动时间内保持为Stub路由器，也就是说，该设备发布的LSA中的链路度量值为最大值（65535），从而告知其它OSPF设备不要使用这个路由器来转发数据。</li>
+</ul>
+<p>在R2上使能BGP联动，这样，在BGP收敛完成前，R1不把流量转发到R2上，而是继续使用备份设备R3转发流量，直到R2上的BGP路由完成收敛。</p>
+<p><img src="https://s3.bmp.ovh/imgs/2023/03/27/11d0bb3427b2e308.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>配置Stub路由器：</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs csharp">[<span class="hljs-meta">Huawei-ospf-1</span>] stub-router [<span class="hljs-keyword">on</span>-startup [interval] ]<br>[<span class="hljs-meta">Huawei-ospf-1</span>] stub-router <span class="hljs-keyword">on</span>-startup <span class="hljs-number">100</span><br><br>配置Stub路由器是一种特殊的路由选路，配置了Stub路由器的路径不被优选。<br>实现方法是将度量值设为最大（<span class="hljs-number">65535</span>），尽量避免数据从此路由器转发。用于保护此路由器链路，通常使用在升级等维护操作的场景。<br><br></code></pre></td></tr></table></figure>
+
+<p>命令：[Huawei-ospf-1] stub-router [ on-startup [ interval ] ]</p>
+<p>on-startup [ interval ]：设备在发生重启或故障时保持为Stub路由器的时间间隔。整数形式，取值范围是5～65535，单位是秒，缺省值是500秒。</p>
+<p>如果未配置on-startup参数，则表示该设备始终保持为Stub路由器，即所有来自这个设备的路由条目Cost值均设为65535。</p>
+<p>如果配置了on-startup参数，则表示该设备仅在重启或者故障时保持为Stub路由器，保持时间由interval参数决定。此时若未配置interval参数，则使用interval的缺省值500秒。</p>
+<h1 id="OSPF转发地址-FA"><a href="#OSPF转发地址-FA" class="headerlink" title="OSPF转发地址-FA"></a>OSPF转发地址-FA</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><ul>
+<li>FA（Forwarding Address，转发地址）：</li>
+</ul>
+<blockquote>
+<p>到达所通告的目的地的数据包应该被转发到的地址，如果转发地址为0.0.0.0，那么数据包将被转发到始发ASBR上。</p>
+<p>Type5 AS-External-LSA 和 Type7 NSSA LSA：</p>
+</blockquote>
+<p><img src="https://s3.bmp.ovh/imgs/2023/03/27/1cfc6f10f98ee721.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>注意OSPF的Type5 LSA和Type7 LSA中包含一个特别的字段FA，FA的引入使得OSPF在某些特殊的场景下可以避免次优路径问题。</strong></p>
+<h2 id="没有FA引发的问题"><a href="#没有FA引发的问题" class="headerlink" title="没有FA引发的问题"></a>没有FA引发的问题</h2><p><img src="https://s3.bmp.ovh/imgs/2023/03/27/6e7710e7d9bac54c.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>R2、R3和R4运行OSPF，均部署在Area0中。其中R2和R3的GE0&#x2F;0&#x2F;1接口都激活OSPF并建立邻接关系，但是两者与外部路由器R1并不建立OSPF邻接关系。</li>
+</ul>
+<ol>
+<li>R2配置到达10.1.1.1&#x2F;32的静态路由，下一跳为10.1.123.1。</li>
+<li>R2将静态路由引入OSPF，产生Type5 LSA在区域内泛洪。</li>
+<li>R3接收到R2产生的5类LSA，计算出到达10.1.1.1&#x2F;32的外部路由，并且将路由的下一跳指定为R2（10.1.123.2）。</li>
+</ol>
+<ul>
+<li>OSPF域内的路由器如R4到达10.1.1.1&#x2F;32的路径是：R4-R3-R2-R1，该路径是次优路径的。</li>
+</ul>
+<h2 id="利用FA解决次优路径问题"><a href="#利用FA解决次优路径问题" class="headerlink" title="利用FA解决次优路径问题"></a>利用FA解决次优路径问题</h2><p><img src="https://s3.bmp.ovh/imgs/2023/03/27/02b47167a8e0727b.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>R2向OSPF域内通告到达10.1.1.1&#x2F;32的外部路由时，为对应的Type5 LSA设置FA，值为其自己到达该外部路由的下一跳：10.1.123.1。</li>
+<li>当R3收到该LSA后，计算到达10.1.1.1&#x2F;32的路由时，发现FA为非0，因此它认为到达目标地址10.1.1.1&#x2F;32的下一跳为FA所指定的地址，即：10.1.123.1。</li>
+<li>有FA地址后路径：R4-R3-R1</li>
+</ul>
+<h2 id="FA的取值"><a href="#FA的取值" class="headerlink" title="FA的取值"></a>FA的取值</h2><ul>
+<li>当ASBR引入外部路由时，若Type5 LSA中的FA字段为0，表示路由器认为到达目的网段的数据包应该发往该ASBR；若Type5 LSA中的FA字段不为0，表示路由器认为到达目的网段的数据包应该发往这个FA所标识的设备。</li>
+<li>当以下条件全部满足时，FA字段才可以被设置为非0：</li>
+</ul>
+<blockquote>
+<p>ASBR在其连接外部网络的接口（外部路由的出接口）上激活了OSPF；</p>
+<p>该接口没有被配置为Silent-Interface；</p>
+<p>该接口的OSPF网络类型为Broadcast或NBMA；</p>
+<p>该接口的IP地址在OSPF配置的network命令指定的网段范围内；</p>
+<p>到达FA地址的路由必须是OSPF区域内部路由或区域间路由，这样接收到该外部LSA的路由器才能够加载该LSA进入路由表。加载的外部LSA生成的路由条目下一跳与到达FA地址的下一跳相同。</p>
+</blockquote>
+<ul>
+<li><strong>NSSA区域Type7 LSA转化为Type5 LSA：</strong></li>
+</ul>
+<blockquote>
+<p>为了将NSSA区域引入的外部路由发布到其它区域，需要把Type7 LSA转化为Type5 LSA以便在整个OSPF网络中通告。缺省情况下，转换路由器是NSSA区域中Router ID最大的区域边界路由器（ABR）。</p>
+<p>LSA头部Options字段中的P-bit（Propagate bit）用于告知转化路由器该条Type7 LSA是否需要转化为Type5 LSA。只有P-bit置位并且FA不为0的Type7 LSA才能转化为Type5 LSA。</p>
+<p>区域边界路由器产生的Type7 LSA缺省路由不会置位P-bit。</p>
+</blockquote>
+<p><strong>注意：所有的OSPF LSA有相同的LSA头部，P-bit在LSA头部中的Options字段。</strong></p>
+<h2 id="案例：NSSA场景下FA的典型应用"><a href="#案例：NSSA场景下FA的典型应用" class="headerlink" title="案例：NSSA场景下FA的典型应用"></a>案例：NSSA场景下FA的典型应用</h2><ul>
+<li>当NSSA区域中有多个ABR时，系统会根据规则自动选择一个ABR作为转换器，将Type7 LSA转换为Type5 LSA，其他ABR不做LSA转换。</li>
+<li>如图所示，如果不考虑FA，由于R3的Router ID比R2大，因此它将执行7转5的动作，如此一来，R1将认为必须经由ABR（R3）到达目的网络。这样，流量便会被引导到低带宽链路，即R1-R3-R4-R5。</li>
+</ul>
+<p><img src="https://s3.bmp.ovh/imgs/2023/03/27/769a5e388cca1a05.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><strong>如图所示：</strong></li>
+</ul>
+<blockquote>
+<p>R5引入直连外部路由，且将FA设为自己访问目的网段10.1.5.0&#x2F;24的地址：10.1.45.5。</p>
+<p>R3执行Type7 LSA转换Type5 LSA动作，继续携带FA：10.1.45.5。</p>
+<p>R1收到后，会在自己的OSPF路由表中查询到达这个FA的路由，发现在OSPF路由表中能够找到匹配这个FA的路由，就使用到达这个FA的下一跳地址作为这条外部路由的下一跳地址。</p>
+<p>因此，R1最终会通过R1-R2-R4-R5路径，访问目的网段10.1.5.0&#x2F;24。</p>
+</blockquote>
+<div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a target="_blank" rel="noopener" href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="https://songxwn.com/DNS_recursive_Server/">建立自有递归DNS服务器</a></li><li><a href="https://songxwn.com/zabbix_data/">Zabbix：历史数据与趋势数据</a></li><li><a href="https://songxwn.com/Juniper_RE-Protect/">Juniper RE防护-过滤SSH&Telnet登录</a></li></ul></div>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/network/" class="category-chain-item">network</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/network/">#network</a>
+      
+        <a href="/tags/ospf/">#ospf</a>
+      
+        <a href="/tags/datacom/">#datacom</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>HCIE Datacom-01.3 IGP高级特性-OSPF-其他特性</div>
+      <div>https://songxwn.com/ospf-route-FA/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Song</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年3月27日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年3月27日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/MariaDB_Galera_Cluster/" title="MariaDB Galera Cluster 10.6 集群部署">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MariaDB Galera Cluster 10.6 集群部署</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/frostmourne_install/" title="Frostmourne (霜之哀伤)日志监控系统部署安装">
+                        <span class="hidden-mobile">Frostmourne (霜之哀伤)日志监控系统部署安装</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments">
+      
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script>
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          Fluid.utils.createCssLink('https://lib.baomitu.com/disqusjs/1.3.0/disqusjs.css');
+          Fluid.utils.createScript('https://lib.baomitu.com/disqusjs/1.3.0/disqus.js', function() {
+            new DisqusJS({
+              shortname: 'songxwn',
+              apikey: ''
+            });
+          });
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <a href="https://www.foreverblog.cn/go.html" target="_blank"> <img src="https://img.foreverblog.cn/wormhole_1_tp.gif" alt="" style="width:auto;height:32px;" title="穿梭虫洞-随机访问十年之约友链博客"></a>,<a href="https://www.vultr.com/?ref=7199488" target="_blank"> <img src="https://www.vultr.com/media/logo_ondark.svg" alt="" style="width:auto;height:32px;" title="注册vultr获取免费10美元体验额度"></a>,<a href="https://www.vultr.com/?ref=9293176-8H" target="_blank"> <img src="https://www.vultr.com/media/logo_mono_onwhite.png" alt="" style="width:auto;height:32px;" title="注册vultr获取免费100美元体验额度"></a>
+        </div>
+      </div>
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

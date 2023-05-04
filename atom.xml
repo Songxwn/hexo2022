@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Song`s Blog</title>
+  
+  <subtitle>学习笔记博客</subtitle>
+  <link href="https://songxwn.com/atom.xml" rel="self"/>
+  
+  <link href="https://songxwn.com/"/>
+  <updated>2023-05-03T02:35:36.117Z</updated>
+  <id>https://songxwn.com/</id>
+  
+  <author>
+    <name>Song</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Elasticsearch 接入微软Active Directory认证</title>
+    <link href="https://songxwn.com/ELK-AD-LDAP-Authentication/"/>
+    <id>https://songxwn.com/ELK-AD-LDAP-Authentication/</id>
+    <published>2023-05-03T01:51:41.000Z</published>
+    <updated>2023-05-03T02:35:36.117Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;本文章主要介绍了Elasticsearch 接入微软的&lt;a href=&quot;https://learn.microsoft.com/zh-cn/troubleshoot/windows-server/identity/active-directory-overview&quot;&gt;Active Directory&lt;/a&gt;（域控）作为身份认证。&lt;/p&gt;
+&lt;p&gt;LDAP认证接入可参考&lt;a href=&quot;https://www.elastic.co/guide/en/elasticsearch/reference/current/ldap-realm.html&quot;&gt;官方文档&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;使用环境：Rocky Linux 8、Elasticsearch 8、Windows Server 2022&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意：由于此功能基础版无法使用，需要白金版本，可参考教程：&lt;/strong&gt;&lt;a href=&quot;https://songxwn.com/Elasticsearch-x-pack-core/&quot;&gt;&lt;strong&gt;https://songxwn.com/Elasticsearch-x-pack-core/&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;ELK系列文章：&lt;a href=&quot;https://songxwn.com/categories/linux/ELK/&quot;&gt;https://songxwn.com/categories/linux/ELK/&lt;/a&gt; &lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
+    
+    <category term="ELK" scheme="https://songxwn.com/categories/linux/ELK/"/>
+    
+    
+    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
+    
+    <category term="elk" scheme="https://songxwn.com/tags/elk/"/>
+    
+    <category term="elasticsearch" scheme="https://songxwn.com/tags/elasticsearch/"/>
+    
+    <category term="ad" scheme="https://songxwn.com/tags/ad/"/>
+    
+    <category term="ldap" scheme="https://songxwn.com/tags/ldap/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Podman 容器管理工具</title>
+    <link href="https://songxwn.com/podman/"/>
+    <id>https://songxwn.com/podman/</id>
+    <published>2023-05-02T04:50:52.000Z</published>
+    <updated>2023-05-02T13:23:51.436Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;Podman是一个用于在 Linux 系统上构建、管理和运行&lt;a href=&quot;https://opencontainers.org/&quot;&gt;OCI标准&lt;/a&gt;容器的CLI工具，是Docker的直接替代品。&lt;/p&gt;
+&lt;p&gt;由红帽主导，与开源社区一起开发。在RHEL8开始预装并替代Docker。命令上与Docker并无区别。&lt;/p&gt;
+&lt;p&gt;主要特点是不需要守护进程，可以支持非root用户运行容器，提高了安全性和可访问性。&lt;/p&gt;
+&lt;p&gt;本教程也适用于RHEL其他衍生版本，如Rocky Linux。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
+    
+    
+    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
+    
+    <category term="Docker" scheme="https://songxwn.com/tags/Docker/"/>
+    
+    <category term="Dodman" scheme="https://songxwn.com/tags/Dodman/"/>
+    
+    <category term="container" scheme="https://songxwn.com/tags/container/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Zabbix SNMPv3 设备重启后无法监控问题</title>
+    <link href="https://songxwn.com/zabbix-reboot-SNMPv3/"/>
+    <id>https://songxwn.com/zabbix-reboot-SNMPv3/</id>
+    <published>2023-05-01T23:29:36.000Z</published>
+    <updated>2023-05-02T07:33:45.192Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;最近有发现有SNMPv3 监控的网络设备断电重启后，Zabbix无法正常监控，显示SNMP超时。&lt;/p&gt;
+&lt;p&gt;但SNMP工具去get oid值却没有问题，Zabbix Server重启后能解决。&lt;/p&gt;
+&lt;p&gt;查询一番后有了不重启的解决方案。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Zabbix" scheme="https://songxwn.com/categories/Zabbix/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
+    
+    <category term="Zabbix" scheme="https://songxwn.com/tags/Zabbix/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Elasticsearch 8.7 白金版激活</title>
+    <link href="https://songxwn.com/Elasticsearch-x-pack-core/"/>
+    <id>https://songxwn.com/Elasticsearch-x-pack-core/</id>
+    <published>2023-05-01T19:49:37.000Z</published>
+    <updated>2023-05-02T03:58:19.410Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;本文章讲解了Elasticsearch 8的白金版激活，使用了Docker环境进行自动生成破解文件x-pack-core。仅用于学习使用。&lt;/p&gt;
+&lt;p&gt;仅适用于：Elasticsearch版本：8.7.0 （使用RPM包安装）&lt;/p&gt;
+&lt;p&gt;Java容器版本：JDK19.0.2&lt;/p&gt;
+&lt;p&gt;环境要求：Rocky Linux8、&lt;a href=&quot;https://yeasy.gitbook.io/docker_practice/install/centos&quot;&gt;Docker&lt;/a&gt;或&lt;a href=&quot;https://cloud.tencent.com/developer/article/1976198&quot;&gt;Podman&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;网络要求：需要能正常访问GitHub和Docker HUB（建议全局挂代理）&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.elastic.co/cn/subscriptions&quot;&gt;白金版功能&lt;/a&gt;：支持LDAP、watcher、支持邮箱发送等。&lt;/p&gt;
+&lt;p&gt;安装教程可参考：&lt;a href=&quot;https://songxwn.com/elk/&quot;&gt;https://songxwn.com/elk/&lt;/a&gt; &lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
+    
+    <category term="ELK" scheme="https://songxwn.com/categories/linux/ELK/"/>
+    
+    
+    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
+    
+    <category term="elk" scheme="https://songxwn.com/tags/elk/"/>
+    
+    <category term="elasticsearch" scheme="https://songxwn.com/tags/elasticsearch/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux 虚拟机在线热扩容分区</title>
+    <link href="https://songxwn.com/Linux-growpart/"/>
+    <id>https://songxwn.com/Linux-growpart/</id>
+    <published>2023-04-30T19:11:31.000Z</published>
+    <updated>2023-05-01T03:36:20.221Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;本教程是用于Linux虚拟机在调整虚拟硬盘大小后，进行在线不重启热扩容分区大小。&lt;/p&gt;
+&lt;p&gt;适用于RHEL 7+以上的版本及衍生发行版。（如Centos、Rocky Linux、Alma Linux等）&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
+    
+    
+    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
+    
+    <category term="VMware" scheme="https://songxwn.com/tags/VMware/"/>
+    
+    <category term="Disk" scheme="https://songxwn.com/tags/Disk/"/>
+    
+    <category term="Partition" scheme="https://songxwn.com/tags/Partition/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Elasticsearch 安装配置集群系统</title>
+    <link href="https://songxwn.com/elk_cluster/"/>
+    <id>https://songxwn.com/elk_cluster/</id>
+    <published>2023-04-30T01:59:00.000Z</published>
+    <updated>2023-05-02T14:12:47.807Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;本教程客户端API关闭HTTPS认证，但传输使用HTTPS。（为了接入&lt;a href=&quot;https://songxwn.com/frostmourne_install/&quot;&gt;日志监控&lt;/a&gt;）&lt;/p&gt;
+&lt;p&gt;主要介绍了ES集群的搭建。ELK单机使用可参考：&lt;a href=&quot;https://songxwn.com/elk/&quot;&gt;https://songxwn.com/elk/&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;Elasticsearch版本：8.x&lt;/p&gt;
+&lt;p&gt;系统版本：Rocky Linux 8.7 (关闭SE Linux和防火墙)&lt;/p&gt;
+&lt;p&gt;配置要求：建议4核8G以上，存储空间按照存储的文档大小规划。&lt;/p&gt;
+&lt;p&gt;Elasticsearch 集群建议至少要有三个节点，两个以上的master节点。&lt;/p&gt;
+&lt;p&gt;本教程也同样适用于也适用于其他RHEL8-9版本衍生版系统：如Centos stream、AlmaLinux等。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
+    
+    <category term="ELK" scheme="https://songxwn.com/categories/linux/ELK/"/>
+    
+    
+    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
+    
+    <category term="elk" scheme="https://songxwn.com/tags/elk/"/>
+    
+    <category term="elasticsearch" scheme="https://songxwn.com/tags/elasticsearch/"/>
+    
+    <category term="cluster" scheme="https://songxwn.com/tags/cluster/"/>
+    
+    <category term="ha" scheme="https://songxwn.com/tags/ha/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ELK-Logstash配置SNMP-Trap</title>
+    <link href="https://songxwn.com/elk_snmp_trap/"/>
+    <id>https://songxwn.com/elk_snmp_trap/</id>
+    <published>2023-04-24T06:59:00.000Z</published>
+    <updated>2023-05-01T03:52:23.299Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;本文章适用于ELK的logstash 配置SNMP Trap插件,接收告警通知。&lt;br&gt;默认情况下是安装此插件的，如没有可手动安装。&lt;/p&gt;
+&lt;p&gt;一般用于网络设备。&lt;/p&gt;
+&lt;p&gt;注意此插件不支持v3版本。&lt;/p&gt;
+&lt;p&gt;参考：&lt;a href=&quot;https://www.elastic.co/guide/en/logstash/current/plugins-inputs-snmptrap.html&quot;&gt;https://www.elastic.co/guide/en/logstash/current/plugins-inputs-snmptrap.html&lt;/a&gt; &lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
+    
+    <category term="ELK" scheme="https://songxwn.com/categories/linux/ELK/"/>
+    
+    
+    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
+    
+    <category term="elk" scheme="https://songxwn.com/tags/elk/"/>
+    
+    <category term="snmp" scheme="https://songxwn.com/tags/snmp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>部署团队服务导航网站 Team-nav</title>
+    <link href="https://songxwn.com/team_nav/"/>
+    <id>https://songxwn.com/team_nav/</id>
+    <published>2023-04-18T04:14:00.000Z</published>
+    <updated>2023-04-23T05:44:22.733Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;前后端完整的网址导航服务，可以用于公司内部内网使用，提供多种的卡片图标生成方式，能将上传的原型压缩包自动生成可访问的地址，支持私密卡片，发布倒计时等功能。&lt;/p&gt;
+&lt;p&gt;用于在公司内网部署使用，可在线修改上传、可拖拽排序等。&lt;/p&gt;
+&lt;p&gt;项目地址：&lt;a href=&quot;https://github.com/tuituidan/team-nav&quot;&gt;https://github.com/tuituidan/team-nav&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;要求Java版本为 1.8.0&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
+    
+    
+    <category term="linux" scheme="https://songxwn.com/tags/linux/"/>
+    
+    <category term="web" scheme="https://songxwn.com/tags/web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>VMware Vsphere 8 序列号</title>
+    <link href="https://songxwn.com/VMware_Vsphere8_key/"/>
+    <id>https://songxwn.com/VMware_Vsphere8_key/</id>
+    <published>2023-04-18T02:34:00.000Z</published>
+    <updated>2023-04-18T02:34:00.000Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;适用于VMware Vsphere 8系列产品的序列号，用于学习使用。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="vmware" scheme="https://songxwn.com/categories/vmware/"/>
+    
+    
+    <category term="esxi" scheme="https://songxwn.com/tags/esxi/"/>
+    
+    <category term="vmware" scheme="https://songxwn.com/tags/vmware/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>VMware ESXi 8 使用IPMITool</title>
+    <link href="https://songxwn.com/ESXi8_IPMI/"/>
+    <id>https://songxwn.com/ESXi8_IPMI/</id>
+    <published>2023-04-15T03:54:00.000Z</published>
+    <updated>2023-04-18T00:24:00.000Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;本教程适用于在VMware ESXi 8上使用ipmitool 工具进行本地管理BMC。&lt;/p&gt;
+&lt;p&gt;因8.0无法正常安装社区打包的VIB版本，所以需要自行编译二进制文件，上传到esxi使用。&lt;/p&gt;
+&lt;p&gt;7.0版本及之前的建议安装VIB包的&lt;a href=&quot;https://vswitchzero.com/ipmitool-vib&quot;&gt;ipmitools&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;IPMITool可以用来获取和设置服务器带外管理口的网络配置、用户配置、传感器、重启BMC等等。&lt;/p&gt;
+&lt;p&gt;项目地址：&lt;a href=&quot;https://github.com/ipmitool/ipmitool&quot;&gt;https://github.com/ipmitool/ipmitool&lt;/a&gt; &lt;/p&gt;</summary>
+    
+    
+    
+    <category term="esxi" scheme="https://songxwn.com/categories/esxi/"/>
+    
+    
+    <category term="esxi" scheme="https://songxwn.com/tags/esxi/"/>
+    
+    <category term="vmware" scheme="https://songxwn.com/tags/vmware/"/>
+    
+    <category term="ipmi" scheme="https://songxwn.com/tags/ipmi/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>建立自有递归DNS服务器</title>
+    <link href="https://songxwn.com/DNS_recursive_Server/"/>
+    <id>https://songxwn.com/DNS_recursive_Server/</id>
+    <published>2023-04-12T03:54:00.000Z</published>
+    <updated>2023-05-02T00:23:00.712Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;本教程教大家自建一个递归DNS服务器，让所有DNS请求向权威服务器进行查询。&lt;/p&gt;
+&lt;p&gt;DNS服务器软件使用unbound&lt;/p&gt;
+&lt;p&gt;系统使用Rocky Linux8&lt;/p&gt;
+&lt;p&gt;关闭防火墙和SElinux&lt;/p&gt;
+&lt;p&gt;注意：本教程只是简单的建立一个可用的DNS递归服务器，可以小规模使用，用于学习解析过程。&lt;br&gt;注意：国内若对公网开放，需要进行备案。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="dns" scheme="https://songxwn.com/tags/dns/"/>
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Zabbix：历史数据与趋势数据</title>
+    <link href="https://songxwn.com/zabbix_data/"/>
+    <id>https://songxwn.com/zabbix_data/</id>
+    <published>2023-04-04T17:54:00.000Z</published>
+    <updated>2023-04-12T03:44:00.000Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;历史数据（history）和趋势数据（trends）是Zabbix中存储收集到的数据的两种方式。&lt;/p&gt;
+&lt;p&gt;历史数据：每一个收集到的监控数据， 趋势数据：按小时统计计算的平均值数据。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Zabbix" scheme="https://songxwn.com/categories/Zabbix/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="Zabbix" scheme="https://songxwn.com/tags/Zabbix/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MariaDB Galera Cluster 10.6 集群部署</title>
+    <link href="https://songxwn.com/MariaDB_Galera_Cluster/"/>
+    <id>https://songxwn.com/MariaDB_Galera_Cluster/</id>
+    <published>2023-04-02T08:48:00.000Z</published>
+    <updated>2023-04-30T05:19:01.076Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://s3.bmp.ovh/imgs/2023/04/02/1342a2c99e7d1161.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;MariaDB Galera Cluster 是 MariaDB 的&lt;a href=&quot;https://mariadb.com/kb/en/about-galera-replication/&quot;&gt;虚拟同步&lt;/a&gt;多主集群。它仅在Linux上可用，并且仅支持&lt;a href=&quot;https://mariadb.com/kb/en/innodb/&quot;&gt;InnoDB&lt;/a&gt;存储引擎（尽管有 对&lt;a href=&quot;https://mariadb.com/kb/en/myisam/&quot;&gt;MyISAM&lt;/a&gt;和&lt;a href=&quot;https://mariadb.com/kb/en/what-is-mariadb-106/&quot;&gt;MariaDB 10.6&lt;/a&gt;的&lt;a href=&quot;https://mariadb.com/kb/en/aria/&quot;&gt;Aria&lt;/a&gt;的实验性支持。请参阅&lt;a href=&quot;https://mariadb.com/kb/en/galera-cluster-system-variables/#wsrep_replicate_myisam&quot;&gt;wsrep_replicate_myisam&lt;/a&gt;系统变量，或者从 &lt;a href=&quot;https://mariadb.com/kb/en/what-is-mariadb-106/&quot;&gt;MariaDB 10.6&lt;/a&gt; 开始，&lt;a href=&quot;https://mariadb.com/kb/en/galera-cluster-system-variables/#wsrep_mode&quot;&gt;wsrep_mode&lt;/a&gt;系统变量）。&lt;/p&gt;
+&lt;p&gt;个人为了替代主从复制而使用。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
+    
+    
+    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
+    
+    <category term="mariadb" scheme="https://songxwn.com/tags/mariadb/"/>
+    
+    <category term="cluster" scheme="https://songxwn.com/tags/cluster/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HCIE Datacom-01.3 IGP高级特性-OSPF-其他特性</title>
+    <link href="https://songxwn.com/ospf-route-FA/"/>
+    <id>https://songxwn.com/ospf-route-FA/</id>
+    <published>2023-03-27T02:52:23.000Z</published>
+    <updated>2023-03-27T03:56:11.122Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;本文章包括多进程、BGP联动问题（延迟收敛）、FA地址。&lt;/p&gt;
+&lt;p&gt;本教程参考华为认证系列PPT。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="ospf" scheme="https://songxwn.com/tags/ospf/"/>
+    
+    <category term="datacom" scheme="https://songxwn.com/tags/datacom/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Frostmourne (霜之哀伤)日志监控系统部署安装</title>
+    <link href="https://songxwn.com/frostmourne_install/"/>
+    <id>https://songxwn.com/frostmourne_install/</id>
+    <published>2023-03-26T08:48:00.000Z</published>
+    <updated>2023-05-02T06:46:42.167Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;&lt;code&gt;Frostmourne&lt;/code&gt;(霜之哀伤)是汽车之家经销商技术部监控系统的开源版本，用于帮助监控几乎所有数据库数据(包括&lt;code&gt;Elasticsearch&lt;/code&gt;, &lt;code&gt;Prometheus&lt;/code&gt;, &lt;code&gt;SkyWalking&lt;/code&gt;, &lt;code&gt;MySql&lt;/code&gt; 等等)。如果你已经建立起了日志系统， 指标体系，却苦恼于没有一个配套监控系统，也许它能帮到你。&lt;/p&gt;
+&lt;p&gt;支持数据源：Elasticsearch, HTTP, SkyWalking, Prometheus, InfluxDB, MySQL&amp;#x2F;TiDb, ClickHouse, SqlServer, PING, IotDB, Telnet&lt;/p&gt;
+&lt;p&gt;支持告警发送方式：钉钉(机器人)、企业微信(机器人)、飞书机器人、OneMessage机器人、Email、短信、HTTP。（text, markdown）&lt;/p&gt;
+&lt;p&gt;支持LDAP认证和自动创建用户。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Elasticsearch&lt;/code&gt;数据查询、分享和下载&lt;/p&gt;
+&lt;p&gt;报警消息抑制功能，防止消息轰炸；也有报警升级功能，避免故障相关方长时间得不到通知。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
+    
+    <category term="ELK" scheme="https://songxwn.com/categories/linux/ELK/"/>
+    
+    
+    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
+    
+    <category term="elk" scheme="https://songxwn.com/tags/elk/"/>
+    
+    <category term="syslog" scheme="https://songxwn.com/tags/syslog/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Veeam Backup Replication 12 安装和激活</title>
+    <link href="https://songxwn.com/Veeam12/"/>
+    <id>https://songxwn.com/Veeam12/</id>
+    <published>2023-02-26T17:48:00.000Z</published>
+    <updated>2023-02-28T13:44:02.210Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;只需单个平台即可保护并管理所有工作负载、应用及数据：云端、虚拟、物理、SaaS、Kubernetes、VMware、Hyper-V、Windows、Linux、UNIX、NAS、AWS、Azure、企业应用等。&lt;/p&gt;
+&lt;p&gt;个人主要用于备份ESXi上的虚拟机，可以实现单次完整备份，和定时的增量备份。&lt;/p&gt;
+&lt;p&gt;此文章提供了ISO安装文件的下载和安装激活。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="VMware" scheme="https://songxwn.com/categories/VMware/"/>
+    
+    
+    <category term="esxi" scheme="https://songxwn.com/tags/esxi/"/>
+    
+    <category term="vmware" scheme="https://songxwn.com/tags/vmware/"/>
+    
+    <category term="backups" scheme="https://songxwn.com/tags/backups/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ESXi 勒索病毒ESXiArgs 其CVE-2021-21974漏洞分析和恢复</title>
+    <link href="https://songxwn.com/ESXI_CVE-2021-21974/"/>
+    <id>https://songxwn.com/ESXI_CVE-2021-21974/</id>
+    <published>2023-02-07T11:32:00.000Z</published>
+    <updated>2023-02-09T15:16:51.296Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;该漏洞编号为&lt;a href=&quot;https://www.vmware.com/security/advisories/VMSA-2021-0002.html&quot;&gt;CVE-2021-21974&lt;/a&gt;，由 OpenSLP 服务中的堆溢出问题引起，未经身份验证的攻击者可以此进行低复杂度攻击。&lt;/li&gt;
+&lt;li&gt;该漏洞主要影响6.x 版和 6.7、7.0版本之前的 ESXi 管理程序，2021年2月23日 ，VMware曾发布补丁修复了该漏洞。（在此之后发布的版本不影响）&lt;/li&gt;
+&lt;li&gt;该漏洞启动之后，主要破坏行为为停止所有虚拟机，并加密所有数据文件。&lt;/li&gt;
+&lt;li&gt;因为不会加密大文件，所以有很大可能性进行恢复操作。&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="VMware" scheme="https://songxwn.com/categories/VMware/"/>
+    
+    
+    <category term="esxi" scheme="https://songxwn.com/tags/esxi/"/>
+    
+    <category term="vmware" scheme="https://songxwn.com/tags/vmware/"/>
+    
+    <category term="security" scheme="https://songxwn.com/tags/security/"/>
+    
+    <category term="netwrok" scheme="https://songxwn.com/tags/netwrok/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Juniper Junos系统架构和命令模式浅谈</title>
+    <link href="https://songxwn.com/Juniper_Junos/"/>
+    <id>https://songxwn.com/Juniper_Junos/</id>
+    <published>2023-01-08T03:42:00.000Z</published>
+    <updated>2023-01-08T04:04:07.471Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;Junos OS 是支持瞻博网络广泛的物理和虚拟网络及安全产品组合的单一操作系统。&lt;/p&gt;
+&lt;p&gt;Junos OS 包括以下架构变化：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;裸机上运行的 Junos OS FreeBSD 6。这是基于 FreeBSD 6 内核的 Junos OS。（很老版本）&lt;/li&gt;
+&lt;li&gt;Junos OS FreeBSD 10 或更高版本的裸机上。这是基于升级后的 FreeBSD 内核的 Junos OS。从 Junos OS 15.1 版开始，某些硬件平台运行升级版 FreeBSD 的 Junos OS。从 Junos OS 版本 16.1 开始，升级版 FreeBSD 的 Junos OS 可作为访客虚拟机 （VM） 在 Linux 虚拟机主机上运行。有关运行具有升级后的 FreeBSD 的 Junos OS 的更多信息，请在功能探索器中搜索 &lt;strong&gt;Junos 内核升级到 FreeBSD 10+&lt;/strong&gt; ： &lt;a href=&quot;https://apps.juniper.net/feature-explorer/feature-info.html?fKey=6880&amp;fn=Junos+kernel+upgrade+to+FreeBSD+10+&quot;&gt;Junos 内核升级到 FreeBSD 10+&lt;/a&gt; 。（现有设备版本，裸机跑Linux，KVM虚拟化跑RE引擎）&lt;/li&gt;
+&lt;li&gt;Junos OS Evolved。有关 &lt;a href=&quot;https://www.juniper.net/documentation/us/en/software/junos/evo-overview/index.html&quot;&gt;Junos OS Evolved 的详细信息，请参阅 Junos® OS Evolved&lt;/a&gt; 和 &lt;a href=&quot;https://www.juniper.net/documentation/us/en/software/junos/evo-install-upgrade/index.html&quot;&gt;Junos® OS Evolved 软件安装和升级指南&lt;/a&gt; 。（裸机直接跑Junos OS，更开放，可以运行第三方容器）&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="netwrok" scheme="https://songxwn.com/categories/netwrok/"/>
+    
+    
+    <category term="netwrok" scheme="https://songxwn.com/tags/netwrok/"/>
+    
+    <category term="linux" scheme="https://songxwn.com/tags/linux/"/>
+    
+    <category term="juniper" scheme="https://songxwn.com/tags/juniper/"/>
+    
+    <category term="freebsd" scheme="https://songxwn.com/tags/freebsd/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Juniper RE防护-过滤SSH&amp;Telnet登录</title>
+    <link href="https://songxwn.com/Juniper_RE-Protect/"/>
+    <id>https://songxwn.com/Juniper_RE-Protect/</id>
+    <published>2023-01-04T14:14:23.000Z</published>
+    <updated>2023-01-04T14:24:50.553Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;1、本教程仅适用于Juniper MX系列和QFX系列设备。（验证过）&lt;/p&gt;
+&lt;p&gt;2、提交配置时候，建议使用可自动回退的提交，防止无法远程管理。&lt;/p&gt;
+&lt;p&gt;3、本教程主要用于Juniper设备的登录防护，限制IP登录SSH或Telnet等远程控制协议。&lt;/p&gt;
+&lt;p&gt;PS：设备如果有公网IP，几乎无时不刻都有扫描和登录攻击。而且Juniper某些版本有Bug可能因此重启。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="juniper" scheme="https://songxwn.com/tags/juniper/"/>
+    
+    <category term="ssh" scheme="https://songxwn.com/tags/ssh/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HCIE Datacom-01.2 IGP高级特性-OSPF-路由控制</title>
+    <link href="https://songxwn.com/ospf-route-c/"/>
+    <id>https://songxwn.com/ospf-route-c/</id>
+    <published>2022-12-31T03:52:23.000Z</published>
+    <updated>2023-05-02T00:49:02.145Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;OSPF的路由控制包括：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;调整OSPF的接口开销&lt;/li&gt;
+&lt;li&gt;设置等价路由&lt;/li&gt;
+&lt;li&gt;引入外部路由&lt;/li&gt;
+&lt;li&gt;路由聚合&lt;/li&gt;
+&lt;li&gt;缺省路由通告&lt;/li&gt;
+&lt;li&gt;Filter-Policy&lt;/li&gt;
+&lt;li&gt;对发送的LSA进行过滤&lt;/li&gt;
+&lt;li&gt;对ABR Type3 LSA进行过滤&lt;/li&gt;
+&lt;li&gt;设置LSDB中External LSA的最大数量&lt;/li&gt;
+&lt;li&gt;案例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;本文章参考华为认证系列PPT&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="ospf" scheme="https://songxwn.com/tags/ospf/"/>
+    
+    <category term="datacom" scheme="https://songxwn.com/tags/datacom/"/>
+    
+  </entry>
+  
+</feed>

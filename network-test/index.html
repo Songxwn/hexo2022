@@ -1,0 +1,855 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/images/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Song">
+  <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
+  
+    <meta name="description" content="简介本文章介绍了 Linux下iperf3（点对点测试），speedtest（公网测试）的安装和使用方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux下的网络测试">
+<meta property="og:url" content="https://songxwn.com/network-test/index.html">
+<meta property="og:site_name" content="Song&#96;s Blog">
+<meta property="og:description" content="简介本文章介绍了 Linux下iperf3（点对点测试），speedtest（公网测试）的安装和使用方法。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-02-01T07:04:00.000Z">
+<meta property="article:modified_time" content="2023-04-30T05:19:34.461Z">
+<meta property="article:author" content="Song">
+<meta property="article:tag" content="network">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Linux下的网络测试 - Song`s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/scroll.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"songxwn.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":130,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Song`s Blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Song`s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/books/">
+                <i class="iconfont icon-books"></i>
+                <span>读书</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                <span>RSS</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Linux下的网络测试"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-02-01 15:04" pubdate>
+          2022年2月1日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          22 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Linux下的网络测试</h1>
+            
+              <p class="note note-danger">
+                
+                  
+                    本文最后更新于：2023年4月30日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>本文章介绍了 Linux下iperf3（点对点测试），speedtest（公网测试）的安装和使用方法。</p>
+<span id="more"></span>
+
+<h2 id="iperf3"><a href="#iperf3" class="headerlink" title="iperf3"></a>iperf3</h2><h3 id="Centos-RHEL、Fedora、Rocky-Linux等Redhat系发行版-安装iperf3"><a href="#Centos-RHEL、Fedora、Rocky-Linux等Redhat系发行版-安装iperf3" class="headerlink" title="Centos (RHEL、Fedora、Rocky Linux等Redhat系发行版) 安装iperf3"></a>Centos (RHEL、Fedora、Rocky Linux等Redhat系发行版) 安装iperf3</h3><p>yum -y install iperf3</p>
+<p>systemctl stop firewalld.service</p>
+<p>临时关闭防火墙，作为服务端启动时候，默认会使用5201端口，需要放开此端口。</p>
+<h3 id="Ubuntu（Mint、Debian系发行版）安装iperf3"><a href="#Ubuntu（Mint、Debian系发行版）安装iperf3" class="headerlink" title="Ubuntu（Mint、Debian系发行版）安装iperf3"></a>Ubuntu（Mint、Debian系发行版）安装iperf3</h3><p>sudo apt update</p>
+<p>sudo apt install iperf3</p>
+<p>sudo ufw disable</p>
+<p>永久关闭防火墙，作为服务端启动时候，默认会使用5201端口，需要放开此端口。</p>
+<h3 id="iperf3-使用方法（全平台通用）"><a href="#iperf3-使用方法（全平台通用）" class="headerlink" title="iperf3 使用方法（全平台通用）"></a>iperf3 使用方法（全平台通用）</h3><p>iperf3 -s</p>
+<p>开启iperf3 服务器端，默认使用5201端口。</p>
+<p>iperf3 -s -p 9527</p>
+<p>开启服务器端，指定开启端口为9527。</p>
+<p>iperf3 -c 192.168.0.1 </p>
+<p>-c 参数客户端指定服务器端IP或域名进行打流测试，默认使用TCP端口5201测试。<br>(默认使用最大带宽，TCP 延迟过大可能导致带宽打不满，建议使用 -P 5 参数多线程测试)</p>
+<p>iperf3 -c 192.168.0.1 -p 12345 -i 1 -t 20 -R </p>
+<p>-p 为指定服务器端口， -i 为信息输出间隔时间，-t 为指定测试时间，-R 为反向模式，客户端收，服务器发。</p>
+<p>iperf3 -c 192.168.0.1 -u -b 30m</p>
+<p>-u 为UDP测试数据，-b为指定带宽去测试， UDP默认只使用1M。</p>
+<p>iperf官网： <a target="_blank" rel="noopener" href="https://iperf.fr/">https://iperf.fr</a></p>
+<p>PS: 注意云服务器会有安全组，也需要开放端口。</p>
+<h2 id="speedtest"><a href="#speedtest" class="headerlink" title="speedtest"></a>speedtest</h2><h3 id="Centos-speedtest-CLI客户端安装-RHEL、Fedora、Rocky-Linux等Redhat系发行版"><a href="#Centos-speedtest-CLI客户端安装-RHEL、Fedora、Rocky-Linux等Redhat系发行版" class="headerlink" title="Centos speedtest CLI客户端安装  (RHEL、Fedora、Rocky Linux等Redhat系发行版)"></a>Centos speedtest CLI客户端安装  (RHEL、Fedora、Rocky Linux等Redhat系发行版)</h3><p>curl -s <a target="_blank" rel="noopener" href="https://install.speedtest.net/app/cli/install.rpm.sh">https://install.speedtest.net/app/cli/install.rpm.sh</a> | sudo bash</p>
+<p>sudo yum -y install speedtest</p>
+<p>添加yum源 进行安装。</p>
+<h3 id="Ubuntu-speedtest-CLI客户端安装-（Mint、Debian系发行版）"><a href="#Ubuntu-speedtest-CLI客户端安装-（Mint、Debian系发行版）" class="headerlink" title="Ubuntu speedtest CLI客户端安装 （Mint、Debian系发行版）"></a>Ubuntu speedtest CLI客户端安装 （Mint、Debian系发行版）</h3><p>sudo apt-get install curl</p>
+<p>curl -s <a target="_blank" rel="noopener" href="https://install.speedtest.net/app/cli/install.deb.sh">https://install.speedtest.net/app/cli/install.deb.sh</a> | sudo bash</p>
+<p>sudo apt-get install speedtest</p>
+<p>添加apt源进行安装，</p>
+<h3 id="二进制包-speedtest-CLI客户端安装（下载二进制包解压运行）"><a href="#二进制包-speedtest-CLI客户端安装（下载二进制包解压运行）" class="headerlink" title="二进制包 speedtest CLI客户端安装（下载二进制包解压运行）"></a>二进制包 speedtest CLI客户端安装（下载二进制包解压运行）</h3><p>wget <a target="_blank" rel="noopener" href="https://install.speedtest.net/app/cli/ookla-speedtest-1.1.1-linux-x86_64.tgz">https://install.speedtest.net/app/cli/ookla-speedtest-1.1.1-linux-x86_64.tgz</a></p>
+<p>tar -zxvf ookla-speedtest-1.1.1-linux-x86_64.tgz</p>
+<p>.&#x2F;speedtest</p>
+<p>执行二进制文件测试。</p>
+<h3 id="speedtest-使用方法"><a href="#speedtest-使用方法" class="headerlink" title="speedtest 使用方法"></a>speedtest 使用方法</h3><p>speedtest</p>
+<p>Do you accept the license? [type YES to accept]: YES</p>
+<p>直接执行命令，然后输入YES,会根据IP选择最近的节点进行最大公网上下行和延迟测试。</p>
+<p>speedtest -s 37235</p>
+<p>指定服务器节点进行测试，下面是服务器节点ID。</p>
+<p>ID：36646 中国联通河南5G（中国郑州）</p>
+<p>ID：41852 河南电信5G（中国郑州</p>
+<p>ID：5039中国联通济南分公司（中国济南）</p>
+<p>ID：26412 济南联通5G（中国济南）</p>
+<p>ID：26180 山东联通5G（中国济南）</p>
+<p>ID：41912 中国移动河北有限公司(石家庄, 中国）</p>
+<p>ID：4863 中国联通西安分公司（中国西安）</p>
+<p>ID：17145 中国电信安徽5G（中国合肥）</p>
+<p>ID：23844 中国电信武汉分公司（中国武汉）</p>
+<p>ID：29353 武汉你好5G（中国武汉）</p>
+<p>ID：41009 湖北联通5G（中国武汉）</p>
+<p>ID：26352 中国电信江苏5G（中国南京）</p>
+<p>ID：13704 中国联通（中国南京）</p>
+<p>ID：27249 中国移动江苏5G（中国南京）</p>
+<p>ID：34115 中国电信天津-5G（中国天津）</p>
+<p>ID：35722 中国电信天津（天津）</p>
+<p>ID：27154 中国联通-5G（中国天津）</p>
+<p>ID：17320 中国移动江苏5G（中国镇江）</p>
+<p>ID：36663 中国电信江苏5G（中国镇江）</p>
+<p>ID：5145 北京联通（中国北京）</p>
+<p>ID：5505 北京宽带网（中国北京）</p>
+<p>ID：32291 中国移动5G（中国常州）</p>
+<p>ID：30232 内蒙古中国移动5G（呼和浩特）</p>
+<p>ID：28225 湖南电信5G（中国长沙）</p>
+<p>ID：4870 湖南联通5G（中国长沙）</p>
+<p>ID：28491 中国移动湖南5G（中国长沙）</p>
+<p>ID：40131 中国移动苏州5G（中国苏州）</p>
+<p>ID：5396 中国电信江苏5G（中国苏州）</p>
+<p>ID：30852 杜克昆山大学（中国昆山）</p>
+<p>ID：31815 维克斯特尔（中国银川市）</p>
+<p>ID：7509 中国电信浙江省分公司（中国杭州）</p>
+<p>ID：24447 中国联通5G（中国上海）</p>
+<p>ID：3633 中国电信（中国上海）</p>
+<p>ID：25637 中国移动5G（中国上海）</p>
+<p>ID：5530 CCN（中国重庆）</p>
+<p>ID：16145 兰州，中国移动，甘肃（中国兰州）</p>
+<p>ID：3973 中国电信（中国兰州）</p>
+<p>ID：29071 中国电信(成都, 中国）</p>
+<p>ID：24337 中国移动集团四川有限公司（中国成都）</p>
+<p>ID：35527 sccn（中国成都）</p>
+<p>ID：4884 中国联通福建（中国福州）</p>
+<p>ID：34988 中国电信辽宁5G（中国沈阳）</p>
+<p>ID：37235 中国联通（沈阳）</p>
+<p>ID：30293 中国移动内蒙5G（中国通辽）</p>
+<p>ID：29107 亚太电信（台湾桃园）</p>
+<p>ID：24462 Homeplus（台湾桃园）</p>
+<p>ID：4938 首席电信（台湾桃园）</p>
+<p>ID：18452 中华移动（台湾桃园）</p>
+<p>ID：9484 中国联通（中国长春）</p>
+<p>speedtest CLI客户端官网：<a target="_blank" rel="noopener" href="https://www.speedtest.net/apps/cli">https://www.speedtest.net/apps/cli</a><br>测试节点信息来源于：<a target="_blank" rel="noopener" href="https://biger.me/184.html">https://biger.me/184.html</a></p>
+<div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a target="_blank" rel="noopener" href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="https://songxwn.com/Elasticsearch-x-pack-core/">Elasticsearch 8.7 白金版激活</a></li><li><a href="https://songxwn.com/Linux-growpart/">Linux 虚拟机在线热扩容分区</a></li><li><a href="https://songxwn.com/elk_cluster/">Elasticsearch 安装配置集群系统</a></li><li><a target="_blank" rel="noopener" href="https://chengzhaoxi.xyz/361d7ede.html">互联网算法工程开发常用技术</a></li></ul></div>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/linux/" class="category-chain-item">linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/network/">#network</a>
+      
+        <a href="/tags/Linux/">#Linux</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Linux下的网络测试</div>
+      <div>https://songxwn.com/network-test/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Song</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年2月1日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年4月30日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/VXLAN/" title="VXLAN 随笔">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">VXLAN 随笔</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/ipv6-icmpv6/" title="IPv6的ICMPv6协议">
+                        <span class="hidden-mobile">IPv6的ICMPv6协议</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments">
+      
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script>
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          Fluid.utils.createCssLink('https://lib.baomitu.com/disqusjs/1.3.0/disqusjs.css');
+          Fluid.utils.createScript('https://lib.baomitu.com/disqusjs/1.3.0/disqus.js', function() {
+            new DisqusJS({
+              shortname: 'songxwn',
+              apikey: ''
+            });
+          });
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <a href="https://www.foreverblog.cn/go.html" target="_blank"> <img src="https://img.foreverblog.cn/wormhole_1_tp.gif" alt="" style="width:auto;height:32px;" title="穿梭虫洞-随机访问十年之约友链博客"></a>,<a href="https://www.vultr.com/?ref=7199488" target="_blank"> <img src="https://www.vultr.com/media/logo_ondark.svg" alt="" style="width:auto;height:32px;" title="注册vultr获取免费10美元体验额度"></a>,<a href="https://www.vultr.com/?ref=9293176-8H" target="_blank"> <img src="https://www.vultr.com/media/logo_mono_onwhite.png" alt="" style="width:auto;height:32px;" title="注册vultr获取免费100美元体验额度"></a>
+        </div>
+      </div>
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

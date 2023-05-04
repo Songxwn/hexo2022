@@ -1,0 +1,1040 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/images/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Song">
+  <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
+  
+    <meta name="description" content="介绍 OSPF和IS-IS都是基于链路状态的内部网关路由协议，运行这两种协议的路由器通过同步LSDB，采用SPF算法计算最优路由。 当网络拓扑发生变化时，OSPF和IS-IS支持多种快速收敛和保护机制，能够降低网络故障导致的流量丢失。 为了实现对路由表规模的控制，OSPF和IS-IS支持路由选路及路由信息的控制，能够减少特定路由器路由表的大小。 本系列文章将介绍OSPF和IS-IS的高级特性，包括">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HCIE Datacom-01.1 IGP高级特性-OSPF-快速收敛">
+<meta property="og:url" content="https://songxwn.com/ospf-frr/index.html">
+<meta property="og:site_name" content="Song&#96;s Blog">
+<meta property="og:description" content="介绍 OSPF和IS-IS都是基于链路状态的内部网关路由协议，运行这两种协议的路由器通过同步LSDB，采用SPF算法计算最优路由。 当网络拓扑发生变化时，OSPF和IS-IS支持多种快速收敛和保护机制，能够降低网络故障导致的流量丢失。 为了实现对路由表规模的控制，OSPF和IS-IS支持路由选路及路由信息的控制，能够减少特定路由器路由表的大小。 本系列文章将介绍OSPF和IS-IS的高级特性，包括">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2022/12/24/e4f471f05c987460.jpg">
+<meta property="article:published_time" content="2022-12-24T07:52:00.000Z">
+<meta property="article:modified_time" content="2022-12-24T07:53:42.088Z">
+<meta property="article:author" content="Song">
+<meta property="article:tag" content="network">
+<meta property="article:tag" content="ospf">
+<meta property="article:tag" content="datacom">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2022/12/24/e4f471f05c987460.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>HCIE Datacom-01.1 IGP高级特性-OSPF-快速收敛 - Song`s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/scroll.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"songxwn.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":130,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Song`s Blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Song`s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/books/">
+                <i class="iconfont icon-books"></i>
+                <span>读书</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                <span>RSS</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s3.bmp.ovh/imgs/2022/12/24/a2cfff0e1a26b333.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="HCIE Datacom-01.1 IGP高级特性-OSPF-快速收敛"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-12-24 15:52" pubdate>
+          2022年12月24日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          73 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">HCIE Datacom-01.1 IGP高级特性-OSPF-快速收敛</h1>
+            
+              <p class="note note-danger">
+                
+                  
+                    本文最后更新于：2022年12月24日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><ul>
+<li>OSPF和IS-IS都是基于链路状态的内部网关路由协议，运行这两种协议的路由器通过同步LSDB，采用SPF算法计算最优路由。</li>
+<li>当网络拓扑发生变化时，OSPF和IS-IS支持多种快速收敛和保护机制，能够降低网络故障导致的流量丢失。</li>
+<li>为了实现对路由表规模的控制，OSPF和IS-IS支持路由选路及路由信息的控制，能够减少特定路由器路由表的大小。</li>
+<li>本系列文章将介绍OSPF和IS-IS的高级特性，包括：快速收敛机制、路由控制、其他特性等。</li>
+<li>此文章参考于华为认证系列PPT。</li>
+</ul>
+<h1 id="OSPF快速收敛概述"><a href="#OSPF快速收敛概述" class="headerlink" title="OSPF快速收敛概述"></a>OSPF快速收敛概述</h1><ul>
+<li>OSPF快速收敛是为了提高路由的收敛速度而做的扩展特性，包括：PRC（Partial Route Calculation，部分路由计算）和智能定时器。</li>
+<li>同时，OSPF支持故障恢复快速收敛，例如通过OSPF IP FRR（Fast ReRoute，快速重路由）实现备份链路的快速切换，也可以与BFD联动实现对故障的快速感知。</li>
+<li>快速收敛是为了满载电信级的要求，50ms内完成收敛减少丢包。</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="PRC（Partial-Route-Calculate，部分路由计算算法）"><a href="#PRC（Partial-Route-Calculate，部分路由计算算法）" class="headerlink" title="PRC（Partial Route Calculate，部分路由计算算法）"></a>PRC（Partial Route Calculate，部分路由计算算法）</h2><ul>
+<li>PRC的工作原理：当网络上路由发生变化的时候，只对发生变化的路由进行重新计算。</li>
+<li>PRC不计算节点路径，而是根据SPF算法算出来的最短路径树来更新路由。</li>
+</ul>
+<p><img src="https://s3.bmp.ovh/imgs/2022/12/24/23783227cc19ec7a.png" srcset="/img/loading.gif" lazyload></p>
+<p>在路由计算中，节点代表路由器，叶子代表路由，PRC只处理变化的叶子信息。</p>
+<ul>
+<li>场景介绍：</li>
+</ul>
+<ol>
+<li>某网络运行OSPF，网络收敛后，左图是以R1为根的最短路径树。此时R1访问节点R5时，通过[R1下行链路的出接口，R3上行链路接口的IP地址]到达该目的地。</li>
+<li>R5将环回口Loopback0开启OSPF，即OSPF网络内有新增网段。</li>
+</ol>
+<ul>
+<li>PRC计算：</li>
+</ul>
+<ol>
+<li>R5全网泛洪新增LSA。</li>
+<li>R1收到该LSA后会创建新的路由，继承原有访问节点R5的路径及下一跳，即最短路径树不变，只在节点R5上新增叶子。</li>
+<li>因此R1访问R5的Loopback0时，通过[R1下行链路的出接口，R3上行链路接口的IP地址]到达该目的地。</li>
+</ol>
+<ul>
+<li>价值：</li>
+</ul>
+<blockquote>
+<p>OSPF网络新增网段时，只关注发生变化的路由，加快了路由的计算。</p>
+</blockquote>
+<p>注意：大部分现代网络设备都默认开启此功能。此功能也依赖于I-SPF算法，ISIS也会默认开启。</p>
+<h2 id="智能定时器（Intelligent-Timer）"><a href="#智能定时器（Intelligent-Timer）" class="headerlink" title="智能定时器（Intelligent Timer）"></a>智能定时器（Intelligent Timer）</h2><ul>
+<li>智能定时器是在进行SPF计算和产生LSA的时候用到的一种定时器。</li>
+<li>智能定时器既可以对少量的外界突发事件进行快速响应，又可以避免过度地占用CPU。</li>
+</ul>
+<h3 id="控制LSA的生成与接收"><a href="#控制LSA的生成与接收" class="headerlink" title="控制LSA的生成与接收"></a>控制LSA的生成与接收</h3><ul>
+<li>OSPF通过如下两个规定来避免网络连接或者路由频繁动荡引起的过多占用设备资源的情况。</li>
+</ul>
+<blockquote>
+<p>同一条LSA在1秒内不能再次生成，即LSA的更新时间间隔5秒。</p>
+<p>LSA被接收的时间间隔为1秒。</p>
+</blockquote>
+<ul>
+<li>在网络相对稳定、对路由收敛时间要求较高的组网环境中，可以通过智能定时器指定LSA的更新时间间隔为0来取消LSA的更新时间间隔，使得拓扑或者路由的变化可以立即通过LSA发布到网络中，或者立即被感知到，从而加快网络中路由的收敛速度。</li>
+</ul>
+<h3 id="控制路由计算"><a href="#控制路由计算" class="headerlink" title="控制路由计算"></a>控制路由计算</h3><ul>
+<li>当网络发生变化时，OSPF的LSDB会发生改变，需要重新计算最短路径。如果网络频繁变化，由于不断地计算最短路径，会占用大量系统资源，影响设备的效率。</li>
+<li>通过配置智能定时器，设置合理的SPF计算的间隔时间，可以避免占用过多的路由器内存和带宽资源。</li>
+</ul>
+<h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h3><ul>
+<li>如果触发路由计算的时间间隔较长，同样会影响网络的收敛速度。</li>
+<li>智能定时器首次超时时间是一个固定的时间。如果在定时器超时前，又有触发定时器的事件发生，则该定时器下一次的超时时间会增加。</li>
+<li>现代网络设备性能都比较强了，可以适当调小时间间隔。</li>
+</ul>
+<h3 id="配置命令"><a href="#配置命令" class="headerlink" title="配置命令"></a>配置命令</h3><h4 id="1、设置OSPF-LSA更新的时间间隔。"><a href="#1、设置OSPF-LSA更新的时间间隔。" class="headerlink" title="1、设置OSPF LSA更新的时间间隔。"></a>1、设置OSPF LSA更新的时间间隔。</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-string">[Huawei-ospf-1]</span> lsa-originate-<span class="hljs-built_in">int</span>erval &#123; <span class="hljs-number">0</span> | &#123; <span class="hljs-built_in">int</span>elligent-timer max-<span class="hljs-built_in">int</span>erval start-<span class="hljs-built_in">int</span>erval hold-<span class="hljs-built_in">int</span>erval | other-type <span class="hljs-built_in">int</span>erval &#125; &#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>缺省情况下，使能智能定时器intelligent-timer，更新LSA的最长间隔时间max-interval为5000毫秒、初始间隔时间start-interval为500毫秒、基数间隔时间hold-interval为1000毫秒。（以毫秒为单位的时间间隔）</p>
+<h5 id="使用智能定时器后："><a href="#使用智能定时器后：" class="headerlink" title="使用智能定时器后："></a>使用智能定时器后：</h5><ol>
+<li>初次更新LSA的间隔时间由start-interval参数指定。</li>
+<li>第n（n≥2）次更新LSA的间隔时间为hold-interval×2(n-2)。</li>
+<li>当hold-interval×2(n-2)达到指定的最长间隔时间max-interval时，OSPF连续三次更新LSA的时间间隔都是最长间隔时间，之后，再次返回步骤1，按照初始间隔时间start-interval更新LSA。</li>
+</ol>
+<h5 id="命令介绍："><a href="#命令介绍：" class="headerlink" title="命令介绍："></a>命令介绍：</h5><p>[Huawei-ospf] lsa-originate-interval { 0 | { intelligent-timer max-interval start-interval hold-interval | other-type interval } }</p>
+<p>0：指定LSA更新的时间间隔为0，即取消LSA的5秒的更新时间间隔。</p>
+<p>intelligent-timer：指定通过智能定时器设置OSPF Router LSA和Network LSA的更新间隔时间。</p>
+<p>max-interval：指定更新OSPF LSA的最长间隔时间。整数形式，取值范围是1～120000，单位是毫秒。缺省值是5000。</p>
+<p>start-interval：指定更新OSPF LSA的初始间隔时间。整数形式，取值范围是0～60000，单位是毫秒。缺省值是500。</p>
+<p>hold-interval：指定更新OSPF LSA的基数间隔时间。整数形式，取值范围是1～60000，单位是毫秒。缺省值是1000。</p>
+<p>other-type：指定设置除OSPF Router LSA和Network LSA外LSA的更新间隔时间。</p>
+<p>interval：指定LSA更新的时间间隔。整数形式，取值范围是0～10，单位是秒。缺省值是5。</p>
+<h4 id="2、设置OSPF-LSA接收的时间间隔。"><a href="#2、设置OSPF-LSA接收的时间间隔。" class="headerlink" title="2、设置OSPF LSA接收的时间间隔。"></a>2、设置OSPF LSA接收的时间间隔。</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-string">[Huawei-ospf-1]</span> lsa-arrival-<span class="hljs-built_in">int</span>erval &#123; <span class="hljs-built_in">int</span>erval | <span class="hljs-built_in">int</span>elligent-timer max-<span class="hljs-built_in">int</span>erval start-<span class="hljs-built_in">int</span>erval hold-<span class="hljs-built_in">int</span>erval &#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>缺省情况下，使能智能定时器intelligent-timer，接收LSA的最长间隔时间max-interval为1000毫秒、初始间隔时间start-interval为500毫秒、基数间隔时间hold-interval为500毫秒。（以毫秒为单位的时间间隔）</p>
+<h5 id="使用智能定时器后：-1"><a href="#使用智能定时器后：-1" class="headerlink" title="使用智能定时器后："></a>使用智能定时器后：</h5><p>初次接收LSA的间隔时间由start-interval参数指定。</p>
+<p>第n（n≥2）次接收LSA的间隔时间为hold-interval×2(n-2)。</p>
+<p>当hold-interval×2(n-2)达到指定的最长间隔时间max-interval时，OSPF连续三次接收LSA的时间间隔都是最长间隔时间，之后，再次返回步骤1，按照初始间隔时间start-interval接收LSA。</p>
+<h5 id="命令："><a href="#命令：" class="headerlink" title="命令："></a>命令：</h5><p>[Huawei-ospf-1] lsa-arrival-interval { interval | intelligent-timer max-interval start-interval hold-interval }</p>
+<p>interval：指定LSA接收的时间间隔。整数形式，取值范围是0～10000，单位是毫秒。</p>
+<p>intelligent-timer：指定通过智能定时器设置LSA接收的间隔时间。</p>
+<p>max-interval：指定接收OSPF LSA的最长间隔时间。整数形式，取值范围是1～120000，单位是毫秒。缺省值是1000。</p>
+<p>start-interval：指定接收OSPF LSA的初始间隔时间。整数形式，取值范围是0～60000，单位是毫秒。缺省值是500。</p>
+<p>hold-interval：指定接收OSPF LSA的基数间隔时间。整数形式，取值范围是1～60000，单位是毫秒。缺省值是500。</p>
+<h4 id="3、设置OSPF路由计算时间间隔。"><a href="#3、设置OSPF路由计算时间间隔。" class="headerlink" title="3、设置OSPF路由计算时间间隔。"></a>3、设置OSPF路由计算时间间隔。</h4><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-string">[Huawei-ospf-1]</span> spf-schedule-<span class="hljs-built_in">int</span>erval &#123; <span class="hljs-built_in">int</span>erval1 | <span class="hljs-built_in">int</span>elligent-timer max-<span class="hljs-built_in">int</span>erval start-<span class="hljs-built_in">int</span>erval hold-<span class="hljs-built_in">int</span>erval | millisecond <span class="hljs-built_in">int</span>erval2 &#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>缺省情况下，使能智能定时器intelligent-timer，SPF计算的最长间隔时间max-interval为10000毫秒、初始间隔时间start-interval为500毫秒、基数间隔时间hold-interval为1000毫秒。（以毫秒为单位的时间间隔）。</p>
+<h5 id="使用智能定时器后，SPF计算的时间间隔如下："><a href="#使用智能定时器后，SPF计算的时间间隔如下：" class="headerlink" title="使用智能定时器后，SPF计算的时间间隔如下："></a>使用智能定时器后，SPF计算的时间间隔如下：</h5><ol>
+<li>初次计算SPF的间隔时间由start-interval参数指定。</li>
+<li>第n（n≥2）次计算SPF的间隔时间为hold-interval×2(n-2)。</li>
+<li>当hold-interval×2(n-2)达到指定的最长间隔时间max-interval时，OSPF连续三次计算SPF的时间间隔都是最长间隔时间，之后，再次返回步骤1，按照初始间隔时间start-interval计算SPF。</li>
+</ol>
+<h5 id="命令：-1"><a href="#命令：-1" class="headerlink" title="命令："></a>命令：</h5><p>[Huawei-ospf-1] spf-schedule-interval { interval1 | intelligent-timer max-interval start-interval hold-interval | millisecond interval2 }</p>
+<p>interval1：指定OSPF SPF计算间隔时间。整数形式，取值范围是1～10，单位是秒。</p>
+<p>intelligent-timer：指定通过智能定时器设置OSPF SPF计算的间隔时间。</p>
+<p>max-interval：指定OSPF SPF计算的最长间隔时间。整数形式，取值范围是1～120000，单位是毫秒。缺省值是10000。</p>
+<p>start-interval：指定OSPF SPF计算的初始间隔时间。整数形式，取值范围是1～60000，单位是毫秒。缺省值是500。</p>
+<p>hold-interval：指定OSPF SPF计算的基数间隔时间。整数形式，取值范围是1～60000，单位是毫秒。缺省值是1000。</p>
+<p>millisecond interval2：指定OSPF SPF计算间隔时间。整数形式，取值范围是1～10000，单位是毫秒。</p>
+<h2 id="OSPF-IP-FRR（快速重路由）"><a href="#OSPF-IP-FRR（快速重路由）" class="headerlink" title="OSPF IP FRR（快速重路由）"></a>OSPF IP FRR（快速重路由）</h2><ul>
+<li>OSPF IP FRR是动态IP FRR，利用LFA（Loop-Free Alternates）算法预先计算出备份路径，保存在转发表中，以备在故障时将流量快速切换到备份链路上，保证流量不中断，从而达到流量保护的目的，该功能可将故障恢复时间降低到50 ms以内。</li>
+<li>LFA计算备份链路的基本思路是：</li>
+</ul>
+<blockquote>
+<p>以可提供备份链路的邻居为根节点，利用SPF算法计算出到目的节点的最短距离。然后，按照不等式计算出开销最小且无环的备份链路。</p>
+</blockquote>
+<h3 id="OSPF-IP-FRR组网应用"><a href="#OSPF-IP-FRR组网应用" class="headerlink" title="OSPF IP FRR组网应用"></a>OSPF IP FRR组网应用</h3><ul>
+<li>OSPF IP FRR的流量保护分为链路保护和节点链路双保护。</li>
+<li>Distance_opt(X, Y) 是指节点X到Y之间的最短路径</li>
+</ul>
+<h5 id="链路保护"><a href="#链路保护" class="headerlink" title="链路保护"></a>链路保护</h5><p>链路保护公式：</p>
+<pre><code class="hljs">Distance_opt(N,D)\&lt;Distance_opt(N,S)+Distance_opt(S,D)
+</code></pre>
+<p>保证从节点N-&gt;D的流量不会再经过节点S，即保证没有环路。</p>
+<p><img src="https://s3.bmp.ovh/imgs/2022/12/24/af6885ece9bcf07c.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>S：流量转发的源节点</p>
+<p>D：流量转发的目的节点</p>
+<p>N：备份链路的节点</p>
+</blockquote>
+<ul>
+<li>流量从设备S到D进行转发，网络开销值满足链路保护公式，可保证当主链路故障后，设备S将流量切换到备份链路S到N后可以继续向下游转发，确保流量中断小于50 ms。</li>
+</ul>
+<h5 id="节点链路双保护"><a href="#节点链路双保护" class="headerlink" title="节点链路双保护"></a>节点链路双保护</h5><p>链路保护公式：</p>
+<pre><code class="hljs">Distance_opt(N,D)\&lt;Distance_opt(N,S)+Distance_opt(S,D)
+</code></pre>
+<p>节点保护公式：</p>
+<pre><code class="hljs">Distance_opt(N,D)\&lt;Distance_opt(N,E)+Distance_opt(E,D)
+</code></pre>
+<p>保证从节点N-&gt;D的流量不会经过节点S和E，即保证没有环路。</p>
+<p><img src="https://s3.bmp.ovh/imgs/2022/12/24/a2cfff0e1a26b333.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>节点链路双保护必须同时满足以上两个公式。</li>
+</ul>
+<h5 id="注意：-1"><a href="#注意：-1" class="headerlink" title="注意："></a>注意：</h5><ul>
+<li>节点链路双保护：</li>
+</ul>
+<blockquote>
+<p>如正文右图：流量从设备S到D进行转发，网络开销值满足节点链路保护公式，可保证当主链路故障后，设备S将流量切换到备份链路S到N后可以继续向下游转发，确保流量中断小于50 ms。</p>
+</blockquote>
+<ul>
+<li>OSPF IP FRR的流量保护分为链路保护和节点链路双保护。</li>
+</ul>
+<blockquote>
+<p>当需要保护的对象是经过特定链路的流量时，流量保护类型为链路保护。</p>
+<p>当需要保护的对象是经过特定设备的流量时，流量保护类型为节点链路双保护。节点保护优先级高于链路保护。</p>
+</blockquote>
+<h3 id="配置命令-1"><a href="#配置命令-1" class="headerlink" title="配置命令"></a>配置命令</h3><ol>
+<li>使能OSPF IP FRR。</li>
+</ol>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-string">[Huawei-ospf-1]</span> frr<br><span class="hljs-string">[Huawei-ospf-1-frr]</span><br><br></code></pre></td></tr></table></figure>
+
+<p>创建并进入OSPF FRR视图。</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gams">[Huawei-ospf<span class="hljs-number">-1</span>-frr] <span class="hljs-keyword">loop</span>-<span class="hljs-keyword">free</span>-alternate<br><br></code></pre></td></tr></table></figure>
+
+<p>使能OSPF IP FRR功能，利用LFA算法计算备份下一跳和备份出接口。</p>
+<p>2、（可选）阻止OSPF接口的FRR能力。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">[Huawei-GigabitEthernet0<span class="hljs-regexp">/0/</span><span class="hljs-number">1</span>] ospf frr block<br><br></code></pre></td></tr></table></figure>
+
+
+
+<p>对于承载重要业务的节点设备，通过该命令在指定接口上禁止OSPF IP FRR功能，从而使此接口相连的对端设备不成为备份链路上的节点设备，避免使能OSPF IP FRR功能后对节点设备上运行的重要业务造成影响。</p>
+<h3 id="OSPF-IP-FRR配置举例"><a href="#OSPF-IP-FRR配置举例" class="headerlink" title="OSPF IP FRR配置举例"></a>OSPF IP FRR配置举例</h3><p>当R1与R3之间的链路出现故障时，R1转发的流量能够快速切换到备份链路，通过R2进行流量转发。</p>
+<p>1、各设备配置接口地址及部署OSPF。（略）</p>
+<p>2、配置各设备OSPF开销值。</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs gradle">[R1] <span class="hljs-keyword">interface</span> GigabitEthernet <span class="hljs-number">0</span><span class="hljs-regexp">/0/</span><span class="hljs-number">0</span><br>[R1-GigabitEthernet <span class="hljs-number">0</span><span class="hljs-regexp">/0/</span><span class="hljs-number">0</span>] ospf cost <span class="hljs-number">10</span><br>[R1-GigabitEthernet <span class="hljs-number">0</span><span class="hljs-regexp">/0/</span><span class="hljs-number">0</span>] quit<br>[R1] <span class="hljs-keyword">interface</span> GigabitEthernet <span class="hljs-number">0</span><span class="hljs-regexp">/0/</span><span class="hljs-number">1</span><br>[R1-GigabitEthernet <span class="hljs-number">0</span><span class="hljs-regexp">/0/</span><span class="hljs-number">1</span>] ospf cost <span class="hljs-number">10</span><br>[R1-GigabitEthernet <span class="hljs-number">0</span><span class="hljs-regexp">/0/</span><span class="hljs-number">1</span>] quit<br><br></code></pre></td></tr></table></figure>
+
+<p>3、在R1上使能OSPF IP FRR。</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs x86asm">[<span class="hljs-built_in">R1</span>] ospf<br>[<span class="hljs-built_in">R1</span>-ospf-<span class="hljs-number">1</span>] frr<br>[<span class="hljs-built_in">R1</span>-ospf-<span class="hljs-number">1</span>-frr] <span class="hljs-keyword">loop</span>-free-alternate<br>[<span class="hljs-built_in">R1</span>-ospf-<span class="hljs-number">1</span>-frr] quit<br>[<span class="hljs-built_in">R1</span>-ospf-<span class="hljs-number">1</span>] quit<br><br><br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://s3.bmp.ovh/imgs/2022/12/24/d67d27ed5c815772.jpg" srcset="/img/loading.gif" lazyload><img src="https://s3.bmp.ovh/imgs/2022/12/24/5d37b0bb79811852.jpg" srcset="/img/loading.gif" lazyload></p>
+<h3 id="查看OSPF-IP-FRR配置结果"><a href="#查看OSPF-IP-FRR配置结果" class="headerlink" title="查看OSPF IP FRR配置结果"></a>查看OSPF IP FRR配置结果</h3><p>查看R1到R4的GE0&#x2F;0&#x2F;1接口地址的路由信息。</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs ada">[R1]display ospf routing <span class="hljs-number">10.1</span>.<span class="hljs-number">34.4</span><br>       OSPF Process <span class="hljs-number">1</span> <span class="hljs-keyword">with</span> Router ID <span class="hljs-number">10.1</span>.<span class="hljs-number">1.1</span><br> Destination :    10.1.34.0/24       <br> AdverRouter :    10.1.4.4    <span class="hljs-type">Area</span> :      0.0.0.0  <br> Cost :           15    <span class="hljs-type">Type</span> :      <span class="hljs-type">Transit</span> <br> NextHop :        10.1.13.3   <span class="hljs-type">Interface</span> : <span class="hljs-type">GigabitEthernet0</span>/<span class="hljs-number">0</span>/<span class="hljs-number">0</span>  <br> Priority :       <span class="hljs-type">Low</span>   Age : 00<span class="hljs-type">h01m59s</span>  <br> Backup Nexthop : 10.1.12.2   <span class="hljs-type">Backup</span> <span class="hljs-keyword">Interface</span>:GigabitEthernet0/<span class="hljs-number">0</span>/<span class="hljs-number">1</span><br> Backup <span class="hljs-keyword">Type</span> <span class="hljs-type">:    </span>LFA LINK  <br><br><br></code></pre></td></tr></table></figure>
+
+<p>注意看上面<strong>Backup Nexthop</strong>和<strong>Backup Type</strong>，由于R1使能了OSPF IP FRR功能，OSPF生成了一条备份链路。</p>
+<p><img src="https://s3.bmp.ovh/imgs/2022/12/24/86fb3edf8ba9be03.jpg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="OSPF与BFD联动"><a href="#OSPF与BFD联动" class="headerlink" title="OSPF与BFD联动"></a>OSPF与BFD联动</h2><ul>
+<li>网络上的链路故障或拓扑变化都会导致设备重新进行路由计算，所以缩短路由协议的收敛时间对于提高网络的性能是非常重要的。</li>
+<li>OSPF与BFD联动就是将BFD和OSPF关联起来，一旦与邻居之间的链路出现故障，BFD对链路故障的快速感应能够加快OSPF对于网络拓扑变化的响应。</li>
+</ul>
+<p><img src="https://s3.bmp.ovh/imgs/2022/12/24/e4f471f05c987460.jpg" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>OSPF与BFD联动工作原理：</li>
+</ul>
+<blockquote>
+<p>三台设备（R1、R2、R3）间建立OSPF邻居关系。邻居状态到达Full时通知BFD建立BFD会话。</p>
+<p>R1到R2间的链路出现故障后，BFD首先感知到并通知R1。R1处理BFD会话Down事件，重新进行路由计算，新的路径为：R1-R3-R2。</p>
+</blockquote>
+<ul>
+<li>OSPF通过周期性的向邻居发送Hello报文来实现邻居检测，检测到故障所需时间比较长，超过1秒钟（默认通过OSPF Dead Timer超时判断邻居失效，缺省为40秒）。随着科技的发展，语音、视频及其它点播业务应用广泛，而这些业务对于丢包和延时非常敏感，当数据达到吉比特速率级时，较长的检测时间会导致大量数据丢失，无法满足电信级网络高可靠性的需求。</li>
+<li>为了解决上述问题，配置指定进程或指定接口的OSPF与BFD联动功能，可以快速检测链路的状态，故障检测时间可以达到毫秒级，提高链路状态变化时OSPF的收敛速度。</li>
+</ul>
+<h3 id="OSPF与BFD联动的基础配置命令"><a href="#OSPF与BFD联动的基础配置命令" class="headerlink" title="OSPF与BFD联动的基础配置命令"></a>OSPF与BFD联动的基础配置命令</h3><p>1、配置OSPF的BFD特性。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">[Huawei-ospf-1]<span class="hljs-built_in"> bfd </span>all-interfaces <span class="hljs-built_in">enable</span><br><br></code></pre></td></tr></table></figure>
+
+<p>在OSPF进程下使能BFD特性。</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-string">[Huawei-ospf-1]</span> bfd all-<span class="hljs-built_in">int</span>erfaces &#123; min-rx-<span class="hljs-built_in">int</span>erval receive-<span class="hljs-built_in">int</span>erval | min-tx-<span class="hljs-built_in">int</span>erval transmit-<span class="hljs-built_in">int</span>erval | detect-multiplier multiplier-value | frr-binding &#125; <br><br></code></pre></td></tr></table></figure>
+
+<p>配置BFD会话的参数值。</p>
+<p>2、配置指定接口的BFD特性。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">[Huawei-GigabitEthernet0/0/1]<span class="hljs-built_in"> ospf bfd </span><span class="hljs-built_in">enable</span><br><br></code></pre></td></tr></table></figure>
+
+<p>在使能OSPF的特定接口下使能BFD特性。</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-string">[Huawei-GigabitEthernet0/0/1]</span> ospf bfd &#123; min-rx-<span class="hljs-built_in">int</span>erval receive-<span class="hljs-built_in">int</span>erval | min-tx-<span class="hljs-built_in">int</span>erval transmit-<span class="hljs-built_in">int</span>erval | detect-multiplier multiplier-value | frr-binding &#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>在使能OSPF的特定接口下配置BFD会话的参数值。</p>
+<ul>
+<li>配置前提：</li>
+</ul>
+<blockquote>
+<p>如果需要使用BFD功能快速检测链路故障，则必须在系统视图下执行bfd命令，使能全局BFD功能。</p>
+</blockquote>
+<ul>
+<li>接口配置的BFD特性优先级高于进程配置的BFD特性优先级。如果打开了接口的BFD开关，则按照接口上BFD参数建立BFD会话。</li>
+<li>可以配置OSPF IP FRR与BFD联动：</li>
+</ul>
+<blockquote>
+<p>配置OSPF IP FRR特性时，需要底层能够快速响应链路变化，以便迅速将流量切换到备份链路。</p>
+<p>将OSPF IP FRR与BFD会话绑定可以达到快速感知故障的目的，确保故障后流量切换的及时性。</p>
+</blockquote>
+<ul>
+<li>命令：[Huawei-ospf-1] bfd all-interfaces { min-rx-interval receive-interval | min-tx-interval transmit-interval | detect-multiplier multiplier-value | frr-binding }</li>
+</ul>
+<p> </p>
+<blockquote>
+<p>min-rx-interval receive-interval：指定期望从对端接收BFD报文的最小接收间隔。整数形式，取值范围是10～2000，单位是毫秒。缺省值是1000毫秒。</p>
+<p>min-tx-interval transmit-interval：指定向对端发送BFD报文的最小发送间隔。整数形式，取值范围是10～2000，单位是毫秒。缺省值是1000毫秒。</p>
+<p>detect-multiplier multiplier-value：指定本地检测倍数。整数形式，取值范围是3～50，缺省值是3。</p>
+<p>frr-binding：将BFD会话状态与接口的链路状态进行绑定。当BFD会话状态变为Down时，接口的物理层链路状态也会变为Down，从而触发流量切换到备份路径。</p>
+</blockquote>
+<h2 id="OSPF-Smart-discover（智能发现）"><a href="#OSPF-Smart-discover（智能发现）" class="headerlink" title="OSPF Smart-discover（智能发现）"></a>OSPF Smart-discover（智能发现）</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>通常情况下，路由器会周期性地从运行OSPF协议的接口上发送Hello报文。这个周期被称为Hello Interval，通过一个Hello Timer定时器控制Hello报文的发送。这种按固定周期发送报文的方式减缓了OSPF邻居关系的建立。</p>
+<p>通过使能Smart-discover特性，可以在特定场景下加快OSPF邻居的建立。</p>
+<table>
+<thead>
+<tr>
+<th align="left">接口是否配置Smart-discover</th>
+<th align="left">处理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">接口没有配置Smart-discover</td>
+<td align="left">必须等待Hello Timer到时才能发送Hello报文；两次报文发送间隔为Hello Interval；在这期间邻居一直在等待接收报文。</td>
+</tr>
+<tr>
+<td align="left">接口上配置Smart-discover</td>
+<td align="left">直接发送Hello报文，不需要等待Hello Timer超时；邻居可以很快收到报文迅速进行状态迁移。</td>
+</tr>
+</tbody></table>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>在以下场景中，使能了Smart-discover特性的接口不需要等待Hello Timer到时，可以主动向邻居发送Hello报文：</p>
+<ul>
+<li>当邻居状态首次到达2-way状态。</li>
+<li>当邻居状态从2-way或更高状态迁移到Init状态。</li>
+</ul>
+<h3 id="配置命令-2"><a href="#配置命令-2" class="headerlink" title="配置命令"></a>配置命令</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">[Huawei-GigabitEthernet0<span class="hljs-regexp">/0/</span><span class="hljs-number">1</span>]ospf smart-discover<br><br></code></pre></td></tr></table></figure>
+
+<p>配置接口的Smart-discover功能, 网络中邻居状态，或者DR、BDR发生变化时，设备不必等到Hello定时器到就可以立刻主动的向邻居发送Hello报文。从而提高建立邻居的速度，达到网络快速收敛的目的。</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://support.huawei.com/enterprise/zh/doc/EDOC1000047393/b2b66017">华为文档</a></p>
+<div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a target="_blank" rel="noopener" href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="https://songxwn.com/DNS_recursive_Server/">建立自有递归DNS服务器</a></li><li><a href="https://songxwn.com/zabbix_data/">Zabbix：历史数据与趋势数据</a></li><li><a href="https://songxwn.com/ospf-route-FA/">HCIE Datacom-01.3 IGP高级特性-OSPF-其他特性</a></li></ul></div>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/network/" class="category-chain-item">network</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/network/">#network</a>
+      
+        <a href="/tags/ospf/">#ospf</a>
+      
+        <a href="/tags/datacom/">#datacom</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>HCIE Datacom-01.1 IGP高级特性-OSPF-快速收敛</div>
+      <div>https://songxwn.com/ospf-frr/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Song</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年12月24日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年12月24日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/ospf-route-c/" title="HCIE Datacom-01.2 IGP高级特性-OSPF-路由控制">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">HCIE Datacom-01.2 IGP高级特性-OSPF-路由控制</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/vdo/" title="红帽的重复数据删除VDO">
+                        <span class="hidden-mobile">红帽的重复数据删除VDO</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments">
+      
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script>
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          Fluid.utils.createCssLink('https://lib.baomitu.com/disqusjs/1.3.0/disqusjs.css');
+          Fluid.utils.createScript('https://lib.baomitu.com/disqusjs/1.3.0/disqus.js', function() {
+            new DisqusJS({
+              shortname: 'songxwn',
+              apikey: ''
+            });
+          });
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <a href="https://www.foreverblog.cn/go.html" target="_blank"> <img src="https://img.foreverblog.cn/wormhole_1_tp.gif" alt="" style="width:auto;height:32px;" title="穿梭虫洞-随机访问十年之约友链博客"></a>,<a href="https://www.vultr.com/?ref=7199488" target="_blank"> <img src="https://www.vultr.com/media/logo_ondark.svg" alt="" style="width:auto;height:32px;" title="注册vultr获取免费10美元体验额度"></a>,<a href="https://www.vultr.com/?ref=9293176-8H" target="_blank"> <img src="https://www.vultr.com/media/logo_mono_onwhite.png" alt="" style="width:auto;height:32px;" title="注册vultr获取免费100美元体验额度"></a>
+        </div>
+      </div>
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

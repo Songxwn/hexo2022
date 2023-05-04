@@ -1,0 +1,1104 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/images/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Song">
+  <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
+  
+    <meta name="description" content="简介OSPF的路由控制包括：  调整OSPF的接口开销 设置等价路由 引入外部路由 路由聚合 缺省路由通告 Filter-Policy 对发送的LSA进行过滤 对ABR Type3 LSA进行过滤 设置LSDB中External LSA的最大数量 案例  本文章参考华为认证系列PPT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HCIE Datacom-01.2 IGP高级特性-OSPF-路由控制">
+<meta property="og:url" content="https://songxwn.com/ospf-route-c/index.html">
+<meta property="og:site_name" content="Song&#96;s Blog">
+<meta property="og:description" content="简介OSPF的路由控制包括：  调整OSPF的接口开销 设置等价路由 引入外部路由 路由聚合 缺省路由通告 Filter-Policy 对发送的LSA进行过滤 对ABR Type3 LSA进行过滤 设置LSDB中External LSA的最大数量 案例  本文章参考华为认证系列PPT">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2022/12/31/46529ccaf9fa51a6.png">
+<meta property="article:published_time" content="2022-12-31T03:52:23.000Z">
+<meta property="article:modified_time" content="2023-05-02T00:49:02.145Z">
+<meta property="article:author" content="Song">
+<meta property="article:tag" content="network">
+<meta property="article:tag" content="ospf">
+<meta property="article:tag" content="datacom">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2022/12/31/46529ccaf9fa51a6.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>HCIE Datacom-01.2 IGP高级特性-OSPF-路由控制 - Song`s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/scroll.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"songxwn.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":130,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Song`s Blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Song`s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/books/">
+                <i class="iconfont icon-books"></i>
+                <span>读书</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                <span>RSS</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="HCIE Datacom-01.2 IGP高级特性-OSPF-路由控制"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-12-31 11:52" pubdate>
+          2022年12月31日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          11k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          91 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">HCIE Datacom-01.2 IGP高级特性-OSPF-路由控制</h1>
+            
+              <p class="note note-danger">
+                
+                  
+                    本文最后更新于：2023年5月2日 早上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><strong>OSPF的路由控制包括：</strong></p>
+<ul>
+<li>调整OSPF的接口开销</li>
+<li>设置等价路由</li>
+<li>引入外部路由</li>
+<li>路由聚合</li>
+<li>缺省路由通告</li>
+<li>Filter-Policy</li>
+<li>对发送的LSA进行过滤</li>
+<li>对ABR Type3 LSA进行过滤</li>
+<li>设置LSDB中External LSA的最大数量</li>
+<li>案例</li>
+</ul>
+<p>本文章参考华为认证系列PPT</p>
+<span id="more"></span>
+
+<h2 id="等价路由"><a href="#等价路由" class="headerlink" title="等价路由"></a>等价路由</h2><ul>
+<li><p>当路由表中存在到达同一目的地址，且同一路由协议发现的多条路由时，若这几条路由的开销值（Cost）也相同，那么这些路由就是等价路由，可以实现负载分担。（OSPF选路基本靠Cost值）</p>
+</li>
+<li><p>设备将按照负载分担的方式从多条等价路由发送报文到同一目的地址。</p>
+<p>   设置进行负载分担的等价路由的最大数量：</p>
+</li>
+</ul>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-string">[Huawei-ospf-1]</span> maximum load-balancing number<br><br></code></pre></td></tr></table></figure>
+
+<p>PS：默认为1，不进行等价路由。</p>
+<p>命令说明：</p>
+<p>[Huawei-ospf-1] maximum load-balancing number</p>
+<p>number：等价路由的最大数量。设备型号不同，取值范围不同，具体请参考相应设备的产品文档。</p>
+<h2 id="等价路由配置举例"><a href="#等价路由配置举例" class="headerlink" title="等价路由配置举例"></a>等价路由配置举例</h2><p><img src="https://s3.bmp.ovh/imgs/2022/12/25/6d24f71b442758ea.png" srcset="/img/loading.gif" lazyload></p>
+<p>通过配置，要求R1可以通过R1-R3路径访问R3的环回口地址，也可以通过R1-R2-R3路径访问R3的环回口地址。</p>
+<p>1、各设备配置接口地址及部署OSPF。（略）</p>
+<p>2、R1配置路由负载分担。</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-string">[R1]</span> ospf<br><span class="hljs-string">[R1-ospf-1]</span> maximum load-balancing <span class="hljs-number">3</span>	<br><br></code></pre></td></tr></table></figure>
+
+<p>3、结果验证。</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">[R1]display ip routing-table <br><span class="hljs-section">Route Flags: R - relay, D - download to fib</span><br><span class="hljs-section">-------------------------------------------------------------------------------------------</span><br><br>Destination/Mask 	Proto   Pre  Cost   Flags NextHop     Interface<br>10.1.3.3/32		    OSPF    10   10       D   10.1.13.3   GigabitEthernet0/0/0<br><span class="hljs-code">                    OSPF    10   10       D   10.1.12.2   GigabitEthernet0/0/1</span><br><br></code></pre></td></tr></table></figure>
+
+<h2 id="缺省路由"><a href="#缺省路由" class="headerlink" title="缺省路由"></a>缺省路由</h2><ul>
+<li>OSPF实际组网应用中，区域边界和自治系统边界通常都是由多个路由器组成的多出口冗余备份或者负载分担。此时，为了减少路由表的容量，可以配置缺省路由，保证网络的高可用性。</li>
+<li>OSPF缺省路由通常应用于下面两种情况：</li>
+</ul>
+<blockquote>
+<p>由区域边界路由器（ABR）发布Type3 LSA，用来指导特殊区域内路由器进行区域之间报文的转发。</p>
+<p>由自治系统边界路由器（ASBR）发布Type5 LSA或Type7 LSA，用来指导OSPF路由域内路由器进行域外报文的转发。</p>
+</blockquote>
+<p><img src="https://s3.bmp.ovh/imgs/2022/12/31/17a4e512cd1419d4.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>缺省路由是指目的地址和掩码都是0的路由。当设备无精确匹配的路由时，就可以通过缺省路由进行报文转发。由于OSPF路由的分级管理，Type3缺省路由的优先级高于Type5或Type7路由。</li>
+<li>普通区域：</li>
+</ul>
+<blockquote>
+<p>缺省情况下，普通OSPF区域内的OSPF路由器是不会产生缺省路由的，即使它有缺省路由。当该路由器需要向OSPF发布缺省路由时，必须手工执行default-route-advertise命令，配置完成后，路由器会产生一个缺省ASE LSA（Type5 LSA），并且通告到整个OSPF自治系统中。</p>
+</blockquote>
+<ul>
+<li>Stub区域：</li>
+</ul>
+<blockquote>
+<p>Stub区域不允许自治系统外部的路由（Type5 LSA）在区域内传播。区域内的路由器必须通过ABR学到自治系统外部的路由。</p>
+<p>Stub区域的ABR会自动产生一条缺省的Type3 LSA通告到整个Stub区域。ABR通过该缺省路由，将到达AS外部的流量吸引到自己这里，然后通过ABR转发出去。</p>
+</blockquote>
+<ul>
+<li>Totally Stub区域：</li>
+</ul>
+<blockquote>
+<p>Totally Stub区域既不允许自治系统外部的路由（Type5 LSA）在区域内传播，也不允许区域间路由（Type3 LSA）在区域内传播。区域内的路由器必须通过ABR学到自治系统外部和其他区域的路由。</p>
+<p>Totally Stub区域的ABR会自动产生一条缺省的Type3 LSA通告到整个Stub区域。ABR通过该缺省路由，将到达AS外部和其它区域的流量吸引到自己这里，然后通过ABR转发出去。</p>
+</blockquote>
+<ul>
+<li>NSSA区域：</li>
+</ul>
+<blockquote>
+<p>如果希望到达自治系统外部的路由通过本区域（NSSA区域）的ASBR到达，而其它外部路由通过其它区域出去。此时，ABR会产生一条Type7 LSA的缺省路由，通告到整个NSSA区域内。这样，除了某少部分路由通过NSSA的ASBR到达，其它路由都可以通过NSSA的ABR到达其它区域的ASBR出去。这种情况下，在ABR上无论路由表中是否存在缺省路由0.0.0.0，都会产生Type7 LSA的缺省路由。</p>
+<p>如果希望所有的外部路由只通过本区域（NSSA区域）的ASBR到达，则必须在ASBR上手动执行nssa [default-route-advertise]命令进行配置，使ASBR产生一条缺省的NSSA LSA（Type7 LSA），通告到整个NSSA区域内。这样，所有的外部路由就只能通过本区域NSSA的ASBR到达。这种情况下，在ASBR上只有当路由表中存在缺省路由0.0.0.0时，才会产生Type7 LSA的缺省路由。</p>
+<p>注意：因为缺省路由只是在本NSSA区域内泛洪，并没有泛洪到整个OSPF域中，所以本NSSA区域内的路由器在找不到路由之后可以从该NSSA的ASBR出去，但不能实现其他OSPF域的路由从这个出口出去。Type7 LSA缺省路由不会在ABR上转换成Type5 LSA缺省路由泛洪到整个OSPF域。</p>
+</blockquote>
+<ul>
+<li>Totally NSSA区域：</li>
+</ul>
+<blockquote>
+<p>Totally NSSA的ABR会自动向该区域下发使用Type3 LSA描述的缺省路由，而Totally NSSA的ASBR则不会自动下发缺省路由。因此，在该场景下，对于区域内的路由器而言，可以通过ASBR引入的外部路由到达相应的外部网段、通过ABR下发的缺省路由到达其他网段。</p>
+<p>如果希望Totally NSSA内的路由器选择ASBR作为默认出口，而不是ABR，那么需要让ASBR也下发缺省路由，此时必须在ASBR上手工执行配置。</p>
+</blockquote>
+<h3 id="将缺省路由通告到OSPF路由区域"><a href="#将缺省路由通告到OSPF路由区域" class="headerlink" title="将缺省路由通告到OSPF路由区域"></a>将缺省路由通告到OSPF路由区域</h3><p>1、将缺省路由通告到普通OSPF区域。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">[Huawei-ospf<span class="hljs-number">-1</span>] <span class="hljs-keyword">default</span>-route-advertise [ [ <span class="hljs-keyword">always</span> | permit-calculate-other ] | <span class="hljs-keyword">cost</span> <span class="hljs-keyword">cost</span> | <span class="hljs-keyword">type</span> <span class="hljs-keyword">type</span> | route-<span class="hljs-keyword">policy</span> route-<span class="hljs-keyword">policy</span>-<span class="hljs-type">name</span> [ match-<span class="hljs-keyword">any</span> ] ]<br><br></code></pre></td></tr></table></figure>
+
+<p>缺省情况下，在普通OSPF区域内的OSPF设备不产生缺省路由。</p>
+<p>2、指定Type3 Summary-LSA的缺省开销值。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">[Huawei-ospf<span class="hljs-number">-1</span>] <span class="hljs-keyword">default</span>-route-advertise <span class="hljs-keyword">summary</span> <span class="hljs-keyword">cost</span> <span class="hljs-keyword">cost</span><br><br></code></pre></td></tr></table></figure>
+
+<h4 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h4><ul>
+<li>import-route (OSPF)命令不能引入外部路由的缺省路由。当需要引入其他协议产生的缺省路由时，必须在ASBR上配置default-route-advertise命令，发布缺省路由到整个普通OSPF区域。</li>
+<li>OSPF路由域中在通告缺省路由前，会比较缺省路由的优先级。如果在某OSPF设备上同时配置了静态缺省路由，要使OSPF通告的缺省路由加入到当前的路由表中，则必须保证所配置的静态缺省路由的优先级比OSPF通告的缺省路由的优先级低。</li>
+</ul>
+<h4 id="命令说明："><a href="#命令说明：" class="headerlink" title="命令说明："></a>命令说明：</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">[Huawei-ospf<span class="hljs-number">-1</span>] <span class="hljs-keyword">default</span>-route-advertise [ [ <span class="hljs-keyword">always</span> | permit-calculate-other ] | <span class="hljs-keyword">cost</span> <span class="hljs-keyword">cost</span> | <span class="hljs-keyword">type</span> <span class="hljs-keyword">type</span> | route-<span class="hljs-keyword">policy</span> route-<span class="hljs-keyword">policy</span>-<span class="hljs-type">name</span> [ match-<span class="hljs-keyword">any</span> ] ]<br><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>always：无论本机是否存在激活的非本OSPF缺省路由，都会产生并发布一个描述缺省路由的LSA。</li>
+</ul>
+<blockquote>
+<p>如果配置了always参数，设备不再计算来自其他设备的缺省路由。</p>
+<p>如果没有配置always参数，本机路由表中必须有激活的非本OSPF缺省路由时才生成缺省路由的LSA。</p>
+</blockquote>
+<ul>
+<li>permit-calculate-other：本机必须存在激活的非本OSPF缺省路由时才会产生并发布一个缺省路由的LSA，且设备仍然计算来自于其他设备的缺省路由。</li>
+<li>type type：指定外部路由的类型。整数形式，取值为1或2，缺省值是2。</li>
+</ul>
+<blockquote>
+<p>值为1：第一类外部路由</p>
+<p>值为2：第二类外部路由</p>
+</blockquote>
+<ul>
+<li>route-policy route-policy-name：通过路由策略，实现在路由表中有匹配的非OSPF产生的缺省路由表项时，按路由策略所配置的参数发布缺省路由。字符串形式，区分大小写，不支持空格，长度范围是1～40。当输入的字符串两端使用双引号时，可在字符串中输入空格。</li>
+<li>match-any：通过路由策略，实现在路由表中有匹配的路由表项时，按路由策略所配置的参数发布缺省路由。</li>
+</ul>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">[Huawei-ospf<span class="hljs-number">-1</span>] <span class="hljs-keyword">default</span>-route-advertise <span class="hljs-keyword">summary</span> <span class="hljs-keyword">cost</span> <span class="hljs-keyword">cost</span><br><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>summary：发布指定缺省路由的Type3 LSA。在选用该参数时，必须首先使能VPN，否则路由不能发布。</li>
+<li>cost cost：指定该LSA的开销值。整数形式，取值范围是0～16777214。缺省值是1。</li>
+</ul>
+<p><strong>其他说明：</strong></p>
+<ul>
+<li>always参数：</li>
+</ul>
+<blockquote>
+<p>ASBR已经有缺省路由，执行default-route-advertise命令，将在整个OSPF区域中通告缺省路由0.0.0.0。</p>
+<p>ASBR没有缺省路由，执行default-route-advertise命令时按照以下需求选择是否配置always参数。</p>
+<p>如果配置always参数，无论ASBR是否有缺省路由都将在整个OSPF区域中通告缺省路由0.0.0.0，并且不再计算来自其他设备的缺省路由。</p>
+<p>如果没有配置always参数，ASBR的路由表中必须有激活的非OSPF（BGP除外）缺省路由时才生成缺省路由的LSA。</p>
+</blockquote>
+<ul>
+<li>match-any参数：</li>
+</ul>
+<blockquote>
+<p>使用带match-any参数的路由策略时，如果有多条路由通过策略，选取最优者来生成缺省LSA。路由通过策略时，选取最优者的原则按照优先级从高到低的顺序如下：</p>
+<p>路由设置了type的优先于未设置的，如果都设置了type，值越小越优先。</p>
+<p>路由设置了cost的优先于未设置的，如果都设置了cost，值越小越优先。</p>
+<p>路由设置了tag的优先于未设置的， 如果都设置了tag，值越小越优先。</p>
+</blockquote>
+<h2 id="路由聚合"><a href="#路由聚合" class="headerlink" title="路由聚合"></a>路由聚合</h2><p><strong>背景信息</strong></p>
+<p>当OSPF网络规模较大时，配置路由聚合，可以有效减少路由表中的条目，减小对系统资源的占用，不影响系统的性能。此外，如果被聚合的IP地址范围内的某条链路频繁Up和Down，该变化并不会通告到被聚合的IP地址范围外的设备。因此，可以避免网络中的路由震荡，在一定程度上提高了网络的稳定性。</p>
+<p>ABR向其它区域发送路由信息时，以网段为单位生成Type3 LSA。当区域中存在连续的网段（具有相同前缀的路由信息）时，可以通过abr-summary命令将这些网段聚合成一个网段，ABR向其他区域只发送一条聚合后的LSA，所有指定的聚合网段范围的LSA将不会再被单独发送。从而减小路由表的规模，提高交换机的性能。</p>
+<p>请在运行OSPF协议的交换机上进行以下配置。</p>
+<ul>
+<li><strong>配置ABR路由聚合</strong></li>
+</ul>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs smali">1、执行命令system-view，进入系统视图。<br>2、执行命令ospf [ process-id ]，进入OSPF进程视图。<br>3、执行命令area area-id，进入OSPF区域视图。<br>4、执行命令<br>abr-summary ip-address mask [ [ cost &#123; cost | inherit-minimum &#125; | [ advertise [ generate-null0-route ] |<span class="hljs-built_in"> not-advertise </span>| generate-null0-route [ advertise ] ] ] * ]<br>配置OSPF的ABR路由聚合。<br><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>配置ASBR路由聚合</strong></li>
+</ul>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">执行命令<span class="hljs-keyword">system</span>-<span class="hljs-keyword">view</span>，进入系统视图。<br><br>执行命令ospf [ process-id ]，进入OSPF进程视图。<br><br>（可选）执行命令<br>asbr-<span class="hljs-keyword">summary</span> <span class="hljs-keyword">type</span> nssa-trans-<span class="hljs-keyword">type</span>-reference [ <span class="hljs-keyword">cost</span> nssa-trans-<span class="hljs-keyword">cost</span>-reference ]，<br>配置OSPF设置聚合路由类型（<span class="hljs-keyword">Type</span>）和开销值（<span class="hljs-keyword">Cost</span>）时考虑Type7转换到Type5的LSA。<br><br>缺省情况下，OSPF在设置聚合路由类型和开销时不考虑Type7转换到Type5的LSA。<br><br>执行命令<br>asbr-<span class="hljs-keyword">summary</span> ip-address mask [ <span class="hljs-keyword">not</span>-advertise | tag tag | <span class="hljs-keyword">cost</span> <span class="hljs-keyword">cost</span> | distribute-delay <span class="hljs-type">interval</span> ] *，<br>配置OSPF的ASBR路由聚合。<br><br></code></pre></td></tr></table></figure>
+
+
+
+<p><strong>说明：</strong></p>
+<p>在配置路由聚合后，本地OSPF设备的路由表保持不变。但是其他OSPF设备的路由表中将只有一条聚合路由，没有具体路由。直到网络中被聚合的路由都出现故障而消失时，该聚合路由才会消失。</p>
+<h2 id="对发送的LSA进行过滤"><a href="#对发送的LSA进行过滤" class="headerlink" title="对发送的LSA进行过滤"></a>对发送的LSA进行过滤</h2><ul>
+<li>当两台路由器之间存在多条链路时，可以在某些链路上通过对发送的LSA进行过滤，减少不必要的重传，节省带宽资源。</li>
+<li>通过对OSPF接口出方向的LSA进行过滤可以不向邻居发送无用的LSA，从而减少邻居LSDB的大小，提高网络收敛速度。</li>
+</ul>
+<p>注意：OSPF是链路状态动态路由协议，互相不直接发送路由，无法通过路由策略等工具进行过滤发送路由。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs">配置对OSPF接口出方向的LSA进行过滤：<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs fortran">[Huawei-GigabitEthernet0/<span class="hljs-number">0</span>/<span class="hljs-number">1</span>] ospf filter-lsa-<span class="hljs-keyword">out</span> &#123; <span class="hljs-built_in">all</span> | &#123; summary [ acl &#123; acl-<span class="hljs-keyword">number</span> | acl-<span class="hljs-keyword">name</span> &#125; ] | ase [ acl &#123; acl-<span class="hljs-keyword">number</span> | acl-<span class="hljs-keyword">name</span> &#125; ] | nssa [ acl &#123; acl-<span class="hljs-keyword">number</span> | acl-<span class="hljs-keyword">name</span> &#125; ] &#125; &#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>对于已经发送的LSA，要到3600秒才能达到老化时间。</p>
+<h4 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h4><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs fortran">[Huawei-GigabitEthernet0/<span class="hljs-number">0</span>/<span class="hljs-number">1</span>] ospf filter-lsa-<span class="hljs-keyword">out</span> &#123; <span class="hljs-built_in">all</span> | &#123; summary [ acl &#123; acl-<span class="hljs-keyword">number</span> | acl-<span class="hljs-keyword">name</span> &#125; ] | ase [ acl &#123; acl-<span class="hljs-keyword">number</span> | acl-<span class="hljs-keyword">name</span> &#125; ] | nssa [ acl &#123; acl-<span class="hljs-keyword">number</span> | acl-<span class="hljs-keyword">name</span> &#125; ] &#125; &#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>all：对除Grace LSA外的所有LSA进行过滤。</p>
+<p>summary：对Network Summary LSA（Type3 LSA）进行过滤。</p>
+<p>ase：对AS External LSA（Type5 LSA）进行过滤。</p>
+<p>nssa：对NSSA LSA（Type7 LSA）进行过滤。</p>
+<p>acl acl-number：指定基本访问控制列表编号。整数形式，取值范围是2000～2999。</p>
+<p>acl acl-name：指定访问控制列表名称。字符串形式，不支持空格，区分大小写，长度范围是1～32，以英文字母a～z或A～Z开始。</p>
+<h3 id="对ABR-Type3-LSA进行过滤"><a href="#对ABR-Type3-LSA进行过滤" class="headerlink" title="对ABR Type3 LSA进行过滤"></a>对ABR Type3 LSA进行过滤</h3><ul>
+<li>对区域内出、入方向ABR Type3 LSA（Summary LSA）设置过滤条件，只有通过过滤的LSA才能被发布和接收。</li>
+<li>通过对区域内的LSA进行过滤可以不向邻居发送无用的LSA，从而减少LSDB的大小，提高网络收敛速度。</li>
+</ul>
+<p> 配置对区域内出方向的Type3 LSA进行过滤：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">[Huawei-ospf<span class="hljs-number">-1</span>-area<span class="hljs-number">-0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>] <span class="hljs-keyword">filter</span> &#123; acl-number | acl-<span class="hljs-type">name</span> acl-<span class="hljs-type">name</span> | ip-prefix ip-prefix-<span class="hljs-type">name</span> | route-<span class="hljs-keyword">policy</span> route-<span class="hljs-keyword">policy</span>-<span class="hljs-type">name</span> &#125; export<br><br></code></pre></td></tr></table></figure>
+
+<p>配置对区域内入方向的Type3 LSA进行过滤：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">[Huawei-ospf<span class="hljs-number">-1</span>-area<span class="hljs-number">-0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>] <span class="hljs-keyword">filter</span> &#123; acl-number | acl-<span class="hljs-type">name</span> acl-<span class="hljs-type">name</span> | ip-prefix ip-prefix-<span class="hljs-type">name</span> | route-<span class="hljs-keyword">policy</span> route-<span class="hljs-keyword">policy</span>-<span class="hljs-type">name</span> &#125; <span class="hljs-keyword">import</span><br><br></code></pre></td></tr></table></figure>
+
+<h4 id="命令-1"><a href="#命令-1" class="headerlink" title="命令"></a>命令</h4><p>[Huawei-ospf-1-area-0.0.0.1] filter { acl-number | acl-name acl-name | ip-prefix ip-prefix-name | route-policy route-policy-name } export</p>
+<p>acl-number：指定基本访问控制列表号。整数形式，取值范围是2000～2999。</p>
+<h4 id="使能Mesh-Group特性"><a href="#使能Mesh-Group特性" class="headerlink" title="使能Mesh-Group特性"></a>使能Mesh-Group特性</h4><p><strong>背景信息</strong></p>
+<p>当交换机和邻居存在并行链路时，使能Mesh-Group特性，可以减轻链路的压力。</p>
+<p>Mesh-Group时以邻居的Router-id唯一标识一个Group。是几条并行的LSA，合并为一个组，只泛洪一次。只有同时满足以下三个条件的接口才能属于同一个Mesh-Group：</p>
+<ul>
+<li>属于相同区域和OSPF进程</li>
+<li>接口状态大于Exchange</li>
+<li>只连着同一个邻居</li>
+</ul>
+<p>请在运行OSPF协议的交换机上进行以下配置。</p>
+<h4 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h4><ol>
+<li><p>执行命令system-view，进入系统视图。</p>
+</li>
+<li><p>执行命令ospf [ </p>
+<p><em>process-id</em></p>
+<p> ]，进入OSPF进程视图。</p>
+</li>
+<li><p>执行命令mesh-group enable，使能Mesh-Group特性。</p>
+</li>
+</ol>
+<h2 id="OSPF-Database-Overflow概述（数据库溢出）"><a href="#OSPF-Database-Overflow概述（数据库溢出）" class="headerlink" title="OSPF Database Overflow概述（数据库溢出）"></a>OSPF Database Overflow概述（数据库溢出）</h2><ul>
+<li>OSPF要求同一个区域中的路由器保存相同的LSDB。随着网络上路由数量不断增加，一些路由器由于系统资源有限，不能再承载如此多的路由信息，这种状态就被称为数据库超限（OSPF Database Overflow）。</li>
+<li>对于路由信息不断增加导致路由器系统资源耗尽而失效的问题，可以通过配置Stub或NSSA区域来解决，<strong>但Stub或NSSA区域的方案不能解决动态路由增长导致的数据库超限问题</strong>。为了解决数据库超限引发的问题，通过设置LSDB中External LSA的最大条目数，可以动态限制数据库的规模。（特殊区域只会限制生成路由条目，但不会限制接收LSA）</li>
+</ul>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs delphi">设置OSPF的LSDB中<span class="hljs-keyword">External</span> LSA的最大条目数：<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-attr">[Huawei-ospf-1]</span> lsdb-<span class="hljs-attribute">overflow</span>-limit number<br><br></code></pre></td></tr></table></figure>
+
+<p>当OSPF引入的外部路由（Type5 LSA和Type7 LSA）数量超过允许的范围，会导致超出的外部路由无法得到正常处理，丢失引入的路由。为了解决上述问题，通过配置OSPF的LSDB中External LSA的最大条目数，保证引入的外部路由在一个合理的范围内，调整和优化OSPF网络。</p>
+<p>命令：[Huawei-ospf-1] lsdb-overflow-limit number</p>
+<p>number：指定LSDB中External LSA的最大条目数。整数形式，取值范围是1～1000000。</p>
+<h3 id="避免OSPF-Database-Overflow工作原理"><a href="#避免OSPF-Database-Overflow工作原理" class="headerlink" title="避免OSPF Database Overflow工作原理"></a>避免OSPF Database Overflow工作原理</h3><ul>
+<li>为了避免数据库超限，可以设置路由器上非缺省外部路由数量的上限。</li>
+<li>OSPF网络中所有路由器都配置相同的上限值，只要路由器上外部路由的数量达到该上限，路由器就进入Overflow状态，并同时启动Overflow状态定时器（默认超时时间为5秒），路由器在定时器超过5秒后自动退出Overflow状态。<img src="https://s3.bmp.ovh/imgs/2022/12/31/741d4f6a6e8e83cb.png" srcset="/img/loading.gif" lazyload></li>
+</ul>
+<h2 id="路由控制配置案例"><a href="#路由控制配置案例" class="headerlink" title="路由控制配置案例"></a>路由控制配置案例</h2><h3 id="OSPF路由控制配置举例-过滤LSA3，发送默认路由"><a href="#OSPF路由控制配置举例-过滤LSA3，发送默认路由" class="headerlink" title="OSPF路由控制配置举例(过滤LSA3，发送默认路由)"></a>OSPF路由控制配置举例(过滤LSA3，发送默认路由)</h3><p><img src="https://s3.bmp.ovh/imgs/2022/12/31/8b9eec40783d83a7.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>如图所示，为减少R3的LSA数量，同时确保R3可以和其它区域内的路由器正常通行，要求：</li>
+</ul>
+<blockquote>
+<p>R2不向Area1中注入Type3 LSA。</p>
+<p>R2发布缺省路由。</p>
+</blockquote>
+<p>1、各设备配置接口地址及部署OSPF。（略）</p>
+<p>2、配置R2过滤Type3 LSA。</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs armasm">[<span class="hljs-built_in">R2</span>] acl <span class="hljs-number">2000</span><br>[<span class="hljs-built_in">R2</span>-acl-basic-<span class="hljs-number">2000</span>] rule deny <br>[<span class="hljs-built_in">R2</span>-acl-basic-<span class="hljs-number">2000</span>] quit<br>[<span class="hljs-built_in">R2</span>] ospf<br>[<span class="hljs-built_in">R2</span>-ospf-<span class="hljs-number">1</span>] <span class="hljs-meta">area</span> <span class="hljs-number">1</span><br>[<span class="hljs-built_in">R2</span>-ospf-<span class="hljs-number">1</span>-<span class="hljs-meta">area</span>-<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">1</span>] filter <span class="hljs-number">2000</span> <span class="hljs-meta">import</span><br><br></code></pre></td></tr></table></figure>
+
+<p>PS：本质上和配置Stub区域没啥区别。</p>
+<p><img src="https://s3.bmp.ovh/imgs/2022/12/31/8b9eec40783d83a7.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="验证配置"><a href="#验证配置" class="headerlink" title="验证配置"></a>验证配置</h4><p>1、查看R3的LSDB。</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs dns">[R3]display ospf lsdb<br>	 OSPF Process <span class="hljs-number">1</span> with Router ID <span class="hljs-number">10.1.23.3</span><br>		 Link State Database <br>		         Area: <span class="hljs-number">0.0.0.1</span><br> Type	 LinkState ID	 AdvRouter	Age  Len  Sequence   Metric<br> Router	 <span class="hljs-number">10.1.23.3</span>       <span class="hljs-number">10.1.23.3</span> 	<span class="hljs-number">731</span>  <span class="hljs-number">48</span>    <span class="hljs-number">80000004</span>       <span class="hljs-number">1</span><br> Router  <span class="hljs-number">10.1.12.2</span>       <span class="hljs-number">10.1.12.2</span>	<span class="hljs-number">406</span>  <span class="hljs-number">36</span>    <span class="hljs-number">80000008</span>       <span class="hljs-number">1</span><br> Network <span class="hljs-number">10.1.23.2</span>       <span class="hljs-number">10.1.12.2</span>	<span class="hljs-number">730</span>  <span class="hljs-number">32</span>    <span class="hljs-number">80000002</span>       <span class="hljs-number">0</span><br> <br>		               AS External Database<br> Type      	LinkState ID	 AdvRouter	Age  Len  Sequence   Metric<br> External  	<span class="hljs-number">0.0.0.0</span>	         <span class="hljs-number">10.1.12.2</span>	<span class="hljs-number">406</span>  <span class="hljs-number">36</span>   <span class="hljs-number">80000001</span>       <span class="hljs-number">1</span><br> <br>可以看到Area1内设备R3的LSDB中没有Type3 LSA，但是有Type5缺省LSA。<br>R3可以通过缺省路由访问其他区域设备。<br><br></code></pre></td></tr></table></figure>
+
+<p>2、查看R3的路由表。</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">[R3]dis ip routing-table <br><span class="hljs-section">Route Flags: R - relay, D - download to fib</span><br><span class="hljs-section">-----------------------------------------------------------------------------------------</span><br>Routing Tables: Public<br><span class="hljs-code">         Destinations : 9        Routes : 9        </span><br>Destination/Mask    Proto    Pre  Cost	Flags NextHop     Interface<br>0.0.0.0/0   	    O_ASE    150   1	D     10.1.23.2   GigabitEthernet0/0/1<br>……<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="OSPF路由控制案例分析（通过Cost值控制路由）"><a href="#OSPF路由控制案例分析（通过Cost值控制路由）" class="headerlink" title="OSPF路由控制案例分析（通过Cost值控制路由）"></a>OSPF路由控制案例分析（通过Cost值控制路由）</h3><p><img src="https://s3.bmp.ovh/imgs/2022/12/31/cc466417575073a0.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><strong>网络部署：</strong></li>
+</ul>
+<blockquote>
+<p>某企业网络内有财务部和市场部两张网络。</p>
+<p>该企业网络通过OSPF实现内部网络的互联互通，其中骨干网络部署在Area0，财务部网络客户端部署在Area1，市场部网络客户端部署在Area2。</p>
+<p>边界设备通过静态路由访问各部门服务器，并在OSPF进程内引入该静态路由。</p>
+</blockquote>
+<ul>
+<li>**财务部数据转发需求： **</li>
+</ul>
+<blockquote>
+<p>只要边界-1路由器及其上联链路正常运行，财务部数据流就只会通过边界-1路由器进行数据转发。</p>
+<p>只要核心-1路由器及其上联链路正常运行，财务部数据流就只会通过核心-1路由器进行数据转发。</p>
+</blockquote>
+<ul>
+<li><strong>市场部数据转发需求：（忽略）</strong></li>
+</ul>
+<blockquote>
+<p>只要边界-2路由器及其上联链路正常运行，市场部数据流就只会通过边界-2路由器进行数据转发。</p>
+<p>只要核心-2路由器及其上联链路正常运行，市场部数据流就只会通过核心-2路由器进行数据转发。</p>
+</blockquote>
+<h4 id="控制流量出口（外部路由）"><a href="#控制流量出口（外部路由）" class="headerlink" title="控制流量出口（外部路由）"></a>控制流量出口（外部路由）</h4><p><img src="https://s3.bmp.ovh/imgs/2022/12/31/66b4f4603dbdf548.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><strong>实现方式：</strong></li>
+</ul>
+<blockquote>
+<p>在R1（边界-1）和R2（边界-2）的OSPF进程内引入去往财务部服务器的静态路由，实现出口备份（可以通过路由策略实现）；</p>
+<p>设置引入外部路由类型为Type2；</p>
+<p>在R1上设置外部路由开销为100，在R2上设置外部路由开销为200。</p>
+</blockquote>
+<ul>
+<li>配置结果：</li>
+</ul>
+<blockquote>
+<p>网络中存在2条同一网段不同开销的Type2外部路由时，网络设备会优选开销较小的路由。此时，网络中各设备会优选R1作为出口。</p>
+</blockquote>
+<p>控制流量出口时，不考虑到达各ASBR的内部路径开销。</p>
+<p>Type2 外部路由在内部传递时，不累加Cost值</p>
+<h3 id="控制内部路径：调整汇聚到核心开销"><a href="#控制内部路径：调整汇聚到核心开销" class="headerlink" title="控制内部路径：调整汇聚到核心开销"></a>控制内部路径：调整汇聚到核心开销</h3><p><img src="https://s3.bmp.ovh/imgs/2022/12/31/9cb09ec6210fe5d3.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>若S1与R1间链路故障，由于S1运行正常，则要求S3优选路径1，次选路径2。</li>
+<li>实现方式：</li>
+</ul>
+<blockquote>
+<p>路径1-Cost &lt; 路径2-Cost，即：</p>
+</blockquote>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs armasm">[Cost(<span class="hljs-built_in">S3</span>-<span class="hljs-built_in">S1</span>) + Cost(<span class="hljs-built_in">S1</span>-<span class="hljs-built_in">S2</span>) + Cost(<span class="hljs-built_in">S2</span>-<span class="hljs-built_in">R1</span>)] &lt; [Cost(<span class="hljs-built_in">S3</span>-<span class="hljs-built_in">S2</span>) + Cost(<span class="hljs-built_in">S2</span>-<span class="hljs-built_in">R1</span>)]<br><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>通过调整汇聚到核心设备间的路径开销可以实现路径1。</p>
+</blockquote>
+<h3 id="控制内部路径：调整核心到边界开销"><a href="#控制内部路径：调整核心到边界开销" class="headerlink" title="控制内部路径：调整核心到边界开销"></a>控制内部路径：调整核心到边界开销</h3><p><img src="https://s3.bmp.ovh/imgs/2022/12/31/791faad82d56041d.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>若S3与S1间链路故障，由于S1运行正常，则要求S3优选路径1，次选路径2。</li>
+<li>实现方式：</li>
+</ul>
+<blockquote>
+<p>路径1-Cost &lt; 路径2-Cost，即：</p>
+</blockquote>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs armasm">[Cost(<span class="hljs-built_in">S3</span>-<span class="hljs-built_in">S2</span>) + Cost(<span class="hljs-built_in">S2</span>-<span class="hljs-built_in">S1</span>) + Cost(<span class="hljs-built_in">S1</span>-<span class="hljs-built_in">R1</span>)] &lt; [Cost(<span class="hljs-built_in">S3</span>-<span class="hljs-built_in">S2</span>) + Cost(<span class="hljs-built_in">S2</span>-<span class="hljs-built_in">R1</span>)]<br><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>通过调整核心到边界设备间的路径开销可以实现优选路径1。</p>
+</blockquote>
+<h3 id="OSPF路由控制案例主要配置-引入外部路由-R1"><a href="#OSPF路由控制案例主要配置-引入外部路由-R1" class="headerlink" title="OSPF路由控制案例主要配置 (引入外部路由-R1)"></a>OSPF路由控制案例主要配置 (引入外部路由-R1)</h3><p><img src="https://s3.bmp.ovh/imgs/2022/12/31/83ac07a2c2399ab7.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>R1部署路由策略应用开销值100：</p>
+</blockquote>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs smali">[R1] acl 2000<br>[R1-acl-basic-2000] rule permit source 192.168.10.0 0.0.0.255<br>[R1-acl-basic-2000] quit<br><br>[R1] route-policy<span class="hljs-keyword"> static</span>2ospf permit node 10<br>[R1-route-policy]<span class="hljs-built_in"> if-match </span>acl 2000<br>[R1-route-policy] apply cost 100<br>[R1-route-policy] quit<br>[R1] route-policy<span class="hljs-keyword"> static</span>2ospf permit node 20<br>[R1-route-policy] quit<br><br></code></pre></td></tr></table></figure>
+
+<p>R1在OSPF进程中引入静态路由：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-string">[R1]</span> ospf<br><span class="hljs-string">[R1-ospf-1]</span> <span class="hljs-keyword">import</span>-route static route-policy static2ospf type <span class="hljs-number">2</span><br><br></code></pre></td></tr></table></figure>
+
+<h3 id="OSPF路由控制案例主要配置-引入外部路由-R2"><a href="#OSPF路由控制案例主要配置-引入外部路由-R2" class="headerlink" title="OSPF路由控制案例主要配置 (引入外部路由-R2)"></a>OSPF路由控制案例主要配置 (引入外部路由-R2)</h3><p><img src="https://s3.bmp.ovh/imgs/2022/12/31/83ac07a2c2399ab7.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>R2部署路由策略应用开销值200：</li>
+</ul>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs smali">[R2] acl 2000<br>[R2-acl-basic-2000] rule permit source 192.168.10.0 0.0.0.255<br>[R2-acl-basic-2000] quit<br><br>[R2] route-policy<span class="hljs-keyword"> static</span>2ospf permit node 10<br>[R2-route-policy]<span class="hljs-built_in"> if-match </span>acl 2000<br>[R2-route-policy] apply cost 200<br>[R2-route-policy] quit<br>[R2] route-policy<span class="hljs-keyword"> static</span>2ospf permit node 20<br>[R2-route-policy] quit<br><br></code></pre></td></tr></table></figure>
+
+<p>R2在OSPF进程中引入静态路由：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-string">[R2]</span> ospf<br><span class="hljs-string">[R2-ospf-1]</span> <span class="hljs-keyword">import</span>-route static route-policy static2ospf type <span class="hljs-number">2</span><br><br></code></pre></td></tr></table></figure>
+
+<h3 id="OSPF路由控制案例主要配置-内部路由Cost"><a href="#OSPF路由控制案例主要配置-内部路由Cost" class="headerlink" title="OSPF路由控制案例主要配置 (内部路由Cost)"></a>OSPF路由控制案例主要配置 (内部路由Cost)</h3><p><img src="https://s3.bmp.ovh/imgs/2022/12/31/0d566c105630c8a9.png" srcset="/img/loading.gif" lazyload></p>
+<p>设置接口OSPF开销（以R1的GE0&#x2F;0&#x2F;1口为例）：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gradle">[R1] <span class="hljs-keyword">interface</span> GigabitEthernet <span class="hljs-number">0</span><span class="hljs-regexp">/0/</span><span class="hljs-number">1</span><br>[R1-GigabitEthernet0<span class="hljs-regexp">/0/</span><span class="hljs-number">1</span>] ospf cost <span class="hljs-number">50</span><br><br></code></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p> <a target="_blank" rel="noopener" href="https://support.huawei.com/enterprise/zh/doc/EDOC1000141374/b48f063">控制OSPF的路由信息</a></p>
+<p> <a target="_blank" rel="noopener" href="https://info.support.huawei.com/info-finder/encyclopedia/zh/OSPF.html">什么是OSPF？</a></p>
+<div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a target="_blank" rel="noopener" href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="https://songxwn.com/DNS_recursive_Server/">建立自有递归DNS服务器</a></li><li><a href="https://songxwn.com/zabbix_data/">Zabbix：历史数据与趋势数据</a></li><li><a href="https://songxwn.com/ospf-route-FA/">HCIE Datacom-01.3 IGP高级特性-OSPF-其他特性</a></li></ul></div>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/network/" class="category-chain-item">network</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/network/">#network</a>
+      
+        <a href="/tags/ospf/">#ospf</a>
+      
+        <a href="/tags/datacom/">#datacom</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>HCIE Datacom-01.2 IGP高级特性-OSPF-路由控制</div>
+      <div>https://songxwn.com/ospf-route-c/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Song</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年12月31日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年5月2日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Juniper_RE-Protect/" title="Juniper RE防护-过滤SSH&amp;Telnet登录">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Juniper RE防护-过滤SSH&amp;Telnet登录</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/ospf-frr/" title="HCIE Datacom-01.1 IGP高级特性-OSPF-快速收敛">
+                        <span class="hidden-mobile">HCIE Datacom-01.1 IGP高级特性-OSPF-快速收敛</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments">
+      
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script>
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          Fluid.utils.createCssLink('https://lib.baomitu.com/disqusjs/1.3.0/disqusjs.css');
+          Fluid.utils.createScript('https://lib.baomitu.com/disqusjs/1.3.0/disqus.js', function() {
+            new DisqusJS({
+              shortname: 'songxwn',
+              apikey: ''
+            });
+          });
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <a href="https://www.foreverblog.cn/go.html" target="_blank"> <img src="https://img.foreverblog.cn/wormhole_1_tp.gif" alt="" style="width:auto;height:32px;" title="穿梭虫洞-随机访问十年之约友链博客"></a>,<a href="https://www.vultr.com/?ref=7199488" target="_blank"> <img src="https://www.vultr.com/media/logo_ondark.svg" alt="" style="width:auto;height:32px;" title="注册vultr获取免费10美元体验额度"></a>,<a href="https://www.vultr.com/?ref=9293176-8H" target="_blank"> <img src="https://www.vultr.com/media/logo_mono_onwhite.png" alt="" style="width:auto;height:32px;" title="注册vultr获取免费100美元体验额度"></a>
+        </div>
+      </div>
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

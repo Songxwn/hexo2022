@@ -1,0 +1,959 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/images/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Song">
+  <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
+  
+    <meta name="description" content="介绍“ELK”是三个开源项目的首字母缩写，这三个项目分别是：Elasticsearch、Logstash 和 Kibana。Elasticsearch 是一个搜索和分析引擎。Logstash 是服务器端数据处理管道，能够同时从多个来源采集数据，转换数据，然后将数据发送到诸如 Elasticsearch 等“存储库”中。Kibana 则可以让用户在 Elasticsearch 中使用图形和图表对数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ELK Stack 安装教程，RHEL及衍生系统。">
+<meta property="og:url" content="https://songxwn.com/elk/index.html">
+<meta property="og:site_name" content="Song&#96;s Blog">
+<meta property="og:description" content="介绍“ELK”是三个开源项目的首字母缩写，这三个项目分别是：Elasticsearch、Logstash 和 Kibana。Elasticsearch 是一个搜索和分析引擎。Logstash 是服务器端数据处理管道，能够同时从多个来源采集数据，转换数据，然后将数据发送到诸如 Elasticsearch 等“存储库”中。Kibana 则可以让用户在 Elasticsearch 中使用图形和图表对数据">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.elastic.co/static-res/images/elk/elk-stack-elkb-diagram.svg">
+<meta property="article:published_time" content="2022-08-29T01:59:00.000Z">
+<meta property="article:modified_time" content="2023-05-02T03:39:33.423Z">
+<meta property="article:author" content="Song">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="elk">
+<meta property="article:tag" content="elasticsearch">
+<meta property="article:tag" content="syslog">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.elastic.co/static-res/images/elk/elk-stack-elkb-diagram.svg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>ELK Stack 安装教程，RHEL及衍生系统。 - Song`s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/scroll.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"songxwn.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":130,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Song`s Blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Song`s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/books/">
+                <i class="iconfont icon-books"></i>
+                <span>读书</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                <span>RSS</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="ELK Stack 安装教程，RHEL及衍生系统。"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-08-29 09:59" pubdate>
+          2022年8月29日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          41 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">ELK Stack 安装教程，RHEL及衍生系统。</h1>
+            
+              <p class="note note-danger">
+                
+                  
+                    本文最后更新于：2023年5月2日 中午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>“ELK”是三个开源项目的首字母缩写，这三个项目分别是：Elasticsearch、Logstash 和 Kibana。Elasticsearch 是一个搜索和分析引擎。Logstash 是服务器端数据处理管道，能够同时从多个来源采集数据，转换数据，然后将数据发送到诸如 Elasticsearch 等“存储库”中。Kibana 则可以让用户在 Elasticsearch 中使用图形和图表对数据进行可视化。</p>
+<p>目前最新的名字叫 Elastic Stack 是 ELK Stack 的更新换代产品。（增加了各种Beats）</p>
+<p><img src="https://www.elastic.co/static-res/images/elk/elk-stack-elkb-diagram.svg" srcset="/img/loading.gif" lazyload alt="示意图"></p>
+<p>注意：本文章主要用于syslog类型的日志收集，取消ES的加密访问是为了方便接入frostmourne进行日志告警。</p>
+<span id="more"></span>
+
+<h1 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h1><p>系统： AlmaLinux 9 （关闭SE Linux）</p>
+<p>Java：OpenJDK 19 （从RPM 8.5版本开始使用内置19版本）</p>
+<p>浏览器：Firefox、Chrome、Safari、Edge（使用最新版）</p>
+<p>软件版本，使用ELK 8.5+</p>
+<p>也适用于其他RHEL8-9版本衍生版系统：如Centos Stream、Rocky Linux等。</p>
+<p>兼容性查询：<a target="_blank" rel="noopener" href="https://www.elastic.co/cn/support/matrix">https://www.elastic.co/cn/support/matrix</a></p>
+<p>PS: 参考 <a target="_blank" rel="noopener" href="https://www.skynemo.cn/archives/base-on-centos79-install-elasticsearch81-standalone-and-config#">https://www.skynemo.cn/archives/base-on-centos79-install-elasticsearch81-standalone-and-config#</a></p>
+<p>官网文档：<a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rpm.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/rpm.html</a></p>
+<h1 id="官网下载地址"><a href="#官网下载地址" class="headerlink" title="官网下载地址"></a>官网下载地址</h1><p><a target="_blank" rel="noopener" href="https://www.elastic.co/cn/downloads/elasticsearch">Download Elasticsearch | Elastic</a></p>
+<p>下载RPM包</p>
+<h2 id="使用清华大学镜像源进行安装"><a href="#使用清华大学镜像源进行安装" class="headerlink" title="使用清华大学镜像源进行安装"></a>使用清华大学镜像源进行安装</h2><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs txt">vim /etc/yum.repos.d/elasticsearch.repo<br><br>[elasticsearch]<br>name=Elasticsearch repository for 8.x packages<br>baseurl=https://mirrors.tuna.tsinghua.edu.cn/elasticstack/8.x/yum<br>gpgcheck=0<br>enabled=1<br>autorefresh=1<br>type=rpm-md<br></code></pre></td></tr></table></figure>
+
+
+
+<p>#创建elasticsearch.repo 至 &#x2F;etc&#x2F;yum.repos.d&#x2F;中，注意安装前检查SELinux是否关闭。</p>
+<p>#注意：关闭了GPG认证</p>
+<p>PS: <a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/8.3/rpm.html#rpm-repo">使用 RPM |安装 Elasticsearch弹性搜索指南 [8.3]</a></p>
+<p><code>dnf install elasticsearch logstash kibana</code></p>
+<h2 id="使用dnf进行安装"><a href="#使用dnf进行安装" class="headerlink" title="使用dnf进行安装"></a>使用dnf进行安装</h2><p><code>systemctl enable --now elasticsearch.service kibana.service logstash.service </code></p>
+<p>#启动并设定开机启动。</p>
+<h3 id="默认初始化配置"><a href="#默认初始化配置" class="headerlink" title="默认初始化配置"></a>默认初始化配置</h3><p>使用dnf安装的时候，需要检查输入日志，会有类似以下的输出。</p>
+<p>默认开启HTTPS，并生成默认管理员账号elastic账号的密码。可以使用下面命令进行重置密码。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">/usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic<br></code></pre></td></tr></table></figure>
+
+<p>可以使用下面的命令生成 Kibana 访问Elasticsearch的令牌。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/elasticsearch/</span>bin/elasticsearch-create-enrollment-token -s kibana <br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs log">--------------------------- Security autoconfiguration information ------------------------------<br><br>Authentication and authorization are enabled.<br>TLS for the transport and HTTP layers is enabled and configured.<br><br>The generated password for the elastic built-in superuser is : wm7khlFyj3VrHKOtb5S9<br><br>If this node should join an existing cluster, you can reconfigure this with<br>&#x27;/usr/share/elasticsearch/bin/elasticsearch-reconfigure-node --enrollment-token &lt;token-here&gt;&#x27;<br>after creating an enrollment token on your existing cluster.<br><br>You can complete the following actions at any time:<br><br>Reset the password of the elastic built-in superuser with <br>&#x27;/usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic&#x27;.<br><br>Generate an enrollment token for Kibana instances with <br> &#x27;/usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s kibana&#x27;.<br><br>Generate an enrollment token for Elasticsearch nodes with <br>&#x27;/usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s node&#x27;.<br></code></pre></td></tr></table></figure>
+
+<h3 id="访问测试"><a href="#访问测试" class="headerlink" title="访问测试"></a>访问测试</h3><p><a target="_blank" rel="noopener" href="https://192.168.198.6:9200/">https://192.168.198.6:9200</a> 使用HTTPS访问测试，用管理员账号密码。</p>
+<h1 id="Elasticsearch-配置"><a href="#Elasticsearch-配置" class="headerlink" title="Elasticsearch 配置"></a>Elasticsearch 配置</h1><h3 id="切换客户API为不加密，HTTP访问。"><a href="#切换客户API为不加密，HTTP访问。" class="headerlink" title="切换客户API为不加密，HTTP访问。"></a>切换客户API为不加密，HTTP访问。</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim /etc/elasticsearch/elasticsearch.yml <br></code></pre></td></tr></table></figure>
+
+<p>打开文件</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-comment"># Enable encryption for HTTP API client connections, such as Kibana, Logstash, and Agents</span><br><span class="hljs-attr">xpack.security.http.ssl:</span><br>  <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span><br>  <span class="hljs-attr">keystore.path:</span> <span class="hljs-string">certs/http.p12</span><br></code></pre></td></tr></table></figure>
+
+<p>修改上述配置为 false.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl restart elasticsearch.service  <br></code></pre></td></tr></table></figure>
+
+<p>重启服务，以生效配置。</p>
+<p>访问 <a target="_blank" rel="noopener" href="http://192.168.198.6:9200/">http://192.168.198.6:9200</a>  ，使用http测试。</p>
+<h2 id="日志告警"><a href="#日志告警" class="headerlink" title="日志告警"></a>日志告警</h2><p>关闭https是为了兼容frostmourne做日志告警。</p>
+<p>教程：<a href="https://songxwn.com/frostmourne_install/">https://songxwn.com/frostmourne_install/</a></p>
+<h1 id="Kibana-配置"><a href="#Kibana-配置" class="headerlink" title="Kibana 配置"></a>Kibana 配置</h1><p>Kibana 数据都存储在ES数据库，且为data角色的。</p>
+<h2 id="默认配置"><a href="#默认配置" class="headerlink" title="默认配置"></a>默认配置</h2><p>默认为 5601 端口，默认绑定为127.0.0.1 地址。使用HTTP协议。</p>
+<p>可以修改kibana.yml 文件修改绑定地址，或者使用Nginx反向代理。</p>
+<h2 id="修改语言"><a href="#修改语言" class="headerlink" title="修改语言"></a>修改语言</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-string">vim</span> <span class="hljs-string">/etc/kibana/kibana.yml</span>  <br></code></pre></td></tr></table></figure>
+
+<p>vim修改配置文件</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">i18n.locale:</span> <span class="hljs-string">&quot;zh-CN&quot;</span><br><span class="hljs-attr">server.host:</span> <span class="hljs-string">&quot;0.0.0.0&quot;</span><br><br></code></pre></td></tr></table></figure>
+
+<h1 id="修改此行为中文配置，重启服务生效。第二行为配置监听IP"><a href="#修改此行为中文配置，重启服务生效。第二行为配置监听IP" class="headerlink" title="修改此行为中文配置，重启服务生效。第二行为配置监听IP."></a>修改此行为中文配置，重启服务生效。第二行为配置监听IP.</h1><h2 id="基本认证配置"><a href="#基本认证配置" class="headerlink" title="基本认证配置"></a>基本认证配置</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-comment"># =================== System: Elasticsearch ===================</span><br><span class="hljs-comment"># The URLs of the Elasticsearch instances to use for all your queries.</span><br><span class="hljs-attr">elasticsearch.hosts:</span> [<span class="hljs-string">&quot;http://127.0.0.1:9200&quot;</span>]<br><br><span class="hljs-comment"># If your Elasticsearch is protected with basic authentication, these settings provide</span><br><span class="hljs-comment"># the username and password that the Kibana server uses to perform maintenance on the Kibana</span><br><span class="hljs-comment"># index at startup. Your Kibana users still need to authenticate with Elasticsearch, which</span><br><span class="hljs-comment"># is proxied through the Kibana server.</span><br><span class="hljs-attr">elasticsearch.username:</span> <span class="hljs-string">&quot;kibana_system&quot;</span><br><span class="hljs-attr">elasticsearch.password:</span> <span class="hljs-string">&quot;he5l=fIIbD1WhD_=aNg_&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>修改文件，配置ES访问地址，配置系统默认账号kibana_system的密码，填入配置文件。（必须为此账号）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><br> /usr/share/elasticsearch/bin/elasticsearch-reset-password -u kibana_system<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">重置密码</span><br><br></code></pre></td></tr></table></figure>
+
+<p>PS： 参考 <a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-minimal-setup.html#add-built-in-users">https://www.elastic.co/guide/en/elasticsearch/reference/current/security-minimal-setup.html#add-built-in-users</a></p>
+<h1 id="Logstash-配置"><a href="#Logstash-配置" class="headerlink" title="Logstash 配置"></a>Logstash 配置</h1><h2 id="开启syslog，将数据转发给ES"><a href="#开启syslog，将数据转发给ES" class="headerlink" title="开启syslog，将数据转发给ES."></a>开启syslog，将数据转发给ES.</h2><p><code>vim /etc/logstash/conf.d/syslog.conf</code></p>
+<p>创建修改syslog配置文件</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs json"><br>input <span class="hljs-punctuation">&#123;</span><br>  syslog <span class="hljs-punctuation">&#123;</span><br>    type =&gt; <span class="hljs-string">&quot;system-syslog&quot;</span><br>    port =&gt; <span class="hljs-number">514</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br><br>output <span class="hljs-punctuation">&#123;</span><br>  elasticsearch <span class="hljs-punctuation">&#123;</span><br>    hosts =&gt; <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;http://127.0.0.1:9200&quot;</span><span class="hljs-punctuation">]</span><br>    index =&gt; <span class="hljs-string">&quot;system-syslog-%&#123;+YYYY.MM&#125;&quot;</span><br>    user =&gt; <span class="hljs-string">&quot;elastic&quot;</span><br>    password =&gt; <span class="hljs-string">&quot;2H*Y9rL5D=xFbvLAz_Nr&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span> <br><br></code></pre></td></tr></table></figure>
+
+<p>配置为syslog输入，端口为默认的514。</p>
+<p>将数据输出到ES，配置索引前缀为 system-syslog，按月分割索引。</p>
+<p>注意 中括号。</p>
+<h2 id="修改systemd服务文件。"><a href="#修改systemd服务文件。" class="headerlink" title="修改systemd服务文件。"></a>修改systemd服务文件。</h2><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs abnf">vim /lib/systemd/system/logstash.service<br><br>[Service]<br><span class="hljs-attribute">Type</span><span class="hljs-operator">=</span>simple<br><span class="hljs-attribute">User</span><span class="hljs-operator">=</span>root<br><span class="hljs-attribute">Group</span><span class="hljs-operator">=</span>root<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><br>systemctl daemon-reload<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">重载</span><br><br></code></pre></td></tr></table></figure>
+
+<p>需要修改启动用户为ROOT才能使用小于1024的端口号。(linux对于非root权限用户不能使用1024以下的端口，)</p>
+<h1 id="Kibana-WEB配置"><a href="#Kibana-WEB配置" class="headerlink" title="Kibana WEB配置"></a>Kibana WEB配置</h1><h2 id="创建数据视图"><a href="#创建数据视图" class="headerlink" title="创建数据视图"></a>创建数据视图</h2><p>在主菜单-Stack Management-Kibana-数据视图里面创建</p>
+<p>参考文档： <a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/kibana/current/data-views.html">https://www.elastic.co/guide/en/kibana/current/data-views.html</a></p>
+<p>使用类似 syslog* 匹配索引和日期。</p>
+<h2 id="索引管理"><a href="#索引管理" class="headerlink" title="索引管理"></a>索引管理</h2><p>在主菜单-Stack Management-数据-索引管理里面查看所有索引。</p>
+<div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a target="_blank" rel="noopener" href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="https://songxwn.com/Elasticsearch-x-pack-core/">Elasticsearch 8.7 白金版激活</a></li><li><a href="https://songxwn.com/Linux-growpart/">Linux 虚拟机在线热扩容分区</a></li><li><a href="https://songxwn.com/elk_cluster/">Elasticsearch 安装配置集群系统</a></li><li><a target="_blank" rel="noopener" href="https://chengzhaoxi.xyz/361d7ede.html">互联网算法工程开发常用技术</a></li></ul></div>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/linux/" class="category-chain-item">linux</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/linux/ELK/" class="category-chain-item">ELK</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Linux/">#Linux</a>
+      
+        <a href="/tags/elk/">#elk</a>
+      
+        <a href="/tags/elasticsearch/">#elasticsearch</a>
+      
+        <a href="/tags/syslog/">#syslog</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>ELK Stack 安装教程，RHEL及衍生系统。</div>
+      <div>https://songxwn.com/elk/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Song</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年8月29日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年5月2日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Sublime_Text4/" title="Sublime Text4 4126 安装激活">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Sublime Text4 4126 安装激活</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/netplan/" title="Ubuntu Netplan配置工具">
+                        <span class="hidden-mobile">Ubuntu Netplan配置工具</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments">
+      
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script>
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          Fluid.utils.createCssLink('https://lib.baomitu.com/disqusjs/1.3.0/disqusjs.css');
+          Fluid.utils.createScript('https://lib.baomitu.com/disqusjs/1.3.0/disqus.js', function() {
+            new DisqusJS({
+              shortname: 'songxwn',
+              apikey: ''
+            });
+          });
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="ELK"
+        id="heading-9e3164c35d85d881c2249c7894d8e274" role="tab" data-toggle="collapse" href="#collapse-9e3164c35d85d881c2249c7894d8e274"
+        aria-expanded="true"
+      >
+        ELK
+        <span class="list-group-count">(6)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-9e3164c35d85d881c2249c7894d8e274"
+           role="tabpanel" aria-labelledby="heading-9e3164c35d85d881c2249c7894d8e274">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/ELK-AD-LDAP-Authentication/" title="Elasticsearch 接入微软Active Directory认证"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Elasticsearch 接入微软Active Directory认证</span>
+        </a>
+      
+    
+      
+      
+        <a href="/Elasticsearch-x-pack-core/" title="Elasticsearch 8.7 白金版激活"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Elasticsearch 8.7 白金版激活</span>
+        </a>
+      
+    
+      
+      
+        <a href="/elk/" title="ELK Stack 安装教程，RHEL及衍生系统。"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">ELK Stack 安装教程，RHEL及衍生系统。</span>
+        </a>
+      
+    
+      
+      
+        <a href="/elk_cluster/" title="Elasticsearch 安装配置集群系统"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Elasticsearch 安装配置集群系统</span>
+        </a>
+      
+    
+      
+      
+        <a href="/elk_snmp_trap/" title="ELK-Logstash配置SNMP-Trap"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">ELK-Logstash配置SNMP-Trap</span>
+        </a>
+      
+    
+      
+      
+        <a href="/frostmourne_install/" title="Frostmourne (霜之哀伤)日志监控系统部署安装"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Frostmourne (霜之哀伤)日志监控系统部署安装</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <a href="https://www.foreverblog.cn/go.html" target="_blank"> <img src="https://img.foreverblog.cn/wormhole_1_tp.gif" alt="" style="width:auto;height:32px;" title="穿梭虫洞-随机访问十年之约友链博客"></a>,<a href="https://www.vultr.com/?ref=7199488" target="_blank"> <img src="https://www.vultr.com/media/logo_ondark.svg" alt="" style="width:auto;height:32px;" title="注册vultr获取免费10美元体验额度"></a>,<a href="https://www.vultr.com/?ref=9293176-8H" target="_blank"> <img src="https://www.vultr.com/media/logo_mono_onwhite.png" alt="" style="width:auto;height:32px;" title="注册vultr获取免费100美元体验额度"></a>
+        </div>
+      </div>
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
