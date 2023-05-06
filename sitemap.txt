@@ -1,4 +1,4 @@
-https://songxwn.com/ELK-logstash-hostname.md/
+https://songxwn.com/ELK-logstash-hostname/
 https://songxwn.com/Elasticsearch-x-pack-core/
 https://songxwn.com/ELK-AD-LDAP-Authentication/
 https://songxwn.com/elk_cluster/

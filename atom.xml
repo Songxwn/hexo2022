@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-05-06T02:44:23.301Z</updated>
+  <updated>2023-05-06T02:59:30.206Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>ELK Logstash解析系统日志错误</title>
-    <link href="https://songxwn.com/ELK-logstash-hostname.md/"/>
-    <id>https://songxwn.com/ELK-logstash-hostname.md/</id>
+    <link href="https://songxwn.com/ELK-logstash-hostname/"/>
+    <id>https://songxwn.com/ELK-logstash-hostname/</id>
     <published>2023-05-06T02:49:37.000Z</published>
-    <updated>2023-05-06T02:44:23.301Z</updated>
+    <updated>2023-05-06T02:59:30.206Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;Logstash解析系统日志错误：&lt;/p&gt;

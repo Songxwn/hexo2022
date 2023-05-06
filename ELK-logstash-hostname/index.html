@@ -19,13 +19,13 @@
     <meta name="description" content="介绍Logstash解析系统日志错误： 如果大家使用Logstash自带的解析规则，在某些情况下会出现解析系统日志失败的情况，原因是因为：系统主机名包含下划线时会解析失败，造成无法识别主机名字段。 主要是生产环境有些网络设备的主机名有带下划线_ ，而合法在主机名是没有不允许下划线的。 使用环境：Rocky Linux 8 、  ELK 8.x">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ELK Logstash解析系统日志错误">
-<meta property="og:url" content="https://songxwn.com/ELK-logstash-hostname.md/index.html">
+<meta property="og:url" content="https://songxwn.com/ELK-logstash-hostname/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
 <meta property="og:description" content="介绍Logstash解析系统日志错误： 如果大家使用Logstash自带的解析规则，在某些情况下会出现解析系统日志失败的情况，原因是因为：系统主机名包含下划线时会解析失败，造成无法识别主机名字段。 主要是生产环境有些网络设备的主机名有带下划线_ ，而合法在主机名是没有不允许下划线的。 使用环境：Rocky Linux 8 、  ELK 8.x">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/05/06/13b18a8ce74fb061.png">
 <meta property="article:published_time" content="2023-05-06T02:49:37.000Z">
-<meta property="article:modified_time" content="2023-05-06T02:44:23.301Z">
+<meta property="article:modified_time" content="2023-05-06T02:59:30.206Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="elk">
@@ -358,7 +358,7 @@
 <p>使用环境：Rocky Linux 8 、  ELK 8.x </p>
 <span id="more"></span>
 
-<h2 id="hostname主要规则"><a href="#hostname主要规则" class="headerlink" title="hostname主要规则"></a>hostname主要规则</h2><ul>
+<h2 id="HostName主要规则"><a href="#HostName主要规则" class="headerlink" title="HostName主要规则"></a>HostName主要规则</h2><ul>
 <li>主机名只允许包含ascii字符里的数字0-9，字母a-zA-Z，连字符-。其他都不允许。例如，不允许出现其他标点符号，不允许空格，不允许下划线，不允许中文字符。</li>
 <li>主机名的开头和结尾字符不允许是连字符。</li>
 <li>主机名强烈建议不要用数字开头，尽管这一条不是强制的。甚至不要使用只包含可解释为16进制字符的字符串，例如”beef”。</li>
@@ -440,7 +440,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>ELK Logstash解析系统日志错误</div>
-      <div>https://songxwn.com/ELK-logstash-hostname.md/</div>
+      <div>https://songxwn.com/ELK-logstash-hostname/</div>
     </div>
     <div class="license-meta">
       
@@ -582,15 +582,6 @@
     
       
       
-        <a href="/ELK-logstash-hostname.md/" title="ELK Logstash解析系统日志错误"
-           class="list-group-item list-group-item-action
-           active">
-          <span class="category-post">ELK Logstash解析系统日志错误</span>
-        </a>
-      
-    
-      
-      
         <a href="/Elasticsearch-x-pack-core/" title="Elasticsearch 8.7 白金版激活"
            class="list-group-item list-group-item-action
            ">
@@ -631,6 +622,15 @@
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">Frostmourne (霜之哀伤)日志监控系统部署安装</span>
+        </a>
+      
+    
+      
+      
+        <a href="/ELK-logstash-hostname/" title="ELK Logstash解析系统日志错误"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">ELK Logstash解析系统日志错误</span>
         </a>
       
     
