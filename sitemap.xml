@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://songxwn.com/ELK-logstash-hostname.md/</loc>
+    
+    <lastmod>2023-05-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://songxwn.com/Elasticsearch-x-pack-core/</loc>
     
     <lastmod>2023-05-06</lastmod>
@@ -684,6 +693,13 @@
   
   <url>
     <loc>https://songxwn.com/tags/Zabbix/</loc>
+    <lastmod>2023-05-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://songxwn.com/tags/logstash/</loc>
     <lastmod>2023-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

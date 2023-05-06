@@ -16,29 +16,30 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
   
-    <meta name="description" content="介绍Podman是一个用于在 Linux 系统上构建、管理和运行OCI标准容器的CLI工具，是Docker的直接替代品。 由红帽主导，与开源社区一起开发。在RHEL8开始预装并替代Docker。命令上与Docker并无区别。 主要特点是不需要守护进程，可以支持非root用户运行容器，提高了安全性和可访问性。 本教程也适用于RHEL其他衍生版本，如Rocky Linux。">
+    <meta name="description" content="介绍Logstash解析系统日志错误： 如果大家使用Logstash自带的解析规则，在某些情况下会出现解析系统日志失败的情况，原因是因为：系统主机名包含下划线时会解析失败，造成无法识别主机名字段。 主要是生产环境有些网络设备的主机名有带下划线_ ，而合法在主机名是没有不允许下划线的。 使用环境：Rocky Linux 8 、  ELK 8.x">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Podman 容器管理工具">
-<meta property="og:url" content="https://songxwn.com/podman/index.html">
+<meta property="og:title" content="ELK Logstash解析系统日志错误">
+<meta property="og:url" content="https://songxwn.com/ELK-logstash-hostname.md/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="介绍Podman是一个用于在 Linux 系统上构建、管理和运行OCI标准容器的CLI工具，是Docker的直接替代品。 由红帽主导，与开源社区一起开发。在RHEL8开始预装并替代Docker。命令上与Docker并无区别。 主要特点是不需要守护进程，可以支持非root用户运行容器，提高了安全性和可访问性。 本教程也适用于RHEL其他衍生版本，如Rocky Linux。">
+<meta property="og:description" content="介绍Logstash解析系统日志错误： 如果大家使用Logstash自带的解析规则，在某些情况下会出现解析系统日志失败的情况，原因是因为：系统主机名包含下划线时会解析失败，造成无法识别主机名字段。 主要是生产环境有些网络设备的主机名有带下划线_ ，而合法在主机名是没有不允许下划线的。 使用环境：Rocky Linux 8 、  ELK 8.x">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/05/02/00c467c2a7987e9e.png">
-<meta property="article:published_time" content="2023-05-02T04:50:52.000Z">
-<meta property="article:modified_time" content="2023-05-02T13:23:51.436Z">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/05/06/13b18a8ce74fb061.png">
+<meta property="article:published_time" content="2023-05-06T02:49:37.000Z">
+<meta property="article:modified_time" content="2023-05-06T02:44:23.301Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="Linux">
-<meta property="article:tag" content="Docker">
-<meta property="article:tag" content="Dodman">
-<meta property="article:tag" content="container">
+<meta property="article:tag" content="elk">
+<meta property="article:tag" content="elasticsearch">
+<meta property="article:tag" content="syslog">
+<meta property="article:tag" content="logstash">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2023/05/02/00c467c2a7987e9e.png">
+<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2023/05/06/13b18a8ce74fb061.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Podman 容器管理工具 - Song`s Blog</title>
+  <title>ELK Logstash解析系统日志错误 - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -245,7 +246,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Podman 容器管理工具"></span>
+            <span id="subtitle" data-typed-text="ELK Logstash解析系统日志错误"></span>
           
         </div>
 
@@ -256,8 +257,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-02 12:50" pubdate>
-          2023年5月2日 下午
+        <time datetime="2023-05-06 10:49" pubdate>
+          2023年5月6日 上午
         </time>
       </span>
     
@@ -268,7 +269,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          1.6k 字
         
       </span>
     
@@ -279,7 +280,7 @@
         
         
         
-          11 分钟
+          14 分钟
         
       </span>
     
@@ -338,12 +339,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Podman 容器管理工具</h1>
+            <h1 style="display: none">ELK Logstash解析系统日志错误</h1>
             
               <p class="note note-danger">
                 
                   
-                    本文最后更新于：2023年5月2日 晚上
+                    本文最后更新于：2023年5月6日 上午
                   
                 
               </p>
@@ -351,27 +352,33 @@
             
               <div class="markdown-body">
                 
-                <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Podman是一个用于在 Linux 系统上构建、管理和运行<a target="_blank" rel="noopener" href="https://opencontainers.org/">OCI标准</a>容器的CLI工具，是Docker的直接替代品。</p>
-<p>由红帽主导，与开源社区一起开发。在RHEL8开始预装并替代Docker。命令上与Docker并无区别。</p>
-<p>主要特点是不需要守护进程，可以支持非root用户运行容器，提高了安全性和可访问性。</p>
-<p>本教程也适用于RHEL其他衍生版本，如Rocky Linux。</p>
+                <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Logstash解析系统日志错误：</p>
+<p>如果大家使用Logstash自带的解析规则，在某些情况下会出现解析系统日志失败的情况，原因是因为：系统主机名包含下划线时会解析失败，造成无法识别主机名字段。</p>
+<p>主要是生产环境有些网络设备的主机名有带下划线_ ，而合法在主机名是没有不允许下划线的。</p>
+<p>使用环境：Rocky Linux 8 、  ELK 8.x </p>
 <span id="more"></span>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="RHEL8-9安装"><a href="#RHEL8-9安装" class="headerlink" title="RHEL8-9安装"></a>RHEL8-9安装</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs routeros">dnf install podman podman-docker<br><br><span class="hljs-comment"># 安装podman及docker的命令兼容程序。</span><br><br>systemctl <span class="hljs-built_in">enable</span> --now podman<br><br><span class="hljs-comment"># 启动并设置开机启动。</span><br><br>podman <span class="hljs-built_in">run</span> hello-world<br><br>docker <span class="hljs-built_in">run</span> hello-world<br><br><span class="hljs-comment"># 命令示例，两者都可用，但docker命令无法自动不全。</span><br><br></code></pre></td></tr></table></figure>
 
-<h2 id="安装podman-compose（需要提前安装epel-yum源）"><a href="#安装podman-compose（需要提前安装epel-yum源）" class="headerlink" title="安装podman-compose（需要提前安装epel yum源）"></a>安装podman-compose（需要提前安装epel yum源）</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cmake">dnf <span class="hljs-keyword">install</span> podman-compose<br><br><span class="hljs-comment"># 安装compose工具，用于管理或运行多个容器。可直接替代docker-compose。</span><br><br>podman-compose up -d<br>podman-compose down<br><br><span class="hljs-comment"># 命令示例</span><br><br></code></pre></td></tr></table></figure>
-
-
-
-<h1 id="默认仓库顺序"><a href="#默认仓库顺序" class="headerlink" title="默认仓库顺序"></a>默认仓库顺序</h1><h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>红帽把自己的两个仓库源放在了前面，导致拉取前两个仓库源不存在的镜像时候，要手动选择。</p>
-<p>很麻烦🤬</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs awk">podman pull songxwn/webnettools:<span class="hljs-number">1.4</span><br>Emulate Docker CLI using podman. Create <span class="hljs-regexp">/etc/</span>containers/nodocker to quiet msg.<br>? Please select an image: <br>  ▸ registry.access.redhat.com<span class="hljs-regexp">/songxwn/</span>webnettools:<span class="hljs-number">1.4</span><br>    registry.redhat.io<span class="hljs-regexp">/songxwn/</span>webnettools:<span class="hljs-number">1.4</span><br>    docker.io<span class="hljs-regexp">/songxwn/</span>webnettools:<span class="hljs-number">1.4</span><br><br></code></pre></td></tr></table></figure>
-
-<h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs awk">vim <span class="hljs-regexp">/etc/</span>containers/registries.conf<br><br><br>unqualified-search-registries = [<span class="hljs-string">&quot;docker.io&quot;</span>, <span class="hljs-string">&quot;registry.redhat.io&quot;</span>, <span class="hljs-string">&quot;registry.access.redhat.com&quot;</span>]<br><br><br><span class="hljs-comment"># 将unqualified-search-registries选项，修改为上面的即可。</span><br><br><br>systemctl restart podman<br><br><span class="hljs-comment"># 然后重启一下即可。</span><br><br><br></code></pre></td></tr></table></figure>
-
+<h2 id="hostname主要规则"><a href="#hostname主要规则" class="headerlink" title="hostname主要规则"></a>hostname主要规则</h2><ul>
+<li>主机名只允许包含ascii字符里的数字0-9，字母a-zA-Z，连字符-。其他都不允许。例如，不允许出现其他标点符号，不允许空格，不允许下划线，不允许中文字符。</li>
+<li>主机名的开头和结尾字符不允许是连字符。</li>
+<li>主机名强烈建议不要用数字开头，尽管这一条不是强制的。甚至不要使用只包含可解释为16进制字符的字符串，例如”beef”。</li>
+<li>建议不要使用计算机领域的特殊的词汇，例如，up。</li>
+<li>给主机命名通常不考虑字母大小写问题，并且只用小写字母而不用大写字母。</li>
+<li>给主机命名，建议使用合法的单词，这样方便记忆。因为主机名是在一个domain的范围内唯一即可，通常不必担心重复问题。</li>
+</ul>
+<h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs awk">find <span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/logstash/</span>vendor/ -name grok-patterns<br><br><span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/logstash/</span>vendor<span class="hljs-regexp">/bundle/</span>jruby<span class="hljs-regexp">/2.6.0/g</span>ems<span class="hljs-regexp">/logstash-patterns-core-4.3.4/</span>patterns<span class="hljs-regexp">/ecs-v1/g</span>rok-patterns<br><span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/logstash/</span>vendor<span class="hljs-regexp">/bundle/</span>jruby<span class="hljs-regexp">/2.6.0/g</span>ems<span class="hljs-regexp">/logstash-patterns-core-4.3.4/</span>patterns<span class="hljs-regexp">/legacy/g</span>rok-patterns<br><br><span class="hljs-comment"># 查找grok-patterns文件，因每个版本路径可能会更更改。上面两个文件都需要修改的</span><br><br></code></pre></td></tr></table></figure>
 
 
-<p>PS：也可以修改为<a target="_blank" rel="noopener" href="https://yeasy.gitbook.io/docker_practice/install/mirror">国内的Docker Hub源</a>，如网易的 <code>https://hub-mirror.c.163.com</code></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://computingforgeeks.com/create-docker-container-registry-with-podman-letsencrypt/">https://computingforgeeks.com/create-docker-container-registry-with-podman-letsencrypt/</a> </p>
+
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># 使用vim编辑，注意版本不一样，路径会更改。</span><br><br><span class="hljs-attribute">vim</span> /usr/share/logstash/vendor/bundle/jruby/<span class="hljs-number">2</span>.<span class="hljs-number">6</span>.<span class="hljs-number">0</span>/gems/logstash-patterns-core-<span class="hljs-number">4</span>.<span class="hljs-number">3</span>.<span class="hljs-number">4</span>/patterns/ecs-v1/grok-patterns<br><span class="hljs-attribute">vim</span> /usr/share/logstash/vendor/bundle/jruby/<span class="hljs-number">2</span>.<span class="hljs-number">6</span>.<span class="hljs-number">0</span>/gems/logstash-patterns-core-<span class="hljs-number">4</span>.<span class="hljs-number">3</span>.<span class="hljs-number">4</span>/patterns/legacy/grok-patterns<br><br><span class="hljs-comment"># 找到并将</span><br><br><span class="hljs-attribute">HOSTNAME</span> \b(?:[<span class="hljs-number">0</span>-<span class="hljs-number">9</span>A-Za-z][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>A-Za-z-]&#123;<span class="hljs-number">0</span>,<span class="hljs-number">62</span>&#125;)(?:\.(?:[<span class="hljs-number">0</span>-<span class="hljs-number">9</span>A-Za-z][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>A-Za-z-]&#123;<span class="hljs-number">0</span>,<span class="hljs-number">62</span>&#125;))*(\.?|\b) <br><br><span class="hljs-comment"># 修改为</span><br><br><br><span class="hljs-attribute">HOSTNAME</span> \b(?:[<span class="hljs-number">0</span>-<span class="hljs-number">9</span>A-Za-z][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>A-Za-z_-]&#123;<span class="hljs-number">0</span>,<span class="hljs-number">62</span>&#125;)(?:\.(?:[<span class="hljs-number">0</span>-<span class="hljs-number">9</span>A-Za-z][<span class="hljs-number">0</span>-<span class="hljs-number">9</span>A-Za-z_-]&#123;<span class="hljs-number">0</span>,<span class="hljs-number">62</span>&#125;))*(\.?|\b) <br><br><span class="hljs-comment"># 注意看两者多了两个下划线</span><br><br></code></pre></td></tr></table></figure>
+
+<p>PS：如果使用Filebeat的模块，也会出现这个问题。</p>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs nsis"><span class="hljs-params">system</span>ctl restart logstash.service <br><br><span class="hljs-params">system</span>ctl status logstash.service <br><br><span class="hljs-comment"># 修改保存完成之后，需要重启生效。</span><br><br></code></pre></td></tr></table></figure>
+
+<p>PS：如果Logstash 更新了，也需要再次修改。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://github.com/logstash-plugins/logstash-output-elasticsearch/issues/400">https://github.com/logstash-plugins/logstash-output-elasticsearch/issues/400</a> </p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/101154203">https://zhuanlan.zhihu.com/p/101154203</a> </p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wanghuiict/article/details/70038140">https://blog.csdn.net/wanghuiict/article/details/70038140</a> </p>
 
                 
               </div>
@@ -393,6 +400,13 @@
   <a href="/categories/linux/" class="category-chain-item">linux</a>
   
   
+    <span>></span>
+    
+  <a href="/categories/linux/ELK/" class="category-chain-item">ELK</a>
+  
+  
+
+  
 
       </span>
     
@@ -407,11 +421,13 @@
       
         <a href="/tags/Linux/">#Linux</a>
       
-        <a href="/tags/Docker/">#Docker</a>
+        <a href="/tags/elk/">#elk</a>
       
-        <a href="/tags/Dodman/">#Dodman</a>
+        <a href="/tags/elasticsearch/">#elasticsearch</a>
       
-        <a href="/tags/container/">#container</a>
+        <a href="/tags/syslog/">#syslog</a>
+      
+        <a href="/tags/logstash/">#logstash</a>
       
     </div>
   
@@ -423,8 +439,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Podman 容器管理工具</div>
-      <div>https://songxwn.com/podman/</div>
+      <div>ELK Logstash解析系统日志错误</div>
+      <div>https://songxwn.com/ELK-logstash-hostname.md/</div>
     </div>
     <div class="license-meta">
       
@@ -436,13 +452,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年5月2日</div>
+          <div>2023年5月6日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年5月2日</div>
+          <div>2023年5月6日</div>
         </div>
       
       
@@ -473,18 +489,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/ELK-AD-LDAP-Authentication/" title="Elasticsearch 接入微软Active Directory认证">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Elasticsearch 接入微软Active Directory认证</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/zabbix-reboot-SNMPv3/" title="Zabbix SNMPv3 设备重启后无法监控问题">
-                        <span class="hidden-mobile">Zabbix SNMPv3 设备重启后无法监控问题</span>
+                      <a href="/ELK-AD-LDAP-Authentication/" title="Elasticsearch 接入微软Active Directory认证">
+                        <span class="hidden-mobile">Elasticsearch 接入微软Active Directory认证</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -544,97 +554,16 @@
     
     <div class="category row nomargin-x">
       <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="linux"
-        id="heading-e206a54e97690cce50cc872dd70ee896" role="tab" data-toggle="collapse" href="#collapse-e206a54e97690cce50cc872dd70ee896"
-        aria-expanded="true"
-      >
-        linux
-        <span class="list-group-count">(13)</span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-      <div class="category-collapse collapse show" id="collapse-e206a54e97690cce50cc872dd70ee896"
-           role="tabpanel" aria-labelledby="heading-e206a54e97690cce50cc872dd70ee896">
-        
-        
-          
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/Linux-growpart/" title="Linux 虚拟机在线热扩容分区"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Linux 虚拟机在线热扩容分区</span>
-        </a>
-      
-    
-      
-      
-        <a href="/MariaDB_Galera_Cluster/" title="MariaDB Galera Cluster 10.6 集群部署"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">MariaDB Galera Cluster 10.6 集群部署</span>
-        </a>
-      
-    
-      
-      
-        <a href="/network-test/" title="Linux下的网络测试"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Linux下的网络测试</span>
-        </a>
-      
-    
-      
-      
-        <a href="/podman/" title="Podman 容器管理工具"
-           class="list-group-item list-group-item-action
-           active">
-          <span class="category-post">Podman 容器管理工具</span>
-        </a>
-      
-    
-      
-      
-        <a href="/team_nav/" title="部署团队服务导航网站 Team-nav"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">部署团队服务导航网站 Team-nav</span>
-        </a>
-      
-    
-      
-      
-        <a href="/vdo/" title="红帽的重复数据删除VDO"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">红帽的重复数据删除VDO</span>
-        </a>
-      
-    
-  </div>
-
-          
-  
-    
-    
-    
-    <div class="category-sub row nomargin-x">
-      <a class="category-subitem collapsed
           list-group-item category-item-action col-10 col-md-11 col-xm-11" title="ELK"
         id="heading-9e3164c35d85d881c2249c7894d8e274" role="tab" data-toggle="collapse" href="#collapse-9e3164c35d85d881c2249c7894d8e274"
-        aria-expanded="false"
+        aria-expanded="true"
       >
         ELK
         <span class="list-group-count">(7)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse " id="collapse-9e3164c35d85d881c2249c7894d8e274"
+      <div class="category-collapse collapse show" id="collapse-9e3164c35d85d881c2249c7894d8e274"
            role="tabpanel" aria-labelledby="heading-9e3164c35d85d881c2249c7894d8e274">
         
         
@@ -700,17 +629,13 @@
       
         <a href="/ELK-logstash-hostname.md/" title="ELK Logstash解析系统日志错误"
            class="list-group-item list-group-item-action
-           ">
+           active">
           <span class="category-post">ELK Logstash解析系统日志错误</span>
         </a>
       
     
   </div>
 
-        
-      </div>
-    </div>
-  
         
       </div>
     </div>

@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-05-03T02:35:36.117Z</updated>
+  <updated>2023-05-06T02:44:23.301Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ELK Logstash解析系统日志错误</title>
+    <link href="https://songxwn.com/ELK-logstash-hostname.md/"/>
+    <id>https://songxwn.com/ELK-logstash-hostname.md/</id>
+    <published>2023-05-06T02:49:37.000Z</published>
+    <updated>2023-05-06T02:44:23.301Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;Logstash解析系统日志错误：&lt;/p&gt;
+&lt;p&gt;如果大家使用Logstash自带的解析规则，在某些情况下会出现解析系统日志失败的情况，原因是因为：系统主机名包含下划线时会解析失败，造成无法识别主机名字段。&lt;/p&gt;
+&lt;p&gt;主要是生产环境有些网络设备的主机名有带下划线_ ，而合法在主机名是没有不允许下划线的。&lt;/p&gt;
+&lt;p&gt;使用环境：Rocky Linux 8 、  ELK 8.x &lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
+    
+    <category term="ELK" scheme="https://songxwn.com/categories/linux/ELK/"/>
+    
+    
+    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
+    
+    <category term="elk" scheme="https://songxwn.com/tags/elk/"/>
+    
+    <category term="elasticsearch" scheme="https://songxwn.com/tags/elasticsearch/"/>
+    
+    <category term="syslog" scheme="https://songxwn.com/tags/syslog/"/>
+    
+    <category term="logstash" scheme="https://songxwn.com/tags/logstash/"/>
+    
+  </entry>
   
   <entry>
     <title>Elasticsearch 接入微软Active Directory认证</title>
@@ -529,42 +561,6 @@
     <category term="juniper" scheme="https://songxwn.com/tags/juniper/"/>
     
     <category term="ssh" scheme="https://songxwn.com/tags/ssh/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>HCIE Datacom-01.2 IGP高级特性-OSPF-路由控制</title>
-    <link href="https://songxwn.com/ospf-route-c/"/>
-    <id>https://songxwn.com/ospf-route-c/</id>
-    <published>2022-12-31T03:52:23.000Z</published>
-    <updated>2023-05-02T00:49:02.145Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;OSPF的路由控制包括：&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;调整OSPF的接口开销&lt;/li&gt;
-&lt;li&gt;设置等价路由&lt;/li&gt;
-&lt;li&gt;引入外部路由&lt;/li&gt;
-&lt;li&gt;路由聚合&lt;/li&gt;
-&lt;li&gt;缺省路由通告&lt;/li&gt;
-&lt;li&gt;Filter-Policy&lt;/li&gt;
-&lt;li&gt;对发送的LSA进行过滤&lt;/li&gt;
-&lt;li&gt;对ABR Type3 LSA进行过滤&lt;/li&gt;
-&lt;li&gt;设置LSDB中External LSA的最大数量&lt;/li&gt;
-&lt;li&gt;案例&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;本文章参考华为认证系列PPT&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="network" scheme="https://songxwn.com/categories/network/"/>
-    
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="ospf" scheme="https://songxwn.com/tags/ospf/"/>
-    
-    <category term="datacom" scheme="https://songxwn.com/tags/datacom/"/>
     
   </entry>
   
