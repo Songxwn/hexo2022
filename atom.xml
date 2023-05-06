@@ -49,6 +49,38 @@
   </entry>
   
   <entry>
+    <title>ELK Logstash解析系统日志错误</title>
+    <link href="https://songxwn.com/ELK-logstash-hostname.md/"/>
+    <id>https://songxwn.com/ELK-logstash-hostname.md/</id>
+    <published>2023-05-06T02:49:37.000Z</published>
+    <updated>2023-05-06T04:10:28.858Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;Logstash解析系统日志错误：&lt;/p&gt;
+&lt;p&gt;如果大家使用Logstash自带的解析规则，在某些情况下会出现解析系统日志失败的情况，原因是因为：系统主机名包含下划线时会解析失败，造成无法识别主机名字段。&lt;/p&gt;
+&lt;p&gt;主要是生产环境有些网络设备的主机名有带下划线_ ，而合法在主机名是没有不允许下划线的。&lt;/p&gt;
+&lt;p&gt;使用环境：Rocky Linux 8 、ELK 8.x &lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
+    
+    <category term="ELK" scheme="https://songxwn.com/categories/linux/ELK/"/>
+    
+    
+    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
+    
+    <category term="elk" scheme="https://songxwn.com/tags/elk/"/>
+    
+    <category term="elasticsearch" scheme="https://songxwn.com/tags/elasticsearch/"/>
+    
+    <category term="logstash" scheme="https://songxwn.com/tags/logstash/"/>
+    
+    <category term="syslog" scheme="https://songxwn.com/tags/syslog/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Elasticsearch 接入微软Active Directory认证</title>
     <link href="https://songxwn.com/ELK-AD-LDAP-Authentication/"/>
     <id>https://songxwn.com/ELK-AD-LDAP-Authentication/</id>
@@ -535,32 +567,6 @@
     <category term="juniper" scheme="https://songxwn.com/tags/juniper/"/>
     
     <category term="freebsd" scheme="https://songxwn.com/tags/freebsd/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Juniper RE防护-过滤SSH&amp;Telnet登录</title>
-    <link href="https://songxwn.com/Juniper_RE-Protect/"/>
-    <id>https://songxwn.com/Juniper_RE-Protect/</id>
-    <published>2023-01-04T14:14:23.000Z</published>
-    <updated>2023-01-04T14:24:50.553Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;1、本教程仅适用于Juniper MX系列和QFX系列设备。（验证过）&lt;/p&gt;
-&lt;p&gt;2、提交配置时候，建议使用可自动回退的提交，防止无法远程管理。&lt;/p&gt;
-&lt;p&gt;3、本教程主要用于Juniper设备的登录防护，限制IP登录SSH或Telnet等远程控制协议。&lt;/p&gt;
-&lt;p&gt;PS：设备如果有公网IP，几乎无时不刻都有扫描和登录攻击。而且Juniper某些版本有Bug可能因此重启。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="network" scheme="https://songxwn.com/categories/network/"/>
-    
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="juniper" scheme="https://songxwn.com/tags/juniper/"/>
-    
-    <category term="ssh" scheme="https://songxwn.com/tags/ssh/"/>
     
   </entry>
   
