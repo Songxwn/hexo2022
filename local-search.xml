@@ -28,9 +28,9 @@
       
       <tag>elasticsearch</tag>
       
-      <tag>syslog</tag>
-      
       <tag>logstash</tag>
+      
+      <tag>syslog</tag>
       
     </tags>
     

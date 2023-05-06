@@ -42,9 +42,9 @@
     
     <category term="elasticsearch" scheme="https://songxwn.com/tags/elasticsearch/"/>
     
-    <category term="syslog" scheme="https://songxwn.com/tags/syslog/"/>
-    
     <category term="logstash" scheme="https://songxwn.com/tags/logstash/"/>
+    
+    <category term="syslog" scheme="https://songxwn.com/tags/syslog/"/>
     
   </entry>
   

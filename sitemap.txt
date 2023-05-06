@@ -49,6 +49,8 @@ https://songxwn.com/tags/elk/
 https://songxwn.com/tags/elasticsearch/
 https://songxwn.com/tags/ad/
 https://songxwn.com/tags/ldap/
+https://songxwn.com/tags/logstash/
+https://songxwn.com/tags/syslog/
 https://songxwn.com/tags/esxi/
 https://songxwn.com/tags/vmware/
 https://songxwn.com/tags/security/
@@ -72,7 +74,6 @@ https://songxwn.com/tags/IDE/
 https://songxwn.com/tags/vxlan/
 https://songxwn.com/tags/l2vpn/
 https://songxwn.com/tags/backups/
-https://songxwn.com/tags/syslog/
 https://songxwn.com/tags/ha/
 https://songxwn.com/tags/snmp/
 https://songxwn.com/tags/IPv6/
@@ -85,7 +86,6 @@ https://songxwn.com/tags/container/
 https://songxwn.com/tags/web/
 https://songxwn.com/tags/storage/
 https://songxwn.com/tags/Zabbix/
-https://songxwn.com/tags/logstash/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/VMware/
