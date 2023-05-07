@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-05-06T02:59:30.206Z</updated>
+  <updated>2023-05-07T08:29:59.639Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -21,13 +21,13 @@
     <link href="https://songxwn.com/ELK-logstash-hostname/"/>
     <id>https://songxwn.com/ELK-logstash-hostname/</id>
     <published>2023-05-06T02:49:37.000Z</published>
-    <updated>2023-05-06T02:59:30.206Z</updated>
+    <updated>2023-05-07T08:29:59.639Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;Logstash解析系统日志错误：&lt;/p&gt;
 &lt;p&gt;如果大家使用Logstash自带的解析规则，在某些情况下会出现解析系统日志失败的情况，原因是因为：系统主机名包含下划线时会解析失败，造成无法识别主机名字段。&lt;/p&gt;
 &lt;p&gt;主要是生产环境有些网络设备的主机名有带下划线_ ，而合法在主机名是没有不允许下划线的。&lt;/p&gt;
-&lt;p&gt;使用环境：Rocky Linux 8 、  ELK 8.x &lt;/p&gt;</summary>
+&lt;p&gt;使用环境：Rocky Linux 8 、ELK 8.x &lt;/p&gt;</summary>
     
     
     
