@@ -16,16 +16,16 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
   
-    <meta name="description" content="简介本文章适用于ELK的logstash 配置SNMP Trap插件,接收告警通知。默认情况下是安装此插件的，如没有可手动安装。 一般用于网络设备。 注意此插件不支持v3版本。 参考：https:&#x2F;&#x2F;www.elastic.co&#x2F;guide&#x2F;en&#x2F;logstash&#x2F;current&#x2F;plugins-inputs-snmptrap.html">
+    <meta name="description" content="简介本文章适用于ELK的logstash 配置SNMP Trap插件,接收告警通知。默认情况下是安装此插件的，如没有可手动安装。 一般用于网络设备。 注意此插件不支持v3版本。 ELK系列教程：https:&#x2F;&#x2F;songxwn.com&#x2F;categories&#x2F;linux&#x2F;ELK&#x2F; 参考：https:&#x2F;&#x2F;www.elastic.co&#x2F;guide&#x2F;en&#x2F;logstash&#x2F;current&#x2F;plugins-i">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ELK-Logstash配置SNMP-Trap">
+<meta property="og:title" content="ELK Logstash配置SNMP-Trap">
 <meta property="og:url" content="https://songxwn.com/elk_snmp_trap/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="简介本文章适用于ELK的logstash 配置SNMP Trap插件,接收告警通知。默认情况下是安装此插件的，如没有可手动安装。 一般用于网络设备。 注意此插件不支持v3版本。 参考：https:&#x2F;&#x2F;www.elastic.co&#x2F;guide&#x2F;en&#x2F;logstash&#x2F;current&#x2F;plugins-inputs-snmptrap.html">
+<meta property="og:description" content="简介本文章适用于ELK的logstash 配置SNMP Trap插件,接收告警通知。默认情况下是安装此插件的，如没有可手动安装。 一般用于网络设备。 注意此插件不支持v3版本。 ELK系列教程：https:&#x2F;&#x2F;songxwn.com&#x2F;categories&#x2F;linux&#x2F;ELK&#x2F; 参考：https:&#x2F;&#x2F;www.elastic.co&#x2F;guide&#x2F;en&#x2F;logstash&#x2F;current&#x2F;plugins-i">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/04/24/655e1eed1d766dd0.png">
 <meta property="article:published_time" content="2023-04-24T06:59:00.000Z">
-<meta property="article:modified_time" content="2023-05-01T03:52:23.299Z">
+<meta property="article:modified_time" content="2023-05-08T12:53:50.684Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="elk">
@@ -37,7 +37,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>ELK-Logstash配置SNMP-Trap - Song`s Blog</title>
+  <title>ELK Logstash配置SNMP-Trap - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -244,7 +244,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="ELK-Logstash配置SNMP-Trap"></span>
+            <span id="subtitle" data-typed-text="ELK Logstash配置SNMP-Trap"></span>
           
         </div>
 
@@ -267,7 +267,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          730 字
+          787 字
         
       </span>
     
@@ -337,12 +337,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">ELK-Logstash配置SNMP-Trap</h1>
+            <h1 style="display: none">ELK Logstash配置SNMP-Trap</h1>
             
               <p class="note note-danger">
                 
                   
-                    本文最后更新于：2023年5月1日 中午
+                    本文最后更新于：2023年5月8日 晚上
                   
                 
               </p>
@@ -353,6 +353,7 @@
                 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>本文章适用于ELK的logstash 配置SNMP Trap插件,接收告警通知。<br>默认情况下是安装此插件的，如没有可手动安装。</p>
 <p>一般用于网络设备。</p>
 <p>注意此插件不支持v3版本。</p>
+<p>ELK系列教程：<a href="https://songxwn.com/categories/linux/ELK/">https://songxwn.com/categories/linux/ELK/</a></p>
 <p>参考：<a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/logstash/current/plugins-inputs-snmptrap.html">https://www.elastic.co/guide/en/logstash/current/plugins-inputs-snmptrap.html</a> </p>
 <span id="more"></span>
 
@@ -360,7 +361,7 @@
 
 <p>注意：如果要需要解析OID，需要指定mib库yaml格式的目录。</p>
 <p>ELK安装可参考： <a href="https://songxwn.com/elk/">https://songxwn.com/elk/</a></p>
-<div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a target="_blank" rel="noopener" href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="https://songxwn.com/Elasticsearch-x-pack-core/">Elasticsearch 8.7 白金版激活</a></li><li><a href="https://songxwn.com/Linux-growpart/">Linux 虚拟机在线热扩容分区</a></li><li><a href="https://songxwn.com/elk_cluster/">Elasticsearch 安装配置集群系统</a></li><li><a target="_blank" rel="noopener" href="https://chengzhaoxi.xyz/361d7ede.html">互联网算法工程开发常用技术</a></li></ul></div>
+<div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a target="_blank" rel="noopener" href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="https://songxwn.com/ELK-logstash-hostname/">ELK Logstash解析系统日志错误</a></li><li><a href="https://songxwn.com/ELK-AD-LDAP-Authentication/">Elasticsearch 接入微软Active Directory认证</a></li><li><a href="https://songxwn.com/podman/">Podman 容器管理工具</a></li><li><a target="_blank" rel="noopener" href="https://chengzhaoxi.xyz/361d7ede.html">互联网算法工程开发常用技术</a></li></ul></div>
                 
               </div>
             
@@ -416,7 +417,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>ELK-Logstash配置SNMP-Trap</div>
+      <div>ELK Logstash配置SNMP-Trap</div>
       <div>https://songxwn.com/elk_snmp_trap/</div>
     </div>
     <div class="license-meta">
@@ -435,7 +436,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年5月1日</div>
+          <div>2023年5月8日</div>
         </div>
       
       
@@ -592,10 +593,10 @@
     
       
       
-        <a href="/elk_snmp_trap/" title="ELK-Logstash配置SNMP-Trap"
+        <a href="/elk_snmp_trap/" title="ELK Logstash配置SNMP-Trap"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">ELK-Logstash配置SNMP-Trap</span>
+          <span class="category-post">ELK Logstash配置SNMP-Trap</span>
         </a>
       
     
