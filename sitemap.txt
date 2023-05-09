@@ -1,3 +1,4 @@
+https://songxwn.com/team_nav/
 https://songxwn.com/elk/
 https://songxwn.com/elk_snmp_trap/
 https://songxwn.com/ELK-logstash-hostname/
@@ -14,7 +15,6 @@ https://songxwn.com/about/index.html
 https://songxwn.com/books/index.html
 https://songxwn.com/network-test/
 https://songxwn.com/MariaDB_Galera_Cluster/
-https://songxwn.com/team_nav/
 https://songxwn.com/VMware_Vsphere8_key/
 https://songxwn.com/ESXi8_IPMI/
 https://songxwn.com/zabbix_data/
