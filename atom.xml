@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-05-10T06:46:04.583Z</updated>
+  <updated>2023-05-10T06:46:45.226Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -21,19 +21,12 @@
     <link href="https://songxwn.com/VXLAN_Configuration/"/>
     <id>https://songxwn.com/VXLAN_Configuration/</id>
     <published>2023-05-10T07:01:00.000Z</published>
-    <updated>2023-05-10T06:46:04.583Z</updated>
+    <updated>2023-05-10T06:46:45.226Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;VXLAN工作原理如下：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;在每个数据中心的交换机上都配置一个VTEP（VXLAN Tunnel Endpoints），用于封装和解封装VXLAN报文。&lt;/li&gt;
-&lt;li&gt;在两个VTEP之间建立一个VXLAN隧道，用于在两个数据中心之间传输封装后的VXLAN报文。&lt;/li&gt;
-&lt;li&gt;当虚拟机之间需要通信时，它们的报文会被发送到所在数据中心的交换机上。交换机上的VTEP会将报文封装成VXLAN报文，并通过VXLAN隧道发送到另一个数据中心的交换机上。&lt;/li&gt;
-&lt;li&gt;另一个数据中心的交换机上的VTEP会将VXLAN报文解封装，还原成原始报文，并发送给目标虚拟机。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;这样，虚拟机之间就可以通过VXLAN隧道进行通信了。&lt;/p&gt;
-&lt;p&gt;本文章介绍了其工作原理和配置方案。&lt;/p&gt;
-&lt;p&gt;本文章是针对华为系列网络设备的学习笔记。&lt;/p&gt;</summary>
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;本文章介绍了静态VXLAN配置方案。&lt;/p&gt;
+&lt;p&gt;本文章是针对华为系列网络设备的学习笔记。&lt;/p&gt;
+&lt;p&gt;VNI在VXLAN网络上有全局意义，而BD只有本地意义。&lt;/p&gt;</summary>
     
     
     

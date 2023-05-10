@@ -16,16 +16,16 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
   
-    <meta name="description" content="介绍VXLAN工作原理如下：  在每个数据中心的交换机上都配置一个VTEP（VXLAN Tunnel Endpoints），用于封装和解封装VXLAN报文。 在两个VTEP之间建立一个VXLAN隧道，用于在两个数据中心之间传输封装后的VXLAN报文。 当虚拟机之间需要通信时，它们的报文会被发送到所在数据中心的交换机上。交换机上的VTEP会将报文封装成VXLAN报文，并通过VXLAN隧道发送到另一个">
+    <meta name="description" content="介绍本文章介绍了静态VXLAN配置方案。 本文章是针对华为系列网络设备的学习笔记。 VNI在VXLAN网络上有全局意义，而BD只有本地意义。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VXLAN 基本配置">
 <meta property="og:url" content="https://songxwn.com/VXLAN_Configuration/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="介绍VXLAN工作原理如下：  在每个数据中心的交换机上都配置一个VTEP（VXLAN Tunnel Endpoints），用于封装和解封装VXLAN报文。 在两个VTEP之间建立一个VXLAN隧道，用于在两个数据中心之间传输封装后的VXLAN报文。 当虚拟机之间需要通信时，它们的报文会被发送到所在数据中心的交换机上。交换机上的VTEP会将报文封装成VXLAN报文，并通过VXLAN隧道发送到另一个">
+<meta property="og:description" content="介绍本文章介绍了静态VXLAN配置方案。 本文章是针对华为系列网络设备的学习笔记。 VNI在VXLAN网络上有全局意义，而BD只有本地意义。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.328888.xyz/2023/05/10/iYAwpk.png">
 <meta property="article:published_time" content="2023-05-10T07:01:00.000Z">
-<meta property="article:modified_time" content="2023-05-10T06:46:04.583Z">
+<meta property="article:modified_time" content="2023-05-10T06:46:45.226Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="vxlan">
@@ -268,7 +268,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.7k 字
+          2.9k 字
         
       </span>
     
@@ -279,7 +279,7 @@
         
         
         
-          23 分钟
+          25 分钟
         
       </span>
     
@@ -351,79 +351,58 @@
             
               <div class="markdown-body">
                 
-                <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>VXLAN工作原理如下：</p>
-<ol>
-<li>在每个数据中心的交换机上都配置一个VTEP（VXLAN Tunnel Endpoints），用于封装和解封装VXLAN报文。</li>
-<li>在两个VTEP之间建立一个VXLAN隧道，用于在两个数据中心之间传输封装后的VXLAN报文。</li>
-<li>当虚拟机之间需要通信时，它们的报文会被发送到所在数据中心的交换机上。交换机上的VTEP会将报文封装成VXLAN报文，并通过VXLAN隧道发送到另一个数据中心的交换机上。</li>
-<li>另一个数据中心的交换机上的VTEP会将VXLAN报文解封装，还原成原始报文，并发送给目标虚拟机。</li>
-</ol>
-<p>这样，虚拟机之间就可以通过VXLAN隧道进行通信了。</p>
-<p>本文章介绍了其工作原理和配置方案。</p>
+                <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>本文章介绍了静态VXLAN配置方案。</p>
 <p>本文章是针对华为系列网络设备的学习笔记。</p>
+<p>VNI在VXLAN网络上有全局意义，而BD只有本地意义。</p>
 <span id="more"></span>
 
-<h1 id="VXLAN隧道的建立方式"><a href="#VXLAN隧道的建立方式" class="headerlink" title="VXLAN隧道的建立方式"></a>VXLAN隧道的建立方式</h1><p><strong>VXLAN隧道由一对VTEP确定，报文在VTEP设备进行封装之后在VXLAN隧道中依靠路由进行传输。只要VXLAN隧道的两端VTEP是三层路由可达的，VXLAN隧道就可以建立成功。</strong></p>
-<p><strong>根据VXLAN隧道的创建方式将VXLAN隧道分为以下两种：</strong></p>
-<ul>
-<li>静态隧道：通过用户手工配置本端和远端的VNI、VTEP IP地址和头端复制列表（head-end peer-list）来完成。</li>
-<li>动态隧道：通过BGP EVPN（Ethernet VPN，以太网虚拟私有网络）方式动态建立VXLAN隧道。在VTEP之间建立BGP EVPN对等体，然后对等体之间利用BGP EVPN路由来互相传递VNI和VTEP IP地址信息，从而实现动态地建立VXLAN隧道。</li>
-</ul>
-<h1 id="静态VXLAN隧道"><a href="#静态VXLAN隧道" class="headerlink" title="静态VXLAN隧道"></a>静态VXLAN隧道</h1><ul>
-<li>静态VXLAN隧道并不是一个有状态的隧道（如IPsec VPN），只是数据传输时的隧道封装，类似于GRE VPN。</li>
-<li>头端复制列表中的地址，即进行隧道封装传输时可封装的隧道目的地址。</li>
-</ul>
-<p><img src="https://i.328888.xyz/2023/05/10/iYf9Zy.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="VXLAN-MAC地址表项"><a href="#VXLAN-MAC地址表项" class="headerlink" title="VXLAN MAC地址表项"></a>VXLAN MAC地址表项</h2><ul>
-<li>VXLAN实现的是在Overlay网络中进行二层转发，转发单播数据帧依赖的依旧是MAC地址表项。</li>
-<li>VTEP接收到BD内来自本地的数据帧，将数据帧的源MAC地址添加到该BD的MAC地址表中，出接口为收到数据帧的接口。</li>
-<li>该表项用于指导发往本VTEP下连接终端的数据帧的转发。</li>
-</ul>
-<p><img src="https://i.328888.xyz/2023/05/10/iYfPkF.png" srcset="/img/loading.gif" lazyload></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs none">&lt;S1&gt;display mac-address bridge-domain 10<br>-------------------------------------------------------------------------------<br>MAC Address    		VLAN/VSI/BD   Learned-From    Type        		<br>-------------------------------------------------------------------------------<br>0000-0000-000a	      -/-/10      GE1/0/1.10     dynamic    <br><br>&lt;S1&gt;display mac-address bridge-domain 20<br>-------------------------------------------------------------------------------<br>MAC Address    		VLAN/VSI/BD   Learned-From    Type        		<br>-------------------------------------------------------------------------------<br>0000-0000-000b     	 -/-/20       GE1/0/1.20   	 dynamic    <br><br></code></pre></td></tr></table></figure>
+<h1 id="VXLAN配置介绍"><a href="#VXLAN配置介绍" class="headerlink" title="VXLAN配置介绍"></a>VXLAN配置介绍</h1><h1 id=""><a href="#" class="headerlink" title=""></a></h1><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs perl"><span class="hljs-number">1</span>. 创建广播域BD<br><br>[Huawei] bridge-domain bd-id<br><br><span class="hljs-comment"># 系统视图下创建广播域BD，进入BD视图。ID取值范围为1～16777215。</span><br><br><span class="hljs-number">2</span>. 创建VNI<br><br>[Huawei-bd10<span class="hljs-number">0</span>] vxlan vni vni-id<br><br><span class="hljs-comment"># BD视图下创建VXLAN网络标识VNI并关联广播域BD。ID取值范围为1～16777215。</span><br><br><span class="hljs-number">3</span>. 创建NVE接口。<br><br>[Huawei] interface nve nve-number<br><br><span class="hljs-comment"># 创建NVE接口，并进入NVE接口视图。一般情况下NVE接口编号有且仅为1。</span><br><br><span class="hljs-number">4</span>. 配置源VTEP的IP地址。<br><br>[Huawei-Nve1] source ip-address<br><br><span class="hljs-comment"># 配置源端VTEP的IP地址。一般规划使用Loopback接口的地址。</span><br><br><span class="hljs-number">5</span>.  配置头端复制列表。<br><br>[Huawei-Nve1] vni vni-id head-end peer-list <span class="hljs-number">1.1</span>.<span class="hljs-number">1.1</span><br><br><span class="hljs-comment"># NVE视图下配置VNI指定多个远端VTEP的IP地址建立头端复制列表。本端NVE将根据此列表复制并转发报文。</span><br><br><span class="hljs-number">6</span>.  配置业务接入（子接口接入方式）。<br><br>[Huawei-GE1/<span class="hljs-number">0</span>/<span class="hljs-number">1.1</span>] encapsulation &#123; dot1<span class="hljs-string">q [ vid low-vid [ to high-vid ]</span> ] | default | untag | qin<span class="hljs-string">q [ vid id ]</span>&#125;<br><br><span class="hljs-comment"># 二层子接口视图下配置流封装类型，实现不同二层子接口接入不同的数据报文。</span><br><br><span class="hljs-number">7</span>.  配置业务接入点（VLAN接入方式）。<br><br>[Huawei-bd10<span class="hljs-number">0</span>] l2 binding vlan vlan-id<br><br><span class="hljs-comment"># BD视图下配置。全局VLAN绑定到广播域BD前，请确保全局VLAN已经创建和相关接口已加入该VLAN。</span><br><br><span class="hljs-number">8</span>.   配置三层网关。<br><br>[Huawei] interface vbdif bd-id<br><br><span class="hljs-comment"># 系统视图下创建VBDIF接口，并进入VBDIF接口视图后续配置网关IP地址。</span><br><br></code></pre></td></tr></table></figure>
 
-<h2 id="MAC地址动态学习-1"><a href="#MAC地址动态学习-1" class="headerlink" title="MAC地址动态学习 (1)"></a>MAC地址动态学习 (1)</h2><ul>
-<li>转发属于远端VTEP下所连接设备的数据帧，需要先学习到远端设备的MAC地址。</li>
-<li>该过程与传统MAC地址表形成过程类似，依赖于主机之间的报文交互，一般通过ARP报文交互形成MAC地址表项。</li>
-</ul>
-<p><img src="https://i.328888.xyz/2023/05/10/iYyfac.png" srcset="/img/loading.gif" lazyload></p>
+
+
+<h1 id="同VNI同网段二层互访"><a href="#同VNI同网段二层互访" class="headerlink" title="同VNI同网段二层互访"></a>同VNI同网段二层互访</h1><h2 id="配置案例-1-VLAN绑定接入"><a href="#配置案例-1-VLAN绑定接入" class="headerlink" title="配置案例(1)-VLAN绑定接入"></a>配置案例(1)-VLAN绑定接入</h2><p><img src="https://i.328888.xyz/2023/05/10/iY43cN.png" srcset="/img/loading.gif" lazyload></p>
 <ul>
-<li>PC1与PC2通信过程如下：</li>
+<li>两台交换机配置VXLAN隧道，实现相同网段三台PC之间的互访。</li>
 </ul>
-<ol>
-<li>PC1要与PC2通信，PC1发送ARP请求广播帧，试图请求PC2的MAC地址。</li>
-<li>SW1收到该帧后，根据VAP信息判断出流量所属的BD ID、需进入的VXLAN隧道及对应的VNI；同时学习PC1的MAC地址，将其与该BD ID、接收帧的接口等绑定。</li>
-<li>SW1对ARP请求广播帧进行VXLAN封装，按头端复制列表进行转发。</li>
-<li>SW2收到VXLAN报文后，将其解封装，得到原始数据帧；同时学习PC1的MAC地址，将该地址与SW1的VTEP地址进行绑定。</li>
-<li>SW2将该ARP帧在本地广播域内泛洪。然后，PC2收到了该帧并学习到了PC1的ARP信息。</li>
-</ol>
-<h2 id="MAC地址动态学习-2"><a href="#MAC地址动态学习-2" class="headerlink" title="MAC地址动态学习 (2)"></a>MAC地址动态学习 (2)</h2><p><img src="https://i.328888.xyz/2023/05/10/iYycz5.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">[<span class="hljs-keyword">SW1] </span><span class="hljs-keyword">bridge-domain </span><span class="hljs-number">100</span><br>[<span class="hljs-keyword">SW1-bd100] </span>vxlan vni <span class="hljs-number">10000</span><br><br>[<span class="hljs-keyword">SW1] </span>interface Nve <span class="hljs-number">1</span><br>[<span class="hljs-keyword">SW1-Nve1] </span>source <span class="hljs-number">1</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span><br>[<span class="hljs-keyword">SW1-Nve1] </span>vni <span class="hljs-number">10000</span> head-end peer-list <span class="hljs-number">2</span>.<span class="hljs-number">2</span>.<span class="hljs-number">2</span>.<span class="hljs-number">2</span><br><br>[<span class="hljs-keyword">SW2] </span><span class="hljs-keyword">bridge-domain </span><span class="hljs-number">100</span><br>[<span class="hljs-keyword">SW2-bd100] </span>vxlan vni <span class="hljs-number">10000</span><br><br>[<span class="hljs-keyword">SW2] </span>interface Nve <span class="hljs-number">1</span><br>[<span class="hljs-keyword">SW2-Nve1] </span>source <span class="hljs-number">2</span>.<span class="hljs-number">2</span>.<span class="hljs-number">2</span>.<span class="hljs-number">2</span><br>[<span class="hljs-keyword">SW2-Nve1] </span>vni <span class="hljs-number">10000</span> head-end peer-list <span class="hljs-number">1</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="配置案例-2-子接口接入"><a href="#配置案例-2-子接口接入" class="headerlink" title="配置案例(2)-子接口接入"></a>配置案例(2)-子接口接入</h2><p><img src="https://i.328888.xyz/2023/05/10/iY4xww.png" srcset="/img/loading.gif" lazyload></p>
 <ul>
-<li><p>PC2发送单播的ARP回应。</p>
-<p>6. SW2此时已经拥有PC1的MAC地址表项，因此将会单播转发，并且学习PC2的源MAC地址到MAC地址表项中。</p>
-<p>7. SW2为该ARP响应加上VXLAN封装，发送到远端VTEP 1.1.1.1。</p>
-<p>8. SW1收到VXLAN报文之后解封装，将PC2的源MAC地址记录到MAC地址表，出接口为远端VTEP。</p>
-<p>9. SW1将数据帧转发给PC1。</p>
-</li>
+<li>两台交换机配置VXLAN隧道，实现相同网段三台PC之间的互访。 </li>
+<li>子接口接入的VLAN配置，和交换机本身的VLAN并无关联。</li>
 </ul>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs gradle">[SW1] <span class="hljs-keyword">interface</span> GigabitEthernet <span class="hljs-number">1</span><span class="hljs-regexp">/0/</span><span class="hljs-number">1.1</span> mode l2<br>[SW1-GigabitEthernet1<span class="hljs-regexp">/0/</span><span class="hljs-number">1.1</span>] encapsulation untag<br>[SW1-GigabitEthernet1<span class="hljs-regexp">/0/</span><span class="hljs-number">1.1</span>] bridge-domain <span class="hljs-number">100</span><br><br>[SW1] <span class="hljs-keyword">interface</span> GigabitEthernet <span class="hljs-number">1</span><span class="hljs-regexp">/0/</span><span class="hljs-number">2.1</span> mode l2<br>[SW1-GigabitEthernet1<span class="hljs-regexp">/0/</span><span class="hljs-number">2.1</span>] encapsulation untag<br>[SW1-GigabitEthernet1<span class="hljs-regexp">/0/</span><span class="hljs-number">2.1</span>] bridge-domain <span class="hljs-number">100</span><br><br>[SW2] bridge-domain <span class="hljs-number">100</span><br>[SW2-bd100] l2 binding vlan <span class="hljs-number">1</span><br><br><br></code></pre></td></tr></table></figure>
+
+
+
+<p><strong>思考：</strong></p>
+<p>SW2的接入方式和SW1有什么区别？</p>
 <blockquote>
-<p>至此PC1、2相互学习到了对方的ARP信息，SW1、SW2完成了PC1、PC2的MAC地址学习，该过程也叫做Flood and Learn。</p>
+<p>SW1为二层子接口接入方式，而SW2为绑定VLAN的接入方式。</p>
 </blockquote>
-<h2 id="同子网已知目的地址单播报文转发"><a href="#同子网已知目的地址单播报文转发" class="headerlink" title="同子网已知目的地址单播报文转发"></a>同子网已知目的地址单播报文转发</h2><p><img src="https://i.328888.xyz/2023/05/10/iYygKH.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="BUM流量转发"><a href="#BUM流量转发" class="headerlink" title="BUM流量转发"></a>BUM流量转发</h2><ul>
-<li>传输BUM（Broadcast、Unknown、Multicast）流量时，VTEP会将流量复制多份发送到头端复制列表中的对端VTEP，从而在Overlay网络中实现泛洪转发的效果。 </li>
-<li>BUM，广播、未知、组播以太网帧</li>
+<p>如何配置网关192.168.1.254？</p>
+<blockquote>
+<p>创建VBDIF接口作为对应BD内终端的网关。</p>
+</blockquote>
+<h1 id="不同VNI不同网段三层互访（集中式网关）"><a href="#不同VNI不同网段三层互访（集中式网关）" class="headerlink" title="不同VNI不同网段三层互访（集中式网关）"></a>不同VNI不同网段三层互访（集中式网关）</h1><h2 id="配置VXAN隧道和业务接入"><a href="#配置VXAN隧道和业务接入" class="headerlink" title="配置VXAN隧道和业务接入"></a>配置VXAN隧道和业务接入</h2><ul>
+<li>三台交换机配置VXLAN隧道，实现跨网段两台PC之间的互访。VXLAN网关集中在SW3。</li>
 </ul>
-<p><img src="https://i.328888.xyz/2023/05/10/iYyE3E.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="跨子网三层转发"><a href="#跨子网三层转发" class="headerlink" title="跨子网三层转发"></a>跨子网三层转发</h2><p><img src="https://i.328888.xyz/2023/05/10/iYyeSC.png" srcset="/img/loading.gif" lazyload></p>
-<ol>
-<li>PC1希望与PC2进行通信，本地计算发现对端与自身不在同一个子网，此时将报文发送给网关。</li>
-<li>PC1发往PC2的数据帧，目的MAC为：00AB-09FF-1111（网关MAC地址），SW1收到之后执行L2查表发现出接口为远端VTEP（即L3网关），将报文加上VXLAN头部封装（VNI &#x3D;1000）之后发往SW3。</li>
-<li>SW3收到报文之后解VXLAN封装发现，内部原始数据帧其目的MAC为：00AB-09FF-1111，为自身接口VBDIF 10的MAC地址，此时需要执行L3查表转发。</li>
-<li>SW3查找路由表，发现目的IP：192.168.2.1，与本地接口VBDIF 20产生的直连路由相匹配，查找ARP表项确定报文目的MAC，再查找MAC地址表确定报文的出接口。SW3中前往192.168.2.1所对应MAC地址的出接口为远端VTEP 2.2.2.2，将报文加上VXLAN封装，送往SW2。</li>
-<li>SW2收到报文之后解VXLAN封装发现目的MAC并非自身任何接口的MAC地址，执行L2查表转发，依据MAC地址表将报文从本地接口转发出去。</li>
-</ol>
+<p><img src="https://i.328888.xyz/2023/05/10/iY41GP.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="VXLAN隧道配置"><a href="#VXLAN隧道配置" class="headerlink" title="VXLAN隧道配置"></a>VXLAN隧道配置</h3><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">[<span class="hljs-keyword">SW1] </span><span class="hljs-keyword">bridge-domain </span><span class="hljs-number">100</span><br>[<span class="hljs-keyword">SW1-bd100] </span>vxlan vni <span class="hljs-number">10000</span><br><br>[<span class="hljs-keyword">SW1] </span>interface Nve <span class="hljs-number">1</span><br>[<span class="hljs-keyword">SW1-Nve1] </span>source <span class="hljs-number">1</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span><br>[<span class="hljs-keyword">SW1-Nve1] </span>vni <span class="hljs-number">10000</span> head-end peer-list <span class="hljs-number">3</span>.<span class="hljs-number">3</span>.<span class="hljs-number">3</span>.<span class="hljs-number">3</span><br><br>[<span class="hljs-keyword">SW2] </span><span class="hljs-keyword">bridge-domain </span><span class="hljs-number">200</span><br>[<span class="hljs-keyword">SW2-bd100] </span>vxlan vni <span class="hljs-number">20000</span><br><br>[<span class="hljs-keyword">SW2] </span>interface Nve <span class="hljs-number">1</span><br>[<span class="hljs-keyword">SW2-Nve1] </span>source <span class="hljs-number">2</span>.<span class="hljs-number">2</span>.<span class="hljs-number">2</span>.<span class="hljs-number">2</span><br>[<span class="hljs-keyword">SW2-Nve1] </span>vni <span class="hljs-number">20000</span> head-end peer-list <span class="hljs-number">3</span>.<span class="hljs-number">3</span>.<span class="hljs-number">3</span>.<span class="hljs-number">3</span><br><br></code></pre></td></tr></table></figure>
 
+<h3 id="业务接入"><a href="#业务接入" class="headerlink" title="业务接入"></a>业务接入</h3><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs gradle">[SW1] <span class="hljs-keyword">interface</span> GigabitEthernet <span class="hljs-number">1</span><span class="hljs-regexp">/0/</span><span class="hljs-number">1.1</span> mode l2<br>[SW1-GigabitEthernet1<span class="hljs-regexp">/0/</span><span class="hljs-number">1.1</span>] encapsulation untag<br>[SW1-GigabitEthernet1<span class="hljs-regexp">/0/</span><span class="hljs-number">1.1</span>] bridge-domain <span class="hljs-number">100</span><br><br>[SW2] <span class="hljs-keyword">interface</span> GigabitEthernet <span class="hljs-number">1</span><span class="hljs-regexp">/0/</span><span class="hljs-number">1.1</span> mode l2<br>[SW2-GigabitEthernet1<span class="hljs-regexp">/0/</span><span class="hljs-number">1.1</span>] encapsulation untag<br>[SW2-GigabitEthernet1<span class="hljs-regexp">/0/</span><span class="hljs-number">1.1</span>] bridge-domain <span class="hljs-number">200</span><br><br></code></pre></td></tr></table></figure>
+
+<p>PS：如果192.168.2.10流量携带标签VLAN 20，该如何配置SW2？</p>
+<blockquote>
+<p>SW2的GE1&#x2F;0&#x2F;1配置为Trunk接口放通VLAN 20（实际配置为Access接口，default VLAN配置为20同样也可以），在BD 200中绑定VLAN 20。</p>
+</blockquote>
+<h2 id="配置网关"><a href="#配置网关" class="headerlink" title="配置网关"></a>配置网关</h2><ul>
+<li>三台交换机配置VXLAN隧道，实现跨网段两台PC之间的互访。VXLAN网关集中在SW3。</li>
+</ul>
+<p><img src="https://i.328888.xyz/2023/05/10/iY4u7J.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="SW3配置"><a href="#SW3配置" class="headerlink" title="SW3配置"></a>SW3配置</h3><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">[<span class="hljs-keyword">SW3] </span><span class="hljs-keyword">bridge-domain </span><span class="hljs-number">100</span><br>[<span class="hljs-keyword">SW3-bd100] </span>vxlan vni <span class="hljs-number">10000</span><br><br>[<span class="hljs-keyword">SW3] </span><span class="hljs-keyword">bridge-domain </span><span class="hljs-number">200</span><br>[<span class="hljs-keyword">SW3-bd200] </span>vxlan vni <span class="hljs-number">20000</span><br><br>[<span class="hljs-keyword">SW3] </span>interface Nve <span class="hljs-number">1</span><br>[<span class="hljs-keyword">SW3-Nve1] </span>source <span class="hljs-number">3</span>.<span class="hljs-number">3</span>.<span class="hljs-number">3</span>.<span class="hljs-number">3</span><br>[<span class="hljs-keyword">SW3-Nve1] </span>vni <span class="hljs-number">10000</span> head-end peer-list <span class="hljs-number">1</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span><br>[<span class="hljs-keyword">SW3-Nve1] </span>vni <span class="hljs-number">20000</span> head-end peer-list <span class="hljs-number">2</span>.<span class="hljs-number">2</span>.<span class="hljs-number">2</span>.<span class="hljs-number">2</span><br><br>[<span class="hljs-keyword">SW3] </span>interface Vbdif100<br>[<span class="hljs-keyword">SW3-Vbdif100] </span>ip <span class="hljs-keyword">address </span><span class="hljs-number">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span> <span class="hljs-number">24</span><br><br>[<span class="hljs-keyword">SW3] </span>interface Vbdif200<br>[<span class="hljs-keyword">SW3-Vbdif200] </span>ip <span class="hljs-keyword">address </span><span class="hljs-number">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">2</span>.<span class="hljs-number">1</span> <span class="hljs-number">24</span><br><br></code></pre></td></tr></table></figure>
                 
               </div>
             
