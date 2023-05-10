@@ -1,3 +1,4 @@
+https://songxwn.com/VXLAN_Basic/
 https://songxwn.com/VXLAN/
 https://songxwn.com/team_nav/
 https://songxwn.com/elk/
@@ -97,3 +98,4 @@ https://songxwn.com/categories/IDE/
 https://songxwn.com/categories/vmware/
 https://songxwn.com/categories/Ubuntu/
 https://songxwn.com/categories/Zabbix/
+https://songxwn.com/categories/network-vxlan/
