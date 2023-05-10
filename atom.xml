@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-05-07T08:29:59.639Z</updated>
+  <updated>2023-05-10T05:37:47.002Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>VXLAN基本概念</title>
+    <link href="https://songxwn.com/VXLAN_Basic/"/>
+    <id>https://songxwn.com/VXLAN_Basic/</id>
+    <published>2023-05-10T03:54:00.000Z</published>
+    <updated>2023-05-10T05:37:47.002Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;VXLAN（Virtual eXtensible Local Area Network）采用MAC in UDP（User Datagram Protocol）封装方式，是NVO3（Network Virtualizaiton over Layer 3）中的一种网络虚拟化技术。它是云计算的核心技术之一，服务器虚拟化凭借其大幅降低IT成本、提高业务部署灵活性、降低运维成本等优势已经得到越来越多的认可和部署。&lt;/p&gt;
+&lt;p&gt;本文介绍了其基本概念和接入方式。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network,vxlan" scheme="https://songxwn.com/categories/network-vxlan/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="vxlan" scheme="https://songxwn.com/tags/vxlan/"/>
+    
+    <category term="l2vpn" scheme="https://songxwn.com/tags/l2vpn/"/>
+    
+    <category term="datacom" scheme="https://songxwn.com/tags/datacom/"/>
+    
+  </entry>
   
   <entry>
     <title>ELK Logstash解析系统日志错误</title>
@@ -536,32 +562,6 @@
     <category term="juniper" scheme="https://songxwn.com/tags/juniper/"/>
     
     <category term="freebsd" scheme="https://songxwn.com/tags/freebsd/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Juniper RE防护-过滤SSH&amp;Telnet登录</title>
-    <link href="https://songxwn.com/Juniper_RE-Protect/"/>
-    <id>https://songxwn.com/Juniper_RE-Protect/</id>
-    <published>2023-01-04T14:14:23.000Z</published>
-    <updated>2023-01-04T14:24:50.553Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;1、本教程仅适用于Juniper MX系列和QFX系列设备。（验证过）&lt;/p&gt;
-&lt;p&gt;2、提交配置时候，建议使用可自动回退的提交，防止无法远程管理。&lt;/p&gt;
-&lt;p&gt;3、本教程主要用于Juniper设备的登录防护，限制IP登录SSH或Telnet等远程控制协议。&lt;/p&gt;
-&lt;p&gt;PS：设备如果有公网IP，几乎无时不刻都有扫描和登录攻击。而且Juniper某些版本有Bug可能因此重启。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="network" scheme="https://songxwn.com/categories/network/"/>
-    
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="juniper" scheme="https://songxwn.com/tags/juniper/"/>
-    
-    <category term="ssh" scheme="https://songxwn.com/tags/ssh/"/>
     
   </entry>
   
