@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.328888.xyz/2023/05/10/iYfDI3.png">
 <meta property="article:published_time" content="2023-05-10T03:54:00.000Z">
-<meta property="article:modified_time" content="2023-05-10T07:10:56.551Z">
+<meta property="article:modified_time" content="2023-05-10T07:14:27.160Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="vxlan">
@@ -268,7 +268,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.4k 字
+          5.5k 字
         
       </span>
     
@@ -279,7 +279,7 @@
         
         
         
-          45 分钟
+          46 分钟
         
       </span>
     
@@ -462,13 +462,13 @@
 <td align="left">dot1q</td>
 <td align="left">只允许携带指定的一层VLAN Tag的报文进入VXLAN隧道。</td>
 <td align="left">进行VXLAN封装时，会剥离原始报文的VLAN Tag。</td>
-<td align="left">进行VXLAN解封装后，会根据子接口上dot1q终结配置的vid为报文添加VLAN Tag，再转发。</td>
+<td align="left">进行VXLAN解封装后：若内层原始报文带有VLAN Tag，则先将该VLAN Tag替换为指定的VLAN Tag，再转发；若内层原始报文不带VLAN Tag，则先将其添加指定的VLAN Tag，再转发。</td>
 </tr>
 <tr>
 <td align="left">untag</td>
 <td align="left">只允许不携带VLAN Tag的报文进入VXLAN隧道。</td>
 <td align="left">进行VXLAN封装时，不对原始报文做处理，即不添加任何VLAN Tag。</td>
-<td align="left">进行VXLAN解封装后，不对报文做处理，包括VLAN Tag的添加、替换或剥离。</td>
+<td align="left">进行VXLAN解封装后，若内层原始报文带有vlan tag，则先将该vlan tag 剥掉，再转发；若内层原始报文不带vlan tag，则直接转发</td>
 </tr>
 <tr>
 <td align="left">default</td>
