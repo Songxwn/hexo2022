@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://songxwn.com/VXLAN_Principle/</loc>
+    <loc>https://songxwn.com/VXLAN/</loc>
     
     <lastmod>2023-05-10</lastmod>
     
@@ -20,7 +20,7 @@
   </url>
   
   <url>
-    <loc>https://songxwn.com/VXLAN/</loc>
+    <loc>https://songxwn.com/VXLAN_Principle/</loc>
     
     <lastmod>2023-05-10</lastmod>
     
@@ -803,7 +803,7 @@
   </url>
   
   <url>
-    <loc>https://songxwn.com/categories/network-vxlan/</loc>
+    <loc>https://songxwn.com/categories/network/vxlan/</loc>
     <lastmod>2023-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
