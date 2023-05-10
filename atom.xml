@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-05-10T05:37:47.002Z</updated>
+  <updated>2023-05-10T05:46:10.608Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://songxwn.com/VXLAN_Basic/"/>
     <id>https://songxwn.com/VXLAN_Basic/</id>
     <published>2023-05-10T03:54:00.000Z</published>
-    <updated>2023-05-10T05:37:47.002Z</updated>
+    <updated>2023-05-10T05:46:10.608Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;VXLAN（Virtual eXtensible Local Area Network）采用MAC in UDP（User Datagram Protocol）封装方式，是NVO3（Network Virtualizaiton over Layer 3）中的一种网络虚拟化技术。它是云计算的核心技术之一，服务器虚拟化凭借其大幅降低IT成本、提高业务部署灵活性、降低运维成本等优势已经得到越来越多的认可和部署。&lt;/p&gt;
