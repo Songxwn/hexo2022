@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-05-10T06:10:44.866Z</updated>
+  <updated>2023-05-10T06:46:04.583Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,42 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>VXLAN 基本配置</title>
+    <link href="https://songxwn.com/VXLAN_Configuration/"/>
+    <id>https://songxwn.com/VXLAN_Configuration/</id>
+    <published>2023-05-10T07:01:00.000Z</published>
+    <updated>2023-05-10T06:46:04.583Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;VXLAN工作原理如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在每个数据中心的交换机上都配置一个VTEP（VXLAN Tunnel Endpoints），用于封装和解封装VXLAN报文。&lt;/li&gt;
+&lt;li&gt;在两个VTEP之间建立一个VXLAN隧道，用于在两个数据中心之间传输封装后的VXLAN报文。&lt;/li&gt;
+&lt;li&gt;当虚拟机之间需要通信时，它们的报文会被发送到所在数据中心的交换机上。交换机上的VTEP会将报文封装成VXLAN报文，并通过VXLAN隧道发送到另一个数据中心的交换机上。&lt;/li&gt;
+&lt;li&gt;另一个数据中心的交换机上的VTEP会将VXLAN报文解封装，还原成原始报文，并发送给目标虚拟机。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这样，虚拟机之间就可以通过VXLAN隧道进行通信了。&lt;/p&gt;
+&lt;p&gt;本文章介绍了其工作原理和配置方案。&lt;/p&gt;
+&lt;p&gt;本文章是针对华为系列网络设备的学习笔记。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    <category term="vxlan" scheme="https://songxwn.com/categories/network/vxlan/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="vxlan" scheme="https://songxwn.com/tags/vxlan/"/>
+    
+    <category term="l2vpn" scheme="https://songxwn.com/tags/l2vpn/"/>
+    
+    <category term="datacom" scheme="https://songxwn.com/tags/datacom/"/>
+    
+  </entry>
   
   <entry>
     <title>VXLAN 转发原理</title>
@@ -540,36 +576,6 @@
     <category term="vmware" scheme="https://songxwn.com/tags/vmware/"/>
     
     <category term="backups" scheme="https://songxwn.com/tags/backups/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ESXi 勒索病毒ESXiArgs 其CVE-2021-21974漏洞分析和恢复</title>
-    <link href="https://songxwn.com/ESXI_CVE-2021-21974/"/>
-    <id>https://songxwn.com/ESXI_CVE-2021-21974/</id>
-    <published>2023-02-07T11:32:00.000Z</published>
-    <updated>2023-02-09T15:16:51.296Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;该漏洞编号为&lt;a href=&quot;https://www.vmware.com/security/advisories/VMSA-2021-0002.html&quot;&gt;CVE-2021-21974&lt;/a&gt;，由 OpenSLP 服务中的堆溢出问题引起，未经身份验证的攻击者可以此进行低复杂度攻击。&lt;/li&gt;
-&lt;li&gt;该漏洞主要影响6.x 版和 6.7、7.0版本之前的 ESXi 管理程序，2021年2月23日 ，VMware曾发布补丁修复了该漏洞。（在此之后发布的版本不影响）&lt;/li&gt;
-&lt;li&gt;该漏洞启动之后，主要破坏行为为停止所有虚拟机，并加密所有数据文件。&lt;/li&gt;
-&lt;li&gt;因为不会加密大文件，所以有很大可能性进行恢复操作。&lt;/li&gt;
-&lt;/ul&gt;</summary>
-    
-    
-    
-    <category term="VMware" scheme="https://songxwn.com/categories/VMware/"/>
-    
-    
-    <category term="esxi" scheme="https://songxwn.com/tags/esxi/"/>
-    
-    <category term="vmware" scheme="https://songxwn.com/tags/vmware/"/>
-    
-    <category term="security" scheme="https://songxwn.com/tags/security/"/>
-    
-    <category term="netwrok" scheme="https://songxwn.com/tags/netwrok/"/>
     
   </entry>
   
