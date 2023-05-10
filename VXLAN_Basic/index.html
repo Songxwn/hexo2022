@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.328888.xyz/2023/05/10/iYfDI3.png">
 <meta property="article:published_time" content="2023-05-10T03:54:00.000Z">
-<meta property="article:modified_time" content="2023-05-10T07:14:27.160Z">
+<meta property="article:modified_time" content="2023-05-10T07:21:10.100Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="vxlan">
@@ -352,7 +352,7 @@
               <div class="markdown-body">
                 
                 <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>VXLAN（Virtual eXtensible Local Area Network）采用MAC in UDP（User Datagram Protocol）封装方式，是NVO3（Network Virtualizaiton over Layer 3）中的一种网络虚拟化技术。它是云计算的核心技术之一，服务器虚拟化凭借其大幅降低IT成本、提高业务部署灵活性、降低运维成本等优势已经得到越来越多的认可和部署。</p>
-<p>本文章介绍了其基本概念和接入方式。</p>
+<p>本文章介绍了其基本概念和<a href="https://songxwn.com/VXLAN_Basic/#%E6%B5%81%E5%B0%81%E8%A3%85%E5%92%8C%E6%8E%A5%E5%B0%81%E8%A3%85">接入方式</a>。</p>
 <p>本文章是针对华为系列网络设备的学习笔记。</p>
 <span id="more"></span>
 
@@ -449,7 +449,7 @@
 </blockquote>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">dot1qinterface</span> <span class="hljs-number">10</span>GE1/<span class="hljs-number">0</span>/<span class="hljs-number">1</span>.<span class="hljs-number">1</span> mode l2   //创建二层子接口<span class="hljs-number">10</span>GE1/<span class="hljs-number">0</span>/<span class="hljs-number">1</span>.<span class="hljs-number">1</span><br> <span class="hljs-attribute">encapsulation</span> dot1q vid <span class="hljs-number">10</span>   //只允许携带VLAN Tag <span class="hljs-number">10</span>的报文进入VXLAN隧道<br> <span class="hljs-attribute">bridge</span>-domain <span class="hljs-number">10</span>   //指定报文进入的是BD <span class="hljs-number">10</span><br><span class="hljs-comment">#</span><br><span class="hljs-attribute">interface</span> <span class="hljs-number">10</span>GE1/<span class="hljs-number">0</span>/<span class="hljs-number">1</span>.<span class="hljs-number">2</span> mode l2   //创建二层子接口<span class="hljs-number">10</span>GE1/<span class="hljs-number">0</span>/<span class="hljs-number">1</span>.<span class="hljs-number">2</span><br> <span class="hljs-attribute">encapsulation</span> untag   //只允许不携带VLAN Tag的报文进入VXLAN隧道<br> <span class="hljs-attribute">bridge</span>-domain <span class="hljs-number">20</span>   //指定报文进入的是BD <span class="hljs-number">20</span><br><span class="hljs-comment">#</span><br><span class="hljs-attribute">interface</span> <span class="hljs-number">10</span>GE1/<span class="hljs-number">0</span>/<span class="hljs-number">1</span>.<span class="hljs-number">2</span> mode l2   //创建二层子接口<span class="hljs-number">10</span>GE1/<span class="hljs-number">0</span>/<span class="hljs-number">1</span>.<span class="hljs-number">2</span><br> <span class="hljs-attribute">encapsulation</span> default   //允许接口接收所有报文，透明转发。<br> <span class="hljs-attribute">bridge</span>-domain <span class="hljs-number">30</span>   //指定报文进入的是BD <span class="hljs-number">30</span><br><br><span class="hljs-comment">#</span><br><br></code></pre></td></tr></table></figure>
 
-<h3 id="流封装和接封装"><a href="#流封装和接封装" class="headerlink" title="流封装和接封装"></a>流封装和接封装</h3><table>
+<h3 id="流封装和解封装"><a href="#流封装和解封装" class="headerlink" title="流封装和解封装"></a>流封装和解封装</h3><table>
 <thead>
 <tr>
 <th align="left">流封装类型</th>

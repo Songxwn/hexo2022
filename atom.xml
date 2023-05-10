@@ -86,11 +86,11 @@
     <link href="https://songxwn.com/VXLAN_Basic/"/>
     <id>https://songxwn.com/VXLAN_Basic/</id>
     <published>2023-05-10T03:54:00.000Z</published>
-    <updated>2023-05-10T07:14:27.160Z</updated>
+    <updated>2023-05-10T07:21:10.100Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;VXLAN（Virtual eXtensible Local Area Network）采用MAC in UDP（User Datagram Protocol）封装方式，是NVO3（Network Virtualizaiton over Layer 3）中的一种网络虚拟化技术。它是云计算的核心技术之一，服务器虚拟化凭借其大幅降低IT成本、提高业务部署灵活性、降低运维成本等优势已经得到越来越多的认可和部署。&lt;/p&gt;
-&lt;p&gt;本文章介绍了其基本概念和接入方式。&lt;/p&gt;
+&lt;p&gt;本文章介绍了其基本概念和&lt;a href=&quot;https://songxwn.com/VXLAN_Basic/#%E6%B5%81%E5%B0%81%E8%A3%85%E5%92%8C%E6%8E%A5%E5%B0%81%E8%A3%85&quot;&gt;接入方式&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;本文章是针对华为系列网络设备的学习笔记。&lt;/p&gt;</summary>
     
     
