@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://songxwn.com/VXLAN_Basic/</loc>
+    
+    <lastmod>2023-05-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://songxwn.com/VXLAN_Configuration/</loc>
     
     <lastmod>2023-05-10</lastmod>
@@ -12,15 +21,6 @@
   
   <url>
     <loc>https://songxwn.com/VXLAN/</loc>
-    
-    <lastmod>2023-05-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://songxwn.com/VXLAN_Basic/</loc>
     
     <lastmod>2023-05-10</lastmod>
     

@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.328888.xyz/2023/05/10/iYfDI3.png">
 <meta property="article:published_time" content="2023-05-10T03:54:00.000Z">
-<meta property="article:modified_time" content="2023-05-10T06:10:49.954Z">
+<meta property="article:modified_time" content="2023-05-10T07:10:56.551Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="vxlan">
@@ -268,7 +268,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.7k 字
+          5.4k 字
         
       </span>
     
@@ -279,7 +279,7 @@
         
         
         
-          39 分钟
+          45 分钟
         
       </span>
     
@@ -449,6 +449,40 @@
 </blockquote>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">dot1qinterface</span> <span class="hljs-number">10</span>GE1/<span class="hljs-number">0</span>/<span class="hljs-number">1</span>.<span class="hljs-number">1</span> mode l2   //创建二层子接口<span class="hljs-number">10</span>GE1/<span class="hljs-number">0</span>/<span class="hljs-number">1</span>.<span class="hljs-number">1</span><br> <span class="hljs-attribute">encapsulation</span> dot1q vid <span class="hljs-number">10</span>   //只允许携带VLAN Tag <span class="hljs-number">10</span>的报文进入VXLAN隧道<br> <span class="hljs-attribute">bridge</span>-domain <span class="hljs-number">10</span>   //指定报文进入的是BD <span class="hljs-number">10</span><br><span class="hljs-comment">#</span><br><span class="hljs-attribute">interface</span> <span class="hljs-number">10</span>GE1/<span class="hljs-number">0</span>/<span class="hljs-number">1</span>.<span class="hljs-number">2</span> mode l2   //创建二层子接口<span class="hljs-number">10</span>GE1/<span class="hljs-number">0</span>/<span class="hljs-number">1</span>.<span class="hljs-number">2</span><br> <span class="hljs-attribute">encapsulation</span> untag   //只允许不携带VLAN Tag的报文进入VXLAN隧道<br> <span class="hljs-attribute">bridge</span>-domain <span class="hljs-number">20</span>   //指定报文进入的是BD <span class="hljs-number">20</span><br><span class="hljs-comment">#</span><br><span class="hljs-attribute">interface</span> <span class="hljs-number">10</span>GE1/<span class="hljs-number">0</span>/<span class="hljs-number">1</span>.<span class="hljs-number">2</span> mode l2   //创建二层子接口<span class="hljs-number">10</span>GE1/<span class="hljs-number">0</span>/<span class="hljs-number">1</span>.<span class="hljs-number">2</span><br> <span class="hljs-attribute">encapsulation</span> default   //允许接口接收所有报文，透明转发。<br> <span class="hljs-attribute">bridge</span>-domain <span class="hljs-number">30</span>   //指定报文进入的是BD <span class="hljs-number">30</span><br><br><span class="hljs-comment">#</span><br><br></code></pre></td></tr></table></figure>
 
+<h3 id="流封装和接封装"><a href="#流封装和接封装" class="headerlink" title="流封装和接封装"></a>流封装和接封装</h3><table>
+<thead>
+<tr>
+<th align="left">流封装类型</th>
+<th align="left">允许进入VXLAN隧道的报文类型</th>
+<th align="left">对VXLAN报文进行封装处理</th>
+<th align="left">对VXLAN报文进行解封装处理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">dot1q</td>
+<td align="left">只允许携带指定的一层VLAN Tag的报文进入VXLAN隧道。</td>
+<td align="left">进行VXLAN封装时，会剥离原始报文的VLAN Tag。</td>
+<td align="left">进行VXLAN解封装后，会根据子接口上dot1q终结配置的vid为报文添加VLAN Tag，再转发。</td>
+</tr>
+<tr>
+<td align="left">untag</td>
+<td align="left">只允许不携带VLAN Tag的报文进入VXLAN隧道。</td>
+<td align="left">进行VXLAN封装时，不对原始报文做处理，即不添加任何VLAN Tag。</td>
+<td align="left">进行VXLAN解封装后，不对报文做处理，包括VLAN Tag的添加、替换或剥离。</td>
+</tr>
+<tr>
+<td align="left">default</td>
+<td align="left">允许所有报文进入VXLAN隧道，不论报文是否携带VLAN Tag。</td>
+<td align="left">进行VXLAN封装时，不对原始报文做处理，包括添加、替换或剥离。</td>
+<td align="left">进行VXLAN解封装后，不对报文做处理，包括VLAN Tag的添加、替换或剥离。</td>
+</tr>
+<tr>
+<td align="left">qinq</td>
+<td align="left">只允许带有指定的两层VLAN Tag的报文进入VXLAN隧道。</td>
+<td align="left">进行VXLAN封装时，会剥离原始报文的所有VLAN Tag。</td>
+<td align="left">进行VXLAN解封装后：S5720HI：根据子接口上QinQ终结配置的ce-vid和pe-vid为报文添加两层VLAN Tag，再转发。其他形态：若报文不带VLAN Tag，则先根据子接口上QinQ终结配置的ce-vid和pe-vid为报文添加两层VLAN Tag，再转发；若报文带VLAN Tag，则先剥掉外层VLAN Tag再根据子接口上QinQ终结配置的ce-vid和pe-vid为报文添加两层VLAN Tag，再转发。</td>
+</tr>
+</tbody></table>
 <h1 id="基本概念：Border、Edge"><a href="#基本概念：Border、Edge" class="headerlink" title="基本概念：Border、Edge"></a>基本概念：Border、Edge</h1><h1 id="-2"><a href="#-2" class="headerlink" title=""></a><img src="https://i.328888.xyz/2023/05/10/iYV6cE.png" srcset="/img/loading.gif" lazyload></h1><ul>
 <li>Edge：VXLAN网络的边缘接入设备，传统网络的流量由此进入VXLAN网络。</li>
 <li>Border：VXLAN网络和外部网络通信的节点，用于外部流量进入VXLAN网络或VXLAN内部流量访问外部，一般连接具有三层转发能力的设备（如Router、Firewall）。</li>
@@ -483,7 +517,7 @@
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.ruijie.com.cn/jszl/85104/">https://www.ruijie.com.cn/jszl/85104/</a> </p>
 <p><a target="_blank" rel="noopener" href="https://www.arubanetworks.com/faq/what-is-spine-leaf-architecture/">https://www.arubanetworks.com/faq/what-is-spine-leaf-architecture/</a> </p>
 <p><a target="_blank" rel="noopener" href="https://support.huawei.com/enterprise/zh/doc/EDOC1100087027#ZH-CN_TOPIC_0254803606">https://support.huawei.com/enterprise/zh/doc/EDOC1100087027#ZH-CN_TOPIC_0254803606</a> </p>
-
+<div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a target="_blank" rel="noopener" href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="https://songxwn.com/VXLAN_Configuration/">VXLAN 基本配置</a></li><li><a href="https://songxwn.com/VXLAN_Principle/">VXLAN 转发原理</a></li><li><a href="https://songxwn.com/zabbix-reboot-SNMPv3/">Zabbix SNMPv3 设备重启后无法监控问题</a></li></ul></div>
                 
               </div>
             
