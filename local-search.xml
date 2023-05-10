@@ -982,7 +982,7 @@
     
     <categories>
       
-      <category>network</category>
+      <category>network,vxlan</category>
       
     </categories>
     
