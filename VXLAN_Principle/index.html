@@ -1,0 +1,856 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/images/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Song">
+  <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
+  
+    <meta name="description" content="介绍VXLAN工作原理如下：  在每个数据中心的交换机上都配置一个VTEP（VXLAN Tunnel Endpoints），用于封装和解封装VXLAN报文。 在两个VTEP之间建立一个VXLAN隧道，用于在两个数据中心之间传输封装后的VXLAN报文。 当虚拟机之间需要通信时，它们的报文会被发送到所在数据中心的交换机上。交换机上的VTEP会将报文封装成VXLAN报文，并通过VXLAN隧道发送到另一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VXLAN基本概念">
+<meta property="og:url" content="https://songxwn.com/VXLAN_Principle/index.html">
+<meta property="og:site_name" content="Song&#96;s Blog">
+<meta property="og:description" content="介绍VXLAN工作原理如下：  在每个数据中心的交换机上都配置一个VTEP（VXLAN Tunnel Endpoints），用于封装和解封装VXLAN报文。 在两个VTEP之间建立一个VXLAN隧道，用于在两个数据中心之间传输封装后的VXLAN报文。 当虚拟机之间需要通信时，它们的报文会被发送到所在数据中心的交换机上。交换机上的VTEP会将报文封装成VXLAN报文，并通过VXLAN隧道发送到另一个">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.328888.xyz/2023/05/10/iYfDI3.png">
+<meta property="article:published_time" content="2023-05-10T06:54:00.000Z">
+<meta property="article:modified_time" content="2023-05-10T06:08:31.399Z">
+<meta property="article:author" content="Song">
+<meta property="article:tag" content="network">
+<meta property="article:tag" content="vxlan">
+<meta property="article:tag" content="l2vpn">
+<meta property="article:tag" content="datacom">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://i.328888.xyz/2023/05/10/iYfDI3.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>VXLAN基本概念 - Song`s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/scroll.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"songxwn.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":130,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Song`s Blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Song`s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/books/">
+                <i class="iconfont icon-books"></i>
+                <span>读书</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                <span>RSS</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/images/index.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="VXLAN基本概念"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-10 14:54" pubdate>
+          2023年5月10日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          23 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">VXLAN基本概念</h1>
+            
+              <p class="note note-danger">
+                
+                  
+                    本文最后更新于：2023年5月10日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>VXLAN工作原理如下：</p>
+<ol>
+<li>在每个数据中心的交换机上都配置一个VTEP（VXLAN Tunnel Endpoints），用于封装和解封装VXLAN报文。</li>
+<li>在两个VTEP之间建立一个VXLAN隧道，用于在两个数据中心之间传输封装后的VXLAN报文。</li>
+<li>当虚拟机之间需要通信时，它们的报文会被发送到所在数据中心的交换机上。交换机上的VTEP会将报文封装成VXLAN报文，并通过VXLAN隧道发送到另一个数据中心的交换机上。</li>
+<li>另一个数据中心的交换机上的VTEP会将VXLAN报文解封装，还原成原始报文，并发送给目标虚拟机。</li>
+</ol>
+<p>这样，虚拟机之间就可以通过VXLAN隧道进行通信了。</p>
+<p>本文章介绍了其工作原理和配置方案。</p>
+<p>本文章是针对华为系列网络设备的学习笔记。</p>
+<span id="more"></span>
+
+<h1 id="VXLAN隧道的建立方式"><a href="#VXLAN隧道的建立方式" class="headerlink" title="VXLAN隧道的建立方式"></a>VXLAN隧道的建立方式</h1><p><strong>VXLAN隧道由一对VTEP确定，报文在VTEP设备进行封装之后在VXLAN隧道中依靠路由进行传输。只要VXLAN隧道的两端VTEP是三层路由可达的，VXLAN隧道就可以建立成功。</strong></p>
+<p><strong>根据VXLAN隧道的创建方式将VXLAN隧道分为以下两种：</strong></p>
+<ul>
+<li>静态隧道：通过用户手工配置本端和远端的VNI、VTEP IP地址和头端复制列表（head-end peer-list）来完成。</li>
+<li>动态隧道：通过BGP EVPN（Ethernet VPN，以太网虚拟私有网络）方式动态建立VXLAN隧道。在VTEP之间建立BGP EVPN对等体，然后对等体之间利用BGP EVPN路由来互相传递VNI和VTEP IP地址信息，从而实现动态地建立VXLAN隧道。</li>
+</ul>
+<h1 id="静态VXLAN隧道"><a href="#静态VXLAN隧道" class="headerlink" title="静态VXLAN隧道"></a>静态VXLAN隧道</h1><ul>
+<li>静态VXLAN隧道并不是一个有状态的隧道（如IPsec VPN），只是数据传输时的隧道封装，类似于GRE VPN。</li>
+<li>头端复制列表中的地址，即进行隧道封装传输时可封装的隧道目的地址。</li>
+</ul>
+<p><img src="https://i.328888.xyz/2023/05/10/iYf9Zy.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="VXLAN-MAC地址表项"><a href="#VXLAN-MAC地址表项" class="headerlink" title="VXLAN MAC地址表项"></a>VXLAN MAC地址表项</h2><ul>
+<li>VXLAN实现的是在Overlay网络中进行二层转发，转发单播数据帧依赖的依旧是MAC地址表项。</li>
+<li>VTEP接收到BD内来自本地的数据帧，将数据帧的源MAC地址添加到该BD的MAC地址表中，出接口为收到数据帧的接口。</li>
+<li>该表项用于指导发往本VTEP下连接终端的数据帧的转发。</li>
+</ul>
+<p><img src="https://i.328888.xyz/2023/05/10/iYfPkF.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs none">&lt;S1&gt;display mac-address bridge-domain 10<br>-------------------------------------------------------------------------------<br>MAC Address    		VLAN/VSI/BD   Learned-From    Type        		<br>-------------------------------------------------------------------------------<br>0000-0000-000a	      -/-/10      GE1/0/1.10     dynamic    <br><br>&lt;S1&gt;display mac-address bridge-domain 20<br>-------------------------------------------------------------------------------<br>MAC Address    		VLAN/VSI/BD   Learned-From    Type        		<br>-------------------------------------------------------------------------------<br>0000-0000-000b     	 -/-/20       GE1/0/1.20   	 dynamic    <br><br></code></pre></td></tr></table></figure>
+
+<h2 id="MAC地址动态学习-1"><a href="#MAC地址动态学习-1" class="headerlink" title="MAC地址动态学习 (1)"></a>MAC地址动态学习 (1)</h2><ul>
+<li>转发属于远端VTEP下所连接设备的数据帧，需要先学习到远端设备的MAC地址。</li>
+<li>该过程与传统MAC地址表形成过程类似，依赖于主机之间的报文交互，一般通过ARP报文交互形成MAC地址表项。</li>
+</ul>
+<p><img src="https://i.328888.xyz/2023/05/10/iYyfac.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>PC1与PC2通信过程如下：</li>
+</ul>
+<ol>
+<li>PC1要与PC2通信，PC1发送ARP请求广播帧，试图请求PC2的MAC地址。</li>
+<li>SW1收到该帧后，根据VAP信息判断出流量所属的BD ID、需进入的VXLAN隧道及对应的VNI；同时学习PC1的MAC地址，将其与该BD ID、接收帧的接口等绑定。</li>
+<li>SW1对ARP请求广播帧进行VXLAN封装，按头端复制列表进行转发。</li>
+<li>SW2收到VXLAN报文后，将其解封装，得到原始数据帧；同时学习PC1的MAC地址，将该地址与SW1的VTEP地址进行绑定。</li>
+<li>SW2将该ARP帧在本地广播域内泛洪。然后，PC2收到了该帧并学习到了PC1的ARP信息。</li>
+</ol>
+<h2 id="MAC地址动态学习-2"><a href="#MAC地址动态学习-2" class="headerlink" title="MAC地址动态学习 (2)"></a>MAC地址动态学习 (2)</h2><p><img src="https://i.328888.xyz/2023/05/10/iYycz5.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>PC2发送单播的ARP回应。</p>
+<p>6. SW2此时已经拥有PC1的MAC地址表项，因此将会单播转发，并且学习PC2的源MAC地址到MAC地址表项中。</p>
+<p>7. SW2为该ARP响应加上VXLAN封装，发送到远端VTEP 1.1.1.1。</p>
+<p>8. SW1收到VXLAN报文之后解封装，将PC2的源MAC地址记录到MAC地址表，出接口为远端VTEP。</p>
+<p>9. SW1将数据帧转发给PC1。</p>
+</li>
+</ul>
+<blockquote>
+<p>至此PC1、2相互学习到了对方的ARP信息，SW1、SW2完成了PC1、PC2的MAC地址学习，该过程也叫做Flood and Learn。</p>
+</blockquote>
+<h2 id="同子网已知目的地址单播报文转发"><a href="#同子网已知目的地址单播报文转发" class="headerlink" title="同子网已知目的地址单播报文转发"></a>同子网已知目的地址单播报文转发</h2><p><img src="https://i.328888.xyz/2023/05/10/iYygKH.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="BUM流量转发"><a href="#BUM流量转发" class="headerlink" title="BUM流量转发"></a>BUM流量转发</h2><ul>
+<li>传输BUM（Broadcast、Unknown、Multicast）流量时，VTEP会将流量复制多份发送到头端复制列表中的对端VTEP，从而在Overlay网络中实现泛洪转发的效果。 </li>
+<li>BUM，广播、未知、组播以太网帧</li>
+</ul>
+<p><img src="https://i.328888.xyz/2023/05/10/iYyE3E.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="跨子网三层转发"><a href="#跨子网三层转发" class="headerlink" title="跨子网三层转发"></a>跨子网三层转发</h2><p><img src="https://i.328888.xyz/2023/05/10/iYyeSC.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li>PC1希望与PC2进行通信，本地计算发现对端与自身不在同一个子网，此时将报文发送给网关。</li>
+<li>PC1发往PC2的数据帧，目的MAC为：00AB-09FF-1111（网关MAC地址），SW1收到之后执行L2查表发现出接口为远端VTEP（即L3网关），将报文加上VXLAN头部封装（VNI &#x3D;1000）之后发往SW3。</li>
+<li>SW3收到报文之后解VXLAN封装发现，内部原始数据帧其目的MAC为：00AB-09FF-1111，为自身接口VBDIF 10的MAC地址，此时需要执行L3查表转发。</li>
+<li>SW3查找路由表，发现目的IP：192.168.2.1，与本地接口VBDIF 20产生的直连路由相匹配，查找ARP表项确定报文目的MAC，再查找MAC地址表确定报文的出接口。SW3中前往192.168.2.1所对应MAC地址的出接口为远端VTEP 2.2.2.2，将报文加上VXLAN封装，送往SW2。</li>
+<li>SW2收到报文之后解VXLAN封装发现目的MAC并非自身任何接口的MAC地址，执行L2查表转发，依据MAC地址表将报文从本地接口转发出去。</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/network-vxlan/" class="category-chain-item">network,vxlan</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/network/">#network</a>
+      
+        <a href="/tags/vxlan/">#vxlan</a>
+      
+        <a href="/tags/l2vpn/">#l2vpn</a>
+      
+        <a href="/tags/datacom/">#datacom</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>VXLAN基本概念</div>
+      <div>https://songxwn.com/VXLAN_Principle/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Song</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年5月10日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年5月10日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/VXLAN_Basic/" title="VXLAN基本概念">
+                        <span class="hidden-mobile">VXLAN基本概念</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments">
+      
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script>
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          Fluid.utils.createCssLink('https://lib.baomitu.com/disqusjs/1.3.0/disqusjs.css');
+          Fluid.utils.createScript('https://lib.baomitu.com/disqusjs/1.3.0/disqus.js', function() {
+            new DisqusJS({
+              shortname: 'songxwn',
+              apikey: ''
+            });
+          });
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <a href="https://www.foreverblog.cn/go.html" target="_blank"> <img src="https://img.foreverblog.cn/wormhole_1_tp.gif" alt="" style="width:auto;height:32px;" title="穿梭虫洞-随机访问十年之约友链博客"></a>,<a href="https://www.vultr.com/?ref=7199488" target="_blank"> <img src="https://www.vultr.com/media/logo_ondark.svg" alt="" style="width:auto;height:32px;" title="注册vultr获取免费10美元体验额度"></a>,<a href="https://url.cn/eTx2WPml" target="_blank"> <img src="https://s3.bmp.ovh/imgs/2023/05/06/989aea4d82987ca9.png" alt="" style="width:auto;height:32px;" title="【腾讯云】云服务器、云数据库、COS、CDN、短信等云产品特惠热卖中"></a>
+        </div>
+      </div>
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

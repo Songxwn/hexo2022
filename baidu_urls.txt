@@ -1,3 +1,4 @@
+https://songxwn.com/VXLAN_Principle/
 https://songxwn.com/VXLAN_Basic/
 https://songxwn.com/ELK-logstash-hostname/
 https://songxwn.com/ELK-AD-LDAP-Authentication/
@@ -7,4 +8,3 @@ https://songxwn.com/Elasticsearch-x-pack-core/
 https://songxwn.com/Linux-growpart/
 https://songxwn.com/elk_cluster/
 https://songxwn.com/elk_snmp_trap/
-https://songxwn.com/team_nav/
