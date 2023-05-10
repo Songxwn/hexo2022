@@ -942,6 +942,35 @@
   
   
   <entry>
+    <title>什么是VXLAN</title>
+    <link href="/VXLAN/"/>
+    <url>/VXLAN/</url>
+    
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>VXLAN（Virtual eXtensible Local Area Network，虚拟扩展局域网），<a href="https://datatracker.ietf.org/doc/rfc7348/">RFC7348</a><br>是由IETF定义的NVO3（Network Virtualization over Layer 3）标准技术之一，（还有NVGRE、STT等技术）<br>是对传统VLAN协议的一种扩展。VXLAN的特点是将L2的以太帧封装到UDP报文（即L2 over L4）中，并在L3网络中传输。</p><p>VXLAN本质上是一种隧道技术，在源网络设备与目的网络设备之间的IP网络上，建立一条逻辑隧道，<br>将用户侧报文经过特定的封装后通过这条隧道转发。从用户的角度来看，<br>接入网络的服务器就像是连接到了一个虚拟的二层交换机的不同端口上，可以方便地进行二层通信。</p><p>已经是事实上的网络虚拟化标准，公有云（阿里云、华为云、AWS等）的VPC大多数都是用VXLAN来作为数据转发层面。<br>不止在虚拟化环境，还有园区网络、运营商网络也开始使用。(灵活的二层接入、二层VPN隧道)</p><p><img src="https://i.328888.xyz/2023/05/10/iQuTyy.png" srcset="/img/loading.gif" lazyload></p><p>VXLAN已经成为当前构建数据中心的主流技术，是因为它能很好地满足数据中心里虚拟机动态迁移和多租户等需求。</p><span id="more"></span><h1 id="VXLAN有什么作用？"><a href="#VXLAN有什么作用？" class="headerlink" title="VXLAN有什么作用？"></a>VXLAN有什么作用？</h1><p>为什么需要VXLAN呢？这和数据中心服务器侧的虚拟化趋势紧密相关，<br>一方面服务器虚拟化后出现了虚拟机动态迁移，<br>要求提供一个无障碍接入的网络；另一方面，数据中心规模越发庞大，租户数量激增，<br>需要网络提供隔离海量租户的能力。采用VXLAN可以满足上述两个关键需求。</p><h2 id="虚拟机动态迁移，要求提供一个无障碍接入的网络"><a href="#虚拟机动态迁移，要求提供一个无障碍接入的网络" class="headerlink" title="虚拟机动态迁移，要求提供一个无障碍接入的网络"></a>虚拟机动态迁移，要求提供一个无障碍接入的网络</h2><h3 id="什么是服务器虚拟化技术？"><a href="#什么是服务器虚拟化技术？" class="headerlink" title="什么是服务器虚拟化技术？"></a><strong>什么是服务器虚拟化技术？</strong></h3><p>传统的数据中心物理服务器利用率太低，平均只有10%～15%，浪费了大量的电力能源和机房资源，所以出现了服务器虚拟化技术。如<a href="https://support.huawei.com/enterprise/zh/doc/EDOC1100087027#zh-cn_topic_0244767469_fig128721245865">图1-2</a>所示，服务器虚拟化技术是把一台物理服务器虚拟化成多台逻辑服务器，这种逻辑服务器被称为虚拟机（VM）。每个VM都可以独立运行，有自己的操作系统、APP，当然也有自己独立的MAC地址和IP地址，它们通过服务器内部的虚拟交换机（vSwitch）与外部实体网络连接。</p><p>图1-2 服务器虚拟化示意</p><p><img src="https://i.328888.xyz/2023/05/10/iYZVtE.png" srcset="/img/loading.gif" lazyload></p><p>通过服务器虚拟化，可以有效地提高服务器的利用率，降低能源消耗，降低数据中心的运营成本，所以虚拟化技术目前得到了广泛的应用。图1-3 传统的二三层网络架构限制了虚拟机的动态迁移范围</p><h3 id="什么是虚拟机动态迁移？"><a href="#什么是虚拟机动态迁移？" class="headerlink" title="什么是虚拟机动态迁移？"></a><strong>什么是虚拟机动态迁移？</strong></h3><p>所谓虚拟机动态迁移，就是在保证虚拟机上服务正常运行的同时，将一个虚拟机系统从一个物理服务器移动到另一个物理服务器的过程。该过程对于最终用户来说是无感知的，从而使得管理员能够在不影响用户正常使用的情况下，灵活调配服务器资源，或者对物理服务器进行维修和升级。</p><p>在服务器虚拟化后，虚拟机动态迁移变得常态化，为了保证迁移时业务不中断，就要求在虚拟机迁移时，不仅虚拟机的IP地址不变，而且虚拟机的运行状态也必须保持原状（例如TCP会话状态），所以虚拟机的动态迁移只能在同一个二层域中进行，而不能跨二层域迁移。</p><p>如<a href="https://support.huawei.com/enterprise/zh/doc/EDOC1100087027#zh-cn_topic_0244767469_fig387719372029">图1-3</a>所示，传统的二三层网络架构限制了虚拟机的动态迁移范围，迁移只能在一个较小的局部范围内进行，应用受到了极大的限制。</p><p><img src="https://i.328888.xyz/2023/05/10/iYZfmC.png" srcset="/img/loading.gif" lazyload></p><p>为了打破这种限制，实现虚拟机的大范围甚至跨地域的动态迁移，就要求把VM迁移可能涉及的所有服务器都纳入同一个二层网络域，这样才能实现VM的大范围无障碍迁移。</p><h3 id="VXLAN如何满足虚拟机动态迁移时对网络的要求？"><a href="#VXLAN如何满足虚拟机动态迁移时对网络的要求？" class="headerlink" title="VXLAN如何满足虚拟机动态迁移时对网络的要求？"></a><strong>VXLAN如何满足虚拟机动态迁移时对网络的要求？</strong></h3><p>众所周知，同一台二层交换机可以实现下挂服务器之间的二层通信，而且服务器从该二层交换机的一个端口迁移到另一个端口时，IP地址是可以保持不变的。这样就可以满足虚拟机动态迁移的需求了。VXLAN的设计理念和目标正是由此而来的。</p><p>从上一个小节我们可以知道，VXLAN本质上是一种隧道技术，当源和目的之间有通信需求时，便在数据中心IP网络之上创建一条虚拟的隧道，透明转发用户数据。而数据中心内相互通信的需求众多，这种隧道的建立方式几乎是全互联形态才能满足通信需求。</p><p>VXLAN可以提供一套方法论，在数据中心IP网络基础上，构建一张全互联的二层隧道虚拟网络，保证任意两点之间都能通过VXLAN隧道来通信，并忽略底层网络的结构和细节。从服务器的角度看，VXLAN为它们将整个数据中心基础网络虚拟成了一台巨大的“二层交换机”，所有服务器都连接在这台虚拟二层交换机上。而基础网络之内如何转发都是这台“巨大交换机”内部的事情，服务器完全无需关心。</p><p>图1-4 VXLAN将整个数据中心基础网络虚拟成了一台巨大的“二层交换机”</p><p><img src="https://i.328888.xyz/2023/05/10/iYZUGJ.png" srcset="/img/loading.gif" lazyload></p><p>基于这种“二层交换机”的模型，就很容易理解为什么VXLAN可以实现VM动态迁移了：将虚拟机从“二层交换机”的一个端口换到另一个端口，完全无需变更IP地址。</p><blockquote><p>说明：使用这种理念的技术协议，除了VXLAN外，还有NVGRE、STT等，本文仅对VXLAN进行说明。</p></blockquote><h3 id="数据中心租户数量激增，要求提供一个可隔离海量租户的网络"><a href="#数据中心租户数量激增，要求提供一个可隔离海量租户的网络" class="headerlink" title="数据中心租户数量激增，要求提供一个可隔离海量租户的网络"></a>数据中心租户数量激增，要求提供一个可隔离海量租户的网络</h3><p>众所周知，在传统的VLAN网络中，标准定义所支持的可用VLAN数量只有4000个左右。服务器虚拟化后，一台物理服务器中承载了多台虚拟机，每个虚拟机都有独立的IP地址和MAC地址，相当于接入数据中心的服务器成倍扩大了。另外，公有云或其它大型虚拟化云数据中心动辄需容纳上万甚至更多租户，VLAN的能力显然已经力不从心。</p><p>VXLAN如何来解决上述问题呢？VXLAN在VXLAN帧头中引入了类似VLAN ID的网络标识，称为VXLAN网络标识VNI（VXLAN Network ID），由24比特组成，理论上可支持多达16M的VXLAN段，从而满足了大规模不同网络之间的标识、隔离需求。下文我们会介绍VNI的详细作用。</p><h2 id="VXLAN与VLAN之间有何不同"><a href="#VXLAN与VLAN之间有何不同" class="headerlink" title="VXLAN与VLAN之间有何不同"></a>VXLAN与VLAN之间有何不同</h2><p>VLAN作为传统的网络隔离技术，在标准定义中VLAN的数量只有4000个左右，无法满足大型数据中心的租户间隔离需求。另外，VLAN的二层范围一般较小且固定，无法支持虚拟机大范围的动态迁移。图1-5 VXLAN报文格式（以外层IP头为IPv4格式为例）</p><p>VXLAN完美地弥补了VLAN的上述不足，一方面通过VXLAN中的24比特VNI字段（如<a href="https://support.huawei.com/enterprise/zh/doc/EDOC1100087027#zh-cn_topic_0244198676_fig516416432554">图1-5</a>所示），提供多达<strong>16M</strong>租户的标识能力，远大于VLAN的4000；另一方面，VXLAN本质上在两台交换机之间构建了一条穿越数据中心基础IP网络的虚拟隧道，将数据中心网络虚拟成一个巨型“二层交换机”，满足虚拟机大范围动态迁移的需求。</p><p>虽然从名字上看，VXLAN是VLAN的一种扩展协议，但VXLAN构建虚拟隧道的本领已经与VLAN迥然不同了。</p><p>下面就让我们来看下，VXLAN报文到底长啥样。</p><p><img src="https://i.328888.xyz/2023/05/10/iYZk7o.png" srcset="/img/loading.gif" lazyload></p><p>图1-5 VXLAN报文格式（以外层IP头为IPv4格式为例）</p><p><img src="https://i.328888.xyz/2023/05/10/iYZ0PN.png" srcset="/img/loading.gif" lazyload></p><p>如上图所示，VTEP对VM发送的原始以太帧（Original L2 Frame）进行了以下“包装”：</p><ul><li>VXLAN Header</li><li>UDP Header</li><li>Outer IP Header</li><li>Outer MAC Header</li></ul><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://support.huawei.com/enterprise/zh/doc/EDOC1100087027">https://support.huawei.com/enterprise/zh/doc/EDOC1100087027</a></p><div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="https://songxwn.com/zabbix-reboot-SNMPv3/">Zabbix SNMPv3 设备重启后无法监控问题</a></li><li><a href="https://songxwn.com/DNS_recursive_Server/">建立自有递归DNS服务器</a></li><li><a href="https://songxwn.com/zabbix_data/">Zabbix：历史数据与趋势数据</a></li></ul></div>]]></content>
+    
+    
+    <categories>
+      
+      <category>network</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>network</tag>
+      
+      <tag>vxlan</tag>
+      
+      <tag>l2vpn</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>QinQ 随笔</title>
     <link href="/QINQ/"/>
     <url>/QINQ/</url>
@@ -963,35 +992,6 @@
       <tag>vpn</tag>
       
       <tag>vlan</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>VXLAN 随笔</title>
-    <link href="/VXLAN/"/>
-    <url>/VXLAN/</url>
-    
-    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>VXLAN（Virtual eXtensible Local Area Network，虚拟扩展局域网），<br>是由IETF定义的NVO3（Network Virtualization over Layer 3）标准技术之一，（还有NVGRE、STT等技术）<br>是对传统VLAN协议的一种扩展。VXLAN的特点是将L2的以太帧封装到UDP报文（即L2 over L4）中，并在L3网络中传输。</p><p>VXLAN本质上是一种隧道技术，在源网络设备与目的网络设备之间的IP网络上，建立一条逻辑隧道，<br>将用户侧报文经过特定的封装后通过这条隧道转发。从用户的角度来看，<br>接入网络的服务器就像是连接到了一个虚拟的二层交换机的不同端口上，<br>可以方便地进行二层通信。<br>已经是事实上的网络虚拟化标准，公有云（阿里云、华为云、AWS等）的VPC大多数都是用VXLAN来作为数据转发层面。<br>不止在虚拟化环境，还有园区网络、运营商网络也开始使用。(灵活的二层接入)</p><span id="more"></span><h1 id="VXLAN有什么作用？"><a href="#VXLAN有什么作用？" class="headerlink" title="VXLAN有什么作用？"></a>VXLAN有什么作用？</h1><p>为什么需要VXLAN呢？这和数据中心服务器侧的虚拟化趋势紧密相关，<br>一方面服务器虚拟化后出现了虚拟机动态迁移，<br>要求提供一个无障碍接入的网络；另一方面，数据中心规模越发庞大，租户数量激增，<br>需要网络提供隔离海量租户的能力。采用VXLAN可以满足上述两个关键需求。</p><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://support.huawei.com/enterprise/zh/doc/EDOC1100087027">https://support.huawei.com/enterprise/zh/doc/EDOC1100087027</a></p><div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="https://songxwn.com/zabbix-reboot-SNMPv3/">Zabbix SNMPv3 设备重启后无法监控问题</a></li><li><a href="https://songxwn.com/DNS_recursive_Server/">建立自有递归DNS服务器</a></li><li><a href="https://songxwn.com/zabbix_data/">Zabbix：历史数据与趋势数据</a></li></ul></div>]]></content>
-    
-    
-    <categories>
-      
-      <category>network</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>network</tag>
-      
-      <tag>vxlan</tag>
-      
-      <tag>l2vpn</tag>
       
     </tags>
     
