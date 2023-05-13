@@ -16,30 +16,29 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
   
-    <meta name="description" content="简介本文章主要介绍了Elasticsearch 接入微软的Active Directory（域控）作为身份认证。 LDAP认证接入可参考官方文档。 使用环境：Rocky Linux 8、Elasticsearch 8、Windows Server 2022 注意：由于此功能基础版无法使用，需要白金版本，可参考教程：https:&#x2F;&#x2F;songxwn.com&#x2F;Elasticsearch-x-pack-c">
+    <meta name="description" content="介绍本教程用于鼎频通信的SEC OTP4000波分设备系列的告警接收。 PS：很小众的东西。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Elasticsearch 接入微软Active Directory认证">
-<meta property="og:url" content="https://songxwn.com/ELK-AD-LDAP-Authentication/index.html">
+<meta property="og:title" content="接收SEC OTP4000 UDP告警日志">
+<meta property="og:url" content="https://songxwn.com/SEC_OTP_UDP-log/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="简介本文章主要介绍了Elasticsearch 接入微软的Active Directory（域控）作为身份认证。 LDAP认证接入可参考官方文档。 使用环境：Rocky Linux 8、Elasticsearch 8、Windows Server 2022 注意：由于此功能基础版无法使用，需要白金版本，可参考教程：https:&#x2F;&#x2F;songxwn.com&#x2F;Elasticsearch-x-pack-c">
+<meta property="og:description" content="介绍本教程用于鼎频通信的SEC OTP4000波分设备系列的告警接收。 PS：很小众的东西。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/05/03/5c9e440808e98f3a.png">
-<meta property="article:published_time" content="2023-05-03T01:51:41.000Z">
-<meta property="article:modified_time" content="2023-05-03T02:35:36.117Z">
+<meta property="og:image" content="https://i.328888.xyz/2023/05/13/iuaYFc.png">
+<meta property="article:published_time" content="2023-05-13T14:59:00.000Z">
+<meta property="article:modified_time" content="2023-05-13T15:09:02.715Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="elk">
-<meta property="article:tag" content="elasticsearch">
-<meta property="article:tag" content="ad">
-<meta property="article:tag" content="ldap">
+<meta property="article:tag" content="syslog">
+<meta property="article:tag" content="snmp">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2023/05/03/5c9e440808e98f3a.png">
+<meta name="twitter:image" content="https://i.328888.xyz/2023/05/13/iuaYFc.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Elasticsearch 接入微软Active Directory认证 - Song`s Blog</title>
+  <title>接收SEC OTP4000 UDP告警日志 - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -246,7 +245,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Elasticsearch 接入微软Active Directory认证"></span>
+            <span id="subtitle" data-typed-text="接收SEC OTP4000 UDP告警日志"></span>
           
         </div>
 
@@ -257,8 +256,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-03 09:51" pubdate>
-          2023年5月3日 上午
+        <time datetime="2023-05-13 22:59" pubdate>
+          2023年5月13日 晚上
         </time>
       </span>
     
@@ -269,7 +268,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          416 字
         
       </span>
     
@@ -280,7 +279,7 @@
         
         
         
-          14 分钟
+          4 分钟
         
       </span>
     
@@ -339,12 +338,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Elasticsearch 接入微软Active Directory认证</h1>
+            <h1 style="display: none">接收SEC OTP4000 UDP告警日志</h1>
             
               <p class="note note-danger">
                 
                   
-                    本文最后更新于：2023年5月3日 上午
+                    本文最后更新于：2023年5月13日 晚上
                   
                 
               </p>
@@ -352,37 +351,20 @@
             
               <div class="markdown-body">
                 
-                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>本文章主要介绍了Elasticsearch 接入微软的<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/troubleshoot/windows-server/identity/active-directory-overview">Active Directory</a>（域控）作为身份认证。</p>
-<p>LDAP认证接入可参考<a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ldap-realm.html">官方文档</a>。</p>
-<p>使用环境：Rocky Linux 8、Elasticsearch 8、Windows Server 2022</p>
-<p><strong>注意：由于此功能基础版无法使用，需要白金版本，可参考教程：</strong><a href="https://songxwn.com/Elasticsearch-x-pack-core/"><strong>https://songxwn.com/Elasticsearch-x-pack-core/</strong></a></p>
-<p>ELK系列文章：<a href="https://songxwn.com/categories/linux/ELK/">https://songxwn.com/categories/linux/ELK/</a> </p>
+                <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>本教程用于鼎频通信的SEC OTP4000波分设备系列的告警接收。</p>
+<p>PS：很小众的东西。</p>
 <span id="more"></span>
 
+<h1 id="报文分析"><a href="#报文分析" class="headerlink" title="报文分析"></a>报文分析</h1><p>经配置设备的SNMP Trap服务器后，分析报文不为SNMP Trap报文。</p>
+<p>由简单的UDP报文承载告警信息，字符编码为中文编码 （GB18030）。</p>
+<p>端口号为UDP 9000。</p>
+<h1 id="Logstash-配置接收UDP日志"><a href="#Logstash-配置接收UDP日志" class="headerlink" title="Logstash 配置接收UDP日志"></a>Logstash 配置接收UDP日志</h1><p>vim &#x2F;etc&#x2F;logstash&#x2F;conf.d&#x2F;trap.conf</p>
+<figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs puppet"><span class="hljs-keyword">input</span> &#123;<br>  udp &#123;<br>    <span class="hljs-attr">type</span> =&gt; <span class="hljs-string">&quot;UDP-Logs&quot;</span><br>    <span class="hljs-attr">port</span> =&gt; <span class="hljs-number">9000</span><br>        <span class="hljs-attr">codec</span> =&gt; plain&#123; <span class="hljs-attr">charset</span> =&gt; <span class="hljs-string">&quot;GB18030&quot;</span> <br>       &#125;<br>&#125;<br><br><br></code></pre></td></tr></table></figure>
 
-<h1 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h1><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-string">vim</span> <span class="hljs-string">/etc/elasticsearch/elasticsearch.yml</span> <br><br><span class="hljs-comment"># ad1</span><br><br><span class="hljs-attr">xpack:</span><br>  <span class="hljs-attr">security:</span><br>    <span class="hljs-attr">authc:</span><br>      <span class="hljs-attr">realms:</span><br>        <span class="hljs-attr">active_directory:</span><br>          <span class="hljs-attr">ad1:</span><br>            <span class="hljs-attr">order:</span> <span class="hljs-number">0</span> <br>            <span class="hljs-attr">domain_name:</span> <span class="hljs-string">songxwn.com</span><br>            <span class="hljs-attr">url:</span> <span class="hljs-string">ldap://songxwn:389</span><br>            <span class="hljs-attr">bind_dn:</span> <span class="hljs-string">administrator@songxwn.com</span><br><br></code></pre></td></tr></table></figure>
 
-<ul>
-<li>domain_name和url选项修改为自己的域名。</li>
-<li>bind_dn修改为域用户。</li>
-</ul>
-<p><strong>注意：如果是集群，需要每一个节点都修改此配置。（注意所有节点的DNS服务器都要指向域控制器）</strong></p>
-<h2 id="配置bind账号的密码"><a href="#配置bind账号的密码" class="headerlink" title="配置bind账号的密码"></a>配置bind账号的密码</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/elasticsearch/</span>bin/elasticsearch-keystore add \ xpack.security.authc.realms.active_directory.ad1.secure_bind_password<br><br><span class="hljs-comment"># 配置ad1下的用于搜索的域账号密码。</span><br><br></code></pre></td></tr></table></figure>
 
-<ul>
-<li>密码会存储到 <code>/etc/elasticsearch/elasticsearch.keystore</code></li>
-</ul>
-<p>注意：如果修改了keystore，那么集群上的每一个节点都要同步。</p>
-<p>密钥库管理参考<a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/elasticsearch-keystore.html">官方文档</a>。（增加、列出、查看明文、删除等）</p>
-<h2 id="配置用户组映射"><a href="#配置用户组映射" class="headerlink" title="配置用户组映射"></a>配置用户组映射</h2><h3 id="命令操作-Kibana-gt-http-127-0-0-1-5601-app-dev-tools-console"><a href="#命令操作-Kibana-gt-http-127-0-0-1-5601-app-dev-tools-console" class="headerlink" title="命令操作-Kibana&gt;http://127.0.0.1:5601/app/dev_tools#/console"></a>命令操作-Kibana&gt;<code>http://127.0.0.1:5601/app/dev_tools#/console</code></h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs awk">PUT <span class="hljs-regexp">/_security/</span>role_mapping/admins<br>&#123;<br>  <span class="hljs-string">&quot;roles&quot;</span> : [ <span class="hljs-string">&quot;monitoring&quot;</span> , <span class="hljs-string">&quot;user&quot;</span> ],<br>  <span class="hljs-string">&quot;rules&quot;</span> : &#123; <span class="hljs-string">&quot;field&quot;</span> : &#123;<br>    <span class="hljs-string">&quot;groups&quot;</span> : <span class="hljs-string">&quot;cn=admins,cn=Users,dc=songxwn,dc=com&quot;</span> <br>  &#125; &#125;,<br>  <span class="hljs-string">&quot;enabled&quot;</span>: true<br>&#125;<br><br><span class="hljs-comment"># </span><br><br><span class="hljs-comment"># 映射安全组，dc=songxwn,dc=com 为域名。cn=admins,cn=Users 代表路径，Users是组织单元，而admins为安全组。</span><br>admins安全组在Users组织单元下。<br><br><span class="hljs-comment"># 在AD中，添加到安全组的用户即可登录，并映射到相关角色。</span><br><br><span class="hljs-comment"># 用户可不带域名后缀登录。</span><br><br><span class="hljs-comment"># 具体路径查看，可以参考AD上的ADSI编辑器工具。</span><br><br></code></pre></td></tr></table></figure>
-
-<h3 id="Web操作-推荐-Kibana-gt-http-127-0-0-1-5601-app-management-security-role-mappings"><a href="#Web操作-推荐-Kibana-gt-http-127-0-0-1-5601-app-management-security-role-mappings" class="headerlink" title="Web操作(推荐)-Kibana&gt;http://127.0.0.1:5601/app/management/security/role_mappings"></a>Web操作(推荐)-Kibana&gt;<code>http://127.0.0.1:5601/app/management/security/role_mappings</code></h3><h1 id=""><a href="#" class="headerlink" title=""></a><img src="https://s3.bmp.ovh/imgs/2023/05/03/7dd920bd443e0a3f.jpg" srcset="/img/loading.gif" lazyload></h1><ul>
-<li>映射安全组，dc&#x3D;songxwn,dc&#x3D;com 为域名。cn&#x3D;admins,cn&#x3D;Users 代表路径，Users是组织单元，而admins为安全组。  admins安全组在Users组织单元下。  ﻿ </li>
-<li>在AD中，添加到安全组的用户即可登录，并映射到相关角色。  ﻿  </li>
-<li>用户可不带域名后缀登录。  ﻿  </li>
-<li>具体路径查看，可以参考AD上的ADSI编辑器工具。</li>
-</ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/active-directory-realm.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/active-directory-realm.html</a> </p>
+<h1 id="ELK与告警"><a href="#ELK与告警" class="headerlink" title="ELK与告警"></a>ELK与告警</h1><p>单机搭建：<a href="https://songxwn.com/elk/">https://songxwn.com/elk/</a> </p>
+<p>告警搭建：<a href="https://songxwn.com/frostmourne_install/">https://songxwn.com/frostmourne_install/</a> </p>
 
                 
               </div>
@@ -427,11 +409,9 @@
       
         <a href="/tags/elk/">#elk</a>
       
-        <a href="/tags/elasticsearch/">#elasticsearch</a>
+        <a href="/tags/syslog/">#syslog</a>
       
-        <a href="/tags/ad/">#ad</a>
-      
-        <a href="/tags/ldap/">#ldap</a>
+        <a href="/tags/snmp/">#snmp</a>
       
     </div>
   
@@ -443,8 +423,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Elasticsearch 接入微软Active Directory认证</div>
-      <div>https://songxwn.com/ELK-AD-LDAP-Authentication/</div>
+      <div>接收SEC OTP4000 UDP告警日志</div>
+      <div>https://songxwn.com/SEC_OTP_UDP-log/</div>
     </div>
     <div class="license-meta">
       
@@ -456,13 +436,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年5月3日</div>
+          <div>2023年5月13日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年5月3日</div>
+          <div>2023年5月13日</div>
         </div>
       
       
@@ -493,18 +473,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/ELK-logstash-hostname/" title="ELK Logstash解析系统日志错误">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">ELK Logstash解析系统日志错误</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/podman/" title="Podman 容器管理工具">
-                        <span class="hidden-mobile">Podman 容器管理工具</span>
+                      <a href="/VXLAN_Configuration/" title="VXLAN 基本配置">
+                        <span class="hidden-mobile">VXLAN 基本配置</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -585,7 +559,7 @@
       
         <a href="/ELK-AD-LDAP-Authentication/" title="Elasticsearch 接入微软Active Directory认证"
            class="list-group-item list-group-item-action
-           active">
+           ">
           <span class="category-post">Elasticsearch 接入微软Active Directory认证</span>
         </a>
       
@@ -648,7 +622,7 @@
       
         <a href="/SEC_OTP_UDP-log/" title="接收SEC OTP4000 UDP告警日志"
            class="list-group-item list-group-item-action
-           ">
+           active">
           <span class="category-post">接收SEC OTP4000 UDP告警日志</span>
         </a>
       

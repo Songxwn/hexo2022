@@ -4,6 +4,39 @@
   
   
   <entry>
+    <title>接收SEC OTP4000 UDP告警日志</title>
+    <link href="/SEC_OTP_UDP-log/"/>
+    <url>/SEC_OTP_UDP-log/</url>
+    
+    <content type="html"><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>本教程用于鼎频通信的SEC OTP4000波分设备系列的告警接收。</p><p>PS：很小众的东西。</p><span id="more"></span><h1 id="报文分析"><a href="#报文分析" class="headerlink" title="报文分析"></a>报文分析</h1><p>经配置设备的SNMP Trap服务器后，分析报文不为SNMP Trap报文。</p><p>由简单的UDP报文承载告警信息，字符编码为中文编码 （GB18030）。</p><p>端口号为UDP 9000。</p><h1 id="Logstash-配置接收UDP日志"><a href="#Logstash-配置接收UDP日志" class="headerlink" title="Logstash 配置接收UDP日志"></a>Logstash 配置接收UDP日志</h1><p>vim &#x2F;etc&#x2F;logstash&#x2F;conf.d&#x2F;trap.conf</p><figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs puppet"><span class="hljs-keyword">input</span> &#123;<br>  udp &#123;<br>    <span class="hljs-attr">type</span> =&gt; <span class="hljs-string">&quot;UDP-Logs&quot;</span><br>    <span class="hljs-attr">port</span> =&gt; <span class="hljs-number">9000</span><br>        <span class="hljs-attr">codec</span> =&gt; plain&#123; <span class="hljs-attr">charset</span> =&gt; <span class="hljs-string">&quot;GB18030&quot;</span> <br>       &#125;<br>&#125;<br><br><br></code></pre></td></tr></table></figure><h1 id="ELK与告警"><a href="#ELK与告警" class="headerlink" title="ELK与告警"></a>ELK与告警</h1><p>单机搭建：<a href="https://songxwn.com/elk/">https://songxwn.com/elk/</a> </p><p>告警搭建：<a href="https://songxwn.com/frostmourne_install/">https://songxwn.com/frostmourne_install/</a> </p>]]></content>
+    
+    
+    <categories>
+      
+      <category>linux</category>
+      
+      <category>ELK</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>elk</tag>
+      
+      <tag>syslog</tag>
+      
+      <tag>snmp</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>VXLAN 基本配置</title>
     <link href="/VXLAN_Configuration/"/>
     <url>/VXLAN_Configuration/</url>
