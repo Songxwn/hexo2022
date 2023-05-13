@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.328888.xyz/2023/05/13/iuaYFc.png">
 <meta property="article:published_time" content="2023-05-13T14:59:00.000Z">
-<meta property="article:modified_time" content="2023-05-13T15:09:02.715Z">
+<meta property="article:modified_time" content="2023-05-13T15:15:14.313Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="elk">
@@ -359,7 +359,7 @@
 <p>由简单的UDP报文承载告警信息，字符编码为中文编码 （GB18030）。</p>
 <p>端口号为UDP 9000。</p>
 <h1 id="Logstash-配置接收UDP日志"><a href="#Logstash-配置接收UDP日志" class="headerlink" title="Logstash 配置接收UDP日志"></a>Logstash 配置接收UDP日志</h1><p>vim &#x2F;etc&#x2F;logstash&#x2F;conf.d&#x2F;trap.conf</p>
-<figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs puppet"><span class="hljs-keyword">input</span> &#123;<br>  udp &#123;<br>    <span class="hljs-attr">type</span> =&gt; <span class="hljs-string">&quot;UDP-Logs&quot;</span><br>    <span class="hljs-attr">port</span> =&gt; <span class="hljs-number">9000</span><br>        <span class="hljs-attr">codec</span> =&gt; plain&#123; <span class="hljs-attr">charset</span> =&gt; <span class="hljs-string">&quot;GB18030&quot;</span> <br>       &#125;<br>&#125;<br><br><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs conf">input &#123;<br>  udp &#123;<br>    type =&gt; &quot;UDP-Logs&quot;<br>    port =&gt; 9000<br>        codec =&gt; plain&#123; charset =&gt; &quot;GB18030&quot; <br>       &#125;<br>&#125;<br><br><br></code></pre></td></tr></table></figure>
 
 
 
