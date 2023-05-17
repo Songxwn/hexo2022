@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-05-17T08:33:58.535Z</updated>
+  <updated>2023-05-17T08:38:26.818Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -21,10 +21,10 @@
     <link href="https://songxwn.com/zabbix-SNMP-uptime-497day/"/>
     <id>https://songxwn.com/zabbix-SNMP-uptime-497day/</id>
     <published>2023-05-16T23:29:36.000Z</published>
-    <updated>2023-05-17T08:33:58.535Z</updated>
+    <updated>2023-05-17T08:38:26.818Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;工作中遇到，网络设备开机到了约497天的时候（&lt;strong&gt;或者每过497天&lt;/strong&gt;），Zabbix SNMP获取的时间值就会归零，重新计数，但查看设备状态正常，未重启。&lt;br&gt;查询一番后有了不重启的解决方案。&lt;/p&gt;</summary>
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;工作中遇到，网络设备开机s时间到了约497天的时候（&lt;strong&gt;或者每过497天&lt;/strong&gt;），Zabbix SNMP获取的时间值就会归零，重新计数，但查看设备状态正常，未重启。&lt;br&gt;查询一番后有了不重启的解决方案。&lt;/p&gt;</summary>
     
     
     
@@ -261,11 +261,11 @@
     <link href="https://songxwn.com/zabbix-reboot-SNMPv3/"/>
     <id>https://songxwn.com/zabbix-reboot-SNMPv3/</id>
     <published>2023-05-01T23:29:36.000Z</published>
-    <updated>2023-05-02T07:33:45.192Z</updated>
+    <updated>2023-05-17T08:39:19.552Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;最近有发现有SNMPv3 监控的网络设备断电重启后，Zabbix无法正常监控，显示SNMP超时。&lt;/p&gt;
-&lt;p&gt;但SNMP工具去get oid值却没有问题，Zabbix Server重启后能解决。&lt;/p&gt;
+&lt;p&gt;但SNMP工具去Get OID值却没有问题，但Zabbix Server重启后能解决此问题。&lt;/p&gt;
 &lt;p&gt;查询一番后有了不重启的解决方案。&lt;/p&gt;</summary>
     
     
@@ -276,6 +276,8 @@
     <category term="network" scheme="https://songxwn.com/tags/network/"/>
     
     <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
+    
+    <category term="snmp" scheme="https://songxwn.com/tags/snmp/"/>
     
     <category term="Zabbix" scheme="https://songxwn.com/tags/Zabbix/"/>
     
