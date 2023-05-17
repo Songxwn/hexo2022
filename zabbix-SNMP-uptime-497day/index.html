@@ -16,29 +16,29 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
   
-    <meta name="description" content="介绍本教程用于鼎频通信的SEC OTP4000波分设备系列的告警接收。 PS：很小众的东西。">
+    <meta name="description" content="简介工作中遇到，网络设备开机到了约497天的时候（或者每过497天），Zabbix SNMP获取的时间值就会归零，重新计数，但查看设备状态正常，未重启。查询一番后有了不重启的解决方案。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="接收SEC OTP4000 UDP告警日志">
-<meta property="og:url" content="https://songxwn.com/SEC_OTP_UDP-log/index.html">
+<meta property="og:title" content="Zabbix SNMP开机时间497天重置问题">
+<meta property="og:url" content="https://songxwn.com/zabbix-SNMP-uptime-497day/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="介绍本教程用于鼎频通信的SEC OTP4000波分设备系列的告警接收。 PS：很小众的东西。">
+<meta property="og:description" content="简介工作中遇到，网络设备开机到了约497天的时候（或者每过497天），Zabbix SNMP获取的时间值就会归零，重新计数，但查看设备状态正常，未重启。查询一番后有了不重启的解决方案。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://i.328888.xyz/2023/05/13/iuaYFc.png">
-<meta property="article:published_time" content="2023-05-13T14:59:00.000Z">
-<meta property="article:modified_time" content="2023-05-13T15:15:14.313Z">
+<meta property="og:image" content="https://i.328888.xyz/2023/05/17/VVlmyb.jpeg">
+<meta property="article:published_time" content="2023-05-16T23:29:36.000Z">
+<meta property="article:modified_time" content="2023-05-17T08:33:58.535Z">
 <meta property="article:author" content="Song">
+<meta property="article:tag" content="network">
 <meta property="article:tag" content="Linux">
-<meta property="article:tag" content="elk">
-<meta property="article:tag" content="syslog">
 <meta property="article:tag" content="snmp">
+<meta property="article:tag" content="Zabbix">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://i.328888.xyz/2023/05/13/iuaYFc.png">
+<meta name="twitter:image" content="https://i.328888.xyz/2023/05/17/VVlmyb.jpeg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>接收SEC OTP4000 UDP告警日志 - Song`s Blog</title>
+  <title>Zabbix SNMP开机时间497天重置问题 - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -245,7 +245,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="接收SEC OTP4000 UDP告警日志"></span>
+            <span id="subtitle" data-typed-text="Zabbix SNMP开机时间497天重置问题"></span>
           
         </div>
 
@@ -256,8 +256,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-13 22:59" pubdate>
-          2023年5月13日 晚上
+        <time datetime="2023-05-17 07:29" pubdate>
+          2023年5月17日 早上
         </time>
       </span>
     
@@ -268,7 +268,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          416 字
+          598 字
         
       </span>
     
@@ -279,7 +279,7 @@
         
         
         
-          4 分钟
+          5 分钟
         
       </span>
     
@@ -338,12 +338,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">接收SEC OTP4000 UDP告警日志</h1>
+            <h1 style="display: none">Zabbix SNMP开机时间497天重置问题</h1>
             
               <p class="note note-danger">
                 
                   
-                    本文最后更新于：2023年5月13日 晚上
+                    本文最后更新于：2023年5月17日 下午
                   
                 
               </p>
@@ -351,20 +351,19 @@
             
               <div class="markdown-body">
                 
-                <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>本教程用于鼎频通信的SEC OTP4000波分设备系列的告警接收。</p>
-<p>PS：很小众的东西。</p>
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>工作中遇到，网络设备开机到了约497天的时候（<strong>或者每过497天</strong>），Zabbix SNMP获取的时间值就会归零，重新计数，但查看设备状态正常，未重启。<br>查询一番后有了不重启的解决方案。</p>
 <span id="more"></span>
 
-<h1 id="报文分析"><a href="#报文分析" class="headerlink" title="报文分析"></a>报文分析</h1><p>经配置设备的SNMP Trap服务器后，分析报文不为SNMP Trap报文。</p>
-<p>由简单的UDP报文承载告警信息，字符编码为中文编码 （GB18030）。</p>
-<p>端口号为UDP 9000。</p>
-<h1 id="Logstash-配置接收UDP日志"><a href="#Logstash-配置接收UDP日志" class="headerlink" title="Logstash 配置接收UDP日志"></a>Logstash 配置接收UDP日志</h1><p>vim &#x2F;etc&#x2F;logstash&#x2F;conf.d&#x2F;trap.conf</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs conf">input &#123;<br>  udp &#123;<br>    type =&gt; &quot;UDP-Logs&quot;<br>    port =&gt; 9000<br>        codec =&gt; plain&#123; charset =&gt; &quot;GB18030&quot; <br>       &#125;<br>&#125;<br><br><br></code></pre></td></tr></table></figure>
-
-
-
-<h1 id="ELK与告警"><a href="#ELK与告警" class="headerlink" title="ELK与告警"></a>ELK与告警</h1><p>单机搭建：<a href="https://songxwn.com/elk/">https://songxwn.com/elk/</a> </p>
-<p>告警搭建：<a href="https://songxwn.com/frostmourne_install/">https://songxwn.com/frostmourne_install/</a> </p>
+<h1 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h1><p>sysUpTimeInstance  OID  <strong>1.3.6.1.2.1.1.3.0</strong></p>
+<p>获取的时间单位为 0.01秒，而此OID为32bit，所以最大只能显示<code>42949672.96秒</code>即497.1天，所以每累计大于此限制，就会重置，导致开机时间获取不正确。</p>
+<p><a target="_blank" rel="noopener" href="https://oidref.com/1.3.6.1.2.1.1.3.0">https://oidref.com/1.3.6.1.2.1.1.3.0</a> </p>
+<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>snmpEngineTime  OID <strong>1.3.6.1.6.3.10.2.1.3.0</strong></p>
+<p>获取的时间单位为秒，也为32bti，但最多可以存储49710 天。足够设备生命周期使用。</p>
+<p>修改Zabbix SNMP获取时间的方式为上述OID即可，其数据类型为整数。</p>
+<p>注意：此为SNMP的启动时间，若SNMP进程重启，也会导致时间重置。</p>
+<p><a target="_blank" rel="noopener" href="https://oidref.com/1.3.6.1.6.3.10.2.1.3">https://oidref.com/1.3.6.1.6.3.10.2.1.3</a> </p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.zabbix.com/forum/zabbix-help/47245-snmp-uptime-overflow-after-497-days">https://www.zabbix.com/forum/zabbix-help/47245-snmp-uptime-overflow-after-497-days</a> </p>
+<p><a target="_blank" rel="noopener" href="https://support.huawei.com/enterprise/zh/doc/EDOC1000017243/3e06cc7f">https://support.huawei.com/enterprise/zh/doc/EDOC1000017243/3e06cc7f</a> </p>
 
                 
               </div>
@@ -383,15 +382,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/linux/" class="category-chain-item">linux</a>
+  <a href="/categories/Zabbix/" class="category-chain-item">Zabbix</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/linux/ELK/" class="category-chain-item">ELK</a>
-  
-  
-
   
 
       </span>
@@ -405,13 +397,13 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
+        <a href="/tags/network/">#network</a>
+      
         <a href="/tags/Linux/">#Linux</a>
       
-        <a href="/tags/elk/">#elk</a>
-      
-        <a href="/tags/syslog/">#syslog</a>
-      
         <a href="/tags/snmp/">#snmp</a>
+      
+        <a href="/tags/Zabbix/">#Zabbix</a>
       
     </div>
   
@@ -423,8 +415,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>接收SEC OTP4000 UDP告警日志</div>
-      <div>https://songxwn.com/SEC_OTP_UDP-log/</div>
+      <div>Zabbix SNMP开机时间497天重置问题</div>
+      <div>https://songxwn.com/zabbix-SNMP-uptime-497day/</div>
     </div>
     <div class="license-meta">
       
@@ -436,13 +428,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年5月13日</div>
+          <div>2023年5月17日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年5月13日</div>
+          <div>2023年5月17日</div>
         </div>
       
       
@@ -473,18 +465,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/zabbix-SNMP-uptime-497day/" title="Zabbix SNMP开机时间497天重置问题">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Zabbix SNMP开机时间497天重置问题</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/VXLAN_Configuration/" title="VXLAN 基本配置">
-                        <span class="hidden-mobile">VXLAN 基本配置</span>
+                      <a href="/SEC_OTP_UDP-log/" title="接收SEC OTP4000 UDP告警日志">
+                        <span class="hidden-mobile">接收SEC OTP4000 UDP告警日志</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -544,17 +530,17 @@
     
     <div class="category row nomargin-x">
       <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="ELK"
-        id="heading-9e3164c35d85d881c2249c7894d8e274" role="tab" data-toggle="collapse" href="#collapse-9e3164c35d85d881c2249c7894d8e274"
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Zabbix"
+        id="heading-d1ddc1b1c3c258570ba6994be1aeaddf" role="tab" data-toggle="collapse" href="#collapse-d1ddc1b1c3c258570ba6994be1aeaddf"
         aria-expanded="true"
       >
-        ELK
-        <span class="list-group-count">(8)</span>
+        Zabbix
+        <span class="list-group-count">(3)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse show" id="collapse-9e3164c35d85d881c2249c7894d8e274"
-           role="tabpanel" aria-labelledby="heading-9e3164c35d85d881c2249c7894d8e274">
+      <div class="category-collapse collapse show" id="collapse-d1ddc1b1c3c258570ba6994be1aeaddf"
+           role="tabpanel" aria-labelledby="heading-d1ddc1b1c3c258570ba6994be1aeaddf">
         
         
           
@@ -563,73 +549,28 @@
     
       
       
-        <a href="/ELK-AD-LDAP-Authentication/" title="Elasticsearch 接入微软Active Directory认证"
+        <a href="/zabbix-reboot-SNMPv3/" title="Zabbix SNMPv3 设备重启后无法监控问题"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">Elasticsearch 接入微软Active Directory认证</span>
+          <span class="category-post">Zabbix SNMPv3 设备重启后无法监控问题</span>
         </a>
       
     
       
       
-        <a href="/Elasticsearch-x-pack-core/" title="Elasticsearch 8.7 白金版激活"
+        <a href="/zabbix_data/" title="Zabbix：历史数据与趋势数据"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">Elasticsearch 8.7 白金版激活</span>
+          <span class="category-post">Zabbix：历史数据与趋势数据</span>
         </a>
       
     
       
       
-        <a href="/elk/" title="ELK Stack 安装教程，RHEL及衍生系统。"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">ELK Stack 安装教程，RHEL及衍生系统。</span>
-        </a>
-      
-    
-      
-      
-        <a href="/elk_cluster/" title="Elasticsearch 安装配置集群系统"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Elasticsearch 安装配置集群系统</span>
-        </a>
-      
-    
-      
-      
-        <a href="/elk_snmp_trap/" title="ELK Logstash配置SNMP-Trap"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">ELK Logstash配置SNMP-Trap</span>
-        </a>
-      
-    
-      
-      
-        <a href="/frostmourne_install/" title="Frostmourne (霜之哀伤)日志监控系统部署安装"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Frostmourne (霜之哀伤)日志监控系统部署安装</span>
-        </a>
-      
-    
-      
-      
-        <a href="/ELK-logstash-hostname/" title="ELK Logstash解析系统日志错误"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">ELK Logstash解析系统日志错误</span>
-        </a>
-      
-    
-      
-      
-        <a href="/SEC_OTP_UDP-log/" title="接收SEC OTP4000 UDP告警日志"
+        <a href="/zabbix-SNMP-uptime-497day/" title="Zabbix SNMP开机时间497天重置问题"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">接收SEC OTP4000 UDP告警日志</span>
+          <span class="category-post">Zabbix SNMP开机时间497天重置问题</span>
         </a>
       
     

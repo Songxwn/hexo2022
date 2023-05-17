@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-05-13T15:15:14.313Z</updated>
+  <updated>2023-05-17T08:33:58.535Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Zabbix SNMP开机时间497天重置问题</title>
+    <link href="https://songxwn.com/zabbix-SNMP-uptime-497day/"/>
+    <id>https://songxwn.com/zabbix-SNMP-uptime-497day/</id>
+    <published>2023-05-16T23:29:36.000Z</published>
+    <updated>2023-05-17T08:33:58.535Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;工作中遇到，网络设备开机到了约497天的时候（&lt;strong&gt;或者每过497天&lt;/strong&gt;），Zabbix SNMP获取的时间值就会归零，重新计数，但查看设备状态正常，未重启。&lt;br&gt;查询一番后有了不重启的解决方案。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Zabbix" scheme="https://songxwn.com/categories/Zabbix/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
+    
+    <category term="snmp" scheme="https://songxwn.com/tags/snmp/"/>
+    
+    <category term="Zabbix" scheme="https://songxwn.com/tags/Zabbix/"/>
+    
+  </entry>
   
   <entry>
     <title>接收SEC OTP4000 UDP告警日志</title>
@@ -542,36 +567,6 @@
     <category term="ospf" scheme="https://songxwn.com/tags/ospf/"/>
     
     <category term="datacom" scheme="https://songxwn.com/tags/datacom/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Frostmourne (霜之哀伤)日志监控系统部署安装</title>
-    <link href="https://songxwn.com/frostmourne_install/"/>
-    <id>https://songxwn.com/frostmourne_install/</id>
-    <published>2023-03-26T08:48:00.000Z</published>
-    <updated>2023-05-02T06:46:42.167Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;&lt;code&gt;Frostmourne&lt;/code&gt;(霜之哀伤)是汽车之家经销商技术部监控系统的开源版本，用于帮助监控几乎所有数据库数据(包括&lt;code&gt;Elasticsearch&lt;/code&gt;, &lt;code&gt;Prometheus&lt;/code&gt;, &lt;code&gt;SkyWalking&lt;/code&gt;, &lt;code&gt;MySql&lt;/code&gt; 等等)。如果你已经建立起了日志系统， 指标体系，却苦恼于没有一个配套监控系统，也许它能帮到你。&lt;/p&gt;
-&lt;p&gt;支持数据源：Elasticsearch, HTTP, SkyWalking, Prometheus, InfluxDB, MySQL&amp;#x2F;TiDb, ClickHouse, SqlServer, PING, IotDB, Telnet&lt;/p&gt;
-&lt;p&gt;支持告警发送方式：钉钉(机器人)、企业微信(机器人)、飞书机器人、OneMessage机器人、Email、短信、HTTP。（text, markdown）&lt;/p&gt;
-&lt;p&gt;支持LDAP认证和自动创建用户。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Elasticsearch&lt;/code&gt;数据查询、分享和下载&lt;/p&gt;
-&lt;p&gt;报警消息抑制功能，防止消息轰炸；也有报警升级功能，避免故障相关方长时间得不到通知。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
-    
-    <category term="ELK" scheme="https://songxwn.com/categories/linux/ELK/"/>
-    
-    
-    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
-    
-    <category term="elk" scheme="https://songxwn.com/tags/elk/"/>
-    
-    <category term="syslog" scheme="https://songxwn.com/tags/syslog/"/>
     
   </entry>
   
