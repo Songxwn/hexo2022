@@ -528,7 +528,7 @@
     <link href="https://songxwn.com/MariaDB_Galera_Cluster/"/>
     <id>https://songxwn.com/MariaDB_Galera_Cluster/</id>
     <published>2023-04-02T08:48:00.000Z</published>
-    <updated>2023-04-30T05:19:01.076Z</updated>
+    <updated>2023-05-19T09:29:04.506Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://s3.bmp.ovh/imgs/2023/04/02/1342a2c99e7d1161.png&quot;&gt;&lt;/p&gt;
@@ -545,6 +545,8 @@
     <category term="mariadb" scheme="https://songxwn.com/tags/mariadb/"/>
     
     <category term="cluster" scheme="https://songxwn.com/tags/cluster/"/>
+    
+    <category term="mysql" scheme="https://songxwn.com/tags/mysql/"/>
     
   </entry>
   

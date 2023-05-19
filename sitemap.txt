@@ -1,3 +1,4 @@
+https://songxwn.com/MariaDB_Galera_Cluster/
 https://songxwn.com/zabbix-SNMP-uptime-497day/
 https://songxwn.com/zabbix-reboot-SNMPv3/
 https://songxwn.com/team_nav/
@@ -20,7 +21,6 @@ https://songxwn.com/Linux-growpart/
 https://songxwn.com/about/index.html
 https://songxwn.com/books/index.html
 https://songxwn.com/network-test/
-https://songxwn.com/MariaDB_Galera_Cluster/
 https://songxwn.com/VMware_Vsphere8_key/
 https://songxwn.com/ESXi8_IPMI/
 https://songxwn.com/zabbix_data/
@@ -91,6 +91,7 @@ https://songxwn.com/tags/container/
 https://songxwn.com/tags/web/
 https://songxwn.com/tags/storage/
 https://songxwn.com/tags/Zabbix/
+https://songxwn.com/tags/mysql/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/VMware/
