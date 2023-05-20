@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-05-20T03:53:27.810Z</updated>
+  <updated>2023-05-20T04:03:09.189Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -17,20 +17,15 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>从流量控制算法谈网络优化 – 从 CUBIC 到 BBRv2 算法</title>
+    <title>TCP拥塞控制算法–从 CUBIC 到 BBRv2</title>
     <link href="https://songxwn.com/TCP_BBR/"/>
     <id>https://songxwn.com/TCP_BBR/</id>
     <published>2023-05-20T03:47:39.000Z</published>
-    <updated>2023-05-20T03:53:27.810Z</updated>
+    <updated>2023-05-20T04:03:09.189Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html"></summary>
-        
-      
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;BBR算法可以提高TCP传输在高延迟网络中的性能表现，可以最大程度的利用带宽。于Linux kernel 4.9开始正式加入内核。&lt;/p&gt;
+&lt;p&gt;PS：但注意只会加速上行流量。&lt;/p&gt;</summary>
     
     
     
