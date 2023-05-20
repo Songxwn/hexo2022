@@ -23,16 +23,16 @@
 <meta property="og:site_name" content="Song&#96;s Blog">
 <meta property="og:description" content="介绍VXLAN工作原理如下：  在每个数据中心的交换机上都配置一个VTEP（VXLAN Tunnel Endpoints），用于封装和解封装VXLAN报文。 在两个VTEP之间建立一个VXLAN隧道，用于在两个数据中心之间传输封装后的VXLAN报文。 当虚拟机之间需要通信时，它们的报文会被发送到所在数据中心的交换机上。交换机上的VTEP会将报文封装成VXLAN报文，并通过VXLAN隧道发送到另一个">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://i.328888.xyz/2023/05/10/iYy9RV.png">
+<meta property="og:image" content="https://img.songxwn.com/file/02d30ed243c8c2561fe81.png">
 <meta property="article:published_time" content="2023-05-10T06:54:00.000Z">
-<meta property="article:modified_time" content="2023-05-10T06:10:44.866Z">
+<meta property="article:modified_time" content="2023-05-20T05:44:52.823Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="vxlan">
 <meta property="article:tag" content="l2vpn">
 <meta property="article:tag" content="datacom">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://i.328888.xyz/2023/05/10/iYy9RV.png">
+<meta name="twitter:image" content="https://img.songxwn.com/file/02d30ed243c8c2561fe81.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -343,7 +343,7 @@
               <p class="note note-danger">
                 
                   
-                    本文最后更新于：2023年5月10日 下午
+                    本文最后更新于：2023年5月20日 下午
                   
                 
               </p>
@@ -373,20 +373,20 @@
 <li>静态VXLAN隧道并不是一个有状态的隧道（如IPsec VPN），只是数据传输时的隧道封装，类似于GRE VPN。</li>
 <li>头端复制列表中的地址，即进行隧道封装传输时可封装的隧道目的地址。</li>
 </ul>
-<p><img src="https://i.328888.xyz/2023/05/10/iYf9Zy.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://img.songxwn.com/file/ceb63f5e8da7af7d5ac8f.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="VXLAN-MAC地址表项"><a href="#VXLAN-MAC地址表项" class="headerlink" title="VXLAN MAC地址表项"></a>VXLAN MAC地址表项</h2><ul>
 <li>VXLAN实现的是在Overlay网络中进行二层转发，转发单播数据帧依赖的依旧是MAC地址表项。</li>
 <li>VTEP接收到BD内来自本地的数据帧，将数据帧的源MAC地址添加到该BD的MAC地址表中，出接口为收到数据帧的接口。</li>
 <li>该表项用于指导发往本VTEP下连接终端的数据帧的转发。</li>
 </ul>
-<p><img src="https://i.328888.xyz/2023/05/10/iYfPkF.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://img.songxwn.com/file/3222ae0158dcf683348b4.png" srcset="/img/loading.gif" lazyload></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs none">&lt;S1&gt;display mac-address bridge-domain 10<br>-------------------------------------------------------------------------------<br>MAC Address    		VLAN/VSI/BD   Learned-From    Type        		<br>-------------------------------------------------------------------------------<br>0000-0000-000a	      -/-/10      GE1/0/1.10     dynamic    <br><br>&lt;S1&gt;display mac-address bridge-domain 20<br>-------------------------------------------------------------------------------<br>MAC Address    		VLAN/VSI/BD   Learned-From    Type        		<br>-------------------------------------------------------------------------------<br>0000-0000-000b     	 -/-/20       GE1/0/1.20   	 dynamic    <br><br></code></pre></td></tr></table></figure>
 
 <h2 id="MAC地址动态学习-1"><a href="#MAC地址动态学习-1" class="headerlink" title="MAC地址动态学习 (1)"></a>MAC地址动态学习 (1)</h2><ul>
 <li>转发属于远端VTEP下所连接设备的数据帧，需要先学习到远端设备的MAC地址。</li>
 <li>该过程与传统MAC地址表形成过程类似，依赖于主机之间的报文交互，一般通过ARP报文交互形成MAC地址表项。</li>
 </ul>
-<p><img src="https://i.328888.xyz/2023/05/10/iYyfac.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://img.songxwn.com/file/363a6c0bf7ab599d2043f.png" srcset="/img/loading.gif" lazyload></p>
 <ul>
 <li>PC1与PC2通信过程如下：</li>
 </ul>
@@ -397,7 +397,7 @@
 <li>SW2收到VXLAN报文后，将其解封装，得到原始数据帧；同时学习PC1的MAC地址，将该地址与SW1的VTEP地址进行绑定。</li>
 <li>SW2将该ARP帧在本地广播域内泛洪。然后，PC2收到了该帧并学习到了PC1的ARP信息。</li>
 </ol>
-<h2 id="MAC地址动态学习-2"><a href="#MAC地址动态学习-2" class="headerlink" title="MAC地址动态学习 (2)"></a>MAC地址动态学习 (2)</h2><p><img src="https://i.328888.xyz/2023/05/10/iYycz5.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="MAC地址动态学习-2"><a href="#MAC地址动态学习-2" class="headerlink" title="MAC地址动态学习 (2)"></a>MAC地址动态学习 (2)</h2><p><img src="https://img.songxwn.com/file/066626040ba7e1078206a.png" srcset="/img/loading.gif" lazyload></p>
 <ul>
 <li><p>PC2发送单播的ARP回应。</p>
 <p>6. SW2此时已经拥有PC1的MAC地址表项，因此将会单播转发，并且学习PC2的源MAC地址到MAC地址表项中。</p>
@@ -409,13 +409,13 @@
 <blockquote>
 <p>至此PC1、2相互学习到了对方的ARP信息，SW1、SW2完成了PC1、PC2的MAC地址学习，该过程也叫做Flood and Learn。</p>
 </blockquote>
-<h2 id="同子网已知目的地址单播报文转发"><a href="#同子网已知目的地址单播报文转发" class="headerlink" title="同子网已知目的地址单播报文转发"></a>同子网已知目的地址单播报文转发</h2><p><img src="https://i.328888.xyz/2023/05/10/iYygKH.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="同子网已知目的地址单播报文转发"><a href="#同子网已知目的地址单播报文转发" class="headerlink" title="同子网已知目的地址单播报文转发"></a>同子网已知目的地址单播报文转发</h2><p><img src="https://img.songxwn.com/file/71c8b899588c4675dd2dc.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="BUM流量转发"><a href="#BUM流量转发" class="headerlink" title="BUM流量转发"></a>BUM流量转发</h2><ul>
 <li>传输BUM（Broadcast、Unknown、Multicast）流量时，VTEP会将流量复制多份发送到头端复制列表中的对端VTEP，从而在Overlay网络中实现泛洪转发的效果。 </li>
 <li>BUM，广播、未知、组播以太网帧</li>
 </ul>
-<p><img src="https://i.328888.xyz/2023/05/10/iYyE3E.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="跨子网三层转发"><a href="#跨子网三层转发" class="headerlink" title="跨子网三层转发"></a>跨子网三层转发</h2><p><img src="https://i.328888.xyz/2023/05/10/iYyeSC.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://img.songxwn.com/file/d5ca3a9640169b616d3aa.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="跨子网三层转发"><a href="#跨子网三层转发" class="headerlink" title="跨子网三层转发"></a>跨子网三层转发</h2><p><img src="https://img.songxwn.com/file/403bc1a472d3e9819748f.png" srcset="/img/loading.gif" lazyload></p>
 <ol>
 <li>PC1希望与PC2进行通信，本地计算发现对端与自身不在同一个子网，此时将报文发送给网关。</li>
 <li>PC1发往PC2的数据帧，目的MAC为：00AB-09FF-1111（网关MAC地址），SW1收到之后执行L2查表发现出接口为远端VTEP（即L3网关），将报文加上VXLAN头部封装（VNI &#x3D;1000）之后发往SW3。</li>
@@ -423,7 +423,7 @@
 <li>SW3查找路由表，发现目的IP：192.168.2.1，与本地接口VBDIF 20产生的直连路由相匹配，查找ARP表项确定报文目的MAC，再查找MAC地址表确定报文的出接口。SW3中前往192.168.2.1所对应MAC地址的出接口为远端VTEP 2.2.2.2，将报文加上VXLAN封装，送往SW2。</li>
 <li>SW2收到报文之后解VXLAN封装发现目的MAC并非自身任何接口的MAC地址，执行L2查表转发，依据MAC地址表将报文从本地接口转发出去。</li>
 </ol>
-
+<div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a target="_blank" rel="noopener" href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="https://songxwn.com/VXLAN_Configuration/">VXLAN 基本配置</a></li><li><a href="https://songxwn.com/VXLAN_Basic/">VXLAN 基本概念</a></li><li><a href="https://songxwn.com/zabbix-reboot-SNMPv3/">Zabbix SNMPv3 设备重启后无法监控问题</a></li></ul></div>
                 
               </div>
             
@@ -500,7 +500,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年5月10日</div>
+          <div>2023年5月20日</div>
         </div>
       
       

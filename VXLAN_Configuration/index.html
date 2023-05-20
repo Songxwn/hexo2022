@@ -23,16 +23,16 @@
 <meta property="og:site_name" content="Song&#96;s Blog">
 <meta property="og:description" content="介绍本文章介绍了静态VXLAN配置方案。 本文章是针对华为系列网络设备的学习笔记。 VNI在VXLAN网络上有全局意义，而BD只有本地意义。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://i.328888.xyz/2023/05/10/iYAaJk.jpeg">
+<meta property="og:image" content="https://img.songxwn.com/file/b1baddd26ac2b22c26427.jpg">
 <meta property="article:published_time" content="2023-05-10T07:01:00.000Z">
-<meta property="article:modified_time" content="2023-05-10T07:03:56.511Z">
+<meta property="article:modified_time" content="2023-05-20T05:45:56.562Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="vxlan">
 <meta property="article:tag" content="l2vpn">
 <meta property="article:tag" content="datacom">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://i.328888.xyz/2023/05/10/iYAaJk.jpeg">
+<meta name="twitter:image" content="https://img.songxwn.com/file/b1baddd26ac2b22c26427.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -343,7 +343,7 @@
               <p class="note note-danger">
                 
                   
-                    本文最后更新于：2023年5月10日 下午
+                    本文最后更新于：2023年5月20日 下午
                   
                 
               </p>
@@ -360,7 +360,7 @@
 
 
 
-<h1 id="同VNI同网段二层互访"><a href="#同VNI同网段二层互访" class="headerlink" title="同VNI同网段二层互访"></a>同VNI同网段二层互访</h1><h2 id="配置案例-1-VLAN绑定接入"><a href="#配置案例-1-VLAN绑定接入" class="headerlink" title="配置案例(1)-VLAN绑定接入"></a>配置案例(1)-VLAN绑定接入</h2><p><img src="https://i.328888.xyz/2023/05/10/iY43cN.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="同VNI同网段二层互访"><a href="#同VNI同网段二层互访" class="headerlink" title="同VNI同网段二层互访"></a>同VNI同网段二层互访</h1><h2 id="配置案例-1-VLAN绑定接入"><a href="#配置案例-1-VLAN绑定接入" class="headerlink" title="配置案例(1)-VLAN绑定接入"></a>配置案例(1)-VLAN绑定接入</h2><p><img src="https://img.songxwn.com/file/78cba5225e099a91dbb0b.png" srcset="/img/loading.gif" lazyload></p>
 <ul>
 <li>两台交换机配置VXLAN隧道，实现相同网段三台PC之间的互访。</li>
 </ul>
@@ -368,7 +368,7 @@
 
 
 
-<h2 id="配置案例-2-子接口接入"><a href="#配置案例-2-子接口接入" class="headerlink" title="配置案例(2)-子接口接入"></a>配置案例(2)-子接口接入</h2><p><img src="https://i.328888.xyz/2023/05/10/iY4xww.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="配置案例-2-子接口接入"><a href="#配置案例-2-子接口接入" class="headerlink" title="配置案例(2)-子接口接入"></a>配置案例(2)-子接口接入</h2><p><img src="https://img.songxwn.com/file/438ad283ad03c30999d57.png" srcset="/img/loading.gif" lazyload></p>
 <ul>
 <li>两台交换机配置VXLAN隧道，实现相同网段三台PC之间的互访。 </li>
 <li>子接口接入的VLAN配置，和交换机本身的VLAN并无关联。</li>
@@ -389,7 +389,7 @@
 <h1 id="不同VNI不同网段三层互访（集中式网关）"><a href="#不同VNI不同网段三层互访（集中式网关）" class="headerlink" title="不同VNI不同网段三层互访（集中式网关）"></a>不同VNI不同网段三层互访（集中式网关）</h1><h2 id="配置VXAN隧道和业务接入"><a href="#配置VXAN隧道和业务接入" class="headerlink" title="配置VXAN隧道和业务接入"></a>配置VXAN隧道和业务接入</h2><ul>
 <li>三台交换机配置VXLAN隧道，实现跨网段两台PC之间的互访。VXLAN网关集中在SW3。</li>
 </ul>
-<p><img src="https://i.328888.xyz/2023/05/10/iY41GP.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://img.songxwn.com/file/2d3427afd98904bbd3d42.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="VXLAN隧道配置"><a href="#VXLAN隧道配置" class="headerlink" title="VXLAN隧道配置"></a>VXLAN隧道配置</h3><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">[<span class="hljs-keyword">SW1] </span><span class="hljs-keyword">bridge-domain </span><span class="hljs-number">100</span><br>[<span class="hljs-keyword">SW1-bd100] </span>vxlan vni <span class="hljs-number">10000</span><br><br>[<span class="hljs-keyword">SW1] </span>interface Nve <span class="hljs-number">1</span><br>[<span class="hljs-keyword">SW1-Nve1] </span>source <span class="hljs-number">1</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span><br>[<span class="hljs-keyword">SW1-Nve1] </span>vni <span class="hljs-number">10000</span> head-end peer-list <span class="hljs-number">3</span>.<span class="hljs-number">3</span>.<span class="hljs-number">3</span>.<span class="hljs-number">3</span><br><br>[<span class="hljs-keyword">SW2] </span><span class="hljs-keyword">bridge-domain </span><span class="hljs-number">200</span><br>[<span class="hljs-keyword">SW2-bd100] </span>vxlan vni <span class="hljs-number">20000</span><br><br>[<span class="hljs-keyword">SW2] </span>interface Nve <span class="hljs-number">1</span><br>[<span class="hljs-keyword">SW2-Nve1] </span>source <span class="hljs-number">2</span>.<span class="hljs-number">2</span>.<span class="hljs-number">2</span>.<span class="hljs-number">2</span><br>[<span class="hljs-keyword">SW2-Nve1] </span>vni <span class="hljs-number">20000</span> head-end peer-list <span class="hljs-number">3</span>.<span class="hljs-number">3</span>.<span class="hljs-number">3</span>.<span class="hljs-number">3</span><br><br></code></pre></td></tr></table></figure>
 
 <h3 id="业务接入"><a href="#业务接入" class="headerlink" title="业务接入"></a>业务接入</h3><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs gradle">[SW1] <span class="hljs-keyword">interface</span> GigabitEthernet <span class="hljs-number">1</span><span class="hljs-regexp">/0/</span><span class="hljs-number">1.1</span> mode l2<br>[SW1-GigabitEthernet1<span class="hljs-regexp">/0/</span><span class="hljs-number">1.1</span>] encapsulation untag<br>[SW1-GigabitEthernet1<span class="hljs-regexp">/0/</span><span class="hljs-number">1.1</span>] bridge-domain <span class="hljs-number">100</span><br><br>[SW2] <span class="hljs-keyword">interface</span> GigabitEthernet <span class="hljs-number">1</span><span class="hljs-regexp">/0/</span><span class="hljs-number">1.1</span> mode l2<br>[SW2-GigabitEthernet1<span class="hljs-regexp">/0/</span><span class="hljs-number">1.1</span>] encapsulation untag<br>[SW2-GigabitEthernet1<span class="hljs-regexp">/0/</span><span class="hljs-number">1.1</span>] bridge-domain <span class="hljs-number">200</span><br><br></code></pre></td></tr></table></figure>
@@ -401,7 +401,7 @@
 <h2 id="配置网关"><a href="#配置网关" class="headerlink" title="配置网关"></a>配置网关</h2><ul>
 <li>三台交换机配置VXLAN隧道，实现跨网段两台PC之间的互访。VXLAN网关集中在SW3。</li>
 </ul>
-<p><img src="https://i.328888.xyz/2023/05/10/iY4u7J.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://img.songxwn.com/file/cc08a9353996bd693603a.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="SW3配置"><a href="#SW3配置" class="headerlink" title="SW3配置"></a>SW3配置</h3><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">[<span class="hljs-keyword">SW3] </span><span class="hljs-keyword">bridge-domain </span><span class="hljs-number">100</span><br>[<span class="hljs-keyword">SW3-bd100] </span>vxlan vni <span class="hljs-number">10000</span><br><br>[<span class="hljs-keyword">SW3] </span><span class="hljs-keyword">bridge-domain </span><span class="hljs-number">200</span><br>[<span class="hljs-keyword">SW3-bd200] </span>vxlan vni <span class="hljs-number">20000</span><br><br>[<span class="hljs-keyword">SW3] </span>interface Nve <span class="hljs-number">1</span><br>[<span class="hljs-keyword">SW3-Nve1] </span>source <span class="hljs-number">3</span>.<span class="hljs-number">3</span>.<span class="hljs-number">3</span>.<span class="hljs-number">3</span><br>[<span class="hljs-keyword">SW3-Nve1] </span>vni <span class="hljs-number">10000</span> head-end peer-list <span class="hljs-number">1</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span><br>[<span class="hljs-keyword">SW3-Nve1] </span>vni <span class="hljs-number">20000</span> head-end peer-list <span class="hljs-number">2</span>.<span class="hljs-number">2</span>.<span class="hljs-number">2</span>.<span class="hljs-number">2</span><br><br>[<span class="hljs-keyword">SW3] </span>interface Vbdif100<br>[<span class="hljs-keyword">SW3-Vbdif100] </span>ip <span class="hljs-keyword">address </span><span class="hljs-number">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span> <span class="hljs-number">24</span><br><br>[<span class="hljs-keyword">SW3] </span>interface Vbdif200<br>[<span class="hljs-keyword">SW3-Vbdif200] </span>ip <span class="hljs-keyword">address </span><span class="hljs-number">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">2</span>.<span class="hljs-number">1</span> <span class="hljs-number">24</span><br><br></code></pre></td></tr></table></figure><div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a target="_blank" rel="noopener" href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="https://songxwn.com/VXLAN_Principle/">VXLAN 转发原理</a></li><li><a href="https://songxwn.com/VXLAN_Basic/">VXLAN 基本概念</a></li><li><a href="https://songxwn.com/zabbix-reboot-SNMPv3/">Zabbix SNMPv3 设备重启后无法监控问题</a></li></ul></div>
                 
               </div>
@@ -479,7 +479,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年5月10日</div>
+          <div>2023年5月20日</div>
         </div>
       
       
