@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://songxwn.com/about/index.html</loc>
+    
+    <lastmod>2023-05-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://songxwn.com/switch/</loc>
     
     <lastmod>2023-05-20</lastmod>
@@ -194,15 +203,6 @@
     <loc>https://songxwn.com/Linux-growpart/</loc>
     
     <lastmod>2023-05-01</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://songxwn.com/about/index.html</loc>
-    
-    <lastmod>2023-04-30</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
