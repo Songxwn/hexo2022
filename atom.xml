@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-05-20T07:00:49.769Z</updated>
+  <updated>2023-05-20T07:33:38.838Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://songxwn.com/TCP_BBR/"/>
     <id>https://songxwn.com/TCP_BBR/</id>
     <published>2023-05-20T03:47:39.000Z</published>
-    <updated>2023-05-20T07:00:49.769Z</updated>
+    <updated>2023-05-20T07:33:38.838Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;Linux 默认的CUBIC算法，在高延迟、高丢包的网络情况下，单线程TCP性能会严重受限制。&lt;/p&gt;
