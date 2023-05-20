@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-05-17T08:54:59.248Z</updated>
+  <updated>2023-05-20T03:52:21.262Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>从流量控制算法谈网络优化 – 从 CUBIC 到 BBRv2 算法</title>
+    <link href="https://songxwn.com/TCP_BBR/"/>
+    <id>https://songxwn.com/TCP_BBR/</id>
+    <published>2023-05-20T03:47:39.000Z</published>
+    <updated>2023-05-20T03:52:21.262Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="tcp" scheme="https://songxwn.com/tags/tcp/"/>
+    
+    <category term="BBR" scheme="https://songxwn.com/tags/BBR/"/>
+    
+  </entry>
   
   <entry>
     <title>Zabbix SNMP开机时间497天重置问题</title>
@@ -547,30 +576,6 @@
     <category term="cluster" scheme="https://songxwn.com/tags/cluster/"/>
     
     <category term="mysql" scheme="https://songxwn.com/tags/mysql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>HCIE Datacom-01.3 IGP高级特性-OSPF-其他特性</title>
-    <link href="https://songxwn.com/ospf-route-FA/"/>
-    <id>https://songxwn.com/ospf-route-FA/</id>
-    <published>2023-03-27T02:52:23.000Z</published>
-    <updated>2023-03-27T03:56:11.122Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;本文章包括多进程、BGP联动问题（延迟收敛）、FA地址。&lt;/p&gt;
-&lt;p&gt;本教程参考华为认证系列PPT。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="network" scheme="https://songxwn.com/categories/network/"/>
-    
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="ospf" scheme="https://songxwn.com/tags/ospf/"/>
-    
-    <category term="datacom" scheme="https://songxwn.com/tags/datacom/"/>
     
   </entry>
   
