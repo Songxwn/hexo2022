@@ -46,7 +46,7 @@
     <link href="https://songxwn.com/zabbix-SNMP-uptime-497day/"/>
     <id>https://songxwn.com/zabbix-SNMP-uptime-497day/</id>
     <published>2023-05-16T23:29:36.000Z</published>
-    <updated>2023-05-17T08:54:59.248Z</updated>
+    <updated>2023-05-20T07:28:50.599Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;工作中遇到，网络设备开机时间到了约497天的时候（&lt;strong&gt;或者每过497天&lt;/strong&gt;），Zabbix SNMP获取的时间值就会归零，重新计数，但查看设备状态正常，未重启。&lt;/p&gt;</summary>
