@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-05-20T04:13:50.143Z</updated>
+  <updated>2023-05-20T05:11:28.904Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -21,10 +21,10 @@
     <link href="https://songxwn.com/TCP_BBR/"/>
     <id>https://songxwn.com/TCP_BBR/</id>
     <published>2023-05-20T03:47:39.000Z</published>
-    <updated>2023-05-20T04:13:50.143Z</updated>
+    <updated>2023-05-20T05:11:28.904Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;Linux默认的CUBIC算法，在高延迟、高丢包的网络情况下，单线程TCP性能会严重受限制。&lt;/p&gt;
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;Linux 默认的CUBIC算法，在高延迟、高丢包的网络情况下，单线程TCP性能会严重受限制。&lt;/p&gt;
 &lt;p&gt;BBR算法可以提高TCP传输在高延迟网络中的性能表现，可以最大程度的利用带宽。于Linux kernel 4.9开始正式加入内核。&lt;/p&gt;
 &lt;p&gt;PS：但注意只会加速上行流量。&lt;/p&gt;</summary>
     
