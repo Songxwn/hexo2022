@@ -790,14 +790,14 @@
   </url>
   
   <url>
-    <loc>https://songxwn.com/tags/Web/</loc>
+    <loc>https://songxwn.com/tags/image/</loc>
     <lastmod>2023-05-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://songxwn.com/tags/image/</loc>
+    <loc>https://songxwn.com/tags/blog/</loc>
     <lastmod>2023-05-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -884,6 +884,13 @@
   
   <url>
     <loc>https://songxwn.com/categories/network/vxlan/</loc>
+    <lastmod>2023-05-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://songxwn.com/categories/blog/</loc>
     <lastmod>2023-05-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

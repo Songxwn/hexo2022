@@ -96,8 +96,8 @@ https://songxwn.com/tags/Zabbix/
 https://songxwn.com/tags/mysql/
 https://songxwn.com/tags/tcp/
 https://songxwn.com/tags/BBR/
-https://songxwn.com/tags/Web/
 https://songxwn.com/tags/image/
+https://songxwn.com/tags/blog/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/VMware/
@@ -110,3 +110,4 @@ https://songxwn.com/categories/vmware/
 https://songxwn.com/categories/Ubuntu/
 https://songxwn.com/categories/Zabbix/
 https://songxwn.com/categories/network/vxlan/
+https://songxwn.com/categories/blog/

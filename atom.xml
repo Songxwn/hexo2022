@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-05-21T14:41:08.016Z</updated>
+  <updated>2023-05-21T14:42:52.464Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -21,23 +21,23 @@
     <link href="https://songxwn.com/Image-hosting-service/"/>
     <id>https://songxwn.com/Image-hosting-service/</id>
     <published>2023-05-21T06:29:39.000Z</published>
-    <updated>2023-05-21T14:41:08.016Z</updated>
+    <updated>2023-05-21T14:42:52.464Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/cf-pages/Telegraph-Image&quot;&gt;Telegraph-Images&lt;/a&gt; 是免费图片托管自建解决方案，Flickr&amp;#x2F;imgur替代品。使用&lt;a href=&quot;https://pages.cloudflare.com/&quot;&gt;Cloudflare Pages&lt;/a&gt;和&lt;a href=&quot;https://telegra.ph/&quot;&gt;Telegraph&lt;/a&gt;进行白嫖提供服务。&lt;/p&gt;</summary>
     
     
     
-    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    <category term="blog" scheme="https://songxwn.com/categories/blog/"/>
     
     
     <category term="network" scheme="https://songxwn.com/tags/network/"/>
     
     <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
     
-    <category term="Web" scheme="https://songxwn.com/tags/Web/"/>
-    
     <category term="image" scheme="https://songxwn.com/tags/image/"/>
+    
+    <category term="blog" scheme="https://songxwn.com/tags/blog/"/>
     
   </entry>
   
