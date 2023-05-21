@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-05-20T07:33:38.838Z</updated>
+  <updated>2023-05-21T14:35:06.651Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>白嫖Cloudflare和Telegraph搭建自有图床</title>
+    <link href="https://songxwn.com/Image-hosting-service/"/>
+    <id>https://songxwn.com/Image-hosting-service/</id>
+    <published>2023-05-21T06:29:39.000Z</published>
+    <updated>2023-05-21T14:35:06.651Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/cf-pages/Telegraph-Image&quot;&gt;Telegraph-Images&lt;/a&gt; 是免费图片托管自建解决方案，Flickr&amp;#x2F;imgur替代品。使用&lt;a href=&quot;https://pages.cloudflare.com/&quot;&gt;Cloudflare Pages&lt;/a&gt;和&lt;a href=&quot;https://telegra.ph/&quot;&gt;Telegraph&lt;/a&gt;进行白嫖提供服务。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
+    
+    <category term="Web" scheme="https://songxwn.com/tags/Web/"/>
+    
+    <category term="image" scheme="https://songxwn.com/tags/image/"/>
+    
+  </entry>
   
   <entry>
     <title>TCP拥塞控制算法–从 CUBIC 到 BBRv2</title>
@@ -545,33 +570,6 @@
     <category term="network" scheme="https://songxwn.com/tags/network/"/>
     
     <category term="Zabbix" scheme="https://songxwn.com/tags/Zabbix/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MariaDB Galera Cluster 10.6 集群部署</title>
-    <link href="https://songxwn.com/MariaDB_Galera_Cluster/"/>
-    <id>https://songxwn.com/MariaDB_Galera_Cluster/</id>
-    <published>2023-04-02T08:48:00.000Z</published>
-    <updated>2023-05-19T09:29:04.506Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://s3.bmp.ovh/imgs/2023/04/02/1342a2c99e7d1161.png&quot;&gt;&lt;/p&gt;
-&lt;p&gt;MariaDB Galera Cluster 是 MariaDB 的&lt;a href=&quot;https://mariadb.com/kb/en/about-galera-replication/&quot;&gt;虚拟同步&lt;/a&gt;多主集群。它仅在Linux上可用，并且仅支持&lt;a href=&quot;https://mariadb.com/kb/en/innodb/&quot;&gt;InnoDB&lt;/a&gt;存储引擎（尽管有 对&lt;a href=&quot;https://mariadb.com/kb/en/myisam/&quot;&gt;MyISAM&lt;/a&gt;和&lt;a href=&quot;https://mariadb.com/kb/en/what-is-mariadb-106/&quot;&gt;MariaDB 10.6&lt;/a&gt;的&lt;a href=&quot;https://mariadb.com/kb/en/aria/&quot;&gt;Aria&lt;/a&gt;的实验性支持。请参阅&lt;a href=&quot;https://mariadb.com/kb/en/galera-cluster-system-variables/#wsrep_replicate_myisam&quot;&gt;wsrep_replicate_myisam&lt;/a&gt;系统变量，或者从 &lt;a href=&quot;https://mariadb.com/kb/en/what-is-mariadb-106/&quot;&gt;MariaDB 10.6&lt;/a&gt; 开始，&lt;a href=&quot;https://mariadb.com/kb/en/galera-cluster-system-variables/#wsrep_mode&quot;&gt;wsrep_mode&lt;/a&gt;系统变量）。&lt;/p&gt;
-&lt;p&gt;个人为了替代主从复制而使用。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
-    
-    
-    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
-    
-    <category term="mariadb" scheme="https://songxwn.com/tags/mariadb/"/>
-    
-    <category term="cluster" scheme="https://songxwn.com/tags/cluster/"/>
-    
-    <category term="mysql" scheme="https://songxwn.com/tags/mysql/"/>
     
   </entry>
   

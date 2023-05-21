@@ -1,3 +1,4 @@
+https://songxwn.com/Image-hosting-service/
 https://songxwn.com/books/index.html
 https://songxwn.com/TCP_BBR/
 https://songxwn.com/zabbix-SNMP-uptime-497day/
@@ -95,6 +96,8 @@ https://songxwn.com/tags/Zabbix/
 https://songxwn.com/tags/mysql/
 https://songxwn.com/tags/tcp/
 https://songxwn.com/tags/BBR/
+https://songxwn.com/tags/Web/
+https://songxwn.com/tags/image/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/VMware/
