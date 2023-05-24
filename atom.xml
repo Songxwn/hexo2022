@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-05-24T03:51:06.549Z</updated>
+  <updated>2023-05-24T06:19:24.101Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://songxwn.com/Web-Net-Tools/"/>
     <id>https://songxwn.com/Web-Net-Tools/</id>
     <published>2023-05-23T19:40:21.000Z</published>
-    <updated>2023-05-24T03:51:06.549Z</updated>
+    <updated>2023-05-24T06:19:24.101Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;Web Net Tools 是一些有用的命令行工具的 Web 前端。 它特别为 Ping、MTR、DIG、Nmap、Test SSL、Trace Route等工具提供了一个 Web 前端。 &lt;/p&gt;
