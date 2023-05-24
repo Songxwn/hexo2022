@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-05-22T14:48:49.525Z</updated>
+  <updated>2023-05-24T03:49:09.626Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>部署私有Web Ping/MTR测试服务 Web Net Tools</title>
+    <link href="https://songxwn.com/Web-Net-Tools/"/>
+    <id>https://songxwn.com/Web-Net-Tools/</id>
+    <published>2023-05-23T19:40:21.000Z</published>
+    <updated>2023-05-24T03:49:09.626Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;Web Net Tools 是一些有用的命令行工具的 Web 前端。 它特别为 Ping、MTR、DIG、Nmap、Test SSL、Trace Route等工具提供了一个 Web 前端。 &lt;/p&gt;
+&lt;p&gt;提供一个简单方便的web测试网络工具，类似于 Ping.pe。&lt;/p&gt;
+&lt;p&gt;项目地址：&lt;a href=&quot;https://github.com/johannesschaefer/webnettools&quot;&gt;https://github.com/johannesschaefer/webnettools&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;个人编译推送镜像：&lt;a href=&quot;https://hub.docker.com/r/songxwn/webnettools&quot;&gt;https://hub.docker.com/r/songxwn/webnettools&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;PS：MTR增加了-n选项，基础镜像使用了RHEL 8.7。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
+    
+  </entry>
   
   <entry>
     <title>白嫖Cloudflare和Telegraph搭建自有图床</title>
@@ -548,28 +573,6 @@
     <category term="dns" scheme="https://songxwn.com/tags/dns/"/>
     
     <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Zabbix：历史数据与趋势数据</title>
-    <link href="https://songxwn.com/zabbix_data/"/>
-    <id>https://songxwn.com/zabbix_data/</id>
-    <published>2023-04-04T17:54:00.000Z</published>
-    <updated>2023-04-12T03:44:00.000Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;历史数据（history）和趋势数据（trends）是Zabbix中存储收集到的数据的两种方式。&lt;/p&gt;
-&lt;p&gt;历史数据：每一个收集到的监控数据， 趋势数据：按小时统计计算的平均值数据。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Zabbix" scheme="https://songxwn.com/categories/Zabbix/"/>
-    
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="Zabbix" scheme="https://songxwn.com/tags/Zabbix/"/>
     
   </entry>
   

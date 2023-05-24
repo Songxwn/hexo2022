@@ -16,29 +16,27 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
   
-    <meta name="description" content="介绍本教程是用于Linux虚拟机在调整虚拟硬盘大小后，进行在线不重启热扩容分区大小。 适用于RHEL 7+以上的版本及衍生发行版。（如Centos、Rocky Linux、Alma Linux等）">
+    <meta name="description" content="介绍Web Net Tools 是一些有用的命令行工具的 Web 前端。 它特别为 Ping、MTR、DIG、Nmap、Test SSL、Trace Route等工具提供了一个 Web 前端。  提供一个简单方便的web测试网络工具，类似于 Ping.pe。 项目地址：https:&#x2F;&#x2F;github.com&#x2F;johannesschaefer&#x2F;webnettools  个人编译推送镜像：https:&#x2F;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux 虚拟机在线热扩容分区">
-<meta property="og:url" content="https://songxwn.com/Linux-growpart/index.html">
+<meta property="og:title" content="部署私有Web Ping&#x2F;MTR测试服务 Web Net Tools">
+<meta property="og:url" content="https://songxwn.com/Web-Net-Tools/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="介绍本教程是用于Linux虚拟机在调整虚拟硬盘大小后，进行在线不重启热扩容分区大小。 适用于RHEL 7+以上的版本及衍生发行版。（如Centos、Rocky Linux、Alma Linux等）">
+<meta property="og:description" content="介绍Web Net Tools 是一些有用的命令行工具的 Web 前端。 它特别为 Ping、MTR、DIG、Nmap、Test SSL、Trace Route等工具提供了一个 Web 前端。  提供一个简单方便的web测试网络工具，类似于 Ping.pe。 项目地址：https:&#x2F;&#x2F;github.com&#x2F;johannesschaefer&#x2F;webnettools  个人编译推送镜像：https:&#x2F;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/05/01/e4b12280340cb5a2.png">
-<meta property="article:published_time" content="2023-04-30T19:11:31.000Z">
-<meta property="article:modified_time" content="2023-05-01T03:36:20.221Z">
+<meta property="og:image" content="https://img.songxwn.com/file/58981ab6d9c74970bbbfe.png">
+<meta property="article:published_time" content="2023-05-23T19:40:21.000Z">
+<meta property="article:modified_time" content="2023-05-24T03:49:09.626Z">
 <meta property="article:author" content="Song">
+<meta property="article:tag" content="network">
 <meta property="article:tag" content="Linux">
-<meta property="article:tag" content="VMware">
-<meta property="article:tag" content="Disk">
-<meta property="article:tag" content="Partition">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2023/05/01/e4b12280340cb5a2.png">
+<meta name="twitter:image" content="https://img.songxwn.com/file/58981ab6d9c74970bbbfe.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Linux 虚拟机在线热扩容分区 - Song`s Blog</title>
+  <title>部署私有Web Ping/MTR测试服务 Web Net Tools - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -245,7 +243,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Linux 虚拟机在线热扩容分区"></span>
+            <span id="subtitle" data-typed-text="部署私有Web Ping/MTR测试服务 Web Net Tools"></span>
           
         </div>
 
@@ -256,8 +254,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-01 03:11" pubdate>
-          2023年5月1日 凌晨
+        <time datetime="2023-05-24 03:40" pubdate>
+          2023年5月24日 凌晨
         </time>
       </span>
     
@@ -268,7 +266,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          533 字
         
       </span>
     
@@ -279,7 +277,7 @@
         
         
         
-          10 分钟
+          5 分钟
         
       </span>
     
@@ -338,12 +336,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Linux 虚拟机在线热扩容分区</h1>
+            <h1 style="display: none">部署私有Web Ping/MTR测试服务 Web Net Tools</h1>
             
               <p class="note note-danger">
                 
                   
-                    本文最后更新于：2023年5月1日 中午
+                    本文最后更新于：2023年5月24日 中午
                   
                 
               </p>
@@ -351,25 +349,23 @@
             
               <div class="markdown-body">
                 
-                <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>本教程是用于Linux虚拟机在调整虚拟硬盘大小后，进行在线不重启热扩容分区大小。</p>
-<p>适用于RHEL 7+以上的版本及衍生发行版。（如Centos、Rocky Linux、Alma Linux等）</p>
+                <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Web Net Tools 是一些有用的命令行工具的 Web 前端。 它特别为 Ping、MTR、DIG、Nmap、Test SSL、Trace Route等工具提供了一个 Web 前端。 </p>
+<p>提供一个简单方便的web测试网络工具，类似于 Ping.pe。</p>
+<p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/johannesschaefer/webnettools">https://github.com/johannesschaefer/webnettools</a> </p>
+<p>个人编译推送镜像：<a target="_blank" rel="noopener" href="https://hub.docker.com/r/songxwn/webnettools">https://hub.docker.com/r/songxwn/webnettools</a> </p>
+<p>PS：MTR增加了-n选项，基础镜像使用了RHEL 8.7。</p>
 <span id="more"></span>
 
-<h1 id="硬盘分区在线热扩容"><a href="#硬盘分区在线热扩容" class="headerlink" title="硬盘分区在线热扩容"></a>硬盘分区在线热扩容</h1><h2 id="刷新硬盘容量"><a href="#刷新硬盘容量" class="headerlink" title="刷新硬盘容量"></a>刷新硬盘容量</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">echo <span class="hljs-string">&#x27;1&#x27;</span> &gt; <span class="hljs-regexp">/sys/</span>block<span class="hljs-regexp">/sda/</span>device/rescan  <br><br><span class="hljs-comment"># 刷新容量，设备为 sda</span><br><span class="hljs-comment"># 注意若大于2TB的硬盘，需要GPT分区格式，且为引导硬盘的话，需要以UEFI引导启动。</span><br><br></code></pre></td></tr></table></figure>
+<h1 id="使用Docker部署"><a href="#使用Docker部署" class="headerlink" title="使用Docker部署"></a>使用Docker部署</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run -itd  -p 8080:8080 \<br> -e RATE_LIMIT=3000\<br> -e INTRO_TEXT=&quot;限制3000毫秒一次&quot;\<br> -e LANG=C.UTF-8\<br> --restart=always\<br> --name webnettools\<br> songxwn/webnettools:1.4<br><br></code></pre></td></tr></table></figure>
 
-<h2 id="安装扩容工具"><a href="#安装扩容工具" class="headerlink" title="安装扩容工具"></a>安装扩容工具</h2><figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs tap">yum install cloud-utils-growpart -y<br><br><span class="hljs-comment"># 安装growpart，使用此工具可以自动调整分区。</span><br><br>lsblk<br>NAME     MAJ:MIN RM    SIZE RO TYPE MOUNTPOINT<br>sda        8:0   <span class="hljs-number"> 0 </span>     2T <span class="hljs-number"> 0 </span>disk <br>├─sda1     8:1   <span class="hljs-number"> 0 </span>   100M <span class="hljs-number"> 0 </span>part /boot/efi<br>└─sda2     8:2   <span class="hljs-number"> 0 </span>1023.9G <span class="hljs-number"> 0 </span>part /<br><br><span class="hljs-comment"># 查看硬盘分区结构，注意只有最后一个分区可以扩容。</span><br><br>growpart /dev/sda 2<br><br><span class="hljs-comment"># 分区扩容，指定硬盘和分区号。</span><br><br>xfs_growfs /dev/sda2<br><br><span class="hljs-comment"># 文件系统扩容</span><br><br>lsblk<br>NAME     MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT<br>sda        8:0   <span class="hljs-number"> 0 </span>   2T <span class="hljs-number"> 0 </span>disk <br>├─sda1     8:1   <span class="hljs-number"> 0 </span> 100M <span class="hljs-number"> 0 </span>part /boot/efi<br>└─sda2     8:2   <span class="hljs-number"> 0 </span>   2T <span class="hljs-number"> 0 </span>part / <br><br></code></pre></td></tr></table></figure>
+<ul>
+<li>服务默认使用8080端口，映射到8080端口。</li>
+<li>RATE_LIMIT为限制服务使用频率，单位为毫秒。</li>
+<li>INTRO_TEXT 作为web前端显示的公告。</li>
+<li>配置语言环境为C.UTF-8，配置为开机启动，配置容器名字，指定镜像源。</li>
+</ul>
+<h1 id="部署完成示例"><a href="#部署完成示例" class="headerlink" title="部署完成示例"></a>部署完成示例</h1><p><img src="https://img.songxwn.com/file/db631e1709b2df0f4248f.png" srcset="/img/loading.gif" lazyload></p>
 
-<p>本次在CentOS7中扩容的分区是这块磁盘上的最后一个分区，也就是磁盘扩展后增加的空间是加在磁盘的最后一个分区。</p>
-<p>所以可以通过growpart工具修改硬盘的分区表，将这部分空间直接增加到最后一个分区。</p>
-<p>所以如果你要扩容的分区在你的系统上并非是磁盘上的最后一个分区的话，可能无法直接无损扩充分区。</p>
-<p>请谨慎使用此方法进行操作，建议做好数据备份再进行操作。</p>
-<h1 id="使用Linux-Live-ISO-关机后离线GUI调整分区扩展"><a href="#使用Linux-Live-ISO-关机后离线GUI调整分区扩展" class="headerlink" title="使用Linux Live ISO 关机后离线GUI调整分区扩展"></a>使用Linux Live ISO 关机后离线GUI调整分区扩展</h1><p>GParted Live 下载 <a target="_blank" rel="noopener" href="https://gparted.org/livecd.php">https://gparted.org/livecd.php</a> </p>
-<p>文件系统支持情况：<a target="_blank" rel="noopener" href="https://gparted.org/features.php">https://gparted.org/features.php</a> </p>
-<p>使用教程：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Mr_rsq/article/details/99822699">https://blog.csdn.net/Mr_rsq/article/details/99822699</a> </p>
-<p><img src="https://gparted.org/screens/gparted-main-window.png" srcset="/img/loading.gif" lazyload alt="GParted"></p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p><a target="_blank" rel="noopener" href="https://access.redhat.com/solutions/5540131">https://access.redhat.com/solutions/5540131</a> </p>
-<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1653394">https://cloud.tencent.com/developer/article/1653394</a> </p>
-<div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a target="_blank" rel="noopener" href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="https://songxwn.com/Elasticsearch-x-pack-core/">Elasticsearch 8.7 白金版激活</a></li><li><a href="https://songxwn.com/elk_cluster/">Elasticsearch 安装配置集群系统</a></li><li><a href="https://songxwn.com/elk_snmp_trap/">ELK-Logstash配置SNMP-Trap</a></li><li><a target="_blank" rel="noopener" href="https://chengzhaoxi.xyz/361d7ede.html">互联网算法工程开发常用技术</a></li></ul></div>
                 
               </div>
             
@@ -402,13 +398,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
+        <a href="/tags/network/">#network</a>
+      
         <a href="/tags/Linux/">#Linux</a>
-      
-        <a href="/tags/VMware/">#VMware</a>
-      
-        <a href="/tags/Disk/">#Disk</a>
-      
-        <a href="/tags/Partition/">#Partition</a>
       
     </div>
   
@@ -420,8 +412,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Linux 虚拟机在线热扩容分区</div>
-      <div>https://songxwn.com/Linux-growpart/</div>
+      <div>部署私有Web Ping/MTR测试服务 Web Net Tools</div>
+      <div>https://songxwn.com/Web-Net-Tools/</div>
     </div>
     <div class="license-meta">
       
@@ -433,13 +425,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年5月1日</div>
+          <div>2023年5月24日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年5月1日</div>
+          <div>2023年5月24日</div>
         </div>
       
       
@@ -470,18 +462,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Elasticsearch-x-pack-core/" title="Elasticsearch 8.7 白金版激活">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Elasticsearch 8.7 白金版激活</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/elk_cluster/" title="Elasticsearch 安装配置集群系统">
-                        <span class="hidden-mobile">Elasticsearch 安装配置集群系统</span>
+                      <a href="/Image-hosting-service/" title="白嫖Cloudflare和Telegraph搭建自有图床">
+                        <span class="hidden-mobile">白嫖Cloudflare和Telegraph搭建自有图床</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -563,7 +549,7 @@
       
         <a href="/Linux-growpart/" title="Linux 虚拟机在线热扩容分区"
            class="list-group-item list-group-item-action
-           active">
+           ">
           <span class="category-post">Linux 虚拟机在线热扩容分区</span>
         </a>
       
@@ -617,7 +603,7 @@
       
         <a href="/Web-Net-Tools/" title="部署私有Web Ping/MTR测试服务 Web Net Tools"
            class="list-group-item list-group-item-action
-           ">
+           active">
           <span class="category-post">部署私有Web Ping/MTR测试服务 Web Net Tools</span>
         </a>
       
