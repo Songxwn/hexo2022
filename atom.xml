@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-05-30T16:01:19.876Z</updated>
+  <updated>2023-05-30T16:28:15.908Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Redis 哨兵模式配置</title>
+    <title>Redis 哨兵模式配置 - 在Rocky Linux上</title>
     <link href="https://songxwn.com/redis-sentinel/"/>
     <id>https://songxwn.com/redis-sentinel/</id>
     <published>2023-05-30T07:54:32.000Z</published>
-    <updated>2023-05-30T16:01:19.876Z</updated>
+    <updated>2023-05-30T16:28:15.908Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;ul&gt;
