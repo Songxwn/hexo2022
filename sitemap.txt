@@ -1,3 +1,4 @@
+https://songxwn.com/redis-sentinel/
 https://songxwn.com/MariaDB_Galera_Cluster/
 https://songxwn.com/elk_cluster/
 https://songxwn.com/Image-hosting-service/
@@ -99,6 +100,9 @@ https://songxwn.com/tags/tcp/
 https://songxwn.com/tags/BBR/
 https://songxwn.com/tags/image/
 https://songxwn.com/tags/blog/
+https://songxwn.com/tags/redis/
+https://songxwn.com/tags/database/
+https://songxwn.com/tags/HA/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/VMware/
