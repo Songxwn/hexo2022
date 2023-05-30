@@ -46,7 +46,7 @@
     <link href="https://songxwn.com/Image-hosting-service/"/>
     <id>https://songxwn.com/Image-hosting-service/</id>
     <published>2023-05-21T06:29:39.000Z</published>
-    <updated>2023-05-22T14:48:49.525Z</updated>
+    <updated>2023-05-30T07:01:20.778Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/cf-pages/Telegraph-Image&quot;&gt;Telegraph-Images&lt;/a&gt; 是免费图片托管自建解决方案，Flickr&amp;#x2F;imgur替代品。使用&lt;a href=&quot;https://pages.cloudflare.com/&quot;&gt;Cloudflare Pages&lt;/a&gt;和&lt;a href=&quot;https://telegra.ph/&quot;&gt;Telegraph&lt;/a&gt;进行白嫖提供服务。&lt;/p&gt;</summary>
@@ -420,7 +420,7 @@
     <link href="https://songxwn.com/elk_cluster/"/>
     <id>https://songxwn.com/elk_cluster/</id>
     <published>2023-04-30T01:59:00.000Z</published>
-    <updated>2023-05-02T14:12:47.807Z</updated>
+    <updated>2023-05-30T12:46:17.009Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;本教程客户端API关闭HTTPS认证，但传输使用HTTPS。（为了接入&lt;a href=&quot;https://songxwn.com/frostmourne_install/&quot;&gt;日志监控&lt;/a&gt;）&lt;/p&gt;
