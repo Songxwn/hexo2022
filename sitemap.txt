@@ -103,6 +103,7 @@ https://songxwn.com/tags/blog/
 https://songxwn.com/tags/redis/
 https://songxwn.com/tags/database/
 https://songxwn.com/tags/HA/
+https://songxwn.com/tags/JumpServer/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/VMware/
