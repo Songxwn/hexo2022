@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img.songxwn.com/file/d4e541c9930c15081b221.jpg">
 <meta property="article:published_time" content="2023-05-30T07:54:32.000Z">
-<meta property="article:modified_time" content="2023-06-09T03:58:39.247Z">
+<meta property="article:modified_time" content="2023-06-09T04:06:18.027Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="redis">
@@ -269,7 +269,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.5k 字
+          3.6k 字
         
       </span>
     
@@ -436,7 +436,15 @@
 
 <h3 id="每节点修改配置"><a href="#每节点修改配置" class="headerlink" title="每节点修改配置"></a>每节点修改配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim /etc/redis-sentinel.conf<br><br><br>sentinel monitor mymaster 192.168.205.1 6379 2<br><br><span class="hljs-comment"># 配置监控主节点的IP、端口号、2代表多少个Sentinel实例认为主服务器不可用，才会触发自动故障转移。</span><br><br>sentinel auth-pass mymaster pass123<br><br><span class="hljs-comment"># 主节点的密码</span><br><br>sentinel down-after-milliseconds mymaster 10000<br><br><span class="hljs-comment"># 指定Sentinel在多长时间内未收到来自主服务器的回复后，将主服务器标记为主观下线。</span><br><span class="hljs-comment"># 单位为毫秒</span><br><br><br>sentinel parallel-syncs mymaster 1<br><br><span class="hljs-comment"># 用于指定在自动故障转移期间，最多可以有多少个从服务器同时对新的主服务器进行同步。</span><br><span class="hljs-comment"># 为1即可</span><br><br>requirepass songxwn.com<br><br><br><span class="hljs-comment"># 哨兵本身的连接密码</span><br><br><br>PS：mymaster为自定义名称<br><br></code></pre></td></tr></table></figure>
 
+
+<h3 id="所有节点-1"><a href="#所有节点-1" class="headerlink" title="所有节点"></a>所有节点</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl restart redis-sentinel<br><br><br><span class="hljs-comment"># 重启配置生效</span><br><br></code></pre></td></tr></table></figure>
+
+
 <h3 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">redis-cli -p 26379 info sentinel<br><br></code></pre></td></tr></table></figure>
+
+
+
+
 
 <h1 id=""><a href="#" class="headerlink" title=""></a></h1><h1 id="JumpServer接入配置"><a href="#JumpServer接入配置" class="headerlink" title="JumpServer接入配置"></a>JumpServer接入配置</h1><p> v2.28.0 开始支持哨兵模式。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 编辑配置文件</span><br>vim /opt/jumpserver/config/config.txt<br>  <br><span class="hljs-comment"># 配置Redis 哨兵模式配置</span><br>REDIS_SENTINEL_HOSTS=mymaster/哨兵1:26379,哨兵2:26380,哨兵3:26381 <br>REDIS_SENTINEL_PASSWORD=xxxxfrthnjggdrthdf<br>REDIS_PASSWORD=qwertysdftgyhjfggs<br><br></code></pre></td></tr></table></figure>
