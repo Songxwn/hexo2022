@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-06-09T04:06:18.027Z</updated>
+  <updated>2023-06-11T15:40:34.474Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>windows10/11 企业多会话版</title>
+    <link href="https://songxwn.com/windows10-11-Enterprise-Virtual-Desktops/"/>
+    <id>https://songxwn.com/windows10-11-Enterprise-Virtual-Desktops/</id>
+    <published>2023-06-11T07:42:22.000Z</published>
+    <updated>2023-06-11T15:40:34.474Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;Windows 10 &amp;#x2F;11 企业版多会话，以前称为适用于虚拟桌面的 Windows 10 企业版 (EVD)，是一种新型远程桌面会话主机，允许多个并发交互式会话。 以前，只有 Windows Server 支持此功能。 此功能为用户提供了一个熟悉的 Windows 10 体验，同时 IT 能够从多会话的成本优势中获益，并使用现有的每用户 Windows 许可，而不是 RDS 客户端访问许可证 (CAL)。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Windows" scheme="https://songxwn.com/categories/Windows/"/>
+    
+    
+    <category term="Windows" scheme="https://songxwn.com/tags/Windows/"/>
+    
+    <category term="kms" scheme="https://songxwn.com/tags/kms/"/>
+    
+    <category term="rdp" scheme="https://songxwn.com/tags/rdp/"/>
+    
+    <category term="VDI" scheme="https://songxwn.com/tags/VDI/"/>
+    
+  </entry>
   
   <entry>
     <title>Redis 哨兵模式配置 - 在Rocky Linux上</title>
@@ -553,33 +578,6 @@
     <category term="esxi" scheme="https://songxwn.com/tags/esxi/"/>
     
     <category term="vmware" scheme="https://songxwn.com/tags/vmware/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>VMware ESXi 8 使用IPMITool</title>
-    <link href="https://songxwn.com/ESXi8_IPMI/"/>
-    <id>https://songxwn.com/ESXi8_IPMI/</id>
-    <published>2023-04-15T03:54:00.000Z</published>
-    <updated>2023-04-18T00:24:00.000Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;本教程适用于在VMware ESXi 8上使用ipmitool 工具进行本地管理BMC。&lt;/p&gt;
-&lt;p&gt;因8.0无法正常安装社区打包的VIB版本，所以需要自行编译二进制文件，上传到esxi使用。&lt;/p&gt;
-&lt;p&gt;7.0版本及之前的建议安装VIB包的&lt;a href=&quot;https://vswitchzero.com/ipmitool-vib&quot;&gt;ipmitools&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;IPMITool可以用来获取和设置服务器带外管理口的网络配置、用户配置、传感器、重启BMC等等。&lt;/p&gt;
-&lt;p&gt;项目地址：&lt;a href=&quot;https://github.com/ipmitool/ipmitool&quot;&gt;https://github.com/ipmitool/ipmitool&lt;/a&gt; &lt;/p&gt;</summary>
-    
-    
-    
-    <category term="esxi" scheme="https://songxwn.com/categories/esxi/"/>
-    
-    
-    <category term="esxi" scheme="https://songxwn.com/tags/esxi/"/>
-    
-    <category term="vmware" scheme="https://songxwn.com/tags/vmware/"/>
-    
-    <category term="ipmi" scheme="https://songxwn.com/tags/ipmi/"/>
     
   </entry>
   

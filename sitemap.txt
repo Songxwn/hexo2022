@@ -1,3 +1,4 @@
+https://songxwn.com/windows10-11-Enterprise-Virtual-Desktops/
 https://songxwn.com/redis-sentinel/
 https://songxwn.com/MariaDB_Galera_Cluster/
 https://songxwn.com/elk_cluster/
@@ -104,6 +105,9 @@ https://songxwn.com/tags/redis/
 https://songxwn.com/tags/database/
 https://songxwn.com/tags/HA/
 https://songxwn.com/tags/JumpServer/
+https://songxwn.com/tags/kms/
+https://songxwn.com/tags/rdp/
+https://songxwn.com/tags/VDI/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/VMware/
@@ -117,3 +121,4 @@ https://songxwn.com/categories/Ubuntu/
 https://songxwn.com/categories/Zabbix/
 https://songxwn.com/categories/network/vxlan/
 https://songxwn.com/categories/blog/
+https://songxwn.com/categories/Windows/

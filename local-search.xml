@@ -4,6 +4,37 @@
   
   
   <entry>
+    <title>windows10/11 企业多会话版</title>
+    <link href="/windows10-11-Enterprise-Virtual-Desktops/"/>
+    <url>/windows10-11-Enterprise-Virtual-Desktops/</url>
+    
+    <content type="html"><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Windows 10 &#x2F;11 企业版多会话，以前称为适用于虚拟桌面的 Windows 10 企业版 (EVD)，是一种新型远程桌面会话主机，允许多个并发交互式会话。 以前，只有 Windows Server 支持此功能。 此功能为用户提供了一个熟悉的 Windows 10 体验，同时 IT 能够从多会话的成本优势中获益，并使用现有的每用户 Windows 许可，而不是 RDS 客户端访问许可证 (CAL)。</p><span id="more"></span><p>此版本最大的区别为允许不限制数量的远程桌面用户同时连接登录，实现虚拟化桌面功能（VDI）。</p><h1 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a>系统要求</h1><p>建议为安装为Windows 10或11的最新版企业版或专业版。</p><p>然后通过密钥转换。</p><h1 id="转换"><a href="#转换" class="headerlink" title="转换"></a>转换</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 运行管理员权限的CMD窗口</span><br><br><br>slmgr /ipk VMKVQ-3MN6B-BVM9F-YWV97-R9FCX<br><br><span class="hljs-comment"># 安装KMS密钥</span><br><br>slmgr /skms kms.songxwn.com<br><span class="hljs-comment"># 指定KMS 激活服务器</span><br><br>slmgr /ato<br><br><span class="hljs-comment"># 配置激活</span><br><br><span class="hljs-comment"># 然后重启系统即可完成转换。</span><br><br></code></pre></td></tr></table></figure><h2 id="开启RDP"><a href="#开启RDP" class="headerlink" title="开启RDP"></a>开启RDP</h2><p>在设置里面，默认为关闭的。</p><p><img src="https://img.songxwn.com/file/655d74da1008738046f68.png" srcset="/img/loading.gif" lazyload></p><h1 id="转换后示例"><a href="#转换后示例" class="headerlink" title="转换后示例"></a>转换后示例</h1><p><img src="https://img.songxwn.com/file/5e88808aabc6b22884c41.png" srcset="/img/loading.gif" lazyload></p><h1 id="作为虚拟化桌面使用建议"><a href="#作为虚拟化桌面使用建议" class="headerlink" title="作为虚拟化桌面使用建议"></a>作为虚拟化桌面使用建议</h1><p>1、配置自动注销 （如用户空闲30分钟，自动注销用户）</p><p>2、限制连接数量，（防止虚拟机资源耗尽）</p><p>3、配置自动重新连接。</p><p>4、为远程桌面服务用户会话远程控制设置规则（不经用户授权完全控制）</p><p>5、将远程桌面服务用户限制到单独的远程桌面服务会话（在任务管理器里面连接用户）</p><p>PS：个人网盘，找个文件服务器，建立一个共享，共享名 userdisk$ ，放$是隐藏共享名的作用。里面共享权限everyone读写。</p><p>（然后通过组策略，配置登录脚本，创建文件夹，配置权限。映射网络驱动器）</p><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://learn.microsoft.com/zh-cn/azure/virtual-desktop/windows-10-multisession-faq">https://learn.microsoft.com/zh-cn/azure/virtual-desktop/windows-10-multisession-faq</a> </p><p><a href="https://blog.swineson.me/zh/windows-10-enterprise-for-virtual-desktops-install-and-testing/">https://blog.swineson.me/zh/windows-10-enterprise-for-virtual-desktops-install-and-testing/</a> </p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Windows</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Windows</tag>
+      
+      <tag>kms</tag>
+      
+      <tag>rdp</tag>
+      
+      <tag>VDI</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Redis 哨兵模式配置 - 在Rocky Linux上</title>
     <link href="/redis-sentinel/"/>
     <url>/redis-sentinel/</url>
