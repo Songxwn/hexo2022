@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-06-12T10:55:16.319Z</updated>
+  <updated>2023-06-13T02:04:45.394Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python调用企业微信机器人发送消息 - 在外部群可用</title>
+    <link href="https://songxwn.com/WeCom-Robot-WorkTool/"/>
+    <id>https://songxwn.com/WeCom-Robot-WorkTool/</id>
+    <published>2023-06-13T02:03:00.000Z</published>
+    <updated>2023-06-13T02:04:45.394Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;WorkTool是一个依附于企业微信来运行的无人值守群管理机器人程序，WorkTool开源，并且永久免费。您可以使用本应用程序来自动执行一个自己企业微信里的账号（当做机器人账号），并可通过后台调用对应的 API 来驱动机器人自动执行任务，如收发消息、自动应答、自动建群、拉人踢人等。&lt;/p&gt;
+&lt;p&gt;开源地址：&lt;a href=&quot;https://github.com/gallonyin/worktool&quot;&gt;https://github.com/gallonyin/worktool&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;开源Android APP下载： &lt;a href=&quot;https://cdn.asrtts.cn/uploads/worktool/apk/worktool-latest.apk&quot;&gt;https://cdn.asrtts.cn/uploads/worktool/apk/worktool-latest.apk&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;官方教程：&lt;a href=&quot;https://worktool.apifox.cn/doc-850007&quot;&gt;https://worktool.apifox.cn/doc-850007&lt;/a&gt; &lt;/p&gt;</summary>
+    
+    
+    
+    <category term="python" scheme="https://songxwn.com/categories/python/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="wecom" scheme="https://songxwn.com/tags/wecom/"/>
+    
+    <category term="python" scheme="https://songxwn.com/tags/python/"/>
+    
+  </entry>
   
   <entry>
     <title>windows10/11 企业多会话版 - 无限制用户的RDP</title>
@@ -557,27 +583,6 @@
     <category term="linux" scheme="https://songxwn.com/tags/linux/"/>
     
     <category term="web" scheme="https://songxwn.com/tags/web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>VMware Vsphere 8 序列号</title>
-    <link href="https://songxwn.com/VMware_Vsphere8_key/"/>
-    <id>https://songxwn.com/VMware_Vsphere8_key/</id>
-    <published>2023-04-18T02:34:00.000Z</published>
-    <updated>2023-04-18T02:34:00.000Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;适用于VMware Vsphere 8系列产品的序列号，用于学习使用。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="vmware" scheme="https://songxwn.com/categories/vmware/"/>
-    
-    
-    <category term="esxi" scheme="https://songxwn.com/tags/esxi/"/>
-    
-    <category term="vmware" scheme="https://songxwn.com/tags/vmware/"/>
     
   </entry>
   

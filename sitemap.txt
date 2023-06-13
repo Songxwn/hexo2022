@@ -1,3 +1,4 @@
+https://songxwn.com/WeCom-Robot-WorkTool/
 https://songxwn.com/windows10-11-Enterprise-Virtual-Desktops/
 https://songxwn.com/KMS/
 https://songxwn.com/hello-world/
@@ -108,6 +109,8 @@ https://songxwn.com/tags/JumpServer/
 https://songxwn.com/tags/kms/
 https://songxwn.com/tags/rdp/
 https://songxwn.com/tags/VDI/
+https://songxwn.com/tags/wecom/
+https://songxwn.com/tags/python/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/VMware/
@@ -122,3 +125,4 @@ https://songxwn.com/categories/Zabbix/
 https://songxwn.com/categories/network/vxlan/
 https://songxwn.com/categories/blog/
 https://songxwn.com/categories/Windows/
+https://songxwn.com/categories/python/
