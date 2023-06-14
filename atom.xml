@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-06-14T08:40:16.421Z</updated>
+  <updated>2023-06-14T08:42:32.097Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://songxwn.com/WeCom-Robot-WorkTool/"/>
     <id>https://songxwn.com/WeCom-Robot-WorkTool/</id>
     <published>2023-06-13T02:03:00.000Z</published>
-    <updated>2023-06-14T08:40:16.421Z</updated>
+    <updated>2023-06-14T08:42:32.097Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;WorkTool是一个依附于企业微信来运行的无人值守群管理机器人程序，WorkTool开源，并且永久免费。您可以使用本应用程序来自动执行一个自己企业微信里的账号（当做机器人账号），并可通过后台调用对应的 API 来驱动机器人自动执行任务，如收发消息、自动应答、自动建群、拉人踢人等。&lt;/p&gt;
