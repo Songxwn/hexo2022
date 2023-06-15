@@ -16,20 +16,22 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
   
-    <meta name="description" content="Windows和EUI-64通常情况下，链路本地地址的接口ID是由MAC地址来生成的，标准叫做EUI-64。（RFC 2373）生成的64bit接口ID,叫做接口标识符。SLAAC（无状态分配）所产生的地址，其接口ID也会使用接口标识符。与链路本地地址的接口ID一样。而这只是在Windows Vista和Windows 2008之前的情况下。为了安全，Windows开始使用了随机化接口ID和临时地">
+    <meta name="description" content="Windows和EUI-64 通常情况下，链路本地地址的接口ID是由MAC地址来生成的，标准叫做EUI-64。（RFC 2373）生成的64bit接口ID,叫做接口标识符。SLAAC（无状态分配）所产生的地址，其接口ID也会使用接口标识符。与链路本地地址的接口ID一样。而这只是在Windows Vista和Windows 2008之前的情况下。为了安全，Windows开始使用了随机化接口ID和临时">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Windows上的IPv6">
 <meta property="og:url" content="https://songxwn.com/ipv6-Windows/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="Windows和EUI-64通常情况下，链路本地地址的接口ID是由MAC地址来生成的，标准叫做EUI-64。（RFC 2373）生成的64bit接口ID,叫做接口标识符。SLAAC（无状态分配）所产生的地址，其接口ID也会使用接口标识符。与链路本地地址的接口ID一样。而这只是在Windows Vista和Windows 2008之前的情况下。为了安全，Windows开始使用了随机化接口ID和临时地">
+<meta property="og:description" content="Windows和EUI-64 通常情况下，链路本地地址的接口ID是由MAC地址来生成的，标准叫做EUI-64。（RFC 2373）生成的64bit接口ID,叫做接口标识符。SLAAC（无状态分配）所产生的地址，其接口ID也会使用接口标识符。与链路本地地址的接口ID一样。而这只是在Windows Vista和Windows 2008之前的情况下。为了安全，Windows开始使用了随机化接口ID和临时">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.songxwn.com/file/73980e28139e481d5d982.png">
 <meta property="article:published_time" content="2022-01-09T12:54:00.000Z">
-<meta property="article:modified_time" content="2022-08-27T03:44:17.405Z">
+<meta property="article:modified_time" content="2023-06-15T13:23:04.166Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="IPv6">
 <meta property="article:tag" content="windows">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img.songxwn.com/file/73980e28139e481d5d982.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -340,7 +342,7 @@
               <p class="note note-danger">
                 
                   
-                    本文最后更新于：2022年8月27日 中午
+                    本文最后更新于：2023年6月15日 晚上
                   
                 
               </p>
@@ -348,24 +350,23 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Windows和EUI-64"><a href="#Windows和EUI-64" class="headerlink" title="Windows和EUI-64"></a>Windows和EUI-64</h1><p>通常情况下，链路本地地址的接口ID是由MAC地址来生成的，标准叫做EUI-64。（RFC 2373）<br>生成的64bit接口ID,叫做接口标识符。<br>SLAAC（无状态分配）所产生的地址，其接口ID也会使用接口标识符。与链路本地地址的接口ID一样。<br>而这只是在Windows Vista和Windows 2008之前的情况下。<br>为了安全，Windows开始使用了随机化接口ID和临时地址。（RFC 3041）</p>
+                <h1 id="Windows和EUI-64"><a href="#Windows和EUI-64" class="headerlink" title="Windows和EUI-64"></a>Windows和EUI-64</h1><p><img src="https://img.songxwn.com/file/73980e28139e481d5d982.png" srcset="/img/loading.gif" lazyload alt="EIU-64"></p>
+<p>通常情况下，链路本地地址的接口ID是由MAC地址来生成的，标准叫做EUI-64。（RFC 2373）<br>生成的64bit接口ID,叫做接口标识符。<br>SLAAC（无状态分配）所产生的地址，其接口ID也会使用接口标识符。与链路本地地址的接口ID一样。<br>而这只是在Windows Vista和Windows 2008之前的情况下。<br>为了安全，Windows开始使用了随机化接口ID和临时地址。（RFC 3041）</p>
 <span id="more"></span>
 
 <h1 id="随机标识符-x2F-接口ID"><a href="#随机标识符-x2F-接口ID" class="headerlink" title="随机标识符&#x2F;接口ID"></a>随机标识符&#x2F;接口ID</h1><p>由于EUI-64生成的接口标识符,是由MAC地址生成。所以很容易根据IPv6地址来推断出设备的MAC地址。<br>EUI-64 是将48bit的MAC地址，其第七位取反，然后中间填充FFFE组成64bit的接口ID。<br>所以Windows会随机生成 64bit的接口标识符。看下面的输出，链路本地地址明显是和MAC地址无关的。<br>此地址是固定，一般生成之后，不会改变。</p>
-<blockquote>
-<p>C:\Users\admin&gt; ipconfig &#x2F;all<br>  描述. . . . . . . . . . . . . . . : Intel(R) Wi-Fi 6 AX200 160MHz<br>  物理地址. . . . . . . . . . . . . : 46-68-5C-AA-41-11<br>  DHCP 已启用 . . . . . . . . . . . : 是<br>  自动配置已启用. . . . . . . . . . : 是<br>  本地链接 IPv6 地址. . . . . . . . : fe80::1e2:5910:14f3:a9d5%13(首选)</p>
-</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs CMD"><span class="hljs-function"></span><br><span class="hljs-function">C:\<span class="hljs-title">Users</span>\<span class="hljs-title">admin</span>&gt; <span class="hljs-title">ipconfig</span> /<span class="hljs-title">all</span> </span><br><span class="hljs-function">  描述. . . . . . . . . . . . . . . : <span class="hljs-title">Intel</span>(<span class="hljs-title">R</span>) <span class="hljs-title">Wi</span>-<span class="hljs-title">Fi</span> 6 <span class="hljs-title">AX200</span> 160<span class="hljs-title">MHz</span></span><br><span class="hljs-function">  物理地址. . . . . . . . . . . . . : 46-68-5<span class="hljs-title">C</span>-<span class="hljs-title">AA</span>-41-11</span><br><span class="hljs-function">  <span class="hljs-title">DHCP</span> 已启用 . . . . . . . . . . . : 是</span><br><span class="hljs-function">  自动配置已启用. . . . . . . . . . : 是</span><br><span class="hljs-function">  本地链接 <span class="hljs-title">IPv6</span> 地址. . . . . . . . : <span class="hljs-title">fe80</span>::1<span class="hljs-title">e2</span>:5910:14<span class="hljs-title">f3:a9d5</span>%13(首选)</span><br><span class="hljs-function">  </span><br></code></pre></td></tr></table></figure>
+
 <h1 id="临时地址"><a href="#临时地址" class="headerlink" title="临时地址"></a>临时地址</h1><p>由于SLAAC产生的地址的接口ID，是接口标识符的，所以后64bit是基本不变的，这样很容易被跟踪。<br>所以需要临时地址。<br>临时地址也是一样随机生成64bit接口ID，用于主机作为源IP主动访问网站和应用。但为了安全，会经常变化。<br>如在接口重新连接的时候，或者临时IPv6生存期到期的时候。会重新随机生成另一个临时IPv6地址。<br>在某种情况下，你会看到多个临时IPv6地址。这是因为旧的临时地址过期的时候，旧地址还有建立的连接。</p>
 <h1 id="查看IPv6协议配置"><a href="#查看IPv6协议配置" class="headerlink" title="查看IPv6协议配置"></a>查看IPv6协议配置</h1><p>使用 Powershell命令 <code>get-netipv6protocol</code> </p>
-<blockquote>
-<p>DefaultHopLimit               : 128<br>NeighborCacheLimit(Entries)   : 256<br>RouteCacheLimit(Entries)      : 4096<br>ReassemblyLimit(Bytes)        : 262676960<br>IcmpRedirects                 : Enabled<br>SourceRoutingBehavior         : DontForward<br>DhcpMediaSense                : Enabled<br>MediaSenseEventLog            : Disabled<br>MldLevel                      : All<br>MldVersion                    : Version2<br>MulticastForwarding           : Disabled<br>GroupForwardedFragments       : Disabled<br>RandomizeIdentifiers          : Enabled  &#x2F;&#x2F;随机接口ID开启<br>AddressMaskReply              : Disabled<br>UseTemporaryAddresses         : Enabled  &#x2F;&#x2F;临时IPv6地址开启<br>MaxTemporaryDadAttempts       : 3        &#x2F;&#x2F;临时IPv6的重复地址检测尝试次数<br>MaxTemporaryValidLifetime     : 7.00:00:00 &#x2F;&#x2F;临时地址最大有效时间。<br>MaxTemporaryPreferredLifetime : 7.00:00:00<br>TemporaryRegenerateTime       : 00:00:05<br>MaxTemporaryDesyncTime        : 00:10:00<br>DeadGatewayDetection          : Enabled</p>
-</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs CMD"><br>DefaultHopLimit               : <span class="hljs-number">128</span><br>NeighborCacheLimit(Entries)   : <span class="hljs-number">256</span><br>RouteCacheLimit(Entries)      : <span class="hljs-number">4096</span><br>ReassemblyLimit(Bytes)        : <span class="hljs-number">262676960</span><br>IcmpRedirects                 : Enabled<br>SourceRoutingBehavior         : DontForward<br>DhcpMediaSense                : Enabled<br>MediaSenseEventLog            : Disabled<br>MldLevel                      : All<br>MldVersion                    : Version2<br>MulticastForwarding           : Disabled<br>GroupForwardedFragments       : Disabled<br>RandomizeIdentifiers          : Enabled  //随机接口ID开启<br>AddressMaskReply              : Disabled<br>UseTemporaryAddresses         : Enabled  //临时IPv6地址开启<br>MaxTemporaryDadAttempts       : <span class="hljs-number">3</span>        //临时IPv6的重复地址检测尝试次数<br>MaxTemporaryValidLifetime     : <span class="hljs-number">7</span>.<span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> //临时地址最大有效时间。<br>MaxTemporaryPreferredLifetime : <span class="hljs-number">7</span>.<span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span><br>TemporaryRegenerateTime       : <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">05</span><br>MaxTemporaryDesyncTime        : <span class="hljs-number">00</span>:<span class="hljs-number">10</span>:<span class="hljs-number">00</span><br>DeadGatewayDetection          : Enabled<br><br></code></pre></td></tr></table></figure>
+
 <h1 id="SLAAC的DNS服务器地址分配–RDNSS"><a href="#SLAAC的DNS服务器地址分配–RDNSS" class="headerlink" title="SLAAC的DNS服务器地址分配–RDNSS"></a>SLAAC的DNS服务器地址分配–RDNSS</h1><p>源于一个较新的IPv6标准(RFC 8106)。从Windows 10 1703开始，Windows支持使用无状态获取DNS服务器了。<br>不过，DHCPv6 获取的DNS服务器优于通过RA报文获取的DNS服务器。<br>Android 从4.2开始支持，iOS 从4.1开始支持，MacOS从 10.7开始支持。</p>
-<p>PS：Android至今都不支持DHCPv6，很气人。</p>
+<p>PS：Android至今都不支持DHCPv6，可能是为了安全考虑。</p>
 <p>来源： <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Comparison_of_IPv6_support_in_operating_systems">https://en.wikipedia.org/wiki/Comparison_of_IPv6_support_in_operating_systems</a></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc8106">https://datatracker.ietf.org/doc/html/rfc8106</a><br><a target="_blank" rel="noopener" href="https://www.networkacademy.io/ccna/ipv6/ipv6-on-windows">https://www.networkacademy.io/ccna/ipv6/ipv6-on-windows</a><br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/powershell/module/nettcpip/get-netipv6protocol?view=windowsserver2022-ps">https://docs.microsoft.com/en-us/powershell/module/nettcpip/get-netipv6protocol?view=windowsserver2022-ps</a></p>
 <p>PS：随机标识符和临时地址，其他系统也会使用，如MacOS从10.7也开始使用了，Android iOS Linux等系统较新版本可能会支持。</p>
-<div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a target="_blank" rel="noopener" href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="https://songxwn.com/DNS_recursive_Server/">建立自有递归DNS服务器</a></li><li><a href="https://songxwn.com/zabbix_data/">Zabbix：历史数据与趋势数据</a></li><li><a href="https://songxwn.com/ospf-route-FA/">HCIE Datacom-01.3 IGP高级特性-OSPF-其他特性</a></li><li><a target="_blank" rel="noopener" href="https://www.qystu.cc/posts/63659.html">window上帝模式</a></li></ul></div>
+<div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a target="_blank" rel="noopener" href="https://github.com/huiwang/hexo-recommended-posts">Hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="https://songxwn.com/Web-Net-Tools/">部署私有Web Ping/MTR测试服务 Web Net Tools</a></li><li><a href="https://songxwn.com/Image-hosting-service/">白嫖Cloudflare和Telegraph搭建自有图床</a></li><li><a href="https://songxwn.com/TCP_BBR/">TCP拥塞控制算法–从 CUBIC 到 BBRv2</a></li></ul></div>
                 
               </div>
             
@@ -433,7 +434,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年8月27日</div>
+          <div>2023年6月15日</div>
         </div>
       
       
