@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-06-14T08:43:43.033Z</updated>
+  <updated>2023-06-26T16:50:40.538Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Windows TCP/IP 设置意义简述</title>
+    <link href="https://songxwn.com/IP_Mask_Gateway/"/>
+    <id>https://songxwn.com/IP_Mask_Gateway/</id>
+    <published>2023-06-26T08:45:30.000Z</published>
+    <updated>2023-06-26T16:50:40.538Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;本文简单介绍了Windows下的IP地址、子网掩码、网关的作用&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="Windows" scheme="https://songxwn.com/tags/Windows/"/>
+    
+  </entry>
   
   <entry>
     <title>Python调用企微机器人发送消息-在外部群可用</title>
@@ -559,30 +580,6 @@
     <category term="elk" scheme="https://songxwn.com/tags/elk/"/>
     
     <category term="snmp" scheme="https://songxwn.com/tags/snmp/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>部署团队服务导航网站 Team-nav</title>
-    <link href="https://songxwn.com/team_nav/"/>
-    <id>https://songxwn.com/team_nav/</id>
-    <published>2023-04-18T04:14:00.000Z</published>
-    <updated>2023-05-29T03:57:18.426Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;前后端完整的网址导航服务，可以用于公司内部内网使用，提供多种的卡片图标生成方式，能将上传的原型压缩包自动生成可访问的地址，支持私密卡片，发布倒计时等功能。&lt;/p&gt;
-&lt;p&gt;用于在公司内网部署使用，可在线修改上传、可拖拽排序等。&lt;/p&gt;
-&lt;p&gt;项目地址：&lt;a href=&quot;https://github.com/tuituidan/team-nav&quot;&gt;https://github.com/tuituidan/team-nav&lt;/a&gt; &lt;/p&gt;
-&lt;p&gt;要求Java版本为 1.8.0&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
-    
-    
-    <category term="linux" scheme="https://songxwn.com/tags/linux/"/>
-    
-    <category term="web" scheme="https://songxwn.com/tags/web/"/>
     
   </entry>
   
