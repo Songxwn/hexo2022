@@ -18,14 +18,14 @@
   
     <meta name="description" content="介绍本文简单介绍了Windows下的IP地址、子网掩码、网关的作用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Windows TCP&#x2F;IP 设置意义简述">
+<meta property="og:title" content="Windows TCP&#x2F;IP 配置作用随笔">
 <meta property="og:url" content="https://songxwn.com/IP_Mask_Gateway/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
 <meta property="og:description" content="介绍本文简单介绍了Windows下的IP地址、子网掩码、网关的作用">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img.songxwn.com/file/1ac560730187d01399061.png">
 <meta property="article:published_time" content="2023-06-26T08:45:30.000Z">
-<meta property="article:modified_time" content="2023-06-26T16:50:40.538Z">
+<meta property="article:modified_time" content="2023-06-26T16:55:42.194Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="Windows">
@@ -36,7 +36,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Windows TCP/IP 设置意义简述 - Song`s Blog</title>
+  <title>Windows TCP/IP 配置作用随笔 - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -243,7 +243,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Windows TCP/IP 设置意义简述"></span>
+            <span id="subtitle" data-typed-text="Windows TCP/IP 配置作用随笔"></span>
           
         </div>
 
@@ -266,7 +266,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.1k 字
+          3.3k 字
         
       </span>
     
@@ -277,7 +277,7 @@
         
         
         
-          26 分钟
+          28 分钟
         
       </span>
     
@@ -336,7 +336,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Windows TCP/IP 设置意义简述</h1>
+            <h1 style="display: none">Windows TCP/IP 配置作用随笔</h1>
             
               <p class="note note-danger">
                 
@@ -393,6 +393,11 @@
 <p>而源目IP都和网关无关，三层通讯是不会更改IP地址的。但路由器与路由器之间转发会更改MAC地址 （NAT会）</p>
 <p>三层通讯也不需要知道目标IP的MAC地址。</p>
 <p>主机与网关之间是二层通讯。</p>
+<h2 id="网关的意义？"><a href="#网关的意义？" class="headerlink" title="网关的意义？"></a>网关的意义？</h2><p>在TCP&#x2F;IP网络体系中，网关的基本作用是根据目的IP地址的网络号与子网号，选择最佳的出口对IP分组进行转发，实现跨网段的数据通信。</p>
+<p>但在上面抓包中，网关貌似只是为了获取网关接口的MAC地址？</p>
+<p>正常跨网段的通信好像和网关的IP地址无关？</p>
+<p>那网关本身不能对外通讯可以吗？</p>
+<p>可以的，有些时候为了节省公网IP，可以配置一个假网关。这个假网关的IP可能在其他子网在使用。</p>
 
                 
               </div>
@@ -440,7 +445,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Windows TCP/IP 设置意义简述</div>
+      <div>Windows TCP/IP 配置作用随笔</div>
       <div>https://songxwn.com/IP_Mask_Gateway/</div>
     </div>
     <div class="license-meta">
