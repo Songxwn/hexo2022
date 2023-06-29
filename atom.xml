@@ -125,14 +125,14 @@
     <link href="https://songxwn.com/Web-Net-Tools/"/>
     <id>https://songxwn.com/Web-Net-Tools/</id>
     <published>2023-05-23T19:40:21.000Z</published>
-    <updated>2023-05-26T00:55:12.855Z</updated>
+    <updated>2023-06-29T10:19:35.686Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;Web Net Tools 是一些有用的命令行工具的 Web 前端。 它特别为 Ping、MTR、DIG、Nmap、Test SSL、Trace Route等工具提供了一个 Web 前端。 &lt;/p&gt;
 &lt;p&gt;提供一个简单方便的web测试网络工具，类似于 Ping.pe。&lt;/p&gt;
 &lt;p&gt;项目地址：&lt;a href=&quot;https://github.com/johannesschaefer/webnettools&quot;&gt;https://github.com/johannesschaefer/webnettools&lt;/a&gt;&lt;br&gt;官方编译推送镜像：&lt;a href=&quot;https://hub.docker.com/r/johannesschafer/webnettools&quot;&gt;https://hub.docker.com/r/johannesschafer/webnettools&lt;/a&gt; &lt;/p&gt;
 &lt;p&gt;个人编译推送镜像：&lt;a href=&quot;https://hub.docker.com/r/songxwn/webnettools&quot;&gt;https://hub.docker.com/r/songxwn/webnettools&lt;/a&gt;&lt;br&gt;PS：MTR增加了-n选项，基础镜像使用了RHEL 8.7。&lt;/p&gt;
-&lt;p&gt;宿主机环境：Rocky 8.8 、 Docker 24.01&lt;/p&gt;</summary>
+&lt;p&gt;宿主机环境：Rocky 8.8 、 Docker-CE 24.01&lt;/p&gt;</summary>
     
     
     
