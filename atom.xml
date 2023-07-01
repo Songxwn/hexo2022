@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-06-28T14:40:58.401Z</updated>
+  <updated>2023-07-01T08:32:32.494Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MikroTik ROS Winbox Ping工具DNS问题</title>
+    <link href="https://songxwn.com/MikroTik_ROS_WinBox_DNS/"/>
+    <id>https://songxwn.com/MikroTik_ROS_WinBox_DNS/</id>
+    <published>2023-07-01T08:25:27.000Z</published>
+    <updated>2023-07-01T08:32:32.494Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;RouterOS是一个基于Linux内核的独立操作系统。它为MikroTik专用硬件设备提供支持，但也可用于虚拟机（CHR版本）。&lt;/p&gt;
+&lt;p&gt;本文介绍了一下，我在实际生产环境中遇到的一个问题，在中国大陆使用WinBox远程国际的ROS路由，去Ping谷歌，但返回的都是被污染的IP地址。&lt;/p&gt;
+&lt;h1 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h1&gt;&lt;p&gt;当使用WinBox方式远程连接ROS的时候，使用GUI的 Ping工具，其DNS解析是由本机的WinBox去调用本机系统网络去解析，所以可能导致DNS解析有问题。 比如在中国大陆被污染问题、可能获取的IP不是ROS离着最近的IP等。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="dns" scheme="https://songxwn.com/tags/dns/"/>
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="ROS" scheme="https://songxwn.com/tags/ROS/"/>
+    
+  </entry>
   
   <entry>
     <title>IP地址 子网掩码 默认网关 随笔</title>
@@ -551,35 +576,6 @@
     <category term="cluster" scheme="https://songxwn.com/tags/cluster/"/>
     
     <category term="ha" scheme="https://songxwn.com/tags/ha/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ELK Logstash配置SNMP-Trap</title>
-    <link href="https://songxwn.com/elk_snmp_trap/"/>
-    <id>https://songxwn.com/elk_snmp_trap/</id>
-    <published>2023-04-24T06:59:00.000Z</published>
-    <updated>2023-05-08T12:53:50.684Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;本文章适用于ELK的logstash 配置SNMP Trap插件,接收告警通知。&lt;br&gt;默认情况下是安装此插件的，如没有可手动安装。&lt;/p&gt;
-&lt;p&gt;一般用于网络设备。&lt;/p&gt;
-&lt;p&gt;注意此插件不支持v3版本。&lt;/p&gt;
-&lt;p&gt;ELK系列教程：&lt;a href=&quot;https://songxwn.com/categories/linux/ELK/&quot;&gt;https://songxwn.com/categories/linux/ELK/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;参考：&lt;a href=&quot;https://www.elastic.co/guide/en/logstash/current/plugins-inputs-snmptrap.html&quot;&gt;https://www.elastic.co/guide/en/logstash/current/plugins-inputs-snmptrap.html&lt;/a&gt; &lt;/p&gt;</summary>
-    
-    
-    
-    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
-    
-    <category term="ELK" scheme="https://songxwn.com/categories/linux/ELK/"/>
-    
-    
-    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
-    
-    <category term="elk" scheme="https://songxwn.com/tags/elk/"/>
-    
-    <category term="snmp" scheme="https://songxwn.com/tags/snmp/"/>
     
   </entry>
   
