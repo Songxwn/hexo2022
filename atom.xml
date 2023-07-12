@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-07-01T09:00:24.185Z</updated>
+  <updated>2023-07-12T15:19:26.673Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Windows Server 2022 RDS配置授权激活服务</title>
+    <link href="https://songxwn.com/Windows2022-RDS-RD/"/>
+    <id>https://songxwn.com/Windows2022-RDS-RD/</id>
+    <published>2023-07-12T07:13:41.000Z</published>
+    <updated>2023-07-12T15:19:26.673Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;远程桌面服务 (RDS) 是一个卓越的平台，可以生成虚拟化解决方案来满足每个最终客户的需求，包括交付独立的虚拟化应用程序、提供安全的移动和远程桌面访问，使最终用户能够从云运行其应用程序和桌面。&lt;/p&gt;
+&lt;p&gt;本文主要介绍了其RD 授权的激活方式，默认情况下只有120天试用期。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Windows" scheme="https://songxwn.com/categories/Windows/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="Windows" scheme="https://songxwn.com/tags/Windows/"/>
+    
+    <category term="rdp" scheme="https://songxwn.com/tags/rdp/"/>
+    
+    <category term="RDS" scheme="https://songxwn.com/tags/RDS/"/>
+    
+  </entry>
   
   <entry>
     <title>MikroTik ROS Winbox Ping工具DNS问题</title>
@@ -540,41 +566,6 @@
     <category term="Disk" scheme="https://songxwn.com/tags/Disk/"/>
     
     <category term="Partition" scheme="https://songxwn.com/tags/Partition/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Elasticsearch 安装配置集群系统</title>
-    <link href="https://songxwn.com/elk_cluster/"/>
-    <id>https://songxwn.com/elk_cluster/</id>
-    <published>2023-04-30T01:59:00.000Z</published>
-    <updated>2023-05-30T12:46:17.009Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;本教程客户端API关闭HTTPS认证，但传输使用HTTPS。（为了接入&lt;a href=&quot;https://songxwn.com/frostmourne_install/&quot;&gt;日志监控&lt;/a&gt;）&lt;/p&gt;
-&lt;p&gt;主要介绍了ES集群的搭建。ELK单机使用可参考：&lt;a href=&quot;https://songxwn.com/elk/&quot;&gt;https://songxwn.com/elk/&lt;/a&gt; &lt;/p&gt;
-&lt;p&gt;Elasticsearch版本：8.x&lt;/p&gt;
-&lt;p&gt;系统版本：Rocky Linux 8.7 (关闭SE Linux和防火墙)&lt;/p&gt;
-&lt;p&gt;配置要求：建议4核8G以上，存储空间按照存储的文档大小规划。&lt;/p&gt;
-&lt;p&gt;Elasticsearch 集群建议至少要有三个节点，两个以上的master节点。&lt;/p&gt;
-&lt;p&gt;本教程也同样适用于也适用于其他RHEL8-9版本衍生版系统：如Centos stream、AlmaLinux等。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
-    
-    <category term="ELK" scheme="https://songxwn.com/categories/linux/ELK/"/>
-    
-    
-    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
-    
-    <category term="elk" scheme="https://songxwn.com/tags/elk/"/>
-    
-    <category term="elasticsearch" scheme="https://songxwn.com/tags/elasticsearch/"/>
-    
-    <category term="cluster" scheme="https://songxwn.com/tags/cluster/"/>
-    
-    <category term="ha" scheme="https://songxwn.com/tags/ha/"/>
     
   </entry>
   

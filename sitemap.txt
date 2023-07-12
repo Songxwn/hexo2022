@@ -1,3 +1,4 @@
+https://songxwn.com/Windows2022-RDS-RD/
 https://songxwn.com/books/index.html
 https://songxwn.com/MikroTik_ROS_WinBox_DNS/
 https://songxwn.com/Web-Net-Tools/
@@ -114,6 +115,7 @@ https://songxwn.com/tags/VDI/
 https://songxwn.com/tags/wecom/
 https://songxwn.com/tags/python/
 https://songxwn.com/tags/ROS/
+https://songxwn.com/tags/RDS/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/VMware/
