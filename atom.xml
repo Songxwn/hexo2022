@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-07-12T15:21:47.660Z</updated>
+  <updated>2023-07-15T07:52:17.372Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>url_get_edge-tools</title>
+    <link href="https://songxwn.com/url-get-edge-tools/"/>
+    <id>https://songxwn.com/url-get-edge-tools/</id>
+    <published>2023-07-14T23:48:43.000Z</published>
+    <updated>2023-07-15T07:52:17.372Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;写了一个小工具，可以打开指定网站，抓取此网站的所有域名。&lt;/p&gt;
+&lt;p&gt;适合用来做分流和过滤。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="dns" scheme="https://songxwn.com/tags/dns/"/>
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+  </entry>
   
   <entry>
     <title>Windows Server 2022 RDS配置授权激活服务</title>
@@ -540,32 +562,6 @@
     <category term="elk" scheme="https://songxwn.com/tags/elk/"/>
     
     <category term="elasticsearch" scheme="https://songxwn.com/tags/elasticsearch/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux 虚拟机在线热扩容分区</title>
-    <link href="https://songxwn.com/Linux-growpart/"/>
-    <id>https://songxwn.com/Linux-growpart/</id>
-    <published>2023-04-30T19:11:31.000Z</published>
-    <updated>2023-05-01T03:36:20.221Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;本教程是用于Linux虚拟机在调整虚拟硬盘大小后，进行在线不重启热扩容分区大小。&lt;/p&gt;
-&lt;p&gt;适用于RHEL 7+以上的版本及衍生发行版。（如Centos、Rocky Linux、Alma Linux等）&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
-    
-    
-    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
-    
-    <category term="VMware" scheme="https://songxwn.com/tags/VMware/"/>
-    
-    <category term="Disk" scheme="https://songxwn.com/tags/Disk/"/>
-    
-    <category term="Partition" scheme="https://songxwn.com/tags/Partition/"/>
     
   </entry>
   
