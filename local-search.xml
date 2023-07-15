@@ -4,11 +4,11 @@
   
   
   <entry>
-    <title>url_get_edge-tools</title>
+    <title>网站页面域名获取工具-Edge (2.0.6P)</title>
     <link href="/url-get-edge-tools/"/>
     <url>/url-get-edge-tools/</url>
     
-    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>写了一个小工具，可以打开指定网站，抓取此网站的所有域名。</p><p>适合用来做分流和过滤。</p><span id="more"></span><h1 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h1><p>系统要求 Windows 10 1809版本以上，要求64位系统。</p><p>要求安装最新的Edge浏览器。</p><p><img src="https://img.songxwn.com/file/f066f66fcc59e431725ab.png" srcset="/img/loading.gif" lazyload></p><p><strong>使用说明：</strong></p><p>点击抓取后，会打开一个浏览器窗口，此浏览器只存在60秒，且不要手动关闭。 期间可以浏览网站和登录网站等操作，60秒之后会把期间抓取的域名输出到上面，然后点击复制即可</p><p> 注意：本机要使用最新Edge浏览器。下载地址：https:&#x2F;&#x2F;<a href="http://www.microsoft.com/zh-cn/edge/download">www.microsoft.com/zh-cn/edge/download</a></p><h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>安装包：<a href="https://songxwn.com/file/Url_get-Edg.exe">https://songxwn.com/file/Url_get-Edg.exe</a></p><p>压缩包：<a href="https://songxwn.com/file/Url_get-Edge.7z">https://songxwn.com/file/Url_get-Edge.7z</a></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>用Python写了一个小工具，可以打开指定网站，抓取此网站的所有域名。</p><p>适合用来做分流和过滤。</p><span id="more"></span><h1 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h1><p>系统要求 Windows 10 1809版本以上，要求64位系统。</p><p>要求安装最新的Edge浏览器。</p><p><img src="https://img.songxwn.com/file/f066f66fcc59e431725ab.png" srcset="/img/loading.gif" lazyload></p><p><strong>使用说明：</strong></p><p>点击抓取后，会打开一个浏览器窗口，此浏览器只存在60秒，且不要手动关闭。 期间可以浏览网站和登录网站等操作，60秒之后会把期间抓取的域名输出到上面，然后点击复制即可</p><p> 注意：本机要使用最新Edge浏览器。下载地址：https:&#x2F;&#x2F;<a href="http://www.microsoft.com/zh-cn/edge/download">www.microsoft.com/zh-cn/edge/download</a></p><h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>安装包：<a href="https://songxwn.com/file/Url_get-Edg.exe">https://songxwn.com/file/Url_get-Edg.exe</a></p><p>压缩包：<a href="https://songxwn.com/file/Url_get-Edge.7z">https://songxwn.com/file/Url_get-Edge.7z</a></p>]]></content>
     
     
     <categories>
@@ -23,6 +23,8 @@
       <tag>dns</tag>
       
       <tag>network</tag>
+      
+      <tag>Windows</tag>
       
     </tags>
     

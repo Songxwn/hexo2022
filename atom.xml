@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-07-15T07:52:17.372Z</updated>
+  <updated>2023-07-15T07:53:35.265Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -17,14 +17,14 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>url_get_edge-tools</title>
+    <title>网站页面域名获取工具-Edge (2.0.6P)</title>
     <link href="https://songxwn.com/url-get-edge-tools/"/>
     <id>https://songxwn.com/url-get-edge-tools/</id>
-    <published>2023-07-14T23:48:43.000Z</published>
-    <updated>2023-07-15T07:52:17.372Z</updated>
+    <published>2023-07-15T07:48:43.000Z</published>
+    <updated>2023-07-15T07:53:35.265Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;写了一个小工具，可以打开指定网站，抓取此网站的所有域名。&lt;/p&gt;
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;用Python写了一个小工具，可以打开指定网站，抓取此网站的所有域名。&lt;/p&gt;
 &lt;p&gt;适合用来做分流和过滤。&lt;/p&gt;</summary>
     
     
@@ -35,6 +35,8 @@
     <category term="dns" scheme="https://songxwn.com/tags/dns/"/>
     
     <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="Windows" scheme="https://songxwn.com/tags/Windows/"/>
     
   </entry>
   
