@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-07-15T14:19:04.213Z</updated>
+  <updated>2023-07-16T03:41:10.209Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>网站页面域名获取工具-Edge (2.0.6P)</title>
+    <title>网站页面域名获取工具-Edge (2.1.4P)</title>
     <link href="https://songxwn.com/url-get-edge-tools/"/>
     <id>https://songxwn.com/url-get-edge-tools/</id>
-    <published>2023-07-15T07:48:43.000Z</published>
-    <updated>2023-07-15T14:19:04.213Z</updated>
+    <published>2023-07-16T03:38:43.000Z</published>
+    <updated>2023-07-16T03:41:10.209Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;用Python写了一个小工具，可以打开指定网站，抓取此网站的所有域名。&lt;/p&gt;
@@ -37,6 +37,8 @@
     <category term="network" scheme="https://songxwn.com/tags/network/"/>
     
     <category term="Windows" scheme="https://songxwn.com/tags/Windows/"/>
+    
+    <category term="Url_get-Edge" scheme="https://songxwn.com/tags/Url-get-Edge/"/>
     
   </entry>
   
