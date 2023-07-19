@@ -1,3 +1,4 @@
+https://songxwn.com/netbox/
 https://songxwn.com/Full_Stack_Network_Engineer/
 https://songxwn.com/ipv6/
 https://songxwn.com/url-get-edge-tools/
@@ -118,6 +119,9 @@ https://songxwn.com/tags/python/
 https://songxwn.com/tags/ROS/
 https://songxwn.com/tags/RDS/
 https://songxwn.com/tags/Url-get-Edge/
+https://songxwn.com/tags/IPAM/
+https://songxwn.com/tags/DCIM/
+https://songxwn.com/tags/Redis/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/VMware/
@@ -133,3 +137,4 @@ https://songxwn.com/categories/network/vxlan/
 https://songxwn.com/categories/blog/
 https://songxwn.com/categories/Windows/
 https://songxwn.com/categories/python/
+https://songxwn.com/categories/NetBox/

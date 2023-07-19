@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-07-16T03:57:10.884Z</updated>
+  <updated>2023-07-19T17:04:13.542Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>NetBox-为网络工程师打造的基础设施资产管理</title>
+    <link href="https://songxwn.com/netbox/"/>
+    <id>https://songxwn.com/netbox/</id>
+    <published>2023-07-19T12:00:18.000Z</published>
+    <updated>2023-07-19T17:04:13.542Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;NetBox 是用于建模和记录现代网络的领先解决方案。由 结合 IP 地址管理 （IPAM） 的传统学科和 具有强大 API 和扩展的数据中心基础架构管理 （DCIM）， NetBox 为推动网络自动化提供了理想的“事实来源”。 NetBox 在 Apache 2.0 许可下作为开源软件提供 作为数千个组织中网络自动化的基石。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="NetBox" scheme="https://songxwn.com/categories/NetBox/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="linux" scheme="https://songxwn.com/tags/linux/"/>
+    
+    <category term="IPAM" scheme="https://songxwn.com/tags/IPAM/"/>
+    
+    <category term="DCIM" scheme="https://songxwn.com/tags/DCIM/"/>
+    
+    <category term="Redis" scheme="https://songxwn.com/tags/Redis/"/>
+    
+  </entry>
   
   <entry>
     <title>网站页面域名获取工具-Edge (2.1.4P)</title>
@@ -535,37 +562,6 @@
     <category term="snmp" scheme="https://songxwn.com/tags/snmp/"/>
     
     <category term="Zabbix" scheme="https://songxwn.com/tags/Zabbix/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Elasticsearch 8.7 白金版激活</title>
-    <link href="https://songxwn.com/Elasticsearch-x-pack-core/"/>
-    <id>https://songxwn.com/Elasticsearch-x-pack-core/</id>
-    <published>2023-05-01T19:49:37.000Z</published>
-    <updated>2023-05-06T01:52:15.574Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;本文章讲解了Elasticsearch 8的白金版激活，使用了Docker环境进行自动生成破解文件x-pack-core。仅用于学习使用。&lt;/p&gt;
-&lt;p&gt;仅适用于：Elasticsearch版本：8.7.0 （使用RPM包安装）&lt;/p&gt;
-&lt;p&gt;Java容器版本：JDK19.0.2&lt;/p&gt;
-&lt;p&gt;环境要求：Rocky Linux8、&lt;a href=&quot;https://yeasy.gitbook.io/docker_practice/install/centos&quot;&gt;Docker&lt;/a&gt;或&lt;a href=&quot;https://cloud.tencent.com/developer/article/1976198&quot;&gt;Podman&lt;/a&gt;。&lt;/p&gt;
-&lt;p&gt;网络要求：需要能正常访问GitHub和Docker HUB（建议全局挂代理）&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.elastic.co/cn/subscriptions&quot;&gt;白金版功能&lt;/a&gt;：支持LDAP、watcher、支持邮箱发送等。&lt;/p&gt;
-&lt;p&gt;安装教程可参考：&lt;a href=&quot;https://songxwn.com/elk/&quot;&gt;https://songxwn.com/elk/&lt;/a&gt; &lt;/p&gt;</summary>
-    
-    
-    
-    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
-    
-    <category term="ELK" scheme="https://songxwn.com/categories/linux/ELK/"/>
-    
-    
-    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
-    
-    <category term="elk" scheme="https://songxwn.com/tags/elk/"/>
-    
-    <category term="elasticsearch" scheme="https://songxwn.com/tags/elasticsearch/"/>
     
   </entry>
   
