@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-07-19T17:10:11.695Z</updated>
+  <updated>2023-07-19T17:12:47.983Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>NetBox安装指南-为网络工程师打造的基础设施资产管理</title>
+    <title>NetBox安装指南-为网络工程师打造的基础设施管理</title>
     <link href="https://songxwn.com/netbox/"/>
     <id>https://songxwn.com/netbox/</id>
     <published>2023-07-19T12:00:18.000Z</published>
-    <updated>2023-07-19T17:10:11.695Z</updated>
+    <updated>2023-07-19T17:12:47.983Z</updated>
     
     
     <summary type="html">&lt;p&gt;NetBox 是用于建模和记录现代网络的领先解决方案。由 结合 IP 地址管理 （IPAM） 的传统学科和 具有强大 API 和扩展的数据中心基础架构管理 （DCIM）， NetBox 为推动网络自动化提供了理想的“事实来源”。 NetBox 在 Apache 2.0 许可下作为开源软件提供 作为数千个组织中网络自动化的基石。&lt;/p&gt;</summary>
@@ -40,6 +40,8 @@
     <category term="DCIM" scheme="https://songxwn.com/tags/DCIM/"/>
     
     <category term="Redis" scheme="https://songxwn.com/tags/Redis/"/>
+    
+    <category term="netbox" scheme="https://songxwn.com/tags/netbox/"/>
     
   </entry>
   

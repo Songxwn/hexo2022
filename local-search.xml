@@ -4,7 +4,7 @@
   
   
   <entry>
-    <title>NetBox安装指南-为网络工程师打造的基础设施资产管理</title>
+    <title>NetBox安装指南-为网络工程师打造的基础设施管理</title>
     <link href="/netbox/"/>
     <url>/netbox/</url>
     
@@ -29,6 +29,8 @@
       <tag>DCIM</tag>
       
       <tag>Redis</tag>
+      
+      <tag>netbox</tag>
       
     </tags>
     

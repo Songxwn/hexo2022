@@ -122,6 +122,7 @@ https://songxwn.com/tags/Url-get-Edge/
 https://songxwn.com/tags/IPAM/
 https://songxwn.com/tags/DCIM/
 https://songxwn.com/tags/Redis/
+https://songxwn.com/tags/netbox/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/VMware/
