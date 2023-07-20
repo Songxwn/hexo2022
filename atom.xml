@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-07-20T05:17:54.549Z</updated>
+  <updated>2023-07-20T06:55:19.121Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -17,14 +17,44 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>NetBox CSV导出中文乱码问题</title>
+    <link href="https://songxwn.com/netbox_csv/"/>
+    <id>https://songxwn.com/netbox_csv/</id>
+    <published>2023-07-20T06:00:18.000Z</published>
+    <updated>2023-07-20T06:55:19.121Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;NetBox 在导出CSV的时候，会是使用UTF-8编码，而不是UTF-8-SIG编码。&lt;/p&gt;
+&lt;p&gt;这样会导致导出的文件，在微软的Excel打开中会乱码。（使用Notepad ++不会）&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="NetBox" scheme="https://songxwn.com/categories/NetBox/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="linux" scheme="https://songxwn.com/tags/linux/"/>
+    
+    <category term="IPAM" scheme="https://songxwn.com/tags/IPAM/"/>
+    
+    <category term="DCIM" scheme="https://songxwn.com/tags/DCIM/"/>
+    
+    <category term="Redis" scheme="https://songxwn.com/tags/Redis/"/>
+    
+    <category term="netbox" scheme="https://songxwn.com/tags/netbox/"/>
+    
+  </entry>
+  
+  <entry>
     <title>NetBox安装指南-为网络工程师打造的基础设施管理</title>
     <link href="https://songxwn.com/netbox/"/>
     <id>https://songxwn.com/netbox/</id>
     <published>2023-07-19T12:00:18.000Z</published>
-    <updated>2023-07-20T05:17:54.549Z</updated>
+    <updated>2023-07-20T06:55:03.605Z</updated>
     
     
-    <summary type="html">&lt;p&gt;NetBox 是用于建模和记录现代网络的领先解决方案。由 结合 IP 地址管理 （IPAM） 的传统学科和 具有强大 API 和扩展的数据中心基础架构管理 （DCIM）， NetBox 为推动网络自动化提供了理想的“事实来源”。 NetBox 在 Apache 2.0 许可下作为开源软件提供 作为数千个组织中网络自动化的基石。&lt;/p&gt;</summary>
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;NetBox 是用于建模和记录现代网络的领先解决方案。由 结合 IP 地址管理 （IPAM） 的传统学科和 具有强大 API 和扩展的数据中心基础架构管理 （DCIM）， NetBox 为推动网络自动化提供了理想的“事实来源”。 NetBox 在 Apache 2.0 许可下作为开源软件提供 作为数千个组织中网络自动化的基石。&lt;/p&gt;</summary>
     
     
     
@@ -537,33 +567,6 @@
     <category term="Dodman" scheme="https://songxwn.com/tags/Dodman/"/>
     
     <category term="container" scheme="https://songxwn.com/tags/container/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Zabbix SNMPv3 设备重启后无法监控问题</title>
-    <link href="https://songxwn.com/zabbix-reboot-SNMPv3/"/>
-    <id>https://songxwn.com/zabbix-reboot-SNMPv3/</id>
-    <published>2023-05-01T23:29:36.000Z</published>
-    <updated>2023-05-17T08:39:19.552Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;最近有发现有SNMPv3 监控的网络设备断电重启后，Zabbix无法正常监控，显示SNMP超时。&lt;/p&gt;
-&lt;p&gt;但SNMP工具去Get OID值却没有问题，但Zabbix Server重启后能解决此问题。&lt;/p&gt;
-&lt;p&gt;查询一番后有了不重启的解决方案。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Zabbix" scheme="https://songxwn.com/categories/Zabbix/"/>
-    
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
-    
-    <category term="snmp" scheme="https://songxwn.com/tags/snmp/"/>
-    
-    <category term="Zabbix" scheme="https://songxwn.com/tags/Zabbix/"/>
     
   </entry>
   
