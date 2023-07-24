@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/04/16/6a200c2bca72072c.png">
 <meta property="article:published_time" content="2023-04-15T03:54:00.000Z">
-<meta property="article:modified_time" content="2023-04-18T00:24:00.000Z">
+<meta property="article:modified_time" content="2023-07-24T13:37:12.823Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="esxi">
 <meta property="article:tag" content="vmware">
@@ -342,7 +342,7 @@
               <p class="note note-danger">
                 
                   
-                    本文最后更新于：2023年4月18日 早上
+                    本文最后更新于：2023年7月24日 晚上
                   
                 
               </p>
@@ -374,7 +374,7 @@
 
 
 <h2 id="允许ESXi-8-执行第三方程序"><a href="#允许ESXi-8-执行第三方程序" class="headerlink" title="允许ESXi 8 执行第三方程序"></a>允许ESXi 8 执行第三方程序</h2><p>ESXi 8 为了安全性考虑，不允许第三方程序运行，需要手动禁止。</p>
-<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-comment"># 如果不禁止，就会提示：-sh: ./ipmitool: Operation not permitted</span><br><br><br><br>esxcli system settings advanced <span class="hljs-keyword">set</span> -o <span class="hljs-string">/User/execInstalledOnly</span> -i 0<br><br><span class="hljs-comment"># 关闭安全策略，允许未安装的二进制文件运行</span><br><br>esxcli system settings advanced <span class="hljs-keyword">set</span> -o <span class="hljs-string">/User/execInstalledOnly</span> -i <br><br><span class="hljs-comment"># 开启安全策略，不允许未安装的二进制文件运行</span><br><br>[root@localhost:<span class="hljs-string">/opt</span>] <span class="hljs-string">./ipmitool</span> -V<br>ipmitool <span class="hljs-keyword">version</span> 1.8.18 for songxwn.com<br><br><span class="hljs-comment"># 尝试运行，查看版本。</span><br><br></code></pre></td></tr></table></figure>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-comment"># 如果不禁止，就会提示：-sh: ./ipmitool: Operation not permitted</span><br><br><br><br>esxcli system settings advanced <span class="hljs-keyword">set</span> -o <span class="hljs-string">/User/execInstalledOnly</span> -i 0<br><br><span class="hljs-comment"># 关闭安全策略，允许未安装的二进制文件运行</span><br><br>esxcli system settings advanced <span class="hljs-keyword">set</span> -o <span class="hljs-string">/User/execInstalledOnly</span> -i 1<br><br><span class="hljs-comment"># 开启安全策略，不允许未安装的二进制文件运行</span><br><br>[root@localhost:<span class="hljs-string">/opt</span>] <span class="hljs-string">./ipmitool</span> -V<br>ipmitool <span class="hljs-keyword">version</span> 1.8.18 for songxwn.com<br><br><span class="hljs-comment"># 尝试运行，查看版本。</span><br><br></code></pre></td></tr></table></figure>
 
 <p>PS：这将允许在主机上执行未安装的二进制文件。未知内容可能会导致类似勒索软件的恶意软件攻击。建议使用之后关闭。</p>
 <h1 id="-1"><a href="#-1" class="headerlink" title=""></a></h1><h2 id="常用命令（本地管理）"><a href="#常用命令（本地管理）" class="headerlink" title="常用命令（本地管理）"></a>常用命令（本地管理）</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs routeros">ipmitool sensor list<br><br><span class="hljs-comment"># 查看传感器信息</span><br><br>ipmitool<span class="hljs-built_in"> lan </span><span class="hljs-built_in">print</span><br><br><span class="hljs-comment"># 查看ipmi网络信息</span><br><br>ipmitool<span class="hljs-built_in"> lan </span><span class="hljs-built_in">set</span> 1 ipsrc static<br>ipmitool<span class="hljs-built_in"> lan </span><span class="hljs-built_in">set</span> 1 ipaddr 192.168.142.100<br>ipmitool<span class="hljs-built_in"> lan </span><span class="hljs-built_in">set</span> 1 netmask 255.255.255.0<br>ipmitool<span class="hljs-built_in"> lan </span><span class="hljs-built_in">set</span> 1 defgw ipaddr 192.168.142.1<br><br><span class="hljs-comment"># 配置静态IP，也可以配置使用VLAN。1代表通道，可以用print命令确认。</span><br><br>ipmitool<span class="hljs-built_in"> user </span>list 1<br><br><span class="hljs-comment"># 查看用户列表</span><br><br>ipmitool<span class="hljs-built_in"> user </span><span class="hljs-built_in">set</span> password 1 ABC111@<br><br><span class="hljs-comment"># 将用户ID为1 的用户配置重置密码。</span><br><br>ipmitool mc reset warm<br><br><span class="hljs-comment"># 重启BMC</span><br><br></code></pre></td></tr></table></figure>
@@ -384,7 +384,7 @@
 <p><a target="_blank" rel="noopener" href="https://www.zhaowenyu.com/linux-doc/ipmi/ipmitool.html">https://www.zhaowenyu.com/linux-doc/ipmi/ipmitool.html</a> </p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/liwei924/article/details/80529881">https://blog.csdn.net/liwei924/article/details/80529881</a> </p>
 <p><a target="_blank" rel="noopener" href="https://vswitchzero.com/ipmitool-vib/">https://vswitchzero.com/ipmitool-vib/</a></p>
-<div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a target="_blank" rel="noopener" href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="https://songxwn.com/VMware_Vsphere8_key/">VMware Vsphere 8 序列号</a></li><li><a href="https://songxwn.com/Veeam12/">Veeam Backup Replication 12 安装和激活</a></li><li><a href="https://songxwn.com/ESXI_CVE-2021-21974/">ESXi 勒索病毒ESXiArgs 其CVE-2021-21974漏洞分析和恢复</a></li></ul></div>
+<div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a target="_blank" rel="noopener" href="https://github.com/huiwang/hexo-recommended-posts">Hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="https://songxwn.com/VMware_Vsphere8_key/">VMware Vsphere 8 序列号</a></li><li><a href="https://songxwn.com/Veeam12/">Veeam Backup Replication 12 安装和激活</a></li><li><a href="https://songxwn.com/ESXI_CVE-2021-21974/">ESXi 勒索病毒ESXiArgs 其CVE-2021-21974漏洞分析和恢复</a></li></ul></div>
                 
               </div>
             
@@ -452,7 +452,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年4月18日</div>
+          <div>2023年7月24日</div>
         </div>
       
       
