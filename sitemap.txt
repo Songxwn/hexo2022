@@ -1,3 +1,4 @@
+https://songxwn.com/Netbox-pgsql/
 https://songxwn.com/zabbix-reboot-SNMPv3/
 https://songxwn.com/ESXi8_IPMI/
 https://songxwn.com/netbox/

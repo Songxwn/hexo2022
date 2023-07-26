@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-07-20T06:55:19.121Z</updated>
+  <updated>2023-07-26T16:11:50.210Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>NetBox - PostgreSQL数据库优化指南</title>
+    <link href="https://songxwn.com/Netbox-pgsql/"/>
+    <id>https://songxwn.com/Netbox-pgsql/</id>
+    <published>2023-07-26T15:00:54.000Z</published>
+    <updated>2023-07-26T16:11:50.210Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;默认安装下的 &lt;a href=&quot;https://www.postgresql.org/&quot;&gt;PostgreSQL&lt;/a&gt; 配置无法完全利用现有硬件，影响Netbox的性能。&lt;/p&gt;
+&lt;p&gt;本文章讲解了如何简单去优化。&lt;/p&gt;
+&lt;p&gt;（默认配置使用Netbox Web界面很容易卡顿）&lt;/p&gt;
+&lt;p&gt;Netbox 系列文章：&lt;a href=&quot;https://songxwn.com/categories/NetBox/&quot;&gt;https://songxwn.com/categories/NetBox/&lt;/a&gt; &lt;/p&gt;</summary>
+    
+    
+    
+    <category term="NetBox" scheme="https://songxwn.com/categories/NetBox/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="linux" scheme="https://songxwn.com/tags/linux/"/>
+    
+    <category term="IPAM" scheme="https://songxwn.com/tags/IPAM/"/>
+    
+    <category term="DCIM" scheme="https://songxwn.com/tags/DCIM/"/>
+    
+    <category term="Redis" scheme="https://songxwn.com/tags/Redis/"/>
+    
+    <category term="netbox" scheme="https://songxwn.com/tags/netbox/"/>
+    
+  </entry>
   
   <entry>
     <title>NetBox CSV导出中文乱码问题</title>
@@ -540,34 +572,6 @@
     <category term="ad" scheme="https://songxwn.com/tags/ad/"/>
     
     <category term="ldap" scheme="https://songxwn.com/tags/ldap/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Podman 容器管理工具</title>
-    <link href="https://songxwn.com/podman/"/>
-    <id>https://songxwn.com/podman/</id>
-    <published>2023-05-02T04:50:52.000Z</published>
-    <updated>2023-05-02T13:23:51.436Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;Podman是一个用于在 Linux 系统上构建、管理和运行&lt;a href=&quot;https://opencontainers.org/&quot;&gt;OCI标准&lt;/a&gt;容器的CLI工具，是Docker的直接替代品。&lt;/p&gt;
-&lt;p&gt;由红帽主导，与开源社区一起开发。在RHEL8开始预装并替代Docker。命令上与Docker并无区别。&lt;/p&gt;
-&lt;p&gt;主要特点是不需要守护进程，可以支持非root用户运行容器，提高了安全性和可访问性。&lt;/p&gt;
-&lt;p&gt;本教程也适用于RHEL其他衍生版本，如Rocky Linux。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
-    
-    
-    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
-    
-    <category term="Docker" scheme="https://songxwn.com/tags/Docker/"/>
-    
-    <category term="Dodman" scheme="https://songxwn.com/tags/Dodman/"/>
-    
-    <category term="container" scheme="https://songxwn.com/tags/container/"/>
     
   </entry>
   

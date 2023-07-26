@@ -16,16 +16,16 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
   
-    <meta name="description" content="介绍NetBox 在导出CSV的时候，会是使用UTF-8编码，而不是UTF-8-SIG编码。 这样会导致导出的文件，在微软的Excel打开中会乱码。（使用Notepad ++不会）">
+    <meta name="description" content="简介默认安装下的 PostgreSQL 配置无法完全利用现有硬件，影响Netbox的性能。 本文章讲解了如何简单去优化。 （默认配置使用Netbox Web界面很容易卡顿） Netbox 系列文章：https:&#x2F;&#x2F;songxwn.com&#x2F;categories&#x2F;NetBox&#x2F;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NetBox CSV导出中文乱码问题">
-<meta property="og:url" content="https://songxwn.com/netbox_csv/index.html">
+<meta property="og:title" content="NetBox - PostgreSQL数据库优化指南">
+<meta property="og:url" content="https://songxwn.com/Netbox-pgsql/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="介绍NetBox 在导出CSV的时候，会是使用UTF-8编码，而不是UTF-8-SIG编码。 这样会导致导出的文件，在微软的Excel打开中会乱码。（使用Notepad ++不会）">
+<meta property="og:description" content="简介默认安装下的 PostgreSQL 配置无法完全利用现有硬件，影响Netbox的性能。 本文章讲解了如何简单去优化。 （默认配置使用Netbox Web界面很容易卡顿） Netbox 系列文章：https:&#x2F;&#x2F;songxwn.com&#x2F;categories&#x2F;NetBox&#x2F;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img.songxwn.com/file/d3ebb4ff04e24f94b2bb2.png">
-<meta property="article:published_time" content="2023-07-20T06:00:18.000Z">
-<meta property="article:modified_time" content="2023-07-20T06:55:19.121Z">
+<meta property="og:image" content="https://img.songxwn.com/file/c9c5bc134f9c576fcbedb.png">
+<meta property="article:published_time" content="2023-07-26T15:00:54.000Z">
+<meta property="article:modified_time" content="2023-07-26T16:11:50.210Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="linux">
@@ -34,13 +34,13 @@
 <meta property="article:tag" content="Redis">
 <meta property="article:tag" content="netbox">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img.songxwn.com/file/d3ebb4ff04e24f94b2bb2.png">
+<meta name="twitter:image" content="https://img.songxwn.com/file/c9c5bc134f9c576fcbedb.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>NetBox CSV导出中文乱码问题 - Song`s Blog</title>
+  <title>NetBox - PostgreSQL数据库优化指南 - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -247,7 +247,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="NetBox CSV导出中文乱码问题"></span>
+            <span id="subtitle" data-typed-text="NetBox - PostgreSQL数据库优化指南"></span>
           
         </div>
 
@@ -258,8 +258,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-20 14:00" pubdate>
-          2023年7月20日 下午
+        <time datetime="2023-07-26 23:00" pubdate>
+          2023年7月26日 晚上
         </time>
       </span>
     
@@ -270,7 +270,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          782 字
+          416 字
         
       </span>
     
@@ -281,7 +281,7 @@
         
         
         
-          7 分钟
+          4 分钟
         
       </span>
     
@@ -340,12 +340,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">NetBox CSV导出中文乱码问题</h1>
+            <h1 style="display: none">NetBox - PostgreSQL数据库优化指南</h1>
             
               <p class="note note-danger">
                 
                   
-                    本文最后更新于：2023年7月20日 下午
+                    本文最后更新于：2023年7月27日 凌晨
                   
                 
               </p>
@@ -353,13 +353,26 @@
             
               <div class="markdown-body">
                 
-                <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>NetBox 在导出CSV的时候，会是使用UTF-8编码，而不是UTF-8-SIG编码。</p>
-<p>这样会导致导出的文件，在微软的Excel打开中会乱码。（使用Notepad ++不会）</p>
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>默认安装下的 <a target="_blank" rel="noopener" href="https://www.postgresql.org/">PostgreSQL</a> 配置无法完全利用现有硬件，影响Netbox的性能。</p>
+<p>本文章讲解了如何简单去优化。</p>
+<p>（默认配置使用Netbox Web界面很容易卡顿）</p>
+<p>Netbox 系列文章：<a href="https://songxwn.com/categories/NetBox/">https://songxwn.com/categories/NetBox/</a> </p>
 <span id="more"></span>
 
-<p>NetBox 系列文章：<a href="https://songxwn.com/categories/NetBox/">https://songxwn.com/categories/NetBox/</a> </p>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>直接修改Netbox 虚拟环境的 django_tables2 库的默认编码，这样只要不升级或重装此库就不会失效。</p>
-<h1 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h1><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs dts">vim <span class="hljs-keyword">/opt/</span>netbox<span class="hljs-keyword">/venv/</span>lib/python3<span class="hljs-number">.9</span><span class="hljs-keyword">/site-packages/</span>django_tables2<span class="hljs-keyword">/export/</span>export.py<br><br><span class="hljs-meta"># 修改库文件，路径看自己的实际情况。</span><br><br><br>    FORMATS = <span class="hljs-punctuation">&#123;</span><br><span class="hljs-symbol">        CSV:</span> <span class="hljs-string">&quot;text/csv; charset=utf-8-sig&quot;</span>,<br><span class="hljs-symbol">        JSON:</span> <span class="hljs-string">&quot;application/json&quot;</span>,<br><span class="hljs-symbol">        LATEX:</span> <span class="hljs-string">&quot;text/plain&quot;</span>,<br><span class="hljs-symbol">        ODS:</span> <span class="hljs-string">&quot;application/vnd.oasis.opendocument.spreadsheet&quot;</span>,<br><span class="hljs-symbol">        TSV:</span> <span class="hljs-string">&quot;text/tsv; charset=utf-8&quot;</span>,<br><span class="hljs-symbol">        XLS:</span> <span class="hljs-string">&quot;application/vnd.ms-excel&quot;</span>,<br><span class="hljs-symbol">        XLSX:</span> <span class="hljs-string">&quot;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&quot;</span>,<br><span class="hljs-symbol">        YAML:</span> <span class="hljs-string">&quot;text/yaml; charset=utf-8&quot;</span>,<br>    <span class="hljs-punctuation">&#125;</span><br>    <br>在第<span class="hljs-number">37</span>行，直接修改为utf<span class="hljs-number">-8</span>-sig，然后重启NetBox即可。<br><br>systemctl restart netbox netbox-rq<br><br><br></code></pre></td></tr></table></figure>
+<h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/le0pard/pgtune">https://github.com/le0pard/pgtune</a> </p>
+<p>首先打开：<a target="_blank" rel="noopener" href="https://pgtune.leopard.in.ua/">https://pgtune.leopard.in.ua/</a>    (此网站会根据你的选择自动生成优化配置)</p>
+<p><img src="https://img.songxwn.com/file/73ca06a6d8b0817480a94.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>如上图示例：</strong></p>
+<p>PG版本选择15</p>
+<p>系统为Linux</p>
+<p>类型为Web 应用</p>
+<p>物理内存为16GB</p>
+<p>CPU核心数量为8个</p>
+<p>连接数为1024</p>
+<p>存储类型为 SSD</p>
+<p>点击生成即可在右侧生成优化配置。</p>
+<h1 id="编辑配置"><a href="#编辑配置" class="headerlink" title="编辑配置"></a>编辑配置</h1><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs awk">vim <span class="hljs-regexp">/var/</span>lib<span class="hljs-regexp">/pgsql/</span>data/postgresql.conf<br><br><span class="hljs-comment"># 根据上面的配置增加或修改参数</span><br><br><br> systemctl restart postgresql.service<br> <br><span class="hljs-comment"># 重启之后修改配置生效</span><br><br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
@@ -414,8 +427,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>NetBox CSV导出中文乱码问题</div>
-      <div>https://songxwn.com/netbox_csv/</div>
+      <div>NetBox - PostgreSQL数据库优化指南</div>
+      <div>https://songxwn.com/Netbox-pgsql/</div>
     </div>
     <div class="license-meta">
       
@@ -427,13 +440,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年7月20日</div>
+          <div>2023年7月26日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年7月20日</div>
+          <div>2023年7月27日</div>
         </div>
       
       
@@ -464,18 +477,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Netbox-pgsql/" title="NetBox - PostgreSQL数据库优化指南">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">NetBox - PostgreSQL数据库优化指南</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/netbox/" title="NetBox安装指南-为网络工程师打造的基础设施管理">
-                        <span class="hidden-mobile">NetBox安装指南-为网络工程师打造的基础设施管理</span>
+                      <a href="/netbox_csv/" title="NetBox CSV导出中文乱码问题">
+                        <span class="hidden-mobile">NetBox CSV导出中文乱码问题</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -565,7 +572,7 @@
       
         <a href="/netbox_csv/" title="NetBox CSV导出中文乱码问题"
            class="list-group-item list-group-item-action
-           active">
+           ">
           <span class="category-post">NetBox CSV导出中文乱码问题</span>
         </a>
       
@@ -574,7 +581,7 @@
       
         <a href="/Netbox-pgsql/" title="NetBox - PostgreSQL数据库优化指南"
            class="list-group-item list-group-item-action
-           ">
+           active">
           <span class="category-post">NetBox - PostgreSQL数据库优化指南</span>
         </a>
       

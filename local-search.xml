@@ -4,6 +4,41 @@
   
   
   <entry>
+    <title>NetBox - PostgreSQL数据库优化指南</title>
+    <link href="/Netbox-pgsql/"/>
+    <url>/Netbox-pgsql/</url>
+    
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>默认安装下的 <a href="https://www.postgresql.org/">PostgreSQL</a> 配置无法完全利用现有硬件，影响Netbox的性能。</p><p>本文章讲解了如何简单去优化。</p><p>（默认配置使用Netbox Web界面很容易卡顿）</p><p>Netbox 系列文章：<a href="https://songxwn.com/categories/NetBox/">https://songxwn.com/categories/NetBox/</a> </p><span id="more"></span><h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><p>项目地址：<a href="https://github.com/le0pard/pgtune">https://github.com/le0pard/pgtune</a> </p><p>首先打开：<a href="https://pgtune.leopard.in.ua/">https://pgtune.leopard.in.ua/</a>    (此网站会根据你的选择自动生成优化配置)</p><p><img src="https://img.songxwn.com/file/73ca06a6d8b0817480a94.png" srcset="/img/loading.gif" lazyload></p><p><strong>如上图示例：</strong></p><p>PG版本选择15</p><p>系统为Linux</p><p>类型为Web 应用</p><p>物理内存为16GB</p><p>CPU核心数量为8个</p><p>连接数为1024</p><p>存储类型为 SSD</p><p>点击生成即可在右侧生成优化配置。</p><h1 id="编辑配置"><a href="#编辑配置" class="headerlink" title="编辑配置"></a>编辑配置</h1><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs awk">vim <span class="hljs-regexp">/var/</span>lib<span class="hljs-regexp">/pgsql/</span>data/postgresql.conf<br><br><span class="hljs-comment"># 根据上面的配置增加或修改参数</span><br><br><br> systemctl restart postgresql.service<br> <br><span class="hljs-comment"># 重启之后修改配置生效</span><br><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>NetBox</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>network</tag>
+      
+      <tag>linux</tag>
+      
+      <tag>IPAM</tag>
+      
+      <tag>DCIM</tag>
+      
+      <tag>Redis</tag>
+      
+      <tag>netbox</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>NetBox CSV导出中文乱码问题</title>
     <link href="/netbox_csv/"/>
     <url>/netbox_csv/</url>
