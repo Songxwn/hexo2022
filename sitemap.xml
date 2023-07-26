@@ -11,6 +11,15 @@
   </url>
   
   <url>
+    <loc>https://songxwn.com/VMware_Vsphere8_key/</loc>
+    
+    <lastmod>2023-07-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://songxwn.com/Zabbix-fping/</loc>
     
     <lastmod>2023-07-26</lastmod>
@@ -392,15 +401,6 @@
     <loc>https://songxwn.com/network-test/</loc>
     
     <lastmod>2023-04-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://songxwn.com/VMware_Vsphere8_key/</loc>
-    
-    <lastmod>2023-04-18</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -1048,13 +1048,6 @@
   
   <url>
     <loc>https://songxwn.com/categories/VMware/</loc>
-    <lastmod>2023-07-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://songxwn.com/categories/esxi/</loc>
     <lastmod>2023-07-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
