@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-07-26T16:11:50.210Z</updated>
+  <updated>2023-07-26T16:28:50.641Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Zabbix Ping 丢包问题</title>
+    <link href="https://songxwn.com/Zabbix-fping/"/>
+    <id>https://songxwn.com/Zabbix-fping/</id>
+    <published>2023-07-26T16:16:52.000Z</published>
+    <updated>2023-07-26T16:28:50.641Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;最近遇到一个问题，在Zabbix主机shell下Ping 目标IP是完全不丢包的。但是使用Zabbix 监控项去Ping丢包率为33.3%。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Zabbix" scheme="https://songxwn.com/categories/Zabbix/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
+    
+    <category term="Zabbix" scheme="https://songxwn.com/tags/Zabbix/"/>
+    
+    <category term="ping" scheme="https://songxwn.com/tags/ping/"/>
+    
+  </entry>
   
   <entry>
     <title>NetBox - PostgreSQL数据库优化指南</title>
@@ -539,39 +564,6 @@
     <category term="logstash" scheme="https://songxwn.com/tags/logstash/"/>
     
     <category term="syslog" scheme="https://songxwn.com/tags/syslog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Elasticsearch 接入微软Active Directory认证</title>
-    <link href="https://songxwn.com/ELK-AD-LDAP-Authentication/"/>
-    <id>https://songxwn.com/ELK-AD-LDAP-Authentication/</id>
-    <published>2023-05-03T01:51:41.000Z</published>
-    <updated>2023-05-03T02:35:36.117Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;本文章主要介绍了Elasticsearch 接入微软的&lt;a href=&quot;https://learn.microsoft.com/zh-cn/troubleshoot/windows-server/identity/active-directory-overview&quot;&gt;Active Directory&lt;/a&gt;（域控）作为身份认证。&lt;/p&gt;
-&lt;p&gt;LDAP认证接入可参考&lt;a href=&quot;https://www.elastic.co/guide/en/elasticsearch/reference/current/ldap-realm.html&quot;&gt;官方文档&lt;/a&gt;。&lt;/p&gt;
-&lt;p&gt;使用环境：Rocky Linux 8、Elasticsearch 8、Windows Server 2022&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;注意：由于此功能基础版无法使用，需要白金版本，可参考教程：&lt;/strong&gt;&lt;a href=&quot;https://songxwn.com/Elasticsearch-x-pack-core/&quot;&gt;&lt;strong&gt;https://songxwn.com/Elasticsearch-x-pack-core/&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;ELK系列文章：&lt;a href=&quot;https://songxwn.com/categories/linux/ELK/&quot;&gt;https://songxwn.com/categories/linux/ELK/&lt;/a&gt; &lt;/p&gt;</summary>
-    
-    
-    
-    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
-    
-    <category term="ELK" scheme="https://songxwn.com/categories/linux/ELK/"/>
-    
-    
-    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
-    
-    <category term="elk" scheme="https://songxwn.com/tags/elk/"/>
-    
-    <category term="elasticsearch" scheme="https://songxwn.com/tags/elasticsearch/"/>
-    
-    <category term="ad" scheme="https://songxwn.com/tags/ad/"/>
-    
-    <category term="ldap" scheme="https://songxwn.com/tags/ldap/"/>
     
   </entry>
   
