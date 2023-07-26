@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/05/02/05a0e1ca1c8d095b.png">
 <meta property="article:published_time" content="2023-05-01T23:29:36.000Z">
-<meta property="article:modified_time" content="2023-05-17T08:39:19.552Z">
+<meta property="article:modified_time" content="2023-07-26T11:05:49.960Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="Linux">
@@ -268,7 +268,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          533 字
+          595 字
         
       </span>
     
@@ -343,7 +343,7 @@
               <p class="note note-danger">
                 
                   
-                    本文最后更新于：2023年5月17日 下午
+                    本文最后更新于：2023年7月26日 晚上
                   
                 
               </p>
@@ -359,15 +359,10 @@
 <h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p><a href="RFC3414">RFC3414</a> 要求 SNMPv3 设备保留其 engineBoots。 一些设备不这样做，这导致它们的 SNMP 消息在重新启动后被丢弃为过时的。 在这种情况下，需要在服务器&#x2F;代理上手动清除 SNMP 缓存（通过使用 <a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/6.0/zh/manual/concepts/server#runtime-control">-R snmp_cache_reload</a>）或者需要重新启动服务器&#x2F;代理 .</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">zabbix_server -R snmp_cache_reload<br><br>zabbix_proxy -R snmp_cache_reload<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">清理SNMP缓存</span><br><br></code></pre></td></tr></table></figure>
 
-
-
-
-
-
-
+<h1 id="定时"><a href="#定时" class="headerlink" title="定时"></a>定时</h1><p>可以考虑使用crontab定时清理。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/6.0/zh/manual/config/items/itemtypes/snmp">https://www.zabbix.com/documentation/6.0/zh/manual/config/items/itemtypes/snmp</a> </p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42906357/article/details/129818955">https://blog.csdn.net/qq_42906357/article/details/129818955</a> </p>
-<div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a target="_blank" rel="noopener" href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="https://songxwn.com/VXLAN_Configuration/">VXLAN 基本配置</a></li><li><a href="https://songxwn.com/VXLAN_Principle/">VXLAN 转发原理</a></li><li><a href="https://songxwn.com/VXLAN_Basic/">VXLAN 基本概念</a></li><li><a target="_blank" rel="noopener" href="https://chengzhaoxi.xyz/361d7ede.html">互联网算法工程开发常用技术</a></li></ul></div>
+<div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a target="_blank" rel="noopener" href="https://github.com/huiwang/hexo-recommended-posts">Hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="https://songxwn.com/redis-sentinel/">Redis 哨兵模式配置 - 在Rocky Linux上</a></li><li><a href="https://songxwn.com/Web-Net-Tools/">部署私有Web Ping/MTR测试服务 Web Net Tools</a></li><li><a href="https://songxwn.com/Image-hosting-service/">白嫖Cloudflare和Telegraph搭建自有图床</a></li></ul></div>
                 
               </div>
             
@@ -437,7 +432,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年5月17日</div>
+          <div>2023年7月26日</div>
         </div>
       
       
