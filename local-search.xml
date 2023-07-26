@@ -1098,7 +1098,7 @@
     
     <categories>
       
-      <category>VMware</category>
+      <category>vmware</category>
       
     </categories>
     
@@ -1110,6 +1110,8 @@
       <tag>vmware</tag>
       
       <tag>backups</tag>
+      
+      <tag>veeam</tag>
       
     </tags>
     

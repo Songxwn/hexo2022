@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://songxwn.com/Veeam12/</loc>
+    
+    <lastmod>2023-07-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://songxwn.com/ESXI_CVE-2021-21974/</loc>
     
     <lastmod>2023-07-26</lastmod>
@@ -428,15 +437,6 @@
     <loc>https://songxwn.com/ospf-route-FA/</loc>
     
     <lastmod>2023-03-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://songxwn.com/Veeam12/</loc>
-    
-    <lastmod>2023-02-28</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -1030,6 +1030,13 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>https://songxwn.com/tags/veeam/</loc>
+    <lastmod>2023-07-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
@@ -1041,13 +1048,6 @@
   
   <url>
     <loc>https://songxwn.com/categories/linux/</loc>
-    <lastmod>2023-07-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://songxwn.com/categories/VMware/</loc>
     <lastmod>2023-07-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
