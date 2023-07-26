@@ -179,9 +179,9 @@
     
     <category term="Windows" scheme="https://songxwn.com/tags/Windows/"/>
     
-    <category term="rdp" scheme="https://songxwn.com/tags/rdp/"/>
-    
     <category term="RDS" scheme="https://songxwn.com/tags/RDS/"/>
+    
+    <category term="rdp" scheme="https://songxwn.com/tags/rdp/"/>
     
   </entry>
   
@@ -273,9 +273,9 @@
     
     <category term="Windows" scheme="https://songxwn.com/tags/Windows/"/>
     
-    <category term="kms" scheme="https://songxwn.com/tags/kms/"/>
-    
     <category term="rdp" scheme="https://songxwn.com/tags/rdp/"/>
+    
+    <category term="kms" scheme="https://songxwn.com/tags/kms/"/>
     
     <category term="VDI" scheme="https://songxwn.com/tags/VDI/"/>
     
@@ -357,9 +357,9 @@
     
     <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
     
-    <category term="image" scheme="https://songxwn.com/tags/image/"/>
-    
     <category term="blog" scheme="https://songxwn.com/tags/blog/"/>
+    
+    <category term="image" scheme="https://songxwn.com/tags/image/"/>
     
   </entry>
   

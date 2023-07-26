@@ -423,7 +423,7 @@
 <li>SW3查找路由表，发现目的IP：192.168.2.1，与本地接口VBDIF 20产生的直连路由相匹配，查找ARP表项确定报文目的MAC，再查找MAC地址表确定报文的出接口。SW3中前往192.168.2.1所对应MAC地址的出接口为远端VTEP 2.2.2.2，将报文加上VXLAN封装，送往SW2。</li>
 <li>SW2收到报文之后解VXLAN封装发现目的MAC并非自身任何接口的MAC地址，执行L2查表转发，依据MAC地址表将报文从本地接口转发出去。</li>
 </ol>
-<div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a target="_blank" rel="noopener" href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="https://songxwn.com/VXLAN_Configuration/">VXLAN 基本配置</a></li><li><a href="https://songxwn.com/VXLAN_Basic/">VXLAN 基本概念</a></li><li><a href="https://songxwn.com/zabbix-reboot-SNMPv3/">Zabbix SNMPv3 设备重启后无法监控问题</a></li></ul></div>
+
                 
               </div>
             
@@ -639,19 +639,19 @@
     
       
       
-        <a href="/VXLAN_Principle/" title="VXLAN 转发原理"
+        <a href="/VXLAN_Configuration/" title="VXLAN 基本配置"
            class="list-group-item list-group-item-action
-           active">
-          <span class="category-post">VXLAN 转发原理</span>
+           ">
+          <span class="category-post">VXLAN 基本配置</span>
         </a>
       
     
       
       
-        <a href="/VXLAN_Configuration/" title="VXLAN 基本配置"
+        <a href="/VXLAN_Principle/" title="VXLAN 转发原理"
            class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">VXLAN 基本配置</span>
+           active">
+          <span class="category-post">VXLAN 转发原理</span>
         </a>
       
     

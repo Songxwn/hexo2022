@@ -268,7 +268,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3k 字
+          2.9k 字
         
       </span>
     
@@ -402,7 +402,7 @@
 <li>三台交换机配置VXLAN隧道，实现跨网段两台PC之间的互访。VXLAN网关集中在SW3。</li>
 </ul>
 <p><img src="https://img.songxwn.com/file/cc08a9353996bd693603a.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="SW3配置"><a href="#SW3配置" class="headerlink" title="SW3配置"></a>SW3配置</h3><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">[<span class="hljs-keyword">SW3] </span><span class="hljs-keyword">bridge-domain </span><span class="hljs-number">100</span><br>[<span class="hljs-keyword">SW3-bd100] </span>vxlan vni <span class="hljs-number">10000</span><br><br>[<span class="hljs-keyword">SW3] </span><span class="hljs-keyword">bridge-domain </span><span class="hljs-number">200</span><br>[<span class="hljs-keyword">SW3-bd200] </span>vxlan vni <span class="hljs-number">20000</span><br><br>[<span class="hljs-keyword">SW3] </span>interface Nve <span class="hljs-number">1</span><br>[<span class="hljs-keyword">SW3-Nve1] </span>source <span class="hljs-number">3</span>.<span class="hljs-number">3</span>.<span class="hljs-number">3</span>.<span class="hljs-number">3</span><br>[<span class="hljs-keyword">SW3-Nve1] </span>vni <span class="hljs-number">10000</span> head-end peer-list <span class="hljs-number">1</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span><br>[<span class="hljs-keyword">SW3-Nve1] </span>vni <span class="hljs-number">20000</span> head-end peer-list <span class="hljs-number">2</span>.<span class="hljs-number">2</span>.<span class="hljs-number">2</span>.<span class="hljs-number">2</span><br><br>[<span class="hljs-keyword">SW3] </span>interface Vbdif100<br>[<span class="hljs-keyword">SW3-Vbdif100] </span>ip <span class="hljs-keyword">address </span><span class="hljs-number">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span> <span class="hljs-number">24</span><br><br>[<span class="hljs-keyword">SW3] </span>interface Vbdif200<br>[<span class="hljs-keyword">SW3-Vbdif200] </span>ip <span class="hljs-keyword">address </span><span class="hljs-number">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">2</span>.<span class="hljs-number">1</span> <span class="hljs-number">24</span><br><br></code></pre></td></tr></table></figure><div><h1>推荐文章<span style="font-size:0.45em; color:gray">（由<a target="_blank" rel="noopener" href="https://github.com/huiwang/hexo-recommended-posts">hexo文章推荐插件</a>驱动）</span></h1><ul><li><a href="https://songxwn.com/VXLAN_Principle/">VXLAN 转发原理</a></li><li><a href="https://songxwn.com/VXLAN_Basic/">VXLAN 基本概念</a></li><li><a href="https://songxwn.com/zabbix-reboot-SNMPv3/">Zabbix SNMPv3 设备重启后无法监控问题</a></li></ul></div>
+<h3 id="SW3配置"><a href="#SW3配置" class="headerlink" title="SW3配置"></a>SW3配置</h3><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">[<span class="hljs-keyword">SW3] </span><span class="hljs-keyword">bridge-domain </span><span class="hljs-number">100</span><br>[<span class="hljs-keyword">SW3-bd100] </span>vxlan vni <span class="hljs-number">10000</span><br><br>[<span class="hljs-keyword">SW3] </span><span class="hljs-keyword">bridge-domain </span><span class="hljs-number">200</span><br>[<span class="hljs-keyword">SW3-bd200] </span>vxlan vni <span class="hljs-number">20000</span><br><br>[<span class="hljs-keyword">SW3] </span>interface Nve <span class="hljs-number">1</span><br>[<span class="hljs-keyword">SW3-Nve1] </span>source <span class="hljs-number">3</span>.<span class="hljs-number">3</span>.<span class="hljs-number">3</span>.<span class="hljs-number">3</span><br>[<span class="hljs-keyword">SW3-Nve1] </span>vni <span class="hljs-number">10000</span> head-end peer-list <span class="hljs-number">1</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span><br>[<span class="hljs-keyword">SW3-Nve1] </span>vni <span class="hljs-number">20000</span> head-end peer-list <span class="hljs-number">2</span>.<span class="hljs-number">2</span>.<span class="hljs-number">2</span>.<span class="hljs-number">2</span><br><br>[<span class="hljs-keyword">SW3] </span>interface Vbdif100<br>[<span class="hljs-keyword">SW3-Vbdif100] </span>ip <span class="hljs-keyword">address </span><span class="hljs-number">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span> <span class="hljs-number">24</span><br><br>[<span class="hljs-keyword">SW3] </span>interface Vbdif200<br>[<span class="hljs-keyword">SW3-Vbdif200] </span>ip <span class="hljs-keyword">address </span><span class="hljs-number">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">2</span>.<span class="hljs-number">1</span> <span class="hljs-number">24</span><br><br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -618,19 +618,19 @@
     
       
       
-        <a href="/VXLAN_Principle/" title="VXLAN 转发原理"
+        <a href="/VXLAN_Configuration/" title="VXLAN 基本配置"
            class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">VXLAN 转发原理</span>
+           active">
+          <span class="category-post">VXLAN 基本配置</span>
         </a>
       
     
       
       
-        <a href="/VXLAN_Configuration/" title="VXLAN 基本配置"
+        <a href="/VXLAN_Principle/" title="VXLAN 转发原理"
            class="list-group-item list-group-item-action
-           active">
-          <span class="category-post">VXLAN 基本配置</span>
+           ">
+          <span class="category-post">VXLAN 转发原理</span>
         </a>
       
     
