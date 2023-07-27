@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-07-26T16:28:50.641Z</updated>
+  <updated>2023-07-27T03:00:33.857Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Veeam Backup Replication 12-20230718 安装和激活</title>
+    <link href="https://songxwn.com/Veeam12.1/"/>
+    <id>https://songxwn.com/Veeam12.1/</id>
+    <published>2023-07-27T02:48:00.000Z</published>
+    <updated>2023-07-27T03:00:33.857Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;只需单个平台即可保护并管理所有工作负载、应用及数据：云端、虚拟、物理、SaaS、Kubernetes、VMware、Hyper-V、Windows、Linux、UNIX、NAS、AWS、Azure、企业应用等。&lt;/p&gt;
+&lt;p&gt;个人主要用于备份ESXi上的虚拟机，可以实现单次完整备份，和定时的增量备份。&lt;/p&gt;
+&lt;p&gt;此文章提供了ISO安装文件的下载和安装激活。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="vmware" scheme="https://songxwn.com/categories/vmware/"/>
+    
+    
+    <category term="esxi" scheme="https://songxwn.com/tags/esxi/"/>
+    
+    <category term="vmware" scheme="https://songxwn.com/tags/vmware/"/>
+    
+    <category term="backups" scheme="https://songxwn.com/tags/backups/"/>
+    
+    <category term="veeam" scheme="https://songxwn.com/tags/veeam/"/>
+    
+  </entry>
   
   <entry>
     <title>Zabbix Ping 丢包问题</title>
@@ -532,38 +559,6 @@
     <category term="l2vpn" scheme="https://songxwn.com/tags/l2vpn/"/>
     
     <category term="datacom" scheme="https://songxwn.com/tags/datacom/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ELK Logstash解析系统日志错误</title>
-    <link href="https://songxwn.com/ELK-logstash-hostname/"/>
-    <id>https://songxwn.com/ELK-logstash-hostname/</id>
-    <published>2023-05-06T02:49:37.000Z</published>
-    <updated>2023-05-07T08:29:59.639Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;Logstash解析系统日志错误：&lt;/p&gt;
-&lt;p&gt;如果大家使用Logstash自带的解析规则，在某些情况下会出现解析系统日志失败的情况，原因是因为：系统主机名包含下划线时会解析失败，造成无法识别主机名字段。&lt;/p&gt;
-&lt;p&gt;主要是生产环境有些网络设备的主机名有带下划线_ ，而合法在主机名是没有不允许下划线的。&lt;/p&gt;
-&lt;p&gt;使用环境：Rocky Linux 8 、ELK 8.x &lt;/p&gt;</summary>
-    
-    
-    
-    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
-    
-    <category term="ELK" scheme="https://songxwn.com/categories/linux/ELK/"/>
-    
-    
-    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
-    
-    <category term="elk" scheme="https://songxwn.com/tags/elk/"/>
-    
-    <category term="elasticsearch" scheme="https://songxwn.com/tags/elasticsearch/"/>
-    
-    <category term="logstash" scheme="https://songxwn.com/tags/logstash/"/>
-    
-    <category term="syslog" scheme="https://songxwn.com/tags/syslog/"/>
     
   </entry>
   
