@@ -47,6 +47,38 @@
   </entry>
   
   <entry>
+    <title>什么是OSPF?</title>
+    <link href="https://songxwn.com/OSPF-Basic/"/>
+    <id>https://songxwn.com/OSPF-Basic/</id>
+    <published>2023-07-30T03:52:00.000Z</published>
+    <updated>2023-07-30T04:38:43.153Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;为什么需要OSPF？&quot;&gt;&lt;a href=&quot;#为什么需要OSPF？&quot; class=&quot;headerlink&quot; title=&quot;为什么需要OSPF？&quot;&gt;&lt;/a&gt;为什么需要OSPF？&lt;/h2&gt;&lt;p&gt;在OSPF出现前，网络上广泛使用RIP（Routing Information Protocol）作为内部网关协议。&lt;/p&gt;
+&lt;p&gt;由于RIP是基于距离矢量算法的路由协议，存在着收敛慢、路由环路、可扩展性差等问题，所以逐渐被OSPF取代。&lt;/p&gt;
+&lt;p&gt;OSPF作为基于链路状态的协议，能够解决RIP所面临的诸多问题。此外，OSPF还有以下优点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;OSPF采用&lt;a href=&quot;https://info.support.huawei.com/info-finder/encyclopedia/zh/%E7%BB%84%E6%92%AD.html&quot; title=&quot;组播&quot;&gt;组播&lt;/a&gt;形式收发报文，这样可以减少对其它不运行OSPF路由器的影响。&lt;/li&gt;
+&lt;li&gt;OSPF支持无类型域间选路（CIDR）。&lt;/li&gt;
+&lt;li&gt;OSPF支持对等价路由进行负载分担。&lt;/li&gt;
+&lt;li&gt;OSPF支持报文加密。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;由于OSPF具有以上优势，使得OSPF作为优秀的内部网关协议被快速接收并广泛使用。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="datacom" scheme="https://songxwn.com/tags/datacom/"/>
+    
+    <category term="ospf" scheme="https://songxwn.com/tags/ospf/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Veeam Backup Replication 12 7月更新安装</title>
     <link href="https://songxwn.com/Veeam12.202307/"/>
     <id>https://songxwn.com/Veeam12.202307/</id>
@@ -509,42 +541,6 @@
     <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;本文章介绍了静态VXLAN配置方案。&lt;/p&gt;
 &lt;p&gt;本文章是针对华为系列网络设备的学习笔记。&lt;/p&gt;
 &lt;p&gt;VNI在VXLAN网络上有全局意义，而BD只有本地意义。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="network" scheme="https://songxwn.com/categories/network/"/>
-    
-    <category term="vxlan" scheme="https://songxwn.com/categories/network/vxlan/"/>
-    
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="vxlan" scheme="https://songxwn.com/tags/vxlan/"/>
-    
-    <category term="l2vpn" scheme="https://songxwn.com/tags/l2vpn/"/>
-    
-    <category term="datacom" scheme="https://songxwn.com/tags/datacom/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>VXLAN 转发原理</title>
-    <link href="https://songxwn.com/VXLAN_Principle/"/>
-    <id>https://songxwn.com/VXLAN_Principle/</id>
-    <published>2023-05-10T06:54:00.000Z</published>
-    <updated>2023-05-20T05:44:52.823Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;VXLAN工作原理如下：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;在每个数据中心的交换机上都配置一个VTEP（VXLAN Tunnel Endpoints），用于封装和解封装VXLAN报文。&lt;/li&gt;
-&lt;li&gt;在两个VTEP之间建立一个VXLAN隧道，用于在两个数据中心之间传输封装后的VXLAN报文。&lt;/li&gt;
-&lt;li&gt;当虚拟机之间需要通信时，它们的报文会被发送到所在数据中心的交换机上。交换机上的VTEP会将报文封装成VXLAN报文，并通过VXLAN隧道发送到另一个数据中心的交换机上。&lt;/li&gt;
-&lt;li&gt;另一个数据中心的交换机上的VTEP会将VXLAN报文解封装，还原成原始报文，并发送给目标虚拟机。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;这样，虚拟机之间就可以通过VXLAN隧道进行通信了。&lt;/p&gt;
-&lt;p&gt;本文章介绍了其工作原理和配置方案。&lt;/p&gt;
-&lt;p&gt;本文章是针对华为系列网络设备的学习笔记。&lt;/p&gt;</summary>
     
     
     
