@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-07-30T04:30:21.270Z</updated>
+  <updated>2023-07-30T04:35:11.815Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://songxwn.com/BGP_EVPN_Basic/"/>
     <id>https://songxwn.com/BGP_EVPN_Basic/</id>
     <published>2023-07-30T03:54:00.000Z</published>
-    <updated>2023-07-30T04:30:21.270Z</updated>
+    <updated>2023-07-30T04:35:11.815Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;什么是EVPN？&quot;&gt;&lt;a href=&quot;#什么是EVPN？&quot; class=&quot;headerlink&quot; title=&quot;什么是EVPN？&quot;&gt;&lt;/a&gt;什么是EVPN？&lt;/h1&gt;&lt;p&gt;EVPN（Ethernet Virtual Private Network）是下一代全业务承载的VPN解决方案。EVPN统一了各种VPN业务的控制面（VXLAN、VPWS、VPLS），利用BGP扩展协议来传递二层或三层的可达性信息，实现了转发面和控制面的分离。&lt;/p&gt;
