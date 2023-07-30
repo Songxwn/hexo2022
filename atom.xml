@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-07-29T15:24:36.486Z</updated>
+  <updated>2023-07-30T04:19:43.669Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>什么是EVPN？</title>
+    <link href="https://songxwn.com/BGP_EVPN_Basic/"/>
+    <id>https://songxwn.com/BGP_EVPN_Basic/</id>
+    <published>2023-07-30T03:54:00.000Z</published>
+    <updated>2023-07-30T04:19:43.669Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;什么是EVPN？&quot;&gt;&lt;a href=&quot;#什么是EVPN？&quot; class=&quot;headerlink&quot; title=&quot;什么是EVPN？&quot;&gt;&lt;/a&gt;什么是EVPN？&lt;/h1&gt;&lt;p&gt;EVPN（Ethernet Virtual Private Network）是下一代全业务承载的VPN解决方案。EVPN统一了各种VPN业务的控制面（VXLAN、VPWS、VPLS），利用BGP扩展协议来传递二层或三层的可达性信息，实现了转发面和控制面的分离。&lt;/p&gt;
+&lt;p&gt;EVPN解决传统L2VPN的无法实现负载分担、网络资源的消耗较高等不足，同时也可以对L3VPN业务进行承载，降低了协议的复杂程度。EVPN还将IP VPN流量均衡和部署灵活的优势引入到了以太网中。种种优势使其广泛应用于大型数据中心二层网络互连场景。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    <category term="vxlan" scheme="https://songxwn.com/categories/network/vxlan/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="vxlan" scheme="https://songxwn.com/tags/vxlan/"/>
+    
+    <category term="l2vpn" scheme="https://songxwn.com/tags/l2vpn/"/>
+    
+    <category term="datacom" scheme="https://songxwn.com/tags/datacom/"/>
+    
+    <category term="evpn" scheme="https://songxwn.com/tags/evpn/"/>
+    
+  </entry>
   
   <entry>
     <title>Veeam Backup Replication 12 7月更新安装</title>
@@ -514,35 +544,6 @@
 &lt;/ol&gt;
 &lt;p&gt;这样，虚拟机之间就可以通过VXLAN隧道进行通信了。&lt;/p&gt;
 &lt;p&gt;本文章介绍了其工作原理和配置方案。&lt;/p&gt;
-&lt;p&gt;本文章是针对华为系列网络设备的学习笔记。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="network" scheme="https://songxwn.com/categories/network/"/>
-    
-    <category term="vxlan" scheme="https://songxwn.com/categories/network/vxlan/"/>
-    
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="vxlan" scheme="https://songxwn.com/tags/vxlan/"/>
-    
-    <category term="l2vpn" scheme="https://songxwn.com/tags/l2vpn/"/>
-    
-    <category term="datacom" scheme="https://songxwn.com/tags/datacom/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>VXLAN 基本概念</title>
-    <link href="https://songxwn.com/VXLAN_Basic/"/>
-    <id>https://songxwn.com/VXLAN_Basic/</id>
-    <published>2023-05-10T03:54:00.000Z</published>
-    <updated>2023-05-20T05:38:32.258Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;VXLAN（Virtual eXtensible Local Area Network）采用MAC in UDP（User Datagram Protocol）封装方式，是NVO3（Network Virtualizaiton over Layer 3）中的一种网络虚拟化技术。它是云计算的核心技术之一，服务器虚拟化凭借其大幅降低IT成本、提高业务部署灵活性、降低运维成本等优势已经得到越来越多的认可和部署。&lt;/p&gt;
-&lt;p&gt;本文章介绍了其基本概念和&lt;a href=&quot;https://songxwn.com/VXLAN_Basic/#%E6%B5%81%E5%B0%81%E8%A3%85%E5%92%8C%E8%A7%A3%E5%B0%81%E8%A3%85&quot;&gt;接入方式&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;本文章是针对华为系列网络设备的学习笔记。&lt;/p&gt;</summary>
     
     
