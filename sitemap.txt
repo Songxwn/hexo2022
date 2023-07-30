@@ -1,4 +1,3 @@
-https://songxwn.com/OSPF-Basic/
 https://songxwn.com/BGP_EVPN_Basic/
 https://songxwn.com/Veeam12.202307/
 https://songxwn.com/Veeam12/
