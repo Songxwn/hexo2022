@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>Sublime Text4 4152 安装激活</title>
+    <link href="/Sublime_Text4_4152/"/>
+    <url>/Sublime_Text4_4152/</url>
+    
+    <content type="html"><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>此教程用于Windows 下Sublime Text4 4152版本的安装和激活。</p><p>无需安装其他软件，无需下载替换文件。</p><p>官网： <a href="https://www.sublimetext.com/">https://www.sublimetext.com</a></p><span id="more"></span><h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><p><a href="https://download.sublimetext.com/sublime_text_build_4152_x64_setup.exe">https://download.sublimetext.com/sublime_text_build_4152_x64_setup.exe</a></p><h1 id="激活"><a href="#激活" class="headerlink" title="激活"></a>激活</h1><p>默认安装路径：C:\Program Files\Sublime Text</p><p>安装之后，使用sublime text 打开安装目录下的sublime_text.exe文件。</p><p>搜到到<code>80 7805 000f 94c1</code></p><p>更改为<code>c6 4005 0148 85c9</code></p><p>然后另存到其他路径，然后关闭sublime text，将原sublime_text.exe进行替换即可。</p><h2 id="输入激活码（理论不需要）"><a href="#输入激活码（理论不需要）" class="headerlink" title="输入激活码（理论不需要）"></a>输入激活码（理论不需要）</h2><p>打开Sublime text，点击菜单栏-–&gt;Help—&gt;Enter License</p><p>输入下列激活码即可。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs License">—– BEGIN LICENSE —–<br>Mifeng User<br>Single User License<br>EA7E-1184812<br>C0DAA9CD 6BE825B5 FF935692 1750523A<br>EDF59D3F A3BD6C96 F8D33866 3F1CCCEA<br>1C25BE4D 25B1C4CC 5110C20E 5246CC42<br>D232C83B C99CCC42 0E32890C B6CBF018<br>B1D4C178 2F9DDB16 ABAA74E5 95304BEF<br>9D0CCFA9 8AF8F8E2 1E0A955E 4771A576<br>50737C65 325B6C32 817DCB83 A7394DFA<br>27B7E747 736A1198 B3865734 0B434AA5<br>—— END LICENSE —<br></code></pre></td></tr></table></figure><p>点击菜单栏 Help—&gt;About Sublime Text 可检测激活状态。</p><h1 id="软件安装中文语言包"><a href="#软件安装中文语言包" class="headerlink" title="软件安装中文语言包"></a>软件安装中文语言包</h1><p>1、点击菜单栏Tools—&gt;Install Package Control 跳出弹框点击 确定按钮</p><p>2、点击菜单栏 Preferences – Package Control</p><p>3、弹框中输入 install package，选中 Package Control: Install Package 然后等待弹窗(可能需要耐心等待一段时间)</p><p>4、等出现如下弹窗后, 在弹窗的搜索框中输入 ChineseLocalizations , 点击出现的选项</p><p>5、等待一段时间，如果出现了如下画面则汉化步骤全部完成</p><p>6、后续若需要更改，可点击菜单栏 帮助-–&gt;Language 选择进行更改。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>IDE</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Windows</tag>
+      
+      <tag>IDE</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>什么是EVPN？</title>
     <link href="/BGP_EVPN_Basic/"/>
     <url>/BGP_EVPN_Basic/</url>
