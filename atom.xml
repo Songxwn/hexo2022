@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-08-08T05:37:39.164Z</updated>
+  <updated>2023-08-25T09:54:38.699Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>搭建OpenAI的API代理服务</title>
+    <link href="https://songxwn.com/openai-proxy/"/>
+    <id>https://songxwn.com/openai-proxy/</id>
+    <published>2023-08-25T01:16:38.000Z</published>
+    <updated>2023-08-25T09:54:38.699Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;项目地址：&lt;a href=&quot;https://github.com/easychen/openai-api-proxy&quot;&gt;https://github.com/easychen/openai-api-proxy&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;可以部署到docker和云函数的OpenAI API代理 Simple proxy for OpenAi api via a one-line docker command&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="openai" scheme="https://songxwn.com/categories/openai/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="openai" scheme="https://songxwn.com/tags/openai/"/>
+    
+  </entry>
   
   <entry>
     <title>Sublime Text4 4152 安装激活</title>
@@ -518,35 +540,6 @@
     <category term="syslog" scheme="https://songxwn.com/tags/syslog/"/>
     
     <category term="snmp" scheme="https://songxwn.com/tags/snmp/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>VXLAN 基本配置</title>
-    <link href="https://songxwn.com/VXLAN_Configuration/"/>
-    <id>https://songxwn.com/VXLAN_Configuration/</id>
-    <published>2023-05-10T07:01:00.000Z</published>
-    <updated>2023-05-20T05:45:56.562Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;本文章介绍了静态VXLAN配置方案。&lt;/p&gt;
-&lt;p&gt;本文章是针对华为系列网络设备的学习笔记。&lt;/p&gt;
-&lt;p&gt;VNI在VXLAN网络上有全局意义，而BD只有本地意义。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="network" scheme="https://songxwn.com/categories/network/"/>
-    
-    <category term="vxlan" scheme="https://songxwn.com/categories/network/vxlan/"/>
-    
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="vxlan" scheme="https://songxwn.com/tags/vxlan/"/>
-    
-    <category term="l2vpn" scheme="https://songxwn.com/tags/l2vpn/"/>
-    
-    <category term="datacom" scheme="https://songxwn.com/tags/datacom/"/>
     
   </entry>
   

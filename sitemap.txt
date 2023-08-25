@@ -1,3 +1,4 @@
+https://songxwn.com/openai-proxy/
 https://songxwn.com/Sublime_Text4_4152/
 https://songxwn.com/Sublime_Text4_4143/
 https://songxwn.com/BGP_EVPN_Basic/
@@ -132,6 +133,7 @@ https://songxwn.com/tags/kms/
 https://songxwn.com/tags/VDI/
 https://songxwn.com/tags/veeam/
 https://songxwn.com/tags/evpn/
+https://songxwn.com/tags/openai/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/linux/ELK/
@@ -146,3 +148,4 @@ https://songxwn.com/categories/python/
 https://songxwn.com/categories/Windows/
 https://songxwn.com/categories/Zabbix/
 https://songxwn.com/categories/Ubuntu/
+https://songxwn.com/categories/openai/
