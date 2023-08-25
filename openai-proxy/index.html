@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img.songxwn.com/file/146d835cbbf112bf1143d.jpg">
 <meta property="article:published_time" content="2023-08-25T01:16:38.000Z">
-<meta property="article:modified_time" content="2023-08-25T09:56:13.436Z">
+<meta property="article:modified_time" content="2023-08-25T09:57:28.501Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="openai">
@@ -277,7 +277,7 @@
         
         
         
-          10 分钟
+          9 分钟
         
       </span>
     
@@ -364,7 +364,9 @@
 <li>yarn install 安装依赖</li>
 <li>node app.js 启动服务</li>
 </ol>
-<h1 id="Docker-部署"><a href="#Docker-部署" class="headerlink" title="Docker 部署"></a>Docker 部署</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs shell"><br>docker run -p 9000:9000 easychen/ai.level06.com:latest<br><br>````<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment"># Docker 可用环境变量</span></span><br><br>```shell<br><br>PORT: 内部服务端口<br>PROXY_KEY: 代理访问KEY，用于限制访问. （例如 ss111adad）<br>TIMEOUT：请求超时时间，默认30000毫秒。（建议配置为 300000）<br><br>TENCENT_CLOUD_SID：腾讯云secret_id  （不在腾讯云不需要）<br>TENCENT_CLOUD_SKEY：腾讯云secret_key （不在腾讯云不需要）<br>TENCENT_CLOUD_AP：腾讯云区域（如：ap-singapore 新加坡） （不在腾讯云不需要）<br><br></code></pre></td></tr></table></figure>
+<h1 id="Docker-部署"><a href="#Docker-部署" class="headerlink" title="Docker 部署"></a>Docker 部署</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><br>docker run -p 9000:9000 easychen/ai.level06.com:latest<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="Docker-可用环境变量"><a href="#Docker-可用环境变量" class="headerlink" title="Docker 可用环境变量"></a>Docker 可用环境变量</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell"><br>PORT: 内部服务端口<br>PROXY_KEY: 代理访问KEY，用于限制访问. （例如 ss111adad）<br>TIMEOUT：请求超时时间，默认30000毫秒。（建议配置为 300000）<br><br>TENCENT_CLOUD_SID：腾讯云secret_id  （不在腾讯云不需要）<br>TENCENT_CLOUD_SKEY：腾讯云secret_key （不在腾讯云不需要）<br>TENCENT_CLOUD_AP：腾讯云区域（如：ap-singapore 新加坡） （不在腾讯云不需要）<br><br></code></pre></td></tr></table></figure>
 
 
 <h2 id="接口使用方法"><a href="#接口使用方法" class="headerlink" title="接口使用方法"></a>接口使用方法</h2><ol>
