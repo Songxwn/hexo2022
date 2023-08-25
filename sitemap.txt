@@ -148,4 +148,3 @@ https://songxwn.com/categories/python/
 https://songxwn.com/categories/Windows/
 https://songxwn.com/categories/Zabbix/
 https://songxwn.com/categories/Ubuntu/
-https://songxwn.com/categories/openai/
