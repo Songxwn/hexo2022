@@ -1,3 +1,4 @@
+https://songxwn.com/Windows-DNS-metric/
 https://songxwn.com/openai-proxy/
 https://songxwn.com/Sublime_Text4_4152/
 https://songxwn.com/BGP_EVPN_Basic/
@@ -12,4 +13,3 @@ https://songxwn.com/MikroTik_ROS_WinBox_DNS/
 https://songxwn.com/IP_Mask_Gateway/
 https://songxwn.com/WeCom-Robot-WorkTool/
 https://songxwn.com/windows10-11-Enterprise-Virtual-Desktops/
-https://songxwn.com/redis-sentinel/
