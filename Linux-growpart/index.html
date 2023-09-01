@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/05/01/e4b12280340cb5a2.png">
 <meta property="article:published_time" content="2023-04-30T19:11:31.000Z">
-<meta property="article:modified_time" content="2023-05-01T03:36:20.221Z">
+<meta property="article:modified_time" content="2023-09-01T06:13:22.999Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="VMware">
@@ -268,7 +268,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          1.2k 字
         
       </span>
     
@@ -279,7 +279,7 @@
         
         
         
-          9 分钟
+          10 分钟
         
       </span>
     
@@ -343,7 +343,7 @@
               <p class="note note-danger">
                 
                   
-                    本文最后更新于：2023年5月1日 中午
+                    本文最后更新于：2023年9月1日 下午
                   
                 
               </p>
@@ -357,7 +357,7 @@
 
 <h1 id="硬盘分区在线热扩容"><a href="#硬盘分区在线热扩容" class="headerlink" title="硬盘分区在线热扩容"></a>硬盘分区在线热扩容</h1><h2 id="刷新硬盘容量"><a href="#刷新硬盘容量" class="headerlink" title="刷新硬盘容量"></a>刷新硬盘容量</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">echo <span class="hljs-string">&#x27;1&#x27;</span> &gt; <span class="hljs-regexp">/sys/</span>block<span class="hljs-regexp">/sda/</span>device/rescan  <br><br><span class="hljs-comment"># 刷新容量，设备为 sda</span><br><span class="hljs-comment"># 注意若大于2TB的硬盘，需要GPT分区格式，且为引导硬盘的话，需要以UEFI引导启动。</span><br><br></code></pre></td></tr></table></figure>
 
-<h2 id="安装扩容工具"><a href="#安装扩容工具" class="headerlink" title="安装扩容工具"></a>安装扩容工具</h2><figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs tap">yum install cloud-utils-growpart -y<br><br><span class="hljs-comment"># 安装growpart，使用此工具可以自动调整分区。</span><br><br>lsblk<br>NAME     MAJ:MIN RM    SIZE RO TYPE MOUNTPOINT<br>sda        8:0   <span class="hljs-number"> 0 </span>     2T <span class="hljs-number"> 0 </span>disk <br>├─sda1     8:1   <span class="hljs-number"> 0 </span>   100M <span class="hljs-number"> 0 </span>part /boot/efi<br>└─sda2     8:2   <span class="hljs-number"> 0 </span>1023.9G <span class="hljs-number"> 0 </span>part /<br><br><span class="hljs-comment"># 查看硬盘分区结构，注意只有最后一个分区可以扩容。</span><br><br>growpart /dev/sda 2<br><br><span class="hljs-comment"># 分区扩容，指定硬盘和分区号。</span><br><br>xfs_growfs /dev/sda2<br><br><span class="hljs-comment"># 文件系统扩容</span><br><br>lsblk<br>NAME     MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT<br>sda        8:0   <span class="hljs-number"> 0 </span>   2T <span class="hljs-number"> 0 </span>disk <br>├─sda1     8:1   <span class="hljs-number"> 0 </span> 100M <span class="hljs-number"> 0 </span>part /boot/efi<br>└─sda2     8:2   <span class="hljs-number"> 0 </span>   2T <span class="hljs-number"> 0 </span>part / <br><br></code></pre></td></tr></table></figure>
+<h2 id="安装扩容工具"><a href="#安装扩容工具" class="headerlink" title="安装扩容工具"></a>安装扩容工具</h2><figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs tap"><br><span class="hljs-comment"># Redhat 系列</span><br><br>yum install cloud-utils-growpart -y<br><br><span class="hljs-comment"># Debian 系列</span><br><br>sudo apt install cloud-guest-utils<br><br><br><span class="hljs-comment"># 安装growpart，使用此工具可以自动调整分区。</span><br><br>lsblk<br>NAME     MAJ:MIN RM    SIZE RO TYPE MOUNTPOINT<br>sda        8:0   <span class="hljs-number"> 0 </span>     2T <span class="hljs-number"> 0 </span>disk <br>├─sda1     8:1   <span class="hljs-number"> 0 </span>   100M <span class="hljs-number"> 0 </span>part /boot/efi<br>└─sda2     8:2   <span class="hljs-number"> 0 </span>1023.9G <span class="hljs-number"> 0 </span>part /<br><br><span class="hljs-comment"># 查看硬盘分区结构，注意只有最后一个分区可以扩容。</span><br><br>growpart /dev/sda 2<br><br><span class="hljs-comment"># 分区扩容，指定硬盘和分区号。</span><br><br>xfs_growfs /dev/sda2<br><br><span class="hljs-comment"># XFS文件系统扩容</span><br><br>resize2fs /dev/sda2<br><br><span class="hljs-comment"># EXT4文件系统扩容</span><br><br>lsblk<br>NAME     MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT<br>sda        8:0   <span class="hljs-number"> 0 </span>   2T <span class="hljs-number"> 0 </span>disk <br>├─sda1     8:1   <span class="hljs-number"> 0 </span> 100M <span class="hljs-number"> 0 </span>part /boot/efi<br>└─sda2     8:2   <span class="hljs-number"> 0 </span>   2T <span class="hljs-number"> 0 </span>part / <br><br><span class="hljs-comment"># 查看块设备</span><br><br></code></pre></td></tr></table></figure>
 
 <p>本次在CentOS7中扩容的分区是这块磁盘上的最后一个分区，也就是磁盘扩展后增加的空间是加在磁盘的最后一个分区。</p>
 <p>所以可以通过growpart工具修改硬盘的分区表，将这部分空间直接增加到最后一个分区。</p>
@@ -439,7 +439,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年5月1日</div>
+          <div>2023年9月1日</div>
         </div>
       
       
