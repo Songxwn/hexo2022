@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-08-29T08:17:19.452Z</updated>
+  <updated>2023-09-05T12:25:41.683Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HCIE Datacom-01.1 IGP高级特性-OSPF-快速收敛</title>
+    <link href="https://songxwn.com/ospf-frr/"/>
+    <id>https://songxwn.com/ospf-frr/</id>
+    <published>2023-09-05T07:52:00.000Z</published>
+    <updated>2023-09-05T12:25:41.683Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;OSPF和IS-IS都是基于链路状态的内部网关路由协议，运行这两种协议的路由器通过同步LSDB，采用SPF算法计算最优路由。&lt;/li&gt;
+&lt;li&gt;当网络拓扑发生变化时，OSPF和IS-IS支持多种快速收敛和保护机制，能够降低网络故障导致的流量丢失。&lt;/li&gt;
+&lt;li&gt;为了实现对路由表规模的控制，OSPF和IS-IS支持路由选路及路由信息的控制，能够减少特定路由器路由表的大小。&lt;/li&gt;
+&lt;li&gt;本系列文章将介绍OSPF和IS-IS的高级特性，包括：快速收敛机制、路由控制、其他特性等。&lt;/li&gt;
+&lt;li&gt;此文章参考于华为认证系列PPT。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;OSPF快速收敛概述&quot;&gt;&lt;a href=&quot;#OSPF快速收敛概述&quot; class=&quot;headerlink&quot; title=&quot;OSPF快速收敛概述&quot;&gt;&lt;/a&gt;OSPF快速收敛概述&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;OSPF快速收敛是为了提高路由的收敛速度而做的扩展特性，包括：PRC（Partial Route Calculation，部分路由计算）和智能定时器。&lt;/li&gt;
+&lt;li&gt;同时，OSPF支持故障恢复快速收敛，例如通过OSPF IP FRR（Fast ReRoute，快速重路由）实现备份链路的快速切换，也可以与BFD联动实现对故障的快速感知。&lt;/li&gt;
+&lt;li&gt;快速收敛是为了满载电信级的要求，50ms内完成收敛减少丢包。&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="datacom" scheme="https://songxwn.com/tags/datacom/"/>
+    
+    <category term="ospf" scheme="https://songxwn.com/tags/ospf/"/>
+    
+  </entry>
   
   <entry>
     <title>Windows下网卡跃点数和优先的DNS服务器</title>
@@ -510,31 +544,6 @@
     <category term="tcp" scheme="https://songxwn.com/tags/tcp/"/>
     
     <category term="BBR" scheme="https://songxwn.com/tags/BBR/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Zabbix SNMP开机时间497天重置问题</title>
-    <link href="https://songxwn.com/zabbix-SNMP-uptime-497day/"/>
-    <id>https://songxwn.com/zabbix-SNMP-uptime-497day/</id>
-    <published>2023-05-16T23:29:36.000Z</published>
-    <updated>2023-05-20T07:28:50.599Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;工作中遇到，网络设备开机时间到了约497天的时候（&lt;strong&gt;或者每过497天&lt;/strong&gt;），Zabbix SNMP获取的时间值就会归零，重新计数，但查看设备状态正常，未重启。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Zabbix" scheme="https://songxwn.com/categories/Zabbix/"/>
-    
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
-    
-    <category term="snmp" scheme="https://songxwn.com/tags/snmp/"/>
-    
-    <category term="Zabbix" scheme="https://songxwn.com/tags/Zabbix/"/>
     
   </entry>
   
