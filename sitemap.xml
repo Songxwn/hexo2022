@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://songxwn.com/Veeam12/</loc>
+    
+    <lastmod>2023-09-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://songxwn.com/Veeam12.202307/</loc>
     
     <lastmod>2023-09-27</lastmod>
@@ -68,15 +77,6 @@
     <loc>https://songxwn.com/BGP_EVPN_Basic/</loc>
     
     <lastmod>2023-07-31</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://songxwn.com/Veeam12/</loc>
-    
-    <lastmod>2023-07-26</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
