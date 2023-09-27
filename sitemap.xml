@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://songxwn.com/KMS/</loc>
+    
+    <lastmod>2023-09-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://songxwn.com/Veeam12.202307/</loc>
     
     <lastmod>2023-09-27</lastmod>
@@ -246,15 +255,6 @@
   
   <url>
     <loc>https://songxwn.com/windows10-11-Enterprise-Virtual-Desktops/</loc>
-    
-    <lastmod>2023-06-12</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://songxwn.com/KMS/</loc>
     
     <lastmod>2023-06-12</lastmod>
     
