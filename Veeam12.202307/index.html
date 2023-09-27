@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/02/26/18fe239217ce287d.png">
 <meta property="article:published_time" content="2023-07-27T02:48:00.000Z">
-<meta property="article:modified_time" content="2023-09-27T06:17:28.644Z">
+<meta property="article:modified_time" content="2023-09-27T06:26:05.397Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="esxi">
 <meta property="article:tag" content="vmware">
@@ -279,7 +279,7 @@
         
         
         
-          9 分钟
+          10 分钟
         
       </span>
     
@@ -368,7 +368,8 @@
 <p>7月更新性能提高了50%</p>
 <p>PS：目前支持VMware vSphere 6.0-8.0U1版本</p>
 <h2 id="安装顺序"><a href="#安装顺序" class="headerlink" title="安装顺序"></a>安装顺序</h2><p>需要安装VBR之后，再安装VBEM(统一管理)</p>
-<h3 id="VBEM"><a href="#VBEM" class="headerlink" title="VBEM"></a>VBEM</h3><p>需要去官方申请临时授权，才能安装。</p>
+<h2 id="VBEM-安装"><a href="#VBEM-安装" class="headerlink" title="VBEM 安装"></a>VBEM 安装</h2><p>需要去官方注册账号申请临时授权，才能安装。</p>
+<p><img src="https://img.songxwn.com/file/cea31d53dcc8bdf5fad5d.png" srcset="/img/loading.gif" lazyload alt="Veeam官方试用授权下载"></p>
 <h1 id="激活软件为专业版"><a href="#激活软件为专业版" class="headerlink" title="激活软件为专业版"></a>激活软件为专业版</h1><h2 id="下载替换文件"><a href="#下载替换文件" class="headerlink" title="下载替换文件"></a>下载替换文件</h2><p><a href="https://songxwn.com/file/Veeam_12_P.7z">替换文件下载</a></p>
 <p>下载后解压，会有下列文件</p>
 <figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">VeeamLicense</span>.</span></span>dll<br>#替换文件<br><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Veeam_ASv11_1500</span>.</span></span>lic<br><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Veeam_BackupRep_v12_5000_1</span>.</span></span>lic<br>#授权文件<br><br></code></pre></td></tr></table></figure>
@@ -381,7 +382,7 @@
 
 
 
-<p>然后进入C:\Program Files\Common Files\Veeam 目录下，将VeeamLicense.dll 覆盖到其目录下。</p>
+<p>然后进入 C:\Program Files\Common Files\Veeam 目录下，将VeeamLicense.dll 覆盖到其目录下。</p>
 <h2 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h2><p>然后运行所有服务</p>
 <figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dsconfig"><span class="hljs-built_in">get-service</span> -<span class="hljs-string">displayname</span> <span class="hljs-string">Veeam</span>* | <span class="hljs-string">start-service</span><br><br></code></pre></td></tr></table></figure>
 
