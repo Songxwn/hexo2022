@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s3.bmp.ovh/imgs/2022/10/04/623eaaf6ba57d122.png">
 <meta property="article:published_time" content="2022-09-30T09:09:00.000Z">
-<meta property="article:modified_time" content="2023-10-17T09:33:10.211Z">
+<meta property="article:modified_time" content="2023-10-17T09:34:50.243Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="juniper">
@@ -267,7 +267,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.8k 字
+          2.9k 字
         
       </span>
     
@@ -278,7 +278,7 @@
         
         
         
-          24 分钟
+          25 分钟
         
       </span>
     
@@ -389,9 +389,10 @@
 
 <h1 id="MPLS-MTU-x2F-Jumbo-frames-配置"><a href="#MPLS-MTU-x2F-Jumbo-frames-配置" class="headerlink" title="MPLS MTU &#x2F; Jumbo frames 配置"></a>MPLS MTU &#x2F; Jumbo frames 配置</h1><p>由于多层的MPLS标签会占用有效负载大小，使默认的MTU 1500无法传输（MPLS的MTU会默认使用接口的MTU），所以要改大运营设备所有的接口帧大小和MTU。</p>
 <p>MPLS标签栈象“垫层”一样，位于二层数据帧头和数据之间。在MPLS转发过程中，虽然网络层报文长度小于接口的MTU，但是增加MPLS标签后，报文长度可能超过链路层允许发送的范围，从而导致报文无法正常转发。为此，设备上定义了MPLS MTU，MPLS转发时将增加标签后的报文长度与MPLS MTU比较。报文长度大于MPLS MTU时，如果允许分片，则将报文分片后再进行转发；如果不允许分片，则直接丢弃。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.h3c.com/cn/d_200805/606207_30003_0.htm#_Toc227661962">https://www.h3c.com/cn/d_200805/606207_30003_0.htm#_Toc227661962</a></p>
-<p>参考：<a target="_blank" rel="noopener" href="https://www.juniper.net/documentation/us/en/software/junos/bgp/topics/topic-map/bgp-rr.html#id-understanding-bgp-route-reflectors">https://www.juniper.net/documentation/us/en/software/junos/bgp/topics/topic-map/bgp-rr.html#id-understanding-bgp-route-reflectors</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.juniper.net/documentation/us/en/software/junos/bgp/topics/topic-map/bgp-rr.html#id-understanding-bgp-route-reflectors">https://www.juniper.net/documentation/us/en/software/junos/bgp/topics/topic-map/bgp-rr.html#id-understanding-bgp-route-reflectors</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.h3c.com/cn/d_200805/606207_30003_0.htm#_Toc227661962">https://www.h3c.com/cn/d_200805/606207_30003_0.htm#_Toc227661962</a></p>
 <p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-hans/%E5%B7%A8%E5%9E%8B%E5%B8%A7">https://zh.wikipedia.org/zh-hans/%E5%B7%A8%E5%9E%8B%E5%B8%A7</a></p>
+<p><a target="_blank" rel="noopener" href="https://support.huawei.com/enterprise/zh/doc/EDOC1100138290/2edd846">https://support.huawei.com/enterprise/zh/doc/EDOC1100138290/2edd846</a></p>
 
                 
               </div>
