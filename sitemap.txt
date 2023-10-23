@@ -1,3 +1,5 @@
+https://songxwn.com/Jumpserver-install/
+https://songxwn.com/tools/
 https://songxwn.com/VXLAN_Basic/
 https://songxwn.com/TCP_BBR/
 https://songxwn.com/Juniper_L3-MPLS/
@@ -135,6 +137,7 @@ https://songxwn.com/tags/VDI/
 https://songxwn.com/tags/veeam/
 https://songxwn.com/tags/evpn/
 https://songxwn.com/tags/openai/
+https://songxwn.com/tags/Tools/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/linux/ELK/
@@ -149,3 +152,4 @@ https://songxwn.com/categories/python/
 https://songxwn.com/categories/Windows/
 https://songxwn.com/categories/Zabbix/
 https://songxwn.com/categories/Ubuntu/
+https://songxwn.com/categories/Linux/

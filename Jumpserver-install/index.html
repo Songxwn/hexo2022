@@ -1,0 +1,930 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/images/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Song">
+  <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
+  
+    <meta name="description" content="介绍什么是JumpServerJumpServer 是广受欢迎的开源堡垒机，是符合 4A 规范的专业运维安全审计系统。JumpServer 帮助企业以更安全的方式管控和登录所有类型的资产，包括：  SSH (Linux &#x2F; Unix &#x2F; 网络设备 等) Windows (Web 方式连接 &#x2F; 原生 RDP 连接) 数据库 (MySQL &#x2F; Oracle &amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JumpServer 堡垒机安装指南">
+<meta property="og:url" content="https://songxwn.com/Jumpserver-install/index.html">
+<meta property="og:site_name" content="Song&#96;s Blog">
+<meta property="og:description" content="介绍什么是JumpServerJumpServer 是广受欢迎的开源堡垒机，是符合 4A 规范的专业运维安全审计系统。JumpServer 帮助企业以更安全的方式管控和登录所有类型的资产，包括：  SSH (Linux &#x2F; Unix &#x2F; 网络设备 等) Windows (Web 方式连接 &#x2F; 原生 RDP 连接) 数据库 (MySQL &#x2F; Oracle &amp;#">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.songxwn.com/file/e3996e0db22f98dd279b9.png">
+<meta property="article:published_time" content="2023-10-23T00:35:25.000Z">
+<meta property="article:modified_time" content="2023-10-23T08:37:35.236Z">
+<meta property="article:author" content="Song">
+<meta property="article:tag" content="network">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img.songxwn.com/file/e3996e0db22f98dd279b9.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>JumpServer 堡垒机安装指南 - Song`s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/scroll.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"songxwn.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":100,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Song`s Blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Song`s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/books/">
+                <i class="iconfont icon-books"></i>
+                <span>读书</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                <span>RSS</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://img.songxwn.com/file/9a6a3f4c572b478a6a538.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="JumpServer 堡垒机安装指南"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-10-23 08:35" pubdate>
+          2023年10月23日 早上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          62 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JumpServer 堡垒机安装指南</h1>
+            
+              <p class="note note-danger">
+                
+                  
+                    本文最后更新于：2023年10月23日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><h2 id="什么是JumpServer"><a href="#什么是JumpServer" class="headerlink" title="什么是JumpServer"></a>什么是JumpServer</h2><p>JumpServer 是广受欢迎的开源堡垒机，是符合 4A 规范的专业运维安全审计系统。JumpServer 帮助企业以更安全的方式管控和登录所有类型的资产，包括：</p>
+<ul>
+<li>SSH (Linux &#x2F; Unix &#x2F; 网络设备 等)</li>
+<li>Windows (Web 方式连接 &#x2F; 原生 RDP 连接)</li>
+<li>数据库 (MySQL &#x2F; Oracle &#x2F; SQLServer &#x2F; PostgreSQL 等)</li>
+<li>Kubernetes (支持连接到 K8s 集群中的 Pods)</li>
+<li>Web 站点 (各类系统的 Web 管理后台)</li>
+<li>应用 (通过 Remote App 连接各类应用)</li>
+</ul>
+<p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/jumpserver/jumpserver">https://github.com/jumpserver/jumpserver</a> </p>
+<p>功能列表：<a target="_blank" rel="noopener" href="https://www.jumpserver.org/features.html">https://www.jumpserver.org/features.html</a> </p>
+<p>产品介绍PPT：<a target="_blank" rel="noopener" href="https://www.jumpserver.org/documents/introduce-jumpserver_202304.pdf">https://www.jumpserver.org/documents/introduce-jumpserver_202304.pdf</a> </p>
+<span id="more"></span>
+
+<h2 id="产品特色"><a href="#产品特色" class="headerlink" title="产品特色"></a>产品特色</h2><ul>
+<li>开源：零门槛，线上快速获取和安装；</li>
+<li>分布式：轻松支持大规模并发访问；</li>
+<li>无插件：仅需浏览器，极致的 Web Terminal 使用体验；</li>
+<li>多云支持：一套系统，同时管理不同云上面的资产；</li>
+<li>云端存储：审计录像云端存储，永不丢失；</li>
+<li>多租户：一套系统，多个子公司和部门同时使用；</li>
+<li>多应用支持：数据库，Windows 远程应用，Kubernetes。</li>
+</ul>
+<h2 id="界面展示"><a href="#界面展示" class="headerlink" title="界面展示"></a>界面展示</h2><p><img src="https://img.songxwn.com/file/7455fd9017a840db4f8a4.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="教程环境介绍"><a href="#教程环境介绍" class="headerlink" title="教程环境介绍"></a>教程环境介绍</h2><p>系统版本：Rocky Linux 8 （关闭SE Linux和防火墙）</p>
+<p>容器环境：Docker 24.0.6 Docker-Compose  v2.21.0</p>
+<p>软件版本：JumpServer 3.8.0</p>
+<h3 id="组件架构"><a href="#组件架构" class="headerlink" title="组件架构"></a>组件架构</h3><p><img src="https://img.songxwn.com/file/a3b4737b3b9bd49ba02e0.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="硬件要求和其他要求"><a href="#硬件要求和其他要求" class="headerlink" title="硬件要求和其他要求"></a>硬件要求和其他要求</h2><p>4Core&#x2F;8GB RAM&#x2F;300G HDD</p>
+<p>主机系统建议Debian系列或RHEL系列</p>
+<p>建议不对公网直接开放，通过SSL VPN连接到内网访问。</p>
+<h1 id="正式安装"><a href="#正式安装" class="headerlink" title="正式安装"></a>正式安装</h1><h2 id="JumpServer-版本选择"><a href="#JumpServer-版本选择" class="headerlink" title="JumpServer 版本选择"></a>JumpServer 版本选择</h2><p>生产建议选择最后一位版本较多的最新版本，如选择 3.7.2，而不是3.8.0。</p>
+<h2 id="Docker-环境准备"><a href="#Docker-环境准备" class="headerlink" title="Docker 环境准备"></a>Docker 环境准备</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum install -y yum-utils device-mapper-persistent-data lvm2<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">安装依赖包</span><br><br>yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">添加源</span><br><br>sed -i &#x27;s+https://download.docker.com+https://mirrors.tuna.tsinghua.edu.cn/docker-ce+&#x27; /etc/yum.repos.d/docker-ce.repo<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">替换Docker 安装源为清华大学镜像站。</span><br><br>yum makecache fast<br>yum install docker-ce docker-compose-plugin<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">安装Docker 和 Compose</span><br><br><br>systemctl enable --now docker<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">配置开机启动并启动Docker</span><br><br></code></pre></td></tr></table></figure>
+
+<h3 id="下载JumpServer安装包"><a href="#下载JumpServer安装包" class="headerlink" title="下载JumpServer安装包"></a>下载JumpServer安装包</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum install -y curl wget tar gettext tree<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">安装所需依赖包</span><br><br>curl -sL https://api.github.com/repos/jumpserver/jumpserver/releases/latest | grep &#x27;&quot;tag_name&quot;:&#x27; | cut -d&#x27;&quot;&#x27; -f4 | tr -d &#x27;v&#x27;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">获取最新版本号。</span><br><br>cd /opt<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">切换到opt目录</span><br><br>VERSION=v3.8.0<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">指定下载版本</span><br><br>DOWNLOAD_URL=https://resource.fit2cloud.com<br><span class="hljs-meta prompt_">#</span><span class="language-bash">DOWNLOAD_URL=https://github.com</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">指定下载地址，中国大陆地区可以使用fit2cloud.com，海外使用github.com。</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">(github 才能下载v2版本)</span><br><br><br>wget -qO jumpserver-installer-$&#123;VERSION&#125;.tar.gz $&#123;DOWNLOAD_URL&#125;/jumpserver/installer/releases/download/$&#123;VERSION&#125;/jumpserver-installer-$&#123;VERSION&#125;.tar.gz<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">下载指定版本的安装包</span><br><br>tar -vxf /opt/jumpserver-installer-$&#123;VERSION&#125;.tar.gz -C /opt<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">解压</span><br><br>tree -L 2 /opt         # 查看当前文件目录结构<br>/opt<br>├── jumpserver-installer-v3.8.0<br>│   ├── cn-quick_start.sh<br>│   ├── compose<br>│   ├── config-example.txt<br>│   ├── config_init<br>│   ├── jmsctl.sh<br>│   ├── LICENSE<br>│   ├── locale<br>│   ├── quick_start.sh<br>│   ├── README.md<br>│   ├── scripts<br>│   ├── static.env<br>│   └── utils<br>└── jumpserver-installer-v3.8.0.tar.gz<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="查看和修改安装配置文件"><a href="#查看和修改安装配置文件" class="headerlink" title="查看和修改安装配置文件"></a>查看和修改安装配置文件</h3><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br></pre></td><td class="code"><pre><code class="hljs clean">vim /opt/jumpserver-installer-v3<span class="hljs-number">.8</span><span class="hljs-number">.0</span>/config-example.txt<br><br># 打开安装配置文件，一般默认即可。<br><br><br><br><br><br># JumpServer configuration file example.<br>#<br># 如果不了解用途可以跳过修改此配置文件, 系统会自动填入<br># 完整参数文档 https:<span class="hljs-comment">//docs.jumpserver.org/zh/v3/guide/env/</span><br><br>################################## 镜像配置 ###################################<br>#<br># 国内连接 docker.io 会超时或下载速度较慢, 开启此选项使用华为云镜像加速<br># 取代旧版本 DOCKER_IMAGE_PREFIX<br>#<br># DOCKER_IMAGE_MIRROR=<span class="hljs-number">1</span><br><br># 镜像拉取规则 Always, IfNotPresent<br># Always 表示每次都会拉取最新镜像, IfNotPresent 表示本地不存在镜像时才会拉取<br>#<br># IMAGE_PULL_POLICY=Always<br><br>################################## 安装配置 ###################################<br>#<br># JumpServer 数据库持久化目录, 默认情况下录像、任务日志都在此目录<br># 请根据实际情况修改, 升级时备份的数据库文件(.sql)和配置文件也会保存到该目录<br>#<br>VOLUME_DIR=/data/jumpserver<br><br># 加密密钥, 迁移请保证 SECRET_KEY 与旧环境一致, 请勿使用特殊字符串<br># (*) Warning: Keep this value secret.<br># (*) 勿向任何人泄露 SECRET_KEY<br>#<br>SECRET_KEY=<br><br># 组件向 core 注册使用的 token, 迁移请保持 BOOTSTRAP_TOKEN 与旧环境一致,<br># 请勿使用特殊字符串<br># (*) Warning: Keep this value secret.<br># (*) 勿向任何人泄露 BOOTSTRAP_TOKEN<br>#<br>BOOTSTRAP_TOKEN=<br><br># 日志等级 INFO, WARN, ERROR<br>#<br>LOG_LEVEL=ERROR<br><br># JumpServer 容器使用的网段, 请勿与现有的网络冲突, 根据实际情况自行修改<br>#<br>DOCKER_SUBNET=<span class="hljs-number">192.168</span><span class="hljs-number">.250</span><span class="hljs-number">.0</span>/<span class="hljs-number">24</span><br><br># ipv6 nat, 正常情况下无需开启<br># 如果宿主不支持 ipv6 开启此选项将会导致无法获取真实的客户端 ip 地址<br>#<br>USE_IPV6=<span class="hljs-number">0</span><br>DOCKER_SUBNET_IPV6=fc00:<span class="hljs-number">1010</span>:<span class="hljs-number">1111</span>:<span class="hljs-number">200</span>::/<span class="hljs-number">64</span><br><br>################################# MySQL 配置 ##################################<br># 外置 MySQL 需要输入正确的 MySQL 信息, 内置 MySQL 系统会自动处理<br>#<br>DB_HOST=mysql<br>DB_PORT=<span class="hljs-number">3306</span><br>DB_USER=root<br>DB_PASSWORD=<br>DB_NAME=jumpserver<br><br># 如果外置 MySQL 需要开启 TLS/SSL 连接, 参考 https:<span class="hljs-comment">//docs.jumpserver.org/zh/v3/installation/security_setup/mysql_ssl/</span><br>#<br># DB_USE_SSL=true<br><br>################################# Redis 配置 ##################################<br># 外置 Redis 需要请输入正确的 Redis 信息, 内置 Redis 系统会自动处理<br>#<br>REDIS_HOST=redis<br>REDIS_PORT=<span class="hljs-number">6379</span><br>REDIS_PASSWORD=<br><br># 如果使用外置 Redis Sentinel, 请手动填写下面内容<br>#<br># REDIS_SENTINEL_HOSTS=mymaster/<span class="hljs-number">192.168</span><span class="hljs-number">.100</span><span class="hljs-number">.1</span>:<span class="hljs-number">26379</span>,<span class="hljs-number">192.168</span><span class="hljs-number">.100</span><span class="hljs-number">.1</span>:<span class="hljs-number">26380</span>,<span class="hljs-number">192.168</span><span class="hljs-number">.100</span><span class="hljs-number">.1</span>:<span class="hljs-number">26381</span><br># REDIS_SENTINEL_PASSWORD=your_sentinel_password<br># REDIS_PASSWORD=your_redis_password<br># REDIS_SENTINEL_SOCKET_TIMEOUT=<span class="hljs-number">5</span><br><br># 如果外置 Redis 需要开启 TLS/SSL 连接, 参考 https:<span class="hljs-comment">//docs.jumpserver.org/zh/v3/installation/security_setup/redis_ssl/</span><br>#<br># REDIS_USE_SSL=true<br><br>################################## 访问配置 ###################################<br># 对外提供服务端口, 如果与现有服务冲突请自行修改<br>#<br>HTTP_PORT=<span class="hljs-number">80</span><br>SSH_PORT=<span class="hljs-number">2222</span><br>MAGNUS_MYSQL_PORT=<span class="hljs-number">33061</span><br>MAGNUS_MARIADB_PORT=<span class="hljs-number">33062</span><br>MAGNUS_REDIS_PORT=<span class="hljs-number">63790</span><br>MAGNUS_POSTGRESQL_PORT=<span class="hljs-number">54320</span><br>MAGNUS_ORACLE_PORTS=<span class="hljs-number">30000</span><span class="hljs-number">-30030</span><br><br>################################# HTTPS 配置 #################################<br># 参考 https:<span class="hljs-comment">//docs.jumpserver.org/zh/v3/installation/proxy/ 配置</span><br>#<br># HTTPS_PORT=<span class="hljs-number">443</span><br># SERVER_NAME=your_domain_name<br># SSL_CERTIFICATE=your_cert<br># SSL_CERTIFICATE_KEY=your_cert_key<br>#<br><br># Nginx 文件上传下载大小限制<br>#<br>CLIENT_MAX_BODY_SIZE=<span class="hljs-number">4096</span>m<br><br>################################## 组件配置 ###################################<br># 组件注册使用, 默认情况下向 core 容器注册, 集群环境需要修改为集群 vip 地址<br>#<br>CORE_HOST=http:<span class="hljs-comment">//core:8080</span><br>PERIOD_TASK_ENABLED=true<br><br># Core Session 定义,<br># SESSION_COOKIE_AGE 表示闲置多少秒后 session 过期,<br># SESSION_EXPIRE_AT_BROWSER_CLOSE=true 表示关闭浏览器即 session 过期<br>#<br># SESSION_COOKIE_AGE=<span class="hljs-number">86400</span><br>SESSION_EXPIRE_AT_BROWSER_CLOSE=true<br><br># 可信任 DOMAINS 定义,<br># 定义可信任的访问 IP, 请根据实际情况修改, 如果是公网 IP 请改成对应的公网 IP,<br># DOMAINS=<span class="hljs-string">&quot;demo.jumpserver.org:443&quot;</span><br># DOMAINS=<span class="hljs-string">&quot;172.17.200.191:80&quot;</span><br># DOMAINS=<span class="hljs-string">&quot;demo.jumpserver.org:443,172.17.200.191:80&quot;</span><br>DOMAINS=<br><br># 配置不需要启动的组件, 默认所有组件都会开启, 如果不需要某个组件可以通过设置 &#123;组件名称&#125;_ENABLED 为 <span class="hljs-number">0</span> 关闭<br># CORE_ENABLED=<span class="hljs-number">0</span><br># CELERY_ENABLED=<span class="hljs-number">0</span><br># KOKO_ENABLED=<span class="hljs-number">0</span><br># LION_ENABLED=<span class="hljs-number">0</span><br># MAGNUS_ENABLED=<span class="hljs-number">0</span><br># CHEN_ENABLED=<span class="hljs-number">0</span><br># KAEL_ENABLED=<span class="hljs-number">0</span><br><br># Lion 开启字体平滑, 优化体验<br>#<br>JUMPSERVER_ENABLE_FONT_SMOOTHING=true<br><br>################################# XPack 配置 #################################<br># XPack 包, 开源版本设置无效<br>#<br>RDP_PORT=<span class="hljs-number">3389</span><br>XRDP_PORT=<span class="hljs-number">3390</span><br><br>################################## 其他配置 ##################################<br># 终端使用宿主 HOSTNAME 标识, 首次安装自动生成<br>#<br>SERVER_HOSTNAME=$&#123;HOSTNAME&#125;<br><br># 使用内置 SLB, 如果 Web 页面获取到的客户端 IP 地址不正确, 请将 USE_LB 设置为 <span class="hljs-number">0</span><br># USE_LB 设置为 <span class="hljs-number">1</span> 时, 使用配置 proxy_set_header X-Forwarded-For $remote_addr<br># USE_LB 设置为 <span class="hljs-number">0</span> 时, 使用配置 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for<br>USE_LB=<span class="hljs-number">1</span><br><br># 当前运行的 JumpServer 版本号, 安装和升级完成后自动生成<br>#<br>CURRENT_VERSION=<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /opt/jumpserver-installer-v3.8.0/<br><br><span class="hljs-comment"># 进入安装目录</span><br><br>./jmsctl.sh install<br><br><span class="hljs-comment"># 执行安装，一直默认选项即可。（安装期间会加载Docker镜像，会比较慢）</span><br><span class="hljs-comment"># 默认安装会使用Docker部署的内置Mariadb数据库和Redis数据库.</span><br><span class="hljs-comment"># 默认安装情况下会把数据和配置文件目录存放在 /data/jumpserver</span><br><br>./jmsctl.sh start<br><br><span class="hljs-comment"># 安装后执行启动，默认为开机启动，但安装或升级后，需要手动启动。</span><br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">启动</span><br>./jmsctl.sh start<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">停止</span><br>./jmsctl.sh down<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">卸载</span><br>./jmsctl.sh uninstall<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">重启</span><br><br>./jmsctl.sh restart<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">帮助</span><br>./jmsctl.sh -h<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="默认访问端口"><a href="#默认访问端口" class="headerlink" title="默认访问端口"></a>默认访问端口</h2><h1 id=""><a href="#" class="headerlink" title=""></a></h1><table>
+<thead>
+<tr>
+<th>端口</th>
+<th>作用</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>22</td>
+<td>SSH</td>
+<td>安装、升级及管理使用</td>
+</tr>
+<tr>
+<td>80</td>
+<td>Web HTTP 服务</td>
+<td>通过 HTTP 协议访问 JumpServer 前端页面</td>
+</tr>
+<tr>
+<td>443</td>
+<td>Web HTTPS 服务</td>
+<td>通过 HTTPS 协议访问 JumpServer 前端页面</td>
+</tr>
+<tr>
+<td>3306</td>
+<td>数据库服务</td>
+<td>MySQL 服务使用</td>
+</tr>
+<tr>
+<td>6379</td>
+<td>数据库服务</td>
+<td>Redis 服务使用</td>
+</tr>
+<tr>
+<td>3389</td>
+<td>Razor 服务端口</td>
+<td>RDP Client 方式连接 Windows 资产</td>
+</tr>
+<tr>
+<td>2222</td>
+<td>SSH Client</td>
+<td>SSH Client 方式使用终端工具连接 JumpServer，比如 Xshell、PuTTY、MobaXterm 等终端工具</td>
+</tr>
+<tr>
+<td>33061</td>
+<td>Magnus MySQL 服务端口</td>
+<td>DB Client 方式连接 MySQL 数据库资产</td>
+</tr>
+<tr>
+<td>33062</td>
+<td>Magnus MariaDB 服务端口</td>
+<td>DB Client 方式连接 MariaDB 数据库资产</td>
+</tr>
+<tr>
+<td>54320</td>
+<td>Magnus PostgreSQL 服务端口</td>
+<td>DB Client 方式连接 PostgreSQL 数据库资产</td>
+</tr>
+<tr>
+<td>63790</td>
+<td>Magnus Redis 服务端口</td>
+<td>DB Client 方式连接 Redis 数据库资产</td>
+</tr>
+<tr>
+<td>30000-30100</td>
+<td>Magnus Oracle 服务端口</td>
+<td>DB Client 方式连接 Oracle 数据库资产，该端口范围可自定义</td>
+</tr>
+</tbody></table>
+<h1 id="-1"><a href="#-1" class="headerlink" title=""></a></h1><h1 id="使用教程"><a href="#使用教程" class="headerlink" title="使用教程"></a>使用教程</h1><p>安装后可访问http:&#x2F;&#x2F;ip:80 访问，也可以通过SSH:2222 默认安装端口通过SSH访问资产。</p>
+<p>用户名: admin<br>密码: admin</p>
+<p>官方视频教程：<a target="_blank" rel="noopener" href="https://jumpserver.org/video.html">https://jumpserver.org/video.html</a> </p>
+<h1 id="-2"><a href="#-2" class="headerlink" title=""></a></h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://docs.jumpserver.org/">https://docs.jumpserver.org</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/network/">#network</a>
+      
+        <a href="/tags/Linux/">#Linux</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>JumpServer 堡垒机安装指南</div>
+      <div>https://songxwn.com/Jumpserver-install/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Song</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年10月23日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年10月23日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/tools/" title="个人使用软件清单">
+                        <span class="hidden-mobile">个人使用软件清单</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments">
+      
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script>
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          Fluid.utils.createCssLink('https://lib.baomitu.com/disqusjs/1.3.0/disqusjs.css');
+          Fluid.utils.createScript('https://lib.baomitu.com/disqusjs/1.3.0/disqus.js', function() {
+            new DisqusJS({
+              shortname: 'songxwn',
+              apikey: ''
+            });
+          });
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Linux"
+        id="heading-edc9f0a5a5d57797bf68e37364743831" role="tab" data-toggle="collapse" href="#collapse-edc9f0a5a5d57797bf68e37364743831"
+        aria-expanded="true"
+      >
+        Linux
+        <span class="list-group-count">(1)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-edc9f0a5a5d57797bf68e37364743831"
+           role="tabpanel" aria-labelledby="heading-edc9f0a5a5d57797bf68e37364743831">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/Jumpserver-install/" title="JumpServer 堡垒机安装指南"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">JumpServer 堡垒机安装指南</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <a href="https://www.foreverblog.cn/go.html" target="_blank"> <img src="https://img.foreverblog.cn/wormhole_1_tp.gif" alt="" style="width:auto;height:32px;" title="穿梭虫洞-随机访问十年之约友链博客"></a>,<a href="https://www.vultr.com/?ref=7199488" target="_blank"> <img src="https://www.vultr.com/media/logo_ondark.svg" alt="" style="width:auto;height:32px;" title="注册vultr获取免费10美元体验额度"></a>,<a href="https://url.cn/eTx2WPml" target="_blank"> <img src="https://s3.bmp.ovh/imgs/2023/05/06/989aea4d82987ca9.png" alt="" style="width:auto;height:32px;" title="【腾讯云】云服务器、云数据库、COS、CDN、短信等云产品特惠热卖中"></a>
+        </div>
+      </div>
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
