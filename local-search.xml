@@ -35,7 +35,7 @@
     <link href="/tools/"/>
     <url>/tools/</url>
     
-    <content type="html"><![CDATA[<p>Xshell –SSH、Telnet、Serial等协议连接客户端，有免费版提供。</p><p>Xftp   –SFTP、FTP客户端，可配合Xshell无缝使用。</p><p>PotPlayer –视频播放器，功能及其强大且免费。</p><p>Bandizip –支持大部分压缩格式解压缩。</p><p>ToDesk –国产的免费公网远程工具，易用，限制少。</p><p>ToDo –微软出品的代办事项管理。</p><p>Everything –Windows下的快速文件搜索，支持REFS、NTFS和挂载的网盘。</p><p>EverythingToolbar –配合Everything，在任务栏快速搜索。</p>]]></content>
+    <content type="html"><![CDATA[<p>Xshell –SSH、Telnet、Serial等协议连接客户端，有免费版提供。</p><p>Xftp   –SFTP、FTP客户端，可配合Xshell无缝使用。</p><p>PotPlayer –视频播放器，功能及其强大且免费。</p><p>Bandizip –支持大部分压缩格式解压缩。</p><p>ToDesk –国产的免费公网远程工具，易用，限制少。</p><p>ToDo –微软出品的代办事项管理。</p><p>Everything –Windows下的快速文件搜索，支持REFS、NTFS和挂载的网盘。</p><p>EverythingToolbar –配合Everything，在任务栏快速搜索。</p><p>Keepass –密码管理器，但没有云同步功能，可以配合OneDrive使用。</p><p>Office Tool Plus –Office全家桶安装管理工具。</p>]]></content>
     
     
     <categories>
