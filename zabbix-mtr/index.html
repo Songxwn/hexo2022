@@ -16,27 +16,29 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
   
-    <meta name="description" content="简介因为IPv4地址的日渐枯竭，为了使公网IP利用率提高，这里写了一些解决方案。">
+    <meta name="description" content="简介本文章简单介绍了MTR监控模板的使用。 只简单获取文本数据，作为历史查询。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="假网关-为了节省公网IP的骚操作">
-<meta property="og:url" content="https://songxwn.com/save-ip/index.html">
+<meta property="og:title" content="Zabbix MTR 监测指南">
+<meta property="og:url" content="https://songxwn.com/zabbix-mtr/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="简介因为IPv4地址的日渐枯竭，为了使公网IP利用率提高，这里写了一些解决方案。">
+<meta property="og:description" content="简介本文章简单介绍了MTR监控模板的使用。 只简单获取文本数据，作为历史查询。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img.songxwn.com/file/16183abb9e41a08802d59.png">
-<meta property="article:published_time" content="2023-10-26T01:51:26.000Z">
-<meta property="article:modified_time" content="2023-10-26T07:23:35.932Z">
+<meta property="og:image" content="https://img.songxwn.com/file/a80b948e2dc253169d150.png">
+<meta property="article:published_time" content="2023-10-26T04:02:59.000Z">
+<meta property="article:modified_time" content="2023-10-26T09:26:46.941Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
-<meta property="article:tag" content="nat">
+<meta property="article:tag" content="ping">
+<meta property="article:tag" content="mtr">
+<meta property="article:tag" content="zabbix">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img.songxwn.com/file/16183abb9e41a08802d59.png">
+<meta name="twitter:image" content="https://img.songxwn.com/file/a80b948e2dc253169d150.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>假网关-为了节省公网IP的骚操作 - Song`s Blog</title>
+  <title>Zabbix MTR 监测指南 - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -243,7 +245,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="假网关-为了节省公网IP的骚操作"></span>
+            <span id="subtitle" data-typed-text="Zabbix MTR 监测指南"></span>
           
         </div>
 
@@ -254,8 +256,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-26 09:51" pubdate>
-          2023年10月26日 上午
+        <time datetime="2023-10-26 12:02" pubdate>
+          2023年10月26日 中午
         </time>
       </span>
     
@@ -266,7 +268,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          676 字
+          584 字
         
       </span>
     
@@ -277,7 +279,7 @@
         
         
         
-          6 分钟
+          5 分钟
         
       </span>
     
@@ -336,7 +338,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">假网关-为了节省公网IP的骚操作</h1>
+            <h1 style="display: none">Zabbix MTR 监测指南</h1>
             
               <p class="note note-danger">
                 
@@ -349,20 +351,27 @@
             
               <div class="markdown-body">
                 
-                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>因为IPv4地址的日渐枯竭，为了使公网IP利用率提高，这里写了一些解决方案。</p>
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>本文章简单介绍了MTR监控模板的使用。</p>
+<p>只简单获取文本数据，作为历史查询。</p>
 <span id="more"></span>
 
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>运营商通过互联，指一个 1.1.1.4&#x2F;30的公网路由段，有四个IP，但如果一个作为网络位、一个为网关、一个为广播IP，那可用IP就只能是一个了。那么怎么在二次分配给主机的时候，让公网IP不共享，而提高利用率呢？</p>
-<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs accesslog"><span class="hljs-number">1.1.1.4</span><br><span class="hljs-number">1.1.1.5</span><br><span class="hljs-number">1.1.1.6</span><br><span class="hljs-number">1.1.1.7</span><br></code></pre></td></tr></table></figure>
+<h2 id="安装MTR配置脚本"><a href="#安装MTR配置脚本" class="headerlink" title="安装MTR配置脚本"></a>安装MTR配置脚本</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cmake">dnf <span class="hljs-keyword">install</span> mtr<br><br>apt <span class="hljs-keyword">install</span> mtr<br><br><br><span class="hljs-comment"># 安装MTR包</span><br><br></code></pre></td></tr></table></figure>
 
-<h2 id="方案一：假网关"><a href="#方案一：假网关" class="headerlink" title="方案一：假网关"></a>方案一：假网关</h2><p>可以在路由器上配置接口IP为1.1.1.1&#x2F;28 作为假网关，这样1.1.1.4-7四个IP都可以使用，在主机上配置掩码为&#x2F;28即可。</p>
-<p>由于网关只转发IP，网关本身的IP是不会转发出去的，所以从路由层面是没有问题的。</p>
-<p>这样做唯一的问题是当你下面的主机访问多出来的假网关和多余网段IP的时候，会进行二层通信，而不是发到网关，导致无法访问。但这种概率很低。</p>
-<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs accesslog"><span class="hljs-number">1.1.1.0</span><br><span class="hljs-number">1.1.1.1</span> （作为假网关进行用于转发）<br><span class="hljs-number">1.1.1.2</span><br><span class="hljs-number">1.1.1.3</span><br><br><span class="hljs-number">1.1.1.4</span><br><span class="hljs-number">1.1.1.5</span>  （可用四个IP）<br><span class="hljs-number">1.1.1.6</span><br><span class="hljs-number">1.1.1.7</span><br><br><span class="hljs-number">1.1.1.8</span><br><span class="hljs-number">1.1.1.9</span>  (多余网段)<br><span class="hljs-number">1.1.1.10</span><br><span class="hljs-number">1.1.1.11</span><br><br></code></pre></td></tr></table></figure>
+<h3 id="配置脚本"><a href="#配置脚本" class="headerlink" title="配置脚本"></a>配置脚本</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim /usr/lib/zabbix/externalscripts/mtr.sh<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/bash</span><br>  <br>IP=$1<br>mtr -n -z -c3 -r $IP<br><br></code></pre></td></tr></table></figure>
 
-<h2 id="方案二：-x2F-31-掩码"><a href="#方案二：-x2F-31-掩码" class="headerlink" title="方案二：&#x2F;31  掩码"></a>方案二：&#x2F;31  掩码</h2><p>其实互联IP是可以配置 &#x2F;31位的，这样就让可用IP变成了两个，网关配置为 1.1.1.4&#x2F;31  1.1.1.6&#x2F;31.</p>
-<p>经测试，大部分网络设备和操作系统是支持的。</p>
-<h2 id="方案三：一对一静态NAT"><a href="#方案三：一对一静态NAT" class="headerlink" title="方案三：一对一静态NAT"></a>方案三：一对一静态NAT</h2><p>此方案，大部分公有云都在用，将公网IP一对一NAT到私网IP上。使用上没有任何区别，而且更灵活了。</p>
+<p>说明：不把IP解析为域名，获取IP的AS号，只执行三次。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk">chmod +x <span class="hljs-regexp">/usr/</span>lib<span class="hljs-regexp">/zabbix/</span>externalscripts/mtr.sh<br><br><span class="hljs-comment"># 给予脚本执行权限</span><br><br></code></pre></td></tr></table></figure>
+
+<h2 id="修改超时时间"><a href="#修改超时时间" class="headerlink" title="修改超时时间"></a>修改超时时间</h2><p>由于zabbix 监控项默认的获取超时时间为4秒，而mtr执行时间远超这个，所以会导致超时。</p>
+<h3 id="Zabbix-Server"><a href="#Zabbix-Server" class="headerlink" title="Zabbix Server"></a>Zabbix Server</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs awk">vim <span class="hljs-regexp">/etc/</span>zabbix/zabbix_server.conf<br><br>﻿<br><br>﻿<br><br>Timeout=<span class="hljs-number">15</span><br><br>﻿<br><br><span class="hljs-comment"># 修改超时时间，单位为秒，重启生效。</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="Zabbix-Proxy"><a href="#Zabbix-Proxy" class="headerlink" title="Zabbix Proxy"></a>Zabbix Proxy</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs awk">vim <span class="hljs-regexp">/etc/</span>zabbix/zabbix_proxy.conf<br><br><br>Timeout=<span class="hljs-number">15</span><br><br><span class="hljs-comment"># 修改超时时间，单位为秒，重启生效。</span><br><br></code></pre></td></tr></table></figure>
+
+<h2 id="导入模板"><a href="#导入模板" class="headerlink" title="导入模板"></a>导入模板</h2><p>MTR模板（6.0）下载地址： <a href="https://songxwn.com/file/mtr_templates.yaml">https://songxwn.com/file/mtr_templates.yaml</a></p>
+<p>下载导入即可。</p>
+<h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><p>可以在监控项查看历史记录，数据以文本显示，也可以在Grafana 以文本显示。</p>
 
                 
               </div>
@@ -381,7 +390,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/network/" class="category-chain-item">network</a>
+  <a href="/categories/Zabbix/" class="category-chain-item">Zabbix</a>
   
   
 
@@ -398,7 +407,11 @@
       
         <a href="/tags/network/">#network</a>
       
-        <a href="/tags/nat/">#nat</a>
+        <a href="/tags/ping/">#ping</a>
+      
+        <a href="/tags/mtr/">#mtr</a>
+      
+        <a href="/tags/zabbix/">#zabbix</a>
       
     </div>
   
@@ -410,8 +423,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>假网关-为了节省公网IP的骚操作</div>
-      <div>https://songxwn.com/save-ip/</div>
+      <div>Zabbix MTR 监测指南</div>
+      <div>https://songxwn.com/zabbix-mtr/</div>
     </div>
     <div class="license-meta">
       
@@ -460,18 +473,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/zabbix-mtr/" title="Zabbix MTR 监测指南">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Zabbix MTR 监测指南</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Jumpserver-install/" title="JumpServer 堡垒机安装指南">
-                        <span class="hidden-mobile">JumpServer 堡垒机安装指南</span>
+                      <a href="/save-ip/" title="假网关-为了节省公网IP的骚操作">
+                        <span class="hidden-mobile">假网关-为了节省公网IP的骚操作</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -531,140 +538,17 @@
     
     <div class="category row nomargin-x">
       <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="network"
-        id="heading-91e02cd2b8621d0c05197f645668c5c4" role="tab" data-toggle="collapse" href="#collapse-91e02cd2b8621d0c05197f645668c5c4"
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Zabbix"
+        id="heading-d1ddc1b1c3c258570ba6994be1aeaddf" role="tab" data-toggle="collapse" href="#collapse-d1ddc1b1c3c258570ba6994be1aeaddf"
         aria-expanded="true"
       >
-        network
-        <span class="list-group-count">(26)</span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-      <div class="category-collapse collapse show" id="collapse-91e02cd2b8621d0c05197f645668c5c4"
-           role="tabpanel" aria-labelledby="heading-91e02cd2b8621d0c05197f645668c5c4">
-        
-        
-          
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/DNS_recursive_Server/" title="建立自有递归DNS服务器"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">建立自有递归DNS服务器</span>
-        </a>
-      
-    
-      
-      
-        <a href="/Full_Stack_Network_Engineer/" title="如何成为全栈网络工程师？"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">如何成为全栈网络工程师？</span>
-        </a>
-      
-    
-      
-      
-        <a href="/IP_Mask_Gateway/" title="IP地址 子网掩码 默认网关 随笔"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">IP地址 子网掩码 默认网关 随笔</span>
-        </a>
-      
-    
-      
-      
-        <a href="/Juniper_L3-MPLS/" title="Juniper MPLS L3VPN实验配置"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Juniper MPLS L3VPN实验配置</span>
-        </a>
-      
-    
-      
-      
-        <a href="/Juniper_RE-Protect/" title="Juniper RE防护-过滤SSH&amp;Telnet登录"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Juniper RE防护-过滤SSH&amp;Telnet登录</span>
-        </a>
-      
-    
-      
-      
-        <a href="/MPLS_VPN/" title="MPLS VPN随笔（L3 单域）"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">MPLS VPN随笔（L3 单域）</span>
-        </a>
-      
-    
-      
-      
-        <a href="/MikroTik_ROS_WinBox_DNS/" title="MikroTik ROS Winbox Ping工具DNS问题"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">MikroTik ROS Winbox Ping工具DNS问题</span>
-        </a>
-      
-    
-      
-      
-        <a href="/OSI/" title="OSI七层网络参考模型 随笔"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">OSI七层网络参考模型 随笔</span>
-        </a>
-      
-    
-      
-      
-        <a href="/QINQ/" title="QinQ 随笔"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">QinQ 随笔</span>
-        </a>
-      
-    
-      
-      
-        <a href="/TCP_BBR/" title="TCP拥塞控制算法–从 CUBIC 到 BBRv2"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">TCP拥塞控制算法–从 CUBIC 到 BBRv2</span>
-        </a>
-      
-    
-      
-      
-        <a href="/categories/network/" class="list-group-item list-group-item-action">
-          <span class="category-post">More...</span>
-        </a>
-        
-  </div>
-
-          
-  
-    
-    
-    
-    <div class="category-sub row nomargin-x">
-      <a class="category-subitem collapsed
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="vxlan"
-        id="heading-cc9fdff17fe90752400924ef32962330" role="tab" data-toggle="collapse" href="#collapse-cc9fdff17fe90752400924ef32962330"
-        aria-expanded="false"
-      >
-        vxlan
+        Zabbix
         <span class="list-group-count">(5)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse " id="collapse-cc9fdff17fe90752400924ef32962330"
-           role="tabpanel" aria-labelledby="heading-cc9fdff17fe90752400924ef32962330">
+      <div class="category-collapse collapse show" id="collapse-d1ddc1b1c3c258570ba6994be1aeaddf"
+           role="tabpanel" aria-labelledby="heading-d1ddc1b1c3c258570ba6994be1aeaddf">
         
         
           
@@ -673,55 +557,51 @@
     
       
       
-        <a href="/VXLAN/" title="什么是VXLAN"
+        <a href="/Zabbix-fping/" title="Zabbix Ping 丢包问题"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">什么是VXLAN</span>
+          <span class="category-post">Zabbix Ping 丢包问题</span>
         </a>
       
     
       
       
-        <a href="/VXLAN_Basic/" title="VXLAN 基本概念"
+        <a href="/zabbix-SNMP-uptime-497day/" title="Zabbix SNMP开机时间497天重置问题"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">VXLAN 基本概念</span>
+          <span class="category-post">Zabbix SNMP开机时间497天重置问题</span>
         </a>
       
     
       
       
-        <a href="/VXLAN_Configuration/" title="VXLAN 基本配置"
+        <a href="/zabbix-reboot-SNMPv3/" title="Zabbix SNMPv3 设备重启后无法监控问题"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">VXLAN 基本配置</span>
+          <span class="category-post">Zabbix SNMPv3 设备重启后无法监控问题</span>
         </a>
       
     
       
       
-        <a href="/VXLAN_Principle/" title="VXLAN 转发原理"
+        <a href="/zabbix_data/" title="Zabbix：历史数据与趋势数据"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">VXLAN 转发原理</span>
+          <span class="category-post">Zabbix：历史数据与趋势数据</span>
         </a>
       
     
       
       
-        <a href="/BGP_EVPN_Basic/" title="什么是EVPN？"
+        <a href="/zabbix-mtr/" title="Zabbix MTR 监测指南"
            class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">什么是EVPN？</span>
+           active">
+          <span class="category-post">Zabbix MTR 监测指南</span>
         </a>
       
     
   </div>
 
-        
-      </div>
-    </div>
-  
         
       </div>
     </div>

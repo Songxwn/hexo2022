@@ -1,3 +1,5 @@
+https://songxwn.com/zabbix-mtr/
+https://songxwn.com/file/mtr_templates.json
 https://songxwn.com/save-ip/
 https://songxwn.com/tools/
 https://songxwn.com/Jumpserver-install/
@@ -140,6 +142,8 @@ https://songxwn.com/tags/evpn/
 https://songxwn.com/tags/openai/
 https://songxwn.com/tags/Tools/
 https://songxwn.com/tags/nat/
+https://songxwn.com/tags/mtr/
+https://songxwn.com/tags/zabbix/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/linux/ELK/

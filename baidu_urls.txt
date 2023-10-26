@@ -1,3 +1,4 @@
+https://songxwn.com/zabbix-mtr/
 https://songxwn.com/save-ip/
 https://songxwn.com/Jumpserver-install/
 https://songxwn.com/tools/
@@ -12,4 +13,3 @@ https://songxwn.com/Netbox-pgsql/
 https://songxwn.com/netbox_csv/
 https://songxwn.com/netbox/
 https://songxwn.com/url-get-edge-tools/
-https://songxwn.com/Windows2022-RDS-RD/
