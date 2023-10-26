@@ -16,27 +16,27 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
   
-    <meta name="description" content="简介最近搭建测试 OpenVPN 下发默认路由和dns，发现Windows系统不会使用OpenVPN服务器下发的dns服务器。 查询了一番，抓包看出了问题。">
+    <meta name="description" content="简介因为IPv4地址的日渐枯竭，为了使公网IP利用率提高，这里写了一些解决方案。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Windows下网卡跃点数和优先的DNS服务器">
-<meta property="og:url" content="https://songxwn.com/Windows-DNS-metric/index.html">
+<meta property="og:title" content="假网关-为了节省公网IP的骚操作">
+<meta property="og:url" content="https://songxwn.com/save-ip/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="简介最近搭建测试 OpenVPN 下发默认路由和dns，发现Windows系统不会使用OpenVPN服务器下发的dns服务器。 查询了一番，抓包看出了问题。">
+<meta property="og:description" content="简介因为IPv4地址的日渐枯竭，为了使公网IP利用率提高，这里写了一些解决方案。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img.songxwn.com/file/d9e38dbe0c0b8daab07ac.png">
-<meta property="article:published_time" content="2023-08-29T08:13:44.000Z">
-<meta property="article:modified_time" content="2023-08-29T08:17:19.452Z">
+<meta property="og:image" content="https://img.songxwn.com/file/16183abb9e41a08802d59.png">
+<meta property="article:published_time" content="2023-10-26T01:51:26.000Z">
+<meta property="article:modified_time" content="2023-10-26T06:54:22.471Z">
 <meta property="article:author" content="Song">
-<meta property="article:tag" content="dns">
 <meta property="article:tag" content="network">
+<meta property="article:tag" content="nat">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img.songxwn.com/file/d9e38dbe0c0b8daab07ac.png">
+<meta name="twitter:image" content="https://img.songxwn.com/file/16183abb9e41a08802d59.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Windows下网卡跃点数和优先的DNS服务器 - Song`s Blog</title>
+  <title>假网关-为了节省公网IP的骚操作 - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -243,7 +243,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Windows下网卡跃点数和优先的DNS服务器"></span>
+            <span id="subtitle" data-typed-text="假网关-为了节省公网IP的骚操作"></span>
           
         </div>
 
@@ -254,8 +254,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-08-29 16:13" pubdate>
-          2023年8月29日 下午
+        <time datetime="2023-10-26 09:51" pubdate>
+          2023年10月26日 上午
         </time>
       </span>
     
@@ -266,7 +266,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          618 字
         
       </span>
     
@@ -277,7 +277,7 @@
         
         
         
-          10 分钟
+          6 分钟
         
       </span>
     
@@ -336,12 +336,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Windows下网卡跃点数和优先的DNS服务器</h1>
+            <h1 style="display: none">假网关-为了节省公网IP的骚操作</h1>
             
               <p class="note note-danger">
                 
                   
-                    本文最后更新于：2023年8月29日 下午
+                    本文最后更新于：2023年10月26日 下午
                   
                 
               </p>
@@ -349,25 +349,20 @@
             
               <div class="markdown-body">
                 
-                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>最近搭建测试 OpenVPN 下发默认路由和dns，发现Windows系统不会使用OpenVPN服务器下发的dns服务器。</p>
-<p>查询了一番，抓包看出了问题。</p>
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>因为IPv4地址的日渐枯竭，为了使公网IP利用率提高，这里写了一些解决方案。</p>
 <span id="more"></span>
-<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>因为本地网卡也配置DNS服务器，默认情况下本地网卡跃点数（metric）会较低，所以会优先使用本地网卡的DNS服务器。</p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>建议修改OpenVPN网卡的跃点数（metric）为1，这样会更优先。</p>
-<p>或者将本地网卡的跃点数（metric）改为255，这样本地的优先级会更低。</p>
-<p><img src="https://img.songxwn.com/file/114bfd423e7c43606ffac.png" srcset="/img/loading.gif" lazyload></p>
-<h1 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h1><p>为什么原生的VPN 拨号的时候没有这个问题。</p>
-<p>系统原生L2TP 拨号的时候，会自动加大其他网卡跃点数。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs yaml">[<span class="hljs-string">C:\~</span>]<span class="hljs-string">$</span> <span class="hljs-string">netsh</span> <span class="hljs-string">interface</span> <span class="hljs-string">ipv4</span> <span class="hljs-string">show</span> <span class="hljs-string">interface</span><br><br><span class="hljs-string">Idx</span>     <span class="hljs-string">Met</span>         <span class="hljs-string">MTU</span>          <span class="hljs-string">状态</span>                <span class="hljs-string">名称</span><br><span class="hljs-string">---</span>  <span class="hljs-string">----------</span>  <span class="hljs-string">----------</span>  <span class="hljs-string">------------</span>  <span class="hljs-string">---------------------------</span><br>  <span class="hljs-number">1</span>          <span class="hljs-number">75</span>  <span class="hljs-number">4294967295</span>  <span class="hljs-string">connected</span>     <span class="hljs-string">Loopback</span> <span class="hljs-string">Pseudo-Interface</span> <span class="hljs-number">1</span><br> <span class="hljs-number">10</span>           <span class="hljs-number">5</span>       <span class="hljs-number">65535</span>  <span class="hljs-string">disconnected</span>  <span class="hljs-string">OpenVPN</span> <span class="hljs-string">Wintun</span><br> <span class="hljs-number">22</span>          <span class="hljs-number">25</span>        <span class="hljs-number">1500  </span><span class="hljs-string">disconnected</span>  <span class="hljs-string">WLAN</span><br> <span class="hljs-number">26</span>          <span class="hljs-number">25</span>        <span class="hljs-number">1500  </span><span class="hljs-string">connected</span>     <span class="hljs-string">以太网</span><br>  <span class="hljs-number">7</span>          <span class="hljs-number">25</span>        <span class="hljs-number">1500  </span><span class="hljs-string">disconnected</span>  <span class="hljs-string">OpenVPN</span> <span class="hljs-string">TAP-Windows6</span><br> <span class="hljs-number">25</span>          <span class="hljs-number">25</span>        <span class="hljs-number">1500  </span><span class="hljs-string">disconnected</span>  <span class="hljs-string">本地连接*</span> <span class="hljs-number">9</span><br> <span class="hljs-number">27</span>           <span class="hljs-number">1</span>        <span class="hljs-number">1400  </span><span class="hljs-string">disconnected</span>  <span class="hljs-string">OpenVPN</span> <span class="hljs-string">Data</span> <span class="hljs-string">Channel</span> <span class="hljs-string">Offload</span><br> <span class="hljs-number">18</span>          <span class="hljs-number">25</span>        <span class="hljs-number">1500  </span><span class="hljs-string">disconnected</span>  <span class="hljs-string">本地连接*</span> <span class="hljs-number">10</span><br> <span class="hljs-number">17</span>          <span class="hljs-number">35</span>        <span class="hljs-number">1500  </span><span class="hljs-string">connected</span>     <span class="hljs-string">VMware</span> <span class="hljs-string">Network</span> <span class="hljs-string">Adapter</span> <span class="hljs-string">VMnet1</span><br>  <span class="hljs-number">8</span>          <span class="hljs-number">35</span>        <span class="hljs-number">1500  </span><span class="hljs-string">connected</span>     <span class="hljs-string">VMware</span> <span class="hljs-string">Network</span> <span class="hljs-string">Adapter</span> <span class="hljs-string">VMnet8</span><br> <span class="hljs-number">20</span>          <span class="hljs-number">25</span>        <span class="hljs-number">1500  </span><span class="hljs-string">connected</span>     <span class="hljs-string">VirtualBox</span> <span class="hljs-string">Host-Only</span> <span class="hljs-string">Network</span><br> <span class="hljs-number">15</span>          <span class="hljs-number">65</span>        <span class="hljs-number">1500  </span><span class="hljs-string">disconnected</span>  <span class="hljs-string">蓝牙网络连接</span><br><br><span class="hljs-comment"># Met 为跃点数</span><br><br></code></pre></td></tr></table></figure>
 
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>运营商通过互联，指一个 1.1.1.4&#x2F;30的公网路由段，有四个IP，但如果一个作为网络位、一个为网关、一个为广播IP，那可用IP就只能是一个了。那么怎么在二次分配给主机的时候，让公网IP不共享，而提高利用率呢？</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs accesslog"><span class="hljs-number">1.1.1.4</span><br><span class="hljs-number">1.1.1.5</span><br><span class="hljs-number">1.1.1.6</span><br><span class="hljs-number">1.1.1.7</span><br><br></code></pre></td></tr></table></figure>
 
+<h2 id="方案一：假网关"><a href="#方案一：假网关" class="headerlink" title="方案一：假网关"></a>方案一：假网关</h2><p>可以在路由器上配置接口IP为1.1.1.1&#x2F;29 作为假网关，这样1.1.1.4-7四个IP都可以使用，在主机上配置掩码为&#x2F;29即可。</p>
+<p>由于网关只转发IP，网关本身的IP是不会转发出去的，所以从路由层面是没有问题的。</p>
+<p>这样做唯一的问题是当你下面的主机访问多出来的假网关网段的时候，会进行二层通信，而不是发到网关，导致无法访问。但这种概率很低。</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs accesslog"><span class="hljs-number">1.1.1.0</span><br><span class="hljs-number">1.1.1.1</span> （作为假网关进行用于转发）<br><span class="hljs-number">1.1.1.2</span><br><span class="hljs-number">1.1.1.3</span><br><br><span class="hljs-number">1.1.1.4</span><br><span class="hljs-number">1.1.1.5</span><br><span class="hljs-number">1.1.1.6</span><br><span class="hljs-number">1.1.1.7</span><br><br></code></pre></td></tr></table></figure>
 
-
-
-<h1 id="PS："><a href="#PS：" class="headerlink" title="PS："></a>PS：</h1><p>如果多张网卡配置了dns，且那个dns服务器所在网卡的跃点数越低，则使用那个DNS服务器。(或越快返回)</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://answers.microsoft.com/zh-hans/windows/forum/all/win10%E7%9A%84%E5%8F%8C%E7%BD%91%E5%8D%A1dns/c43191f3-e263-47eb-960c-033f54e10dfb">https://answers.microsoft.com/zh-hans/windows/forum/all/win10%E7%9A%84%E5%8F%8C%E7%BD%91%E5%8D%A1dns/c43191f3-e263-47eb-960c-033f54e10dfb</a> </p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wozlmni1/article/details/117931243">https://blog.csdn.net/wozlmni1/article/details/117931243</a> </p>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv11644693/">https://www.bilibili.com/read/cv11644693/</a> </p>
+<h2 id="方案二：-x2F-31-掩码"><a href="#方案二：-x2F-31-掩码" class="headerlink" title="方案二：&#x2F;31  掩码"></a>方案二：&#x2F;31  掩码</h2><p>其实互联IP是可以配置 &#x2F;31位的，这样就让可用IP变成了两个，网关配置为 1.1.1.4&#x2F;31  1.1.1.6&#x2F;31.</p>
+<p>经测试，大部分网络设备和操作系统是支持的。</p>
+<h2 id="方案三：一对一静态NAT"><a href="#方案三：一对一静态NAT" class="headerlink" title="方案三：一对一静态NAT"></a>方案三：一对一静态NAT</h2><p>此方案，大部分公有云都在用，将公网IP一对一NAT到私网IP上。使用上没有任何区别，而且更灵活了。</p>
 
                 
               </div>
@@ -401,9 +396,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/dns/">#dns</a>
-      
         <a href="/tags/network/">#network</a>
+      
+        <a href="/tags/nat/">#nat</a>
       
     </div>
   
@@ -415,8 +410,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Windows下网卡跃点数和优先的DNS服务器</div>
-      <div>https://songxwn.com/Windows-DNS-metric/</div>
+      <div>假网关-为了节省公网IP的骚操作</div>
+      <div>https://songxwn.com/save-ip/</div>
     </div>
     <div class="license-meta">
       
@@ -428,13 +423,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年8月29日</div>
+          <div>2023年10月26日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年8月29日</div>
+          <div>2023年10月26日</div>
         </div>
       
       
@@ -465,18 +460,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/ospf-frr/" title="HCIE Datacom-01.1 IGP高级特性-OSPF-快速收敛">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">HCIE Datacom-01.1 IGP高级特性-OSPF-快速收敛</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/openai-proxy/" title="搭建OpenAI的API代理服务">
-                        <span class="hidden-mobile">搭建OpenAI的API代理服务</span>
+                      <a href="/Jumpserver-install/" title="JumpServer 堡垒机安装指南">
+                        <span class="hidden-mobile">JumpServer 堡垒机安装指南</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
