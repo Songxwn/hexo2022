@@ -31,33 +31,6 @@
   
   
   <entry>
-    <title>zabbix-mtr</title>
-    <link href="/zabbix-mtr/"/>
-    <url>/zabbix-mtr/</url>
-    
-    <content type="html"><![CDATA[<span id="more"></span>]]></content>
-    
-    
-    <categories>
-      
-      <category>network</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>dns</tag>
-      
-      <tag>network</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>JumpServer 堡垒机安装指南</title>
     <link href="/Jumpserver-install/"/>
     <url>/Jumpserver-install/</url>
