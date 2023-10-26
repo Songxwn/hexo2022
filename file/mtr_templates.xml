@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>6.0</version>
+    <date>2023-10-26T09:00:46Z</date>
+    <groups>
+        <group>
+            <uuid>a571c0d144b14fd4a87a9d9b2aa9fcd6</uuid>
+            <name>Templates/Applications</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <uuid>49944f4008104f5aae90dc570888016c</uuid>
+            <template>MTR Template</template>
+            <name>MTR Template</name>
+            <description>文档：https://songxwn.com/zabbix-mtr
+
+Debian
+
+apt install mtr-tiny
+
+RHEL
+
+yum install</description>
+            <groups>
+                <group>
+                    <name>Templates/Applications</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <uuid>6777d690f9e540bab1c6b8a77db49169</uuid>
+                    <name>MTR Get</name>
+                    <type>EXTERNAL</type>
+                    <key>mtr.sh[{HOST.CONN}]</key>
+                    <delay>3m</delay>
+                    <history>30d</history>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>调用mtr脚本，获取文本数据</description>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>Master Items</value>
+                        </tag>
+                    </tags>
+                </item>
+            </items>
+        </template>
+    </templates>
+</zabbix_export>
