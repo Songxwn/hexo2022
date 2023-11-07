@@ -64,11 +64,11 @@
   </entry>
   
   <entry>
-    <title>JumpServer 堡垒机安装指南</title>
+    <title>JumpServer 开源的跳板机安装指南</title>
     <link href="https://songxwn.com/Jumpserver-install/"/>
     <id>https://songxwn.com/Jumpserver-install/</id>
     <published>2023-10-23T00:35:25.000Z</published>
-    <updated>2023-10-25T02:16:13.884Z</updated>
+    <updated>2023-10-30T06:03:26.204Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;h2 id=&quot;什么是JumpServer&quot;&gt;&lt;a href=&quot;#什么是JumpServer&quot; class=&quot;headerlink&quot; title=&quot;什么是JumpServer&quot;&gt;&lt;/a&gt;什么是JumpServer&lt;/h2&gt;&lt;p&gt;JumpServer 是广受欢迎的开源堡垒机，是符合 4A 规范的专业运维安全审计系统。JumpServer 帮助企业以更安全的方式管控和登录所有类型的资产，包括：&lt;/p&gt;
