@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-11-23T06:16:50.719Z</updated>
+  <updated>2023-11-23T06:25:18.330Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://songxwn.com/BGP-rib-only/"/>
     <id>https://songxwn.com/BGP-rib-only/</id>
     <published>2023-11-23T06:11:49.000Z</published>
-    <updated>2023-11-23T06:16:50.719Z</updated>
+    <updated>2023-11-23T06:25:18.330Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;由于设备硬件资源限制，所有的路由器和交换机的路由表和转发表都有数量上限的，比如华为的NE20-S路由器的路由表为2M，转发表为1.4M左右。而当要接收超过其上限路由的时候，就可以使用此命令，从而不更换硬件设备。&lt;/p&gt;
