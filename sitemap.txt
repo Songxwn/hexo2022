@@ -1,3 +1,4 @@
+https://songxwn.com/WireGuard-UI-install/
 https://songxwn.com/BGP-rib-only/
 https://songxwn.com/save-ip/
 https://songxwn.com/Juniper_L3-MPLS/
@@ -149,6 +150,7 @@ https://songxwn.com/tags/huawei/
 https://songxwn.com/tags/router/
 https://songxwn.com/tags/bgp/
 https://songxwn.com/tags/rib/
+https://songxwn.com/tags/WireGuard/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/linux/ELK/
