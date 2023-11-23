@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-11-23T09:36:36.749Z</updated>
+  <updated>2023-11-23T09:44:00.933Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://songxwn.com/WireGuard-UI-install/"/>
     <id>https://songxwn.com/WireGuard-UI-install/</id>
     <published>2023-11-23T08:34:00.000Z</published>
-    <updated>2023-11-23T09:36:36.749Z</updated>
+    <updated>2023-11-23T09:44:00.933Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;WireGuard 是一种通信协议和免费开源软件，可实现加密的三层隧道协议 ，其设计目标是易用性、高速性能和低攻击面。 它旨在获得比 IPsec 和 OpenVPN 这两种常见的隧道协议更好的性能和更强大的功能。其报文承载在UDP。&lt;/p&gt;
