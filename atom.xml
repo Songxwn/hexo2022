@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-10-30T06:00:33.057Z</updated>
+  <updated>2023-11-23T06:16:50.719Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>节省华为设备的路由表和转发表-rib-only</title>
+    <link href="https://songxwn.com/BGP-rib-only/"/>
+    <id>https://songxwn.com/BGP-rib-only/</id>
+    <published>2023-11-23T06:11:49.000Z</published>
+    <updated>2023-11-23T06:16:50.719Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;由于设备硬件资源限制，所有的路由器和交换机的路由表和转发表都有数量上限的，比如华为的NE20-S路由器的路由表为2M，转发表为1.4M左右。而当要接收超过其上限路由的时候，就可以使用此命令，从而不更换硬件设备。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://img.songxwn.com/file/26fbf985c76fd30930802.png&quot; alt=&quot;路由协议与转发表&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="datacom" scheme="https://songxwn.com/tags/datacom/"/>
+    
+    <category term="huawei" scheme="https://songxwn.com/tags/huawei/"/>
+    
+    <category term="router" scheme="https://songxwn.com/tags/router/"/>
+    
+    <category term="bgp" scheme="https://songxwn.com/tags/bgp/"/>
+    
+    <category term="rib" scheme="https://songxwn.com/tags/rib/"/>
+    
+  </entry>
   
   <entry>
     <title>Zabbix MTR 监测指南</title>
@@ -520,31 +550,6 @@
     <category term="wecom" scheme="https://songxwn.com/tags/wecom/"/>
     
     <category term="python" scheme="https://songxwn.com/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>windows10/11 企业多会话版 - 无限制用户的RDP</title>
-    <link href="https://songxwn.com/windows10-11-Enterprise-Virtual-Desktops/"/>
-    <id>https://songxwn.com/windows10-11-Enterprise-Virtual-Desktops/</id>
-    <published>2023-06-11T07:42:22.000Z</published>
-    <updated>2023-06-12T10:55:16.319Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;Windows 10 &amp;#x2F;11 企业版多会话，以前称为适用于虚拟桌面的 Windows 10 企业版 (EVD)，是一种新型远程桌面会话主机，允许多个并发交互式会话。 以前，只有 Windows Server 支持此功能。 此功能为用户提供了一个熟悉的 Windows 10&amp;#x2F;11 体验，同时 IT 能够从多会话的成本优势中获益，并使用现有的每用户 Windows 许可，而不是 RDS 客户端访问许可证 (CAL)。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Windows" scheme="https://songxwn.com/categories/Windows/"/>
-    
-    
-    <category term="Windows" scheme="https://songxwn.com/tags/Windows/"/>
-    
-    <category term="rdp" scheme="https://songxwn.com/tags/rdp/"/>
-    
-    <category term="kms" scheme="https://songxwn.com/tags/kms/"/>
-    
-    <category term="VDI" scheme="https://songxwn.com/tags/VDI/"/>
     
   </entry>
   
