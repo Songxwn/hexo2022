@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-11-23T09:58:09.941Z</updated>
+  <updated>2023-11-24T05:36:10.078Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -21,12 +21,13 @@
     <link href="https://songxwn.com/WireGuard-UI-install/"/>
     <id>https://songxwn.com/WireGuard-UI-install/</id>
     <published>2023-11-23T08:34:00.000Z</published>
-    <updated>2023-11-23T09:58:09.941Z</updated>
+    <updated>2023-11-24T05:36:10.078Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;WireGuard 是一种通信协议和免费开源软件，可实现加密的三层隧道协议 ，其设计目标是易用性、高速性能和低攻击面。 它旨在获得比 IPsec 和 OpenVPN 这两种常见的隧道协议更好的性能和更强大的功能。其报文承载在UDP。&lt;/p&gt;
 &lt;p&gt;2020 年 5 月，该软件的 Linux 版本达到了稳定的生产版本，并被合并到 Linux 6.3 内核中，并在一些 Linux 发行版中向后移植到早期的 Linux 内核。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/ngoduykhanh/wireguard-ui&quot;&gt;WireGuard-UI &lt;/a&gt;则是用来管理WireGuard配置文件的 Web 可视化管理开源项目，可以方便的生成配置，通过邮件、二维码分发。&lt;/p&gt;
+&lt;p&gt;它最初是为 Linux 内核发布的，现在是跨平台（Windows、macOS、BSD、iOS、Android）并且可以广泛部署。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/ngoduykhanh/wireguard-ui&quot;&gt;WireGuard-UI&lt;/a&gt;则是用来管理WireGuard配置文件的 Web 可视化管理开源项目，可以方便的生成配置，通过邮件、二维码分发。&lt;/p&gt;
 &lt;p&gt;项目地址：&lt;a href=&quot;https://github.com/ngoduykhanh/wireguard-ui&quot;&gt;https://github.com/ngoduykhanh/wireguard-ui&lt;/a&gt; &lt;/p&gt;</summary>
     
     
@@ -35,6 +36,8 @@
     
     
     <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
     
     <category term="WireGuard" scheme="https://songxwn.com/tags/WireGuard/"/>
     
