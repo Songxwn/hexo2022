@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-12-07T06:35:08.544Z</updated>
+  <updated>2023-12-12T02:30:30.108Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Windows 上的TCP BBRv2</title>
+    <link href="https://songxwn.com/Windows-BBRv2/"/>
+    <id>https://songxwn.com/Windows-BBRv2/</id>
+    <published>2023-12-12T01:20:08.000Z</published>
+    <updated>2023-12-12T02:30:30.108Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;Windows 11 22H2 现已支持 TCP BBR 拥塞控制。若想用 BBR 拥塞控制取代默认的 Cubic 拥塞控制，请在终端中输入下面的命令：&lt;/p&gt;
+&lt;p&gt;从10.0.22621版本开始，而尚未发布的Windows Server 2025也会支持此功能。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="dns" scheme="https://songxwn.com/tags/dns/"/>
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+  </entry>
   
   <entry>
     <title>初级波分基础</title>
@@ -528,30 +550,6 @@
     <category term="RDS" scheme="https://songxwn.com/tags/RDS/"/>
     
     <category term="rdp" scheme="https://songxwn.com/tags/rdp/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MikroTik ROS Winbox Ping工具DNS问题</title>
-    <link href="https://songxwn.com/MikroTik_ROS_WinBox_DNS/"/>
-    <id>https://songxwn.com/MikroTik_ROS_WinBox_DNS/</id>
-    <published>2023-07-01T08:25:27.000Z</published>
-    <updated>2023-07-01T09:00:24.185Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;RouterOS是一个基于Linux内核的独立操作系统。它为MikroTik专用硬件设备提供支持，但也可用于虚拟机（CHR版本）。&lt;/p&gt;
-&lt;p&gt;本文介绍了一下，我在实际生产环境中遇到的一个问题，在国内使用WinBox远程国际上的ROS路由，去Ping谷歌，但返回的都是被污染的IP地址。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="network" scheme="https://songxwn.com/categories/network/"/>
-    
-    
-    <category term="dns" scheme="https://songxwn.com/tags/dns/"/>
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="ROS" scheme="https://songxwn.com/tags/ROS/"/>
     
   </entry>
   
