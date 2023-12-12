@@ -20,9 +20,11 @@
     
     <tags>
       
-      <tag>dns</tag>
-      
       <tag>network</tag>
+      
+      <tag>BBR</tag>
+      
+      <tag>TCP</tag>
       
     </tags>
     
