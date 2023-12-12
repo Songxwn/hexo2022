@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-12-12T02:34:47.484Z</updated>
+  <updated>2023-12-12T08:15:01.213Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Sublime Text4 4169 安装激活</title>
+    <link href="https://songxwn.com/Sublime_Text4_4169/"/>
+    <id>https://songxwn.com/Sublime_Text4_4169/</id>
+    <published>2023-12-12T04:52:00.000Z</published>
+    <updated>2023-12-12T08:15:01.213Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;此教程用于Windows 下Sublime Text4 4169版本的安装和激活。&lt;/p&gt;
+&lt;p&gt;无需安装其他软件，无需下载替换文件，无需注册机等。&lt;/p&gt;
+&lt;p&gt;官网： &lt;a href=&quot;https://www.sublimetext.com/&quot;&gt;https://www.sublimetext.com&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="IDE" scheme="https://songxwn.com/categories/IDE/"/>
+    
+    
+    <category term="Windows" scheme="https://songxwn.com/tags/Windows/"/>
+    
+    <category term="IDE" scheme="https://songxwn.com/tags/IDE/"/>
+    
+  </entry>
   
   <entry>
     <title>Windows 上的TCP BBRv2</title>
@@ -527,32 +550,6 @@
     <category term="Windows" scheme="https://songxwn.com/tags/Windows/"/>
     
     <category term="Url_get-Edge" scheme="https://songxwn.com/tags/Url-get-Edge/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Windows Server 2022 RDS配置授权激活服务</title>
-    <link href="https://songxwn.com/Windows2022-RDS-RD/"/>
-    <id>https://songxwn.com/Windows2022-RDS-RD/</id>
-    <published>2023-07-12T07:13:41.000Z</published>
-    <updated>2023-07-12T15:21:47.660Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;远程桌面服务 (RDS) 是一个卓越的平台，可以生成虚拟化解决方案来满足每个最终客户的需求，包括交付独立的虚拟化应用程序、提供安全的移动和远程桌面访问，使最终用户能够从云运行其应用程序和桌面。&lt;/p&gt;
-&lt;p&gt;本文主要介绍了其RD 授权的激活方式，默认情况下只有120天试用期。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Windows" scheme="https://songxwn.com/categories/Windows/"/>
-    
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="Windows" scheme="https://songxwn.com/tags/Windows/"/>
-    
-    <category term="RDS" scheme="https://songxwn.com/tags/RDS/"/>
-    
-    <category term="rdp" scheme="https://songxwn.com/tags/rdp/"/>
     
   </entry>
   
