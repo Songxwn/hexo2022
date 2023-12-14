@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-12-12T08:20:53.435Z</updated>
+  <updated>2023-12-14T03:50:14.067Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Veeam Backup Replication 12.1 12月更新安装</title>
+    <link href="https://songxwn.com/Veeam12.1/"/>
+    <id>https://songxwn.com/Veeam12.1/</id>
+    <published>2023-12-14T02:48:00.000Z</published>
+    <updated>2023-12-14T03:50:14.067Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;只需单个平台即可保护并管理所有工作负载、应用及数据：云端、虚拟、物理、SaaS、Kubernetes、VMware、Hyper-V、Windows、Linux、UNIX、NAS、AWS、Azure、企业应用等。&lt;/p&gt;
+&lt;p&gt;个人主要用于备份ESXi上的虚拟机，可以实现单次完整备份，和定时的增量备份。&lt;/p&gt;
+&lt;p&gt;此文章提供了ISO安装文件的下载和安装激活。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="vmware" scheme="https://songxwn.com/categories/vmware/"/>
+    
+    
+    <category term="esxi" scheme="https://songxwn.com/tags/esxi/"/>
+    
+    <category term="vmware" scheme="https://songxwn.com/tags/vmware/"/>
+    
+    <category term="backups" scheme="https://songxwn.com/tags/backups/"/>
+    
+    <category term="veeam" scheme="https://songxwn.com/tags/veeam/"/>
+    
+  </entry>
   
   <entry>
     <title>Sublime Text4 4169 安装激活</title>
@@ -524,32 +551,6 @@
     <category term="Redis" scheme="https://songxwn.com/tags/Redis/"/>
     
     <category term="netbox" scheme="https://songxwn.com/tags/netbox/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>网站页面域名获取工具-Edge (2.1.4P)</title>
-    <link href="https://songxwn.com/url-get-edge-tools/"/>
-    <id>https://songxwn.com/url-get-edge-tools/</id>
-    <published>2023-07-16T03:38:43.000Z</published>
-    <updated>2023-07-16T03:57:10.884Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;用Python写了一个小工具，可以打开指定网站，抓取此网站的所有域名。&lt;/p&gt;
-&lt;p&gt;适合用来做分流和过滤。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="network" scheme="https://songxwn.com/categories/network/"/>
-    
-    
-    <category term="dns" scheme="https://songxwn.com/tags/dns/"/>
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="Windows" scheme="https://songxwn.com/tags/Windows/"/>
-    
-    <category term="Url_get-Edge" scheme="https://songxwn.com/tags/Url-get-Edge/"/>
     
   </entry>
   
