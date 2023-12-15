@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>住宅IP和数据中心IP(广播和非广播)</title>
+    <link href="/Native_IP/"/>
+    <url>/Native_IP/</url>
+    
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>住宅IP：是由VerizonFiOS、AT＆TU-verse、Cox、Comcast、Charter或TimeWarner等（本地运营商）公司拥有的IP，它们可用于真人家庭。IP地址是由互联网服务提供商（ISP）分配给用户。绑定到家庭地址的IP地址叫住宅IP地址。也叫原生、本地IP、或非广播IP、Native IP。</p><p>（国内移动、联通、电信就是一级本地运营商）</p><span id="more"></span><h1 id="其他类型"><a href="#其他类型" class="headerlink" title="其他类型"></a>其他类型</h1><p>当然，市场上还有其他类型的产品：</p><p>1、机房数据中心代理:使用数据中心(机房)拥有和管理IP代理，俗称机房IP代理。（如阿里云、华为云提供的IP）</p><p>2、4G移动代理：由移动运营商分配给移动设备的真实4G IP地址。（蜂窝网络）</p><p>3、隧道转发：基础IP我们可以将代理分为两类:轮换代理和非轮换(粘性固定)IP地址。</p><h2 id="机房ip和住宅ip有什么区别？"><a href="#机房ip和住宅ip有什么区别？" class="headerlink" title="机房ip和住宅ip有什么区别？"></a><strong>机房ip和住宅ip有什么区别？</strong></h2><h3 id="住宅IP："><a href="#住宅IP：" class="headerlink" title="住宅IP："></a>住宅IP：</h3><p>住宅IP是ISP(互联网服务提供商)或ADSL实际住宅由供应商分配给个人用户IP地址，100%WIFI由网络真实用户组成，独家居住IP是真正的用户设备IP，用于普通网民IP完全一致。</p><p>住宅IP与机房相比，它具有连号、散点分布、与普通网民分布一致的特点IP,成功率采集、补量业务、SEO需要大量短效动态P的业务优势很大。</p><h3 id="机房IP："><a href="#机房IP：" class="headerlink" title="机房IP："></a>机房IP：</h3><p>机房IP是机房中心，机房有很多服务器IP具有IP在线固定稳定，价格相对便宜，但机房IP连号、区域分布不平衡等。适用于挂机、下载、伪装访问等需要长期在线的业务。</p><h3 id="区别总结："><a href="#区别总结：" class="headerlink" title="区别总结："></a>区别总结：</h3><p>机房IP稳定性高，在线时间长，价格相对较低。</p><p>住宅IP目标服务器无法检测到，因此无法屏蔽您IP，处理后的数据不能发送给你。</p><h1 id="为什么要住宅IP"><a href="#为什么要住宅IP" class="headerlink" title="为什么要住宅IP"></a>为什么要住宅IP</h1><p>因为某些流媒体、游戏、APP会对IP类型进行区分对待，如Netflix、Tiktok 直播等等。</p><h1 id="如何判断一个ip是机房ip还是住宅ip呢"><a href="#如何判断一个ip是机房ip还是住宅ip呢" class="headerlink" title="如何判断一个ip是机房ip还是住宅ip呢"></a>如何判断一个ip是机房ip还是住宅ip呢</h1><p>可以用一个网站来判断（<a href="http://ipinfo.io/">http://ipinfo.io</a>），type&#x3D;ISP 代表为住宅 ，type&#x3D;hosting 或者 business 为商用机房ip。</p><p><img src="https://img.songxwn.com/file/24cd05edc5b364c1d7a3d.png" srcset="/img/loading.gif" lazyload></p><p>然后根据AS号查询归属地是否和IP地址一样。查询网址：<a href="https://bgp.he.net/">https://bgp.he.net/</a> </p><p><img src="https://img.songxwn.com/file/1bf9c04f005fd8a4443cf.png" srcset="/img/loading.gif" lazyload></p><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://news.kd010.com/fwqzy/13660.html">https://news.kd010.com/fwqzy/13660.html</a> </p><p><a href="https://www.kookeey.com/news/archives/4712">https://www.kookeey.com/news/archives/4712</a> </p>]]></content>
+    
+    
+    <categories>
+      
+      <category>network</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>network</tag>
+      
+      <tag>ip</tag>
+      
+      <tag>Native_IP</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Veeam Backup Replication 12.1 12月更新安装</title>
     <link href="/Veeam12.1/"/>
     <url>/Veeam12.1/</url>

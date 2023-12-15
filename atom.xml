@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-12-14T03:50:14.067Z</updated>
+  <updated>2023-12-15T03:37:10.630Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>住宅IP和数据中心IP(广播和非广播)</title>
+    <link href="https://songxwn.com/Native_IP/"/>
+    <id>https://songxwn.com/Native_IP/</id>
+    <published>2023-12-15T01:33:46.000Z</published>
+    <updated>2023-12-15T03:37:10.630Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;住宅IP：是由VerizonFiOS、AT＆TU-verse、Cox、Comcast、Charter或TimeWarner等（本地运营商）公司拥有的IP，它们可用于真人家庭。IP地址是由互联网服务提供商（ISP）分配给用户。绑定到家庭地址的IP地址叫住宅IP地址。也叫原生、本地IP、或非广播IP、Native IP。&lt;/p&gt;
+&lt;p&gt;（国内移动、联通、电信就是一级本地运营商）&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="ip" scheme="https://songxwn.com/tags/ip/"/>
+    
+    <category term="Native_IP" scheme="https://songxwn.com/tags/Native-IP/"/>
+    
+  </entry>
   
   <entry>
     <title>Veeam Backup Replication 12.1 12月更新安装</title>
@@ -504,36 +528,6 @@
     
     <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;NetBox 在导出CSV的时候，会是使用UTF-8编码，而不是UTF-8-SIG编码。&lt;/p&gt;
 &lt;p&gt;这样会导致导出的文件，在微软的Excel打开中会乱码。（使用Notepad ++不会）&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="NetBox" scheme="https://songxwn.com/categories/NetBox/"/>
-    
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="linux" scheme="https://songxwn.com/tags/linux/"/>
-    
-    <category term="IPAM" scheme="https://songxwn.com/tags/IPAM/"/>
-    
-    <category term="DCIM" scheme="https://songxwn.com/tags/DCIM/"/>
-    
-    <category term="Redis" scheme="https://songxwn.com/tags/Redis/"/>
-    
-    <category term="netbox" scheme="https://songxwn.com/tags/netbox/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>NetBox安装指南-为网络工程师打造的基础设施管理</title>
-    <link href="https://songxwn.com/netbox/"/>
-    <id>https://songxwn.com/netbox/</id>
-    <published>2023-07-19T12:00:18.000Z</published>
-    <updated>2023-07-21T04:19:58.695Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;NetBox 是用于建模和记录现代网络的领先解决方案。由 结合 IP 地址管理 （IPAM） 的传统学科和 具有强大 API 和扩展的数据中心基础架构管理 （DCIM）， NetBox 为推动网络自动化提供了理想的“事实来源”。 NetBox 在 Apache 2.0 许可下作为开源软件提供 作为数千个组织中网络自动化的基石。&lt;/p&gt;
-&lt;p&gt;Netbox系列：&lt;a href=&quot;https://songxwn.com/categories/NetBox/&quot;&gt;https://songxwn.com/categories/NetBox/&lt;/a&gt;&lt;/p&gt;</summary>
     
     
     
