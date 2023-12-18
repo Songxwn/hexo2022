@@ -67,7 +67,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"songxwn.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":100,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"songxwn.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":100,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -80,7 +80,7 @@
 
 
   
-<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Song`s Blog" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Song`s Blog" type="application/atom+xml">
 </head>
 
 
@@ -112,7 +112,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>主页</span>
               </a>
@@ -124,7 +124,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/archives">
+              <a class="nav-link" href="/archives" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>归档</span>
               </a>
@@ -136,7 +136,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories">
+              <a class="nav-link" href="/categories" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -148,7 +148,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -160,7 +160,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -172,7 +172,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/links/">
+              <a class="nav-link" href="/links/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
                 <span>友链</span>
               </a>
@@ -184,7 +184,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/books/">
+              <a class="nav-link" href="/books/" target="_self">
                 <i class="iconfont icon-books"></i>
                 <span>书单</span>
               </a>
@@ -196,7 +196,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/atom.xml">
+              <a class="nav-link" href="/atom.xml" target="_self">
                 <i class="iconfont icon-rss"></i>
                 <span>RSS</span>
               </a>
@@ -274,12 +274,12 @@
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/Elasticsearch-x-pack-core/" target="_self">
           Elasticsearch 8.7 白金版激活
         </a>
-      </h1>
+      </h2>
 
       
       <a class="index-excerpt " href="/Elasticsearch-x-pack-core/" target="_self">
@@ -352,12 +352,12 @@
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/Linux-growpart/" target="_self">
           Linux 虚拟机在线热扩容分区
         </a>
-      </h1>
+      </h2>
 
       
       <a class="index-excerpt " href="/Linux-growpart/" target="_self">
@@ -425,12 +425,12 @@
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/elk_cluster/" target="_self">
           Elasticsearch 安装配置集群系统
         </a>
-      </h1>
+      </h2>
 
       
       <a class="index-excerpt " href="/elk_cluster/" target="_self">
@@ -507,12 +507,12 @@
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/elk_snmp_trap/" target="_self">
           ELK Logstash配置SNMP-Trap
         </a>
-      </h1>
+      </h2>
 
       
       <a class="index-excerpt " href="/elk_snmp_trap/" target="_self">
@@ -585,12 +585,12 @@
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/team_nav/" target="_self">
           部署团队服务导航网站 Team-nav
         </a>
-      </h1>
+      </h2>
 
       
       <a class="index-excerpt " href="/team_nav/" target="_self">
@@ -654,12 +654,12 @@
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/VMware_Vsphere8_key/" target="_self">
           VMware Vsphere 8 序列号
         </a>
-      </h1>
+      </h2>
 
       
       <a class="index-excerpt " href="/VMware_Vsphere8_key/" target="_self">
@@ -723,12 +723,12 @@
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/ESXi8_IPMI/" target="_self">
           VMware ESXi 8 使用IPMITool
         </a>
-      </h1>
+      </h2>
 
       
       <a class="index-excerpt " href="/ESXi8_IPMI/" target="_self">
@@ -794,12 +794,12 @@
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/DNS_recursive_Server/" target="_self">
           建立自有递归DNS服务器
         </a>
-      </h1>
+      </h2>
 
       
       <a class="index-excerpt " href="/DNS_recursive_Server/" target="_self">
@@ -863,12 +863,12 @@
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/zabbix_data/" target="_self">
           Zabbix：历史数据与趋势数据
         </a>
-      </h1>
+      </h2>
 
       
       <a class="index-excerpt " href="/zabbix_data/" target="_self">
@@ -932,12 +932,12 @@
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/MariaDB_Galera_Cluster/" target="_self">
           MariaDB Galera Cluster 10.6 集群部署
         </a>
-      </h1>
+      </h2>
 
       
       <a class="index-excerpt " href="/MariaDB_Galera_Cluster/" target="_self">
@@ -1092,7 +1092,7 @@
   <!-- Scripts -->
   
 
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>

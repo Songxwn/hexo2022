@@ -18,14 +18,14 @@
   
     <meta name="description" content="简介用Python写了一个小工具，可以打开指定网站，抓取此网站的所有域名。 适合用来做分流和过滤。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="网站页面域名获取工具-Edge (2.1.4P)">
+<meta property="og:title" content="网站页面域名获取工具-Edge (2.1.5P)">
 <meta property="og:url" content="https://songxwn.com/url-get-edge-tools/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
 <meta property="og:description" content="简介用Python写了一个小工具，可以打开指定网站，抓取此网站的所有域名。 适合用来做分流和过滤。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img.songxwn.com/file/2e1a7a46cd96f72fe448c.png">
-<meta property="article:published_time" content="2023-07-16T03:38:43.000Z">
-<meta property="article:modified_time" content="2023-07-16T03:57:10.884Z">
+<meta property="article:published_time" content="2023-12-16T03:38:43.000Z">
+<meta property="article:modified_time" content="2023-12-15T06:22:33.032Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="dns">
 <meta property="article:tag" content="network">
@@ -38,7 +38,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>网站页面域名获取工具-Edge (2.1.4P) - Song`s Blog</title>
+  <title>网站页面域名获取工具-Edge (2.1.5P) - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -80,7 +80,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"songxwn.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":100,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"songxwn.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":100,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -93,7 +93,7 @@
 
 
   
-<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Song`s Blog" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Song`s Blog" type="application/atom+xml">
 </head>
 
 
@@ -125,7 +125,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>主页</span>
               </a>
@@ -137,7 +137,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/archives">
+              <a class="nav-link" href="/archives" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>归档</span>
               </a>
@@ -149,7 +149,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories">
+              <a class="nav-link" href="/categories" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -161,7 +161,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -173,7 +173,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -185,7 +185,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/links/">
+              <a class="nav-link" href="/links/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
                 <span>友链</span>
               </a>
@@ -197,7 +197,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/books/">
+              <a class="nav-link" href="/books/" target="_self">
                 <i class="iconfont icon-books"></i>
                 <span>书单</span>
               </a>
@@ -209,7 +209,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/atom.xml">
+              <a class="nav-link" href="/atom.xml" target="_self">
                 <i class="iconfont icon-rss"></i>
                 <span>RSS</span>
               </a>
@@ -245,7 +245,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="网站页面域名获取工具-Edge (2.1.4P)"></span>
+            <span id="subtitle" data-typed-text="网站页面域名获取工具-Edge (2.1.5P)"></span>
           
         </div>
 
@@ -256,8 +256,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-16 11:38" pubdate>
-          2023年7月16日 中午
+        <time datetime="2023-12-16 11:38" pubdate>
+          2023年12月16日 中午
         </time>
       </span>
     
@@ -268,7 +268,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          553 字
+          301 字
         
       </span>
     
@@ -279,7 +279,7 @@
         
         
         
-          5 分钟
+          3 分钟
         
       </span>
     
@@ -337,13 +337,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">网站页面域名获取工具-Edge (2.1.4P)</h1>
+            <h1 id="seo-header">网站页面域名获取工具-Edge (2.1.5P)</h1>
             
-              <p class="note note-danger">
+              <p id="updated-time" class="note note-danger" style="">
                 
                   
-                    本文最后更新于：2023年7月16日 中午
+                    本文最后更新于 2023年12月15日 下午
                   
                 
               </p>
@@ -367,7 +366,9 @@
 <p>压缩包：<a target="_blank" rel="noopener" href="https://cowtransfer.com/s/f69f50d7665645">https://cowtransfer.com/s/f69f50d7665645</a> 传输口令 lysy0q</p>
 <p>PS：奶牛快传</p>
 <h2 id="谷歌云盘"><a href="#谷歌云盘" class="headerlink" title="谷歌云盘"></a>谷歌云盘</h2><p><a target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1ASJLvpLFS53FrblkvOz2CNSFOGvd42R2?usp=sharing">https://drive.google.com/drive/folders/1ASJLvpLFS53FrblkvOz2CNSFOGvd42R2?usp=sharing</a></p>
-<h1 id="更新日志"><a href="#更新日志" class="headerlink" title="更新日志"></a>更新日志</h1><h2 id="v2-1-4"><a href="#v2-1-4" class="headerlink" title="v2.1.4"></a>v2.1.4</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs log">1、增加输入域名会自动增加http<br>2、新增功能配置浏览器操作时间<br>3、更改输入窗口logo和替换默认英文字符<br>4、增加关于按钮<br>5、增加版本更新检测<br></code></pre></td></tr></table></figure>
+<h1 id="更新日志"><a href="#更新日志" class="headerlink" title="更新日志"></a>更新日志</h1><h2 id="v2-1-5"><a href="#v2-1-5" class="headerlink" title="v2.1.5"></a>v2.1.5</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs log">1、更新python和库<br>2、2023年末废弃2.1.4<br></code></pre></td></tr></table></figure>
+
+<h2 id="v2-1-4"><a href="#v2-1-4" class="headerlink" title="v2.1.4"></a>v2.1.4</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs log">1、增加输入域名会自动增加http<br>2、新增功能配置浏览器操作时间<br>3、更改输入窗口logo和替换默认英文字符<br>4、增加关于按钮<br>5、增加版本更新检测<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -400,13 +401,13 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/dns/">#dns</a>
+        <a href="/tags/dns/" class="print-no-link">#dns</a>
       
-        <a href="/tags/network/">#network</a>
+        <a href="/tags/network/" class="print-no-link">#network</a>
       
-        <a href="/tags/Windows/">#Windows</a>
+        <a href="/tags/Windows/" class="print-no-link">#Windows</a>
       
-        <a href="/tags/Url-get-Edge/">#Url_get-Edge</a>
+        <a href="/tags/Url-get-Edge/" class="print-no-link">#Url_get-Edge</a>
       
     </div>
   
@@ -418,7 +419,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>网站页面域名获取工具-Edge (2.1.4P)</div>
+      <div>网站页面域名获取工具-Edge (2.1.5P)</div>
       <div>https://songxwn.com/url-get-edge-tools/</div>
     </div>
     <div class="license-meta">
@@ -431,13 +432,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年7月16日</div>
+          <div>2023年12月16日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年7月16日</div>
+          <div>2023年12月15日</div>
         </div>
       
       
@@ -447,7 +448,7 @@
             
               
               
-                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
                   <span class="hint--top hint--rounded" aria-label="BY - 署名">
                     <i class="iconfont icon-by"></i>
                   </span>
@@ -468,18 +469,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/netbox/" title="NetBox安装指南-为网络工程师打造的基础设施管理">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">NetBox安装指南-为网络工程师打造的基础设施管理</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Windows2022-RDS-RD/" title="Windows Server 2022 RDS配置授权激活服务">
-                        <span class="hidden-mobile">Windows Server 2022 RDS配置授权激活服务</span>
+                      <a href="/Native_IP/" title="住宅IP和数据中心IP(广播和非广播)">
+                        <span class="hidden-mobile">住宅IP和数据中心IP(广播和非广播)</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -854,7 +849,7 @@
   <!-- Scripts -->
   
 
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
@@ -889,7 +884,7 @@
 
   
 <script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
     var toc = jQuery('#toc');
     if (toc.length === 0 || !window.tocbot) { return; }
     var boardCtn = jQuery('#board-ctn');

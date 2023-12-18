@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-12-15T04:57:38.683Z</updated>
+  <updated>2023-12-15T06:22:33.032Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>网站页面域名获取工具-Edge (2.1.5P)</title>
+    <link href="https://songxwn.com/url-get-edge-tools/"/>
+    <id>https://songxwn.com/url-get-edge-tools/</id>
+    <published>2023-12-16T03:38:43.000Z</published>
+    <updated>2023-12-15T06:22:33.032Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;用Python写了一个小工具，可以打开指定网站，抓取此网站的所有域名。&lt;/p&gt;
+&lt;p&gt;适合用来做分流和过滤。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="dns" scheme="https://songxwn.com/tags/dns/"/>
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="Windows" scheme="https://songxwn.com/tags/Windows/"/>
+    
+    <category term="Url_get-Edge" scheme="https://songxwn.com/tags/Url-get-Edge/"/>
+    
+  </entry>
   
   <entry>
     <title>住宅IP和数据中心IP(广播和非广播)</title>
@@ -498,36 +524,6 @@
 &lt;p&gt;本文章讲解了如何简单去优化。&lt;/p&gt;
 &lt;p&gt;（默认配置使用Netbox Web界面很容易卡顿）&lt;/p&gt;
 &lt;p&gt;Netbox 系列文章：&lt;a href=&quot;https://songxwn.com/categories/NetBox/&quot;&gt;https://songxwn.com/categories/NetBox/&lt;/a&gt; &lt;/p&gt;</summary>
-    
-    
-    
-    <category term="NetBox" scheme="https://songxwn.com/categories/NetBox/"/>
-    
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="linux" scheme="https://songxwn.com/tags/linux/"/>
-    
-    <category term="IPAM" scheme="https://songxwn.com/tags/IPAM/"/>
-    
-    <category term="DCIM" scheme="https://songxwn.com/tags/DCIM/"/>
-    
-    <category term="Redis" scheme="https://songxwn.com/tags/Redis/"/>
-    
-    <category term="netbox" scheme="https://songxwn.com/tags/netbox/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>NetBox CSV导出中文乱码问题</title>
-    <link href="https://songxwn.com/netbox_csv/"/>
-    <id>https://songxwn.com/netbox_csv/</id>
-    <published>2023-07-20T06:00:18.000Z</published>
-    <updated>2023-07-20T06:55:19.121Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;NetBox 在导出CSV的时候，会是使用UTF-8编码，而不是UTF-8-SIG编码。&lt;/p&gt;
-&lt;p&gt;这样会导致导出的文件，在微软的Excel打开中会乱码。（使用Notepad ++不会）&lt;/p&gt;</summary>
     
     
     
