@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-12-18T03:56:30.594Z</updated>
+  <updated>2023-12-27T05:26:44.141Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,47 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ALS - Web 网络测试工具</title>
+    <link href="https://songxwn.com/als/"/>
+    <id>https://songxwn.com/als/</id>
+    <published>2023-12-27T01:21:11.000Z</published>
+    <updated>2023-12-27T05:26:44.141Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;ALS 是一个在线工具集合。&lt;/p&gt;
+&lt;p&gt;项目地址：&lt;a href=&quot;https://github.com/wikihost-opensource/als&quot;&gt;https://github.com/wikihost-opensource/als&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;Demo：&lt;a href=&quot;http://lg.hk1-bgp.hkg.50network.com/&quot;&gt;http://lg.hk1-bgp.hkg.50network.com/&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;注：目前只支持Docker 部署&lt;/p&gt;
+&lt;p&gt;支持以下功能&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input checked=&quot;&quot; disabled=&quot;&quot; type=&quot;checkbox&quot;&gt; Ping - IPv4&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&quot;&quot; disabled=&quot;&quot; type=&quot;checkbox&quot;&gt; HTML 5 在线速度测试（支持内网）&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&quot;&quot; disabled=&quot;&quot; type=&quot;checkbox&quot;&gt; 文件下载测试&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&quot;&quot; disabled=&quot;&quot; type=&quot;checkbox&quot;&gt; 获取访问客户IP地址（可内网使用）&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&quot;&quot; disabled=&quot;&quot; type=&quot;checkbox&quot;&gt; iPerf3 服务器&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&quot;&quot; disabled=&quot;&quot; type=&quot;checkbox&quot;&gt; 服务器流量图&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&quot;&quot; disabled=&quot;&quot; type=&quot;checkbox&quot;&gt; Speedtest.net 客户端（可指定服务器ID）&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&quot;&quot; disabled=&quot;&quot; type=&quot;checkbox&quot;&gt; 在线Web shell （有限命令 - ping  - traceroute  - mtr  - nexttrace）&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
+    
+    
+    <category term="dns" scheme="https://songxwn.com/tags/dns/"/>
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
+    
+    <category term="ping" scheme="https://songxwn.com/tags/ping/"/>
+    
+    <category term="mtr" scheme="https://songxwn.com/tags/mtr/"/>
+    
+  </entry>
   
   <entry>
     <title>网站页面域名获取工具-Edge (2.1.5P)</title>
@@ -509,38 +550,6 @@
     <category term="Zabbix" scheme="https://songxwn.com/tags/Zabbix/"/>
     
     <category term="ping" scheme="https://songxwn.com/tags/ping/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>NetBox - PostgreSQL数据库优化指南</title>
-    <link href="https://songxwn.com/Netbox-pgsql/"/>
-    <id>https://songxwn.com/Netbox-pgsql/</id>
-    <published>2023-07-26T15:00:54.000Z</published>
-    <updated>2023-07-26T16:11:50.210Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;默认安装下的 &lt;a href=&quot;https://www.postgresql.org/&quot;&gt;PostgreSQL&lt;/a&gt; 配置无法完全利用现有硬件，影响Netbox的性能。&lt;/p&gt;
-&lt;p&gt;本文章讲解了如何简单去优化。&lt;/p&gt;
-&lt;p&gt;（默认配置使用Netbox Web界面很容易卡顿）&lt;/p&gt;
-&lt;p&gt;Netbox 系列文章：&lt;a href=&quot;https://songxwn.com/categories/NetBox/&quot;&gt;https://songxwn.com/categories/NetBox/&lt;/a&gt; &lt;/p&gt;</summary>
-    
-    
-    
-    <category term="NetBox" scheme="https://songxwn.com/categories/NetBox/"/>
-    
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="linux" scheme="https://songxwn.com/tags/linux/"/>
-    
-    <category term="IPAM" scheme="https://songxwn.com/tags/IPAM/"/>
-    
-    <category term="DCIM" scheme="https://songxwn.com/tags/DCIM/"/>
-    
-    <category term="Redis" scheme="https://songxwn.com/tags/Redis/"/>
-    
-    <category term="netbox" scheme="https://songxwn.com/tags/netbox/"/>
     
   </entry>
   

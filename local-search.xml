@@ -4,6 +4,39 @@
   
   
   <entry>
+    <title>ALS - Web 网络测试工具</title>
+    <link href="/als/"/>
+    <url>/als/</url>
+    
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>ALS 是一个在线工具集合。</p><p>项目地址：<a href="https://github.com/wikihost-opensource/als">https://github.com/wikihost-opensource/als</a> </p><p>Demo：<a href="http://lg.hk1-bgp.hkg.50network.com/">http://lg.hk1-bgp.hkg.50network.com/</a> </p><p>注：目前只支持Docker 部署</p><p>支持以下功能</p><ul><li><input checked="" disabled="" type="checkbox"> Ping - IPv4</li><li><input checked="" disabled="" type="checkbox"> HTML 5 在线速度测试（支持内网）</li><li><input checked="" disabled="" type="checkbox"> 文件下载测试</li><li><input checked="" disabled="" type="checkbox"> 获取访问客户IP地址（可内网使用）</li><li><input checked="" disabled="" type="checkbox"> iPerf3 服务器</li><li><input checked="" disabled="" type="checkbox"> 服务器流量图</li><li><input checked="" disabled="" type="checkbox"> Speedtest.net 客户端（可指定服务器ID）</li><li><input checked="" disabled="" type="checkbox"> 在线Web shell （有限命令 - ping  - traceroute  - mtr  - nexttrace）</li></ul><span id="more"></span><h2 id="图例"><a href="#图例" class="headerlink" title="图例"></a>图例</h2><p><img src="https://img.songxwn.com/file/053f90e8d6559c35b5562.png" srcset="/img/loading.gif" lazyload></p><h1 id="安装（需要提前安装好Docker环境）"><a href="#安装（需要提前安装好Docker环境）" class="headerlink" title="安装（需要提前安装好Docker环境）"></a>安装（需要提前安装好Docker环境）</h1><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">docker run</span> <span class="hljs-literal">-</span><span class="hljs-comment">d</span> <span class="hljs-literal">--</span><span class="hljs-comment">name looking</span><span class="hljs-literal">-</span><span class="hljs-comment">glass</span> <span class="hljs-literal">--</span><span class="hljs-comment">restart always</span> <span class="hljs-literal">--</span><span class="hljs-comment">network host wikihostinc/looking</span><span class="hljs-literal">-</span><span class="hljs-comment">glass</span><span class="hljs-literal">-</span><span class="hljs-comment">server</span><br><br></code></pre></td></tr></table></figure><h2 id="安装注意"><a href="#安装注意" class="headerlink" title="安装注意"></a>安装注意</h2><p>默认占用80端口作为Web访问，IPerf3 默认端口范围为30000-31000。</p><p>默认使用主机网络。</p><h2 id="Docker-变量"><a href="#Docker-变量" class="headerlink" title="Docker 变量"></a>Docker 变量</h2><table><thead><tr><th>Key</th><th>示例</th><th>默认</th><th>说明</th></tr></thead><tbody><tr><td>LISTEN_IP</td><td>127.0.0.1</td><td>默认使用所有IP</td><td>监听IP</td></tr><tr><td>HTTP_PORT</td><td>80</td><td>80</td><td>Web 访问端口</td></tr><tr><td>SPEEDTEST_FILE_LIST</td><td>100MB 1GB</td><td>1MB 10MB 100MB 1GB</td><td>静态测试文件的大小，以空格分隔</td></tr><tr><td>LOCATION</td><td>“this is location”</td><td>(from maxmind database, ip via PUBLIC_IPV4 or PUBLIC_IPV6)</td><td>位置字符串</td></tr><tr><td>MAXMIND_KEY</td><td>THE_KEY</td><td>(empty)</td><td>about more <a href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data">https://dev.maxmind.com/geoip/geolite2-free-geolocation-data</a></td></tr><tr><td>PUBLIC_IPV4</td><td>1.1.1.1</td><td>(fetch from <a href="http://ifconfig.co/">http://ifconfig.co</a>)</td><td>The IPv4 address of the server</td></tr><tr><td>PUBLIC_IPV6</td><td>fe80::1</td><td>(fetch from <a href="http://ifconfig.co/">http://ifconfig.co</a>)</td><td>The IPv6 address of the server</td></tr><tr><td>DISPLAY_TRAFFIC</td><td>true</td><td>true</td><td>Toggle the streaming traffic graph</td></tr><tr><td>ENABLE_SPEEDTEST</td><td>true</td><td>true</td><td>Toggle the speedtest feature</td></tr><tr><td>UTILITIES_PING</td><td>true</td><td>true</td><td>Toggle the ping feature</td></tr><tr><td>UTILITIES_SPEEDTESTDOTNET</td><td>true</td><td>true</td><td>Toggle the speedtest.net feature</td></tr><tr><td>UTILITIES_FAKESHELL</td><td>true</td><td>true</td><td>Toggle the HTML Shell feature</td></tr><tr><td>UTILITIES_IPERF3</td><td>true</td><td>true</td><td>Toggle the iperf3 feature</td></tr><tr><td>UTILITIES_IPERF3_PORT_MIN</td><td>30000</td><td>30000</td><td>iperf3 监听端口范围 - 开始</td></tr><tr><td>UTILITIES_IPERF3_PORT_MAX</td><td>31000</td><td>31000</td><td>iperf3 监听端口范围 - 结束</td></tr><tr><td>SPONSOR_MESSAGE</td><td>“Test message” or “&#x2F;tmp&#x2F;als_readme.md” or “<a href="http://some_host/114514.md">http://some_host/114514.md</a>“</td><td>‘’</td><td>显示服务器赞助商消息（支持Markdown文件，需要映射文件到容器）</td></tr></tbody></table>]]></content>
+    
+    
+    <categories>
+      
+      <category>linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>dns</tag>
+      
+      <tag>network</tag>
+      
+      <tag>Linux</tag>
+      
+      <tag>ping</tag>
+      
+      <tag>mtr</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>网站页面域名获取工具-Edge (2.1.5P)</title>
     <link href="/url-get-edge-tools/"/>
     <url>/url-get-edge-tools/</url>
