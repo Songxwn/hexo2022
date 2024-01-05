@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2023-12-27T05:32:56.107Z</updated>
+  <updated>2024-01-05T03:01:02.203Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,42 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>将SOCKS5等代理转换为三层TUN口</title>
+    <link href="https://songxwn.com/tun2proxy/"/>
+    <id>https://songxwn.com/tun2proxy/</id>
+    <published>2024-01-05T00:48:59.000Z</published>
+    <updated>2024-01-05T03:01:02.203Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;tun2proxy 是一个基于 smoltcp 在 Linux 上 通过HTTP 和 SOCKS 代理的创建隧道接口的项目，使用Rust 语言开发。&lt;/p&gt;
+&lt;h2 id=&quot;功能&quot;&gt;&lt;a href=&quot;#功能&quot; class=&quot;headerlink&quot; title=&quot;功能&quot;&gt;&lt;/a&gt;功能&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;HTTP 代理支持（无身份验证、基本身份验证和摘要身份验证）&lt;/li&gt;
+&lt;li&gt;SOCKS4 和 SOCKS5 支持（无身份验证、用户名&amp;#x2F;密码身份验证）&lt;/li&gt;
+&lt;li&gt;SOCKS4a和SOCKS5h支持（通过虚拟DNS功能）&lt;/li&gt;
+&lt;li&gt;用于路由所有流量的自动化配置&lt;/li&gt;
+&lt;li&gt;IPv4 和 IPv6 支持&lt;/li&gt;
+&lt;li&gt;SOCKS5 UDP 支持&lt;/li&gt;
+&lt;li&gt;本机支持通过 TCP 代理 DNS&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="Linux" scheme="https://songxwn.com/categories/Linux/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
+    
+    <category term="Tun" scheme="https://songxwn.com/tags/Tun/"/>
+    
+    <category term="Socks5" scheme="https://songxwn.com/tags/Socks5/"/>
+    
+    <category term="HTTP_Proxy" scheme="https://songxwn.com/tags/HTTP-Proxy/"/>
+    
+  </entry>
   
   <entry>
     <title>ALS - Web 网络测试工具</title>
@@ -313,7 +349,7 @@
     <link href="https://songxwn.com/Jumpserver-install/"/>
     <id>https://songxwn.com/Jumpserver-install/</id>
     <published>2023-10-23T00:35:25.000Z</published>
-    <updated>2023-10-30T06:03:26.204Z</updated>
+    <updated>2024-01-02T04:06:14.599Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;h2 id=&quot;什么是JumpServer&quot;&gt;&lt;a href=&quot;#什么是JumpServer&quot; class=&quot;headerlink&quot; title=&quot;什么是JumpServer&quot;&gt;&lt;/a&gt;什么是JumpServer&lt;/h2&gt;&lt;p&gt;JumpServer 是广受欢迎的开源堡垒机，是符合 4A 规范的专业运维安全审计系统。JumpServer 帮助企业以更安全的方式管控和登录所有类型的资产，包括：&lt;/p&gt;
@@ -525,31 +561,6 @@
     <category term="backups" scheme="https://songxwn.com/tags/backups/"/>
     
     <category term="veeam" scheme="https://songxwn.com/tags/veeam/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Zabbix Ping 丢包问题</title>
-    <link href="https://songxwn.com/Zabbix-fping/"/>
-    <id>https://songxwn.com/Zabbix-fping/</id>
-    <published>2023-07-26T16:16:52.000Z</published>
-    <updated>2023-07-26T16:28:50.641Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;最近遇到一个问题，在Zabbix主机shell下Ping 目标IP是完全不丢包的。但是使用Zabbix 监控项去Ping丢包率为33.3%。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Zabbix" scheme="https://songxwn.com/categories/Zabbix/"/>
-    
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
-    
-    <category term="Zabbix" scheme="https://songxwn.com/tags/Zabbix/"/>
-    
-    <category term="ping" scheme="https://songxwn.com/tags/ping/"/>
     
   </entry>
   
