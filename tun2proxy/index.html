@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img.songxwn.com/file/41c08f437b7a27abb4ca8.png">
 <meta property="article:published_time" content="2024-01-05T00:48:59.000Z">
-<meta property="article:modified_time" content="2024-01-05T03:03:14.301Z">
+<meta property="article:modified_time" content="2024-01-05T03:05:07.654Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="Linux">
@@ -269,7 +269,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          554 字
+          717 字
         
       </span>
     
@@ -280,7 +280,7 @@
         
         
         
-          5 分钟
+          6 分钟
         
       </span>
     
@@ -389,6 +389,7 @@
 
 
 <h1 id="DNS解析"><a href="#DNS解析" class="headerlink" title="DNS解析"></a>DNS解析</h1><p>当 DNS 解析由机器上的服务或本地网络中的服务器执行时，DNS 解析将不会通过隧道接口执行，因为指向 localhost 或本地网络的路由比Tun 通道更细。 在这种情况下，建议更新文件以使用通过隧道接口路由的名称服务器地址。当虚拟 DNS 正常工作时，你会看到通过以下方式解析后的主机名连接日志信息，</p>
+<h1 id="Tun和Tap"><a href="#Tun和Tap" class="headerlink" title="Tun和Tap"></a>Tun和Tap</h1><p>Tun虚拟设备和物理网卡的区别是Tun虚拟设备是IP层设备，从&#x2F;dev&#x2F;net&#x2F;tun字符设备上读取的是IP数据包，写入的也只能是IP数据包，因此不能进行二层操作，如发送ARP请求和以太网广播。与之相对的是，Tap虚拟设备是以太网设备，处理的是二层以太网数据帧，从&#x2F;dev&#x2F;net&#x2F;tun字符设备上读取的是以太网数据帧，写入的也只能是以太网数据帧。从这点来看，Tap虚拟设备和真实的物理网卡的能力更接近。</p>
 
                 
               </div>
