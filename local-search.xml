@@ -4,7 +4,7 @@
   
   
   <entry>
-    <title>将SOCKS5等代理转换为三层TUN口</title>
+    <title>tun2proxy -SOCKS5等代理转换为TUN口</title>
     <link href="/tun2proxy/"/>
     <url>/tun2proxy/</url>
     

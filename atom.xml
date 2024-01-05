@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-01-05T03:05:07.654Z</updated>
+  <updated>2024-01-05T03:08:08.395Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>将SOCKS5等代理转换为三层TUN口</title>
+    <title>tun2proxy -SOCKS5等代理转换为TUN口</title>
     <link href="https://songxwn.com/tun2proxy/"/>
     <id>https://songxwn.com/tun2proxy/</id>
     <published>2024-01-05T00:48:59.000Z</published>
-    <updated>2024-01-05T03:05:07.654Z</updated>
+    <updated>2024-01-05T03:08:08.395Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;tun2proxy 是一个基于 smoltcp 在 Linux 上 通过HTTP 和 SOCKS 代理的创建隧道接口的项目，使用Rust 语言开发。&lt;/p&gt;
