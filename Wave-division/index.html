@@ -24,8 +24,8 @@
 <meta property="og:description" content="简介波分复用WDM(Wavelength Division Multiplexing)是将两种或多种不同波长的光载波信号（携带各种信息）在发送端经复用器(亦称合波器，Multiplexer)汇合在一起，并耦合到光线路的同一根光纤中进行传输的技术；在接收端，经解复用器(亦称分波器或称去复用器，Demultiplexer)将各种波长的光载波分离，然后由光接收机或交换机作进一步处理以恢复原信号。这种在同">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img.songxwn.com/file/a7ac5c97c7b9788aa9744.png">
-<meta property="article:published_time" content="2023-12-07T00:27:35.000Z">
-<meta property="article:modified_time" content="2023-12-23T08:28:59.422Z">
+<meta property="article:published_time" content="2023-12-07T01:27:35.000Z">
+<meta property="article:modified_time" content="2024-01-09T04:33:00.423Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="WDM">
@@ -254,8 +254,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-12-07 08:27" pubdate>
-          2023年12月7日 早上
+        <time datetime="2023-12-07 09:27" pubdate>
+          2023年12月7日 上午
         </time>
       </span>
     
@@ -266,7 +266,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.5k 字
+          2.7k 字
         
       </span>
     
@@ -277,7 +277,7 @@
         
         
         
-          21 分钟
+          23 分钟
         
       </span>
     
@@ -340,7 +340,7 @@
               <p id="updated-time" class="note note-danger" style="">
                 
                   
-                    本文最后更新于 2023年12月23日 下午
+                    本文最后更新于 2024年1月9日 下午
                   
                 
               </p>
@@ -372,6 +372,9 @@
 <p>OTU 首先把符合G.957 规范的复用光通路信号进行光&#x2F;电（O&#x2F;E）转换，然后把转换后的电信号进行整形、定时提取和数据再生（也可不进行数据再生），最后再进行电&#x2F;光（E&#x2F;O）转换，输出波长、色散和发光功率等皆符合G.692 规范要求的DWDM 复用光通路信号。<br>如果O&#x2F;E 转换后，只进行整形、定时处理（即2R功能，Reshaping, Retiming），该OTU 只实现波长转换的功能，传输距离较短。如果O&#x2F;E 转换后，进行了整形、定时、再生处理（即3R功能，Reshaping , Retiming , Regeneration），该OTU实际上兼有再生中继器（REG）的功能。<br>根据在波分（WDM）系统中位置不同而分为：发送端OTU，作为再生中继器的OTU，接收端的OTU。再生中继器的OTU除执行光&#x2F;电&#x2F;光转换，实现整形、定时、再生处理（即3R功能，Reshaping , Retiming , Regeneration）功能外，还需要对某些再生段开销字节进行监视的功能，如再生段误码B1字节的监测等。</p>
 <h1 id="EDFA（光放板卡）"><a href="#EDFA（光放板卡）" class="headerlink" title="EDFA（光放板卡）"></a>EDFA（光放板卡）</h1><p><img src="https://img.songxwn.com/file/7ddde3a14e2288f6360ac.png" srcset="/img/loading.gif" lazyload></p>
 <p>EDFA也称为掺铒光纤放大器，是一种特殊的光纤，在纤芯中注入了饵（Er）这种稀土元素，使得在泵浦光源作用下，可直接对某一波长的光信号进行放大。</p>
+<h1 id="SOA-（半导体光放大板卡）"><a href="#SOA-（半导体光放大板卡）" class="headerlink" title="SOA （半导体光放大板卡）"></a>SOA （半导体光放大板卡）</h1><p>![](<a target="_blank" rel="noopener" href="https://img.songxwn.com/file/9cc979c7efcb7defee3fe.pnghttps://img.songxwn.com/file/9cc979c7efcb7defee3fe.png">https://img.songxwn.com/file/9cc979c7efcb7defee3fe.pnghttps://img.songxwn.com/file/9cc979c7efcb7defee3fe.png</a></p>
+<p>半导体光放大器（Semiconductor Optical Amplifier）是光放大器的一种，是将光信号进行放大的一种设备，可用于提高数据传输功率和扩展传输距离。半导体光放大器以半导体材料为增益介质，能够对小信号光进行功率放大并且不明显降低其他光学指标，可作为前置放大器、波长转换器、高速光快门等广泛应用于光通信传输系统和光纤传感系统。</p>
+<p>在10G&#x2F; 40G&#x2F; 100G的传输系统中，常规布局远距离接收端接收不到光信号，如下图。此时可以在1310nm多路波分复用器与LR4的光模块之间添加半导体光纤发大器（SOA），放大1310nm波段，可以实现高带宽信号的远距离传输。</p>
 <h1 id="DCM-（固定色散补偿）"><a href="#DCM-（固定色散补偿）" class="headerlink" title="DCM （固定色散补偿）"></a>DCM （固定色散补偿）</h1><p><img src="https://img.songxwn.com/file/8c4bb624356c033748bb0.png" srcset="/img/loading.gif" lazyload></p>
 <p>针对现已铺设的G.652&amp;G.655标准单模光纤进行色散补偿的新型单模光纤。DCM具备斜率补偿功能，它能够为标准单模光纤（G.652）在C波段内进行宽波段的色散斜率补偿，使系统残余色散得到优化。它基于成熟可靠的光纤工艺，可提升光传输系统的性能，在1550nm波长的色散范围可以达到-10至-2100ps&#x2F;nm，并可提供中心波长和色散有特殊要求的产品。</p>
 <p>色散补偿模块（DCM）主要用于DWDM网络，也可以说主要用于长途网络。DCM部署在网络中的各个地方，如-</p>
@@ -425,7 +428,7 @@
 </tbody></table>
 <h2 id="灰光模块和彩光模块应用"><a href="#灰光模块和彩光模块应用" class="headerlink" title="灰光模块和彩光模块应用"></a>灰光模块和彩光模块应用</h2><p>CWDM光模块适合短距离传输，一般应用千兆、万兆以太网和点对点网络中，DWDM光模块适合长距离传输，一般应用于城域网和局域网等大型网络环境中。</p>
 <p>彩色光模块与其它类型的光模块的最大的区别是中心波长不同：<br>一般光模块的中心波长有850nm、1310nm和1550nm三类，中心波长比较单一，我们称该类光为“黑白光”或者“灰光”。<br>彩色光模块承载了若干不同中心波长的光，所以交集起来是五颜六色的，我们称该类光为“彩光”。<br>彩色光模块分为粗集波光模块（CWDM）和密集波光模块（DWDM）两种。在同一波段下，密集波光模块的种类更多，所以密集波光模块对波段的资源利用更充分。中心波长各异的光在同一根光纤中可以互不干涉的传输，因此，通过无源合波器将来自多路彩色光模块不同中心波长的光合成一路进行传输，远端则通过分波器根据不同的中心波长将光分出多路，有效的节省了光纤线路。彩色光模块主要应用于长距离的传输线路。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://info.support.huawei.com/network/ptmngsys/Web/WDMkg/zh/19_color_gray_new.html">https://info.support.huawei.com/network/ptmngsys/Web/WDMkg/zh/19_color_gray_new.html</a><br><a target="_blank" rel="noopener" href="http://www.xyt-tech.com/m/news-show-ID-639.html">http://www.xyt-tech.com/m/news-show-ID-639.html</a><br><a target="_blank" rel="noopener" href="http://www.visint.com.cn/">http://www.visint.com.cn</a><br><a target="_blank" rel="noopener" href="https://www.sintai.com.cn/">https://www.sintai.com.cn</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://info.support.huawei.com/network/ptmngsys/Web/WDMkg/zh/19_color_gray_new.html">https://info.support.huawei.com/network/ptmngsys/Web/WDMkg/zh/19_color_gray_new.html</a><br><a target="_blank" rel="noopener" href="http://www.xyt-tech.com/m/news-show-ID-639.html">http://www.xyt-tech.com/m/news-show-ID-639.html</a><br><a target="_blank" rel="noopener" href="http://www.visint.com.cn/">http://www.visint.com.cn</a><br><a target="_blank" rel="noopener" href="https://www.sintai.com.cn/">https://www.sintai.com.cn</a><br><a target="_blank" rel="noopener" href="https://community.fs.com/cn/article/cn_30157.html">https://community.fs.com/cn/article/cn_30157.html</a></p>
 
                 
               </div>
@@ -492,7 +495,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年12月23日</div>
+          <div>2024年1月9日</div>
         </div>
       
       
