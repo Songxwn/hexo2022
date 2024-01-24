@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-01-05T03:53:38.132Z</updated>
+  <updated>2024-01-24T08:58:57.629Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>VMware vSwitch - 水平分割的上联接口</title>
+    <link href="https://songxwn.com/VMware-vSwitch-uplink/"/>
+    <id>https://songxwn.com/VMware-vSwitch-uplink/</id>
+    <published>2024-01-24T00:57:26.000Z</published>
+    <updated>2024-01-24T08:58:57.629Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;我在使用 VMware ESXi 的时候发现vSwitch 两个以上的上联端口，连接同一个交换机，或者同一个二层广播域。&lt;/p&gt;
+&lt;p&gt;且没有配置LACP或STP等协议，但并没有造成二层环路。这是因为vSwitch 特殊的上联接口的水平分割。&lt;/p&gt;
+&lt;p&gt;即从一个上联端口发过来的报文，不会转发到其他上联端口。（vSwitch的上联端口是强定义的）&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="VMware" scheme="https://songxwn.com/categories/VMware/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="VMware" scheme="https://songxwn.com/tags/VMware/"/>
+    
+    <category term="ESXi" scheme="https://songxwn.com/tags/ESXi/"/>
+    
+  </entry>
   
   <entry>
     <title>tun2proxy -SOCKS5等代理转换为TUN口</title>
@@ -534,33 +559,6 @@
     <category term="datacom" scheme="https://songxwn.com/tags/datacom/"/>
     
     <category term="evpn" scheme="https://songxwn.com/tags/evpn/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Veeam Backup Replication 12 7月更新安装</title>
-    <link href="https://songxwn.com/Veeam12.202307/"/>
-    <id>https://songxwn.com/Veeam12.202307/</id>
-    <published>2023-07-27T02:48:00.000Z</published>
-    <updated>2023-09-27T06:30:31.208Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;只需单个平台即可保护并管理所有工作负载、应用及数据：云端、虚拟、物理、SaaS、Kubernetes、VMware、Hyper-V、Windows、Linux、UNIX、NAS、AWS、Azure、企业应用等。&lt;/p&gt;
-&lt;p&gt;个人主要用于备份ESXi上的虚拟机，可以实现单次完整备份，和定时的增量备份。&lt;/p&gt;
-&lt;p&gt;此文章提供了ISO安装文件的下载和安装激活。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="vmware" scheme="https://songxwn.com/categories/vmware/"/>
-    
-    
-    <category term="esxi" scheme="https://songxwn.com/tags/esxi/"/>
-    
-    <category term="vmware" scheme="https://songxwn.com/tags/vmware/"/>
-    
-    <category term="backups" scheme="https://songxwn.com/tags/backups/"/>
-    
-    <category term="veeam" scheme="https://songxwn.com/tags/veeam/"/>
     
   </entry>
   

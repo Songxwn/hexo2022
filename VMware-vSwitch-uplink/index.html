@@ -16,30 +16,28 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
   
-    <meta name="description" content="介绍tun2proxy 是一个基于 smoltcp 在 Linux 上 通过HTTP 和 SOCKS 代理的创建隧道接口的项目，使用Rust 语言开发。 功能 HTTP 代理支持（无身份验证、基本身份验证和摘要身份验证） SOCKS4 和 SOCKS5 支持（无身份验证、用户名&#x2F;密码身份验证） SOCKS4a和SOCKS5h支持（通过虚拟DNS功能） 用于路由所有流量的自动化配置 IPv">
+    <meta name="description" content="简介我在使用 VMware ESXi 的时候发现vSwitch 两个以上的上联端口，连接同一个交换机，或者同一个二层广播域。 且没有配置LACP或STP等协议，但并没有造成二层环路。这是因为vSwitch 特殊的上联接口的水平分割。 即从一个上联端口发过来的报文，不会转发到其他上联端口。（vSwitch的上联端口是强定义的）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="tun2proxy -SOCKS5等代理转换为TUN口">
-<meta property="og:url" content="https://songxwn.com/tun2proxy/index.html">
+<meta property="og:title" content="VMware vSwitch - 水平分割的上联接口">
+<meta property="og:url" content="https://songxwn.com/VMware-vSwitch-uplink/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="介绍tun2proxy 是一个基于 smoltcp 在 Linux 上 通过HTTP 和 SOCKS 代理的创建隧道接口的项目，使用Rust 语言开发。 功能 HTTP 代理支持（无身份验证、基本身份验证和摘要身份验证） SOCKS4 和 SOCKS5 支持（无身份验证、用户名&#x2F;密码身份验证） SOCKS4a和SOCKS5h支持（通过虚拟DNS功能） 用于路由所有流量的自动化配置 IPv">
+<meta property="og:description" content="简介我在使用 VMware ESXi 的时候发现vSwitch 两个以上的上联端口，连接同一个交换机，或者同一个二层广播域。 且没有配置LACP或STP等协议，但并没有造成二层环路。这是因为vSwitch 特殊的上联接口的水平分割。 即从一个上联端口发过来的报文，不会转发到其他上联端口。（vSwitch的上联端口是强定义的）">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img.songxwn.com/file/41c08f437b7a27abb4ca8.png">
-<meta property="article:published_time" content="2024-01-05T00:48:59.000Z">
-<meta property="article:modified_time" content="2024-01-05T03:53:38.132Z">
+<meta property="og:image" content="https://img.songxwn.com/file/ea02e499acdff9a0065bf.png">
+<meta property="article:published_time" content="2024-01-24T00:57:26.000Z">
+<meta property="article:modified_time" content="2024-01-24T08:58:57.629Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
-<meta property="article:tag" content="Linux">
-<meta property="article:tag" content="Tun">
-<meta property="article:tag" content="Socks5">
-<meta property="article:tag" content="HTTP_Proxy">
+<meta property="article:tag" content="VMware">
+<meta property="article:tag" content="ESXi">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img.songxwn.com/file/41c08f437b7a27abb4ca8.png">
+<meta name="twitter:image" content="https://img.songxwn.com/file/ea02e499acdff9a0065bf.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>tun2proxy -SOCKS5等代理转换为TUN口 - Song`s Blog</title>
+  <title>VMware vSwitch - 水平分割的上联接口 - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -246,7 +244,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="tun2proxy -SOCKS5等代理转换为TUN口"></span>
+            <span id="subtitle" data-typed-text="VMware vSwitch - 水平分割的上联接口"></span>
           
         </div>
 
@@ -257,8 +255,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-01-05 08:48" pubdate>
-          2024年1月5日 早上
+        <time datetime="2024-01-24 08:57" pubdate>
+          2024年1月24日 早上
         </time>
       </span>
     
@@ -269,7 +267,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          733 字
+          940 字
         
       </span>
     
@@ -280,7 +278,7 @@
         
         
         
-          7 分钟
+          8 分钟
         
       </span>
     
@@ -338,12 +336,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">tun2proxy -SOCKS5等代理转换为TUN口</h1>
+            <h1 id="seo-header">VMware vSwitch - 水平分割的上联接口</h1>
             
               <p id="updated-time" class="note note-danger" style="">
                 
                   
-                    本文最后更新于 2024年1月5日 中午
+                    本文最后更新于 2024年1月24日 下午
                   
                 
               </p>
@@ -351,44 +349,29 @@
             
               <div class="markdown-body">
                 
-                <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>tun2proxy 是一个基于 smoltcp 在 Linux 上 通过HTTP 和 SOCKS 代理的创建隧道接口的项目，使用Rust 语言开发。</p>
-<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><ul>
-<li>HTTP 代理支持（无身份验证、基本身份验证和摘要身份验证）</li>
-<li>SOCKS4 和 SOCKS5 支持（无身份验证、用户名&#x2F;密码身份验证）</li>
-<li>SOCKS4a和SOCKS5h支持（通过虚拟DNS功能）</li>
-<li>用于路由所有流量的自动化配置</li>
-<li>IPv4 和 IPv6 支持</li>
-<li>SOCKS5 UDP 支持</li>
-<li>本机支持通过 TCP 代理 DNS</li>
-</ul>
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>我在使用 VMware ESXi 的时候发现vSwitch 两个以上的上联端口，连接同一个交换机，或者同一个二层广播域。</p>
+<p>且没有配置LACP或STP等协议，但并没有造成二层环路。这是因为vSwitch 特殊的上联接口的水平分割。</p>
+<p>即从一个上联端口发过来的报文，不会转发到其他上联端口。（vSwitch的上联端口是强定义的）</p>
 <span id="more"></span>
 
-
-<p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/blechschmidt/tun2proxy">https://github.com/blechschmidt/tun2proxy</a> </p>
-<h1 id="安装使用"><a href="#安装使用" class="headerlink" title="安装使用"></a>安装使用</h1><h2 id="手动编译"><a href="#手动编译" class="headerlink" title="手动编译"></a>手动编译</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/blechschmidt/tun2proxy.git<br><br><span class="hljs-comment"># 克隆项目</span><br><br><span class="hljs-built_in">cd</span> tun2proxy<br><br>cargo build --release<br><br><span class="hljs-comment"># 编译 （需要提前安装cargo工具）</span><br><br><span class="hljs-built_in">cd</span> ./target/release<br><br><span class="hljs-comment"># 进入输出目录</span><br><br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="下载二进制包"><a href="#下载二进制包" class="headerlink" title="下载二进制包"></a>下载二进制包</h2><p>官方发布地址：<a target="_blank" rel="noopener" href="https://github.com/blechschmidt/tun2proxy/releases">https://github.com/blechschmidt/tun2proxy/releases</a> </p>
-<p>PS：选好对应CPU和系统</p>
-<p>本站编译好的：<a href="https://songxwn.com/file/tun2proxy">https://songxwn.com/file/tun2proxy</a>      (Linux X86-64)</p>
-<h2 id="使用-手动配置路由和接口"><a href="#使用-手动配置路由和接口" class="headerlink" title="使用-手动配置路由和接口"></a>使用-手动配置路由和接口</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs routeros">ip tuntap <span class="hljs-built_in">add</span> name tun163 mode tun<span class="hljs-built_in"> user </span><span class="hljs-variable">$USER</span><br><br><span class="hljs-comment"># 提前创建好tun三层虚拟口</span><br><br>sudo<span class="hljs-built_in"> ip </span>link <span class="hljs-built_in">set</span> tun163 up<br><br><span class="hljs-comment"># 配置状态为UP</span><br><br><br>./tun2proxy --tun tun163 --proxy <span class="hljs-string">&quot;socks5://username:passwd@1.1.1.1:9527&quot;</span><br><br><span class="hljs-comment"># 前台运行，将socks5 转换为三层接口。格式为proto://[username[:password]@]host:port</span><br><span class="hljs-built_in"></span><br><span class="hljs-built_in">ip route </span><span class="hljs-built_in">add</span> 128.0.0.0/1 dev tun163<br><br><span class="hljs-comment"># 手动配置路由指向，也可以配置策略路由等操作。</span><br><br><br></code></pre></td></tr></table></figure>
-
-<p>PS：IP命令配置的都是临时的，重启失效。</p>
-<h2 id="使用-自动化配置"><a href="#使用-自动化配置" class="headerlink" title="使用-自动化配置"></a>使用-自动化配置</h2><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-string">./tun2proxy</span> <span class="hljs-params">--setup</span> auto <span class="hljs-params">--proxy</span> <span class="hljs-string">&quot;socks5://1.2.3.4:1080&quot;</span><br><br><br><span class="hljs-comment"># 自动将所有流量路由到指定的代理。</span><br><br></code></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-<h2 id="命令说明"><a href="#命令说明" class="headerlink" title="命令说明"></a>命令说明</h2><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs ada">Tunnel <span class="hljs-keyword">interface</span> to proxy.<br><br>Usage: tun2proxy [OPTIONS] <span class="hljs-comment">--proxy &lt;URL&gt;</span><br><br>Options:<br>  -t, <span class="hljs-comment">--tun &lt;name&gt;         Name of the tun interface [default: tun0]</span><br>      <span class="hljs-comment">--tun-fd &lt;fd&gt;        File descriptor of the tun interface</span><br>      <span class="hljs-comment">--tun-mtu &lt;mtu&gt;      MTU of the tun interface (only with tunnel file descriptor) [default: 1500]</span><br>  -p, <span class="hljs-comment">--proxy &lt;URL&gt;        Proxy URL in the form proto://[username[:password]@]host:port</span><br>  -d, <span class="hljs-comment">--dns &lt;strategy&gt;     DNS handling strategy [default: virtual] [possible values: virtual, over-tcp, direct]</span><br>      <span class="hljs-comment">--dns-addr &lt;IP&gt;      DNS resolver address [default: 8.8.8.8]</span><br>  -<span class="hljs-number">6</span>, <span class="hljs-comment">--ipv6-enabled       IPv6 enabled</span><br>  -s, <span class="hljs-comment">--setup &lt;method&gt;     Routing and system setup [default: none] [possible values: none, auto]</span><br>  -b, <span class="hljs-comment">--bypass &lt;IP|CIDR&gt;   IPs and CIDRs used in routing setup which should bypass the tunnel</span><br>  -v, <span class="hljs-comment">--verbosity &lt;level&gt;  Verbosity level [default: info] [possible values: off, error, warn, info, debug, trace]</span><br>  -h, <span class="hljs-comment">--help               Print help</span><br>  -V, <span class="hljs-comment">--version            Print version</span><br><br></code></pre></td></tr></table></figure>
-
-
-
-<h1 id="DNS解析"><a href="#DNS解析" class="headerlink" title="DNS解析"></a>DNS解析</h1><p>当 DNS 解析由机器上的服务或本地网络中的服务器执行时，DNS 解析将不会通过隧道接口执行，因为指向 localhost 或本地网络的路由比Tun 通道更细。 在这种情况下，建议更新文件以使用通过隧道接口路由的名称服务器地址。当虚拟 DNS 正常工作时，你会看到通过以下方式解析后的主机名连接日志信息，</p>
-<h1 id="Tun和Tap"><a href="#Tun和Tap" class="headerlink" title="Tun和Tap"></a>Tun和Tap</h1><p>Tun虚拟设备和物理网卡的区别是Tun虚拟设备是IP层设备，从&#x2F;dev&#x2F;net&#x2F;tun字符设备上读取的是IP数据包，写入的也只能是IP数据包，因此不能进行二层操作，如发送ARP请求和以太网广播。与之相对的是，Tap虚拟设备是以太网设备，处理的是二层以太网数据帧，从&#x2F;dev&#x2F;net&#x2F;tun字符设备上读取的是以太网数据帧，写入的也只能是以太网数据帧。从这点来看，Tap虚拟设备和真实的物理网卡的能力更接近。</p>
+<h2 id="示例图"><a href="#示例图" class="headerlink" title="示例图"></a>示例图</h2><p><img src="https://img.songxwn.com/file/ea02e499acdff9a0065bf.png" srcset="/img/loading.gif" lazyload></p>
+<p>如上图所示，vSwitch0 有四个上联接口连接到物理交换机，且没有LACP或STP。</p>
+<p>流量会根据每台虚拟机进行负载分担到每个上联接口，当感知到物理故障的时候，则会自动切换。</p>
+<p>也就是说无需任何物理交换机的网络协议参与，即可实现防环、端口流量负载分担、故障感知。</p>
+<h1 id="默认特性"><a href="#默认特性" class="headerlink" title="默认特性"></a>默认特性</h1><h2 id="端口不相等"><a href="#端口不相等" class="headerlink" title="端口不相等"></a>端口不相等</h2><p>在传统的以太网交换机中，所有端口都使用相同的转发规则。虚拟交换机对** 虚拟接口** 和<strong>上联接口</strong>使用不同的转发规则。</p>
+<p>（强定义的上联接口）</p>
+<h2 id="无MAC地址学习"><a href="#无MAC地址学习" class="headerlink" title="无MAC地址学习"></a>无MAC地址学习</h2><p>虚拟机监控程序知道 ESXi 服务器中运行的所有虚拟机的 MAC 地址;无需执行 MAC 地址学习。</p>
+<h2 id="生成树协议忽略"><a href="#生成树协议忽略" class="headerlink" title="生成树协议忽略"></a>生成树协议忽略</h2><p>虚拟交换机未运行生成树协议 （STP），并且不发送 STP 网桥协议数据单元 （BPDU）。虚拟交换机接收的 STP BPDU 将被忽略。上行链路永远不会根据 STP 信息被阻塞。</p>
+<p>PS：连接ESXI服务器的交换机接口，应该配置BPDU保护 ，以防止由于接线错误而导致转发环路。由于 ESXi 不运行 STP，因此还应该在这些端口上配置 STP边缘接口。</p>
+<h2 id="水平分割转发"><a href="#水平分割转发" class="headerlink" title="水平分割转发"></a>水平分割转发</h2><p>通过其中一个上联接收的数据包永远不会转发到其他上联接口。此规则可防止通过虚拟交换机导致二层转发环路。[</p>
+<p>](<a target="_blank" rel="noopener" href="https://blog.ipspace.net/2010/11/s1600-vswitch_2.png">https://blog.ipspace.net/2010/11/s1600-vswitch_2.png</a>)</p>
+<h2 id="有限的广播-组播报文泛洪"><a href="#有限的广播-组播报文泛洪" class="headerlink" title="有限的广播&#x2F;组播报文泛洪"></a>有限的广播&#x2F;组播报文泛洪</h2><p>由虚拟机发起的广播或多播数据包将发送到同一_端口组_中的所有其他虚拟机（VLAN 的 VMware 术语）。它们也像常规单播数据包一样通过其中一个上行链路发送（它们不会通过所有_上行链路_泛洪）。这可确保外部网络接收广播的单个副本。</p>
+<p>通过上行链路端口接收的广播&#x2F;组播将发送到端口组中的所有虚拟机（由 VLAN 标记标识），但不会发送到其他上行链路（请参阅_水平分割转发_）。</p>
+<h2 id="没有未知单播泛洪"><a href="#没有未知单播泛洪" class="headerlink" title="没有未知单播泛洪"></a>没有未知单播泛洪</h2><p>从虚拟机发送到未知 MAC 地址的单播数据包通过其中一个上行链路（根据负载平衡模式选择）发送。它们没有被淹没。</p>
+<p>通过上行链路端口接收并寻址到未知 MAC 地址的单播数据包将被丢弃。</p>
+<h2 id="基于源MAC地址的反向路径检查"><a href="#基于源MAC地址的反向路径检查" class="headerlink" title="基于源MAC地址的反向路径检查"></a>基于源MAC地址的反向路径检查</h2><p>虚拟交换机向外部网络发送广播&#x2F;组播&#x2F;未知单播数据包的单个副本（请参阅上面的无泛洪规则），但物理交换机始终执行完全_泛洪_，并通过所有其他上行链路将数据包的副本发送回虚拟交换机。因此，VMware 必须检查通过上行链路接收的数据包的源 MAC 地址。通过其中一个上行链路接收且源 MAC 地址属于其中一个虚拟机的数据包将被静默丢弃。[</p>
+<p>](<a target="_blank" rel="noopener" href="https://blog.ipspace.net/2010/11/s1600-vswitch_3.png">https://blog.ipspace.net/2010/11/s1600-vswitch_3.png</a>)</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://blog.ipspace.net/2010/11/vmware-virtual-switch-no-need-for-stp.html">https://blog.ipspace.net/2010/11/vmware-virtual-switch-no-need-for-stp.html</a> </p>
 
                 
               </div>
@@ -407,7 +390,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  <a href="/categories/VMware/" class="category-chain-item">VMware</a>
   
   
 
@@ -424,13 +407,9 @@
       
         <a href="/tags/network/" class="print-no-link">#network</a>
       
-        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
+        <a href="/tags/VMware/" class="print-no-link">#VMware</a>
       
-        <a href="/tags/Tun/" class="print-no-link">#Tun</a>
-      
-        <a href="/tags/Socks5/" class="print-no-link">#Socks5</a>
-      
-        <a href="/tags/HTTP-Proxy/" class="print-no-link">#HTTP_Proxy</a>
+        <a href="/tags/ESXi/" class="print-no-link">#ESXi</a>
       
     </div>
   
@@ -442,8 +421,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>tun2proxy -SOCKS5等代理转换为TUN口</div>
-      <div>https://songxwn.com/tun2proxy/</div>
+      <div>VMware vSwitch - 水平分割的上联接口</div>
+      <div>https://songxwn.com/VMware-vSwitch-uplink/</div>
     </div>
     <div class="license-meta">
       
@@ -455,13 +434,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年1月5日</div>
+          <div>2024年1月24日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年1月5日</div>
+          <div>2024年1月24日</div>
         </div>
       
       
@@ -492,18 +471,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/VMware-vSwitch-uplink/" title="VMware vSwitch - 水平分割的上联接口">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">VMware vSwitch - 水平分割的上联接口</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/als/" title="ALS - Web 网络测试工具">
-                        <span class="hidden-mobile">ALS - Web 网络测试工具</span>
+                      <a href="/tun2proxy/" title="tun2proxy -SOCKS5等代理转换为TUN口">
+                        <span class="hidden-mobile">tun2proxy -SOCKS5等代理转换为TUN口</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -563,17 +536,17 @@
     
     <div class="category row nomargin-x">
       <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Linux"
-        id="heading-edc9f0a5a5d57797bf68e37364743831" role="tab" data-toggle="collapse" href="#collapse-edc9f0a5a5d57797bf68e37364743831"
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="VMware"
+        id="heading-56079badd056a19303cc26e6a4fcc7e0" role="tab" data-toggle="collapse" href="#collapse-56079badd056a19303cc26e6a4fcc7e0"
         aria-expanded="true"
       >
-        Linux
-        <span class="list-group-count">(2)</span>
+        VMware
+        <span class="list-group-count">(1)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse show" id="collapse-edc9f0a5a5d57797bf68e37364743831"
-           role="tabpanel" aria-labelledby="heading-edc9f0a5a5d57797bf68e37364743831">
+      <div class="category-collapse collapse show" id="collapse-56079badd056a19303cc26e6a4fcc7e0"
+           role="tabpanel" aria-labelledby="heading-56079badd056a19303cc26e6a4fcc7e0">
         
         
           
@@ -582,19 +555,10 @@
     
       
       
-        <a href="/Jumpserver-install/" title="JumpServer 开源的跳板机安装指南"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">JumpServer 开源的跳板机安装指南</span>
-        </a>
-      
-    
-      
-      
-        <a href="/tun2proxy/" title="tun2proxy -SOCKS5等代理转换为TUN口"
+        <a href="/VMware-vSwitch-uplink/" title="VMware vSwitch - 水平分割的上联接口"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">tun2proxy -SOCKS5等代理转换为TUN口</span>
+          <span class="category-post">VMware vSwitch - 水平分割的上联接口</span>
         </a>
       
     
