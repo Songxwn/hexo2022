@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-01-24T09:05:34.561Z</updated>
+  <updated>2024-01-24T09:10:07.174Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -21,11 +21,11 @@
     <link href="https://songxwn.com/VMware-vSwitch-uplink/"/>
     <id>https://songxwn.com/VMware-vSwitch-uplink/</id>
     <published>2024-01-24T00:57:26.000Z</published>
-    <updated>2024-01-24T09:05:34.561Z</updated>
+    <updated>2024-01-24T09:10:07.174Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;我在使用 VMware ESXi 的时候发现vSwitch 两个以上的上联端口，连接同一个交换机，或者同一个二层广播域。&lt;/p&gt;
-&lt;p&gt;且没有配置LACP或STP等协议，但并没有造成二层环路。这是因为vSwitch 特殊的上联接口的水平分割。&lt;/p&gt;
+&lt;p&gt;且没有配置LACP或STP等协议，但并没有造成二层环路。这是因为vSwitch 特殊的上联接口的水平分割。(和iBGP的水平分割很像)&lt;/p&gt;
 &lt;p&gt;即从一个上联端口发过来的报文，不会转发到其他上联端口。（vSwitch的上联端口是强定义的）&lt;/p&gt;
 &lt;p&gt;（包括虚拟标准交换机VSS 和 虚拟分布式交换机 VDS）&lt;/p&gt;</summary>
     

@@ -284,7 +284,7 @@
       
       <a class="index-excerpt " href="/VMware-vSwitch-uplink/" target="_self">
         <div>
-          简介我在使用 VMware ESXi 的时候发现vSwitch 两个以上的上联端口，连接同一个交换机，或者同一个二层广播域。 且没有配置LACP或STP等协议，但并没有造成二层环路。这是因为vSwitch 特殊的上联接口的水平分割。 即从一个上联端口发过来的报文，不会转发到其他上联端口。（vSwitch的上联端口是强定义的） （包括虚拟标准交换机VSS 和 虚拟分布式交换机 VDS）
+          简介我在使用 VMware ESXi 的时候发现vSwitch 两个以上的上联端口，连接同一个交换机，或者同一个二层广播域。 且没有配置LACP或STP等协议，但并没有造成二层环路。这是因为vSwitch 特殊的上联接口的水平分割。(和iBGP的水平分割很像) 即从一个上联端口发过来的报文，不会转发到其他上联端口。（vSwitch的上联端口是强定义的） （包括虚拟标准交换机VSS 和 虚拟分布式交
         </div>
       </a>
 
