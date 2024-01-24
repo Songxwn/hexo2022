@@ -13,7 +13,7 @@
     
     <categories>
       
-      <category>VMware</category>
+      <category>vmware</category>
       
     </categories>
     
@@ -22,9 +22,9 @@
       
       <tag>network</tag>
       
-      <tag>VMware</tag>
+      <tag>esxi</tag>
       
-      <tag>ESXi</tag>
+      <tag>vmware</tag>
       
     </tags>
     
