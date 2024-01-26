@@ -1,3 +1,4 @@
+https://songxwn.com/VMware-vCenter-IProute/
 https://songxwn.com/VMware-vSwitch-uplink/
 https://songxwn.com/Wave-division/
 https://songxwn.com/tun2proxy/
@@ -167,6 +168,7 @@ https://songxwn.com/tags/Tun/
 https://songxwn.com/tags/Socks5/
 https://songxwn.com/tags/HTTP-Proxy/
 https://songxwn.com/tags/ESXi/
+https://songxwn.com/tags/vcenter/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/VMware/
