@@ -1,3 +1,5 @@
+https://songxwn.com/Ubuntu-auto-update/
+https://songxwn.com/frostmourne_install/
 https://songxwn.com/switch-ROCEv2-DSCP/
 https://songxwn.com/netbox/
 https://songxwn.com/url-get-edge-tools/
@@ -67,7 +69,6 @@ https://songxwn.com/ELK-logstash-hostname/
 https://songxwn.com/Elasticsearch-x-pack-core/
 https://songxwn.com/ELK-AD-LDAP-Authentication/
 https://songxwn.com/podman/
-https://songxwn.com/frostmourne_install/
 https://songxwn.com/ospf-route-c/
 https://songxwn.com/DNS_recursive_Server/
 https://songxwn.com/network-test/
@@ -175,6 +176,8 @@ https://songxwn.com/tags/fonts/
 https://songxwn.com/tags/rdma/
 https://songxwn.com/tags/centec/
 https://songxwn.com/tags/RoCEv2/
+https://songxwn.com/tags/Ubuntu/
+https://songxwn.com/tags/apt/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/VMware/

@@ -18,14 +18,14 @@
   
     <meta name="description" content="简介Frostmourne(霜之哀伤)是汽车之家经销商技术部监控系统的开源版本，用于帮助监控几乎所有数据库数据(包括Elasticsearch, Prometheus, SkyWalking, MySql 等等)。如果你已经建立起了日志系统， 指标体系，却苦恼于没有一个配套监控系统，也许它能帮到你。 支持数据源：Elasticsearch, HTTP, SkyWalking, Prometheus">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Frostmourne (霜之哀伤)日志监控系统部署安装">
+<meta property="og:title" content="Frostmourne (霜之哀伤)日志告警系统部署安装">
 <meta property="og:url" content="https://songxwn.com/frostmourne_install/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
 <meta property="og:description" content="简介Frostmourne(霜之哀伤)是汽车之家经销商技术部监控系统的开源版本，用于帮助监控几乎所有数据库数据(包括Elasticsearch, Prometheus, SkyWalking, MySql 等等)。如果你已经建立起了日志系统， 指标体系，却苦恼于没有一个配套监控系统，也许它能帮到你。 支持数据源：Elasticsearch, HTTP, SkyWalking, Prometheus">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/03/26/b19fb3c35402bf29.png">
 <meta property="article:published_time" content="2023-03-26T08:48:00.000Z">
-<meta property="article:modified_time" content="2023-05-02T06:46:42.167Z">
+<meta property="article:modified_time" content="2024-02-04T10:20:20.926Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="elk">
@@ -37,7 +37,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Frostmourne (霜之哀伤)日志监控系统部署安装 - Song`s Blog</title>
+  <title>Frostmourne (霜之哀伤)日志告警系统部署安装 - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -244,7 +244,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Frostmourne (霜之哀伤)日志监控系统部署安装"></span>
+            <span id="subtitle" data-typed-text="Frostmourne (霜之哀伤)日志告警系统部署安装"></span>
           
         </div>
 
@@ -336,12 +336,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Frostmourne (霜之哀伤)日志监控系统部署安装</h1>
+            <h1 id="seo-header">Frostmourne (霜之哀伤)日志告警系统部署安装</h1>
             
               <p id="updated-time" class="note note-danger" style="">
                 
                   
-                    本文最后更新于 2023年5月2日 下午
+                    本文最后更新于 2024年2月4日 晚上
                   
                 
               </p>
@@ -371,14 +371,14 @@
 
 <h3 id="创建数据库导入SQL文件"><a href="#创建数据库导入SQL文件" class="headerlink" title="创建数据库导入SQL文件"></a>创建数据库导入SQL文件</h3><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">wget https://github.com/AutohomeCorp/frostmourne/blob/master/doc/mysql-schema/frostmourne.sql<br><br>## 可能需要挂国际代理，或浏览器下载，使用SCP上传即可.<br><br>mysql -uroot -p &lt; frostmourne.sql<br><br>#输入密码即可导入创建数据库。<br><br>mysql -uroot -p<br><span class="hljs-section">mysql&gt; show databases;</span><br><span class="hljs-section">+--------------------+</span><br><span class="hljs-section">| Database           |</span><br><span class="hljs-section">+--------------------+</span><br>| frostmourne        |<br>| information<span class="hljs-emphasis">_schema |</span><br><span class="hljs-emphasis">| mysql              |</span><br><span class="hljs-emphasis">| performance_</span>schema |<br><span class="hljs-section">| sys                |</span><br><span class="hljs-section">+--------------------+</span><br>5 rows in set (9527.01 sec)<br><br><br>#查看数据库是否正常创建, quit命令退出。<br><br></code></pre></td></tr></table></figure>
 
-<h2 id="下载frostmourne"><a href="#下载frostmourne" class="headerlink" title="下载frostmourne"></a>下载frostmourne</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs awk">cd /opt<br>mkdir frostmourne<br>cd frostmourne<br><br>wget https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/AutohomeCorp/</span>frostmourne<span class="hljs-regexp">/releases/</span>download<span class="hljs-regexp">/1.0-RELEASE/</span>frostmourne-monitor-<span class="hljs-number">1.0</span>-RELEASE.zip<br><br><span class="hljs-comment">## 可能需要挂国际代理，或浏览器下载，使用SCP上传到opt目录即可.</span><br><span class="hljs-comment">## Github 下载地址 https://github.com/AutohomeCorp/frostmourne/releases</span><br><br>dnf install unzip <br><br>unzip frostmourne-monitor*.zip <br><br>tree <br>.<br>├── application.properties<br>├── env<br>├── frostmourne-monitor-<span class="hljs-number">1.0</span>-RELEASE.jar<br>├── frostmourne-monitor-<span class="hljs-number">1.0</span>-RELEASE.zip<br>└── scripts<br>    ├── shutdown.sh<br>    └── startup.sh<br><br><span class="hljs-number">1</span> directory, <span class="hljs-number">6</span> files<br><span class="hljs-comment">## 文件树如上。</span><br><br></code></pre></td></tr></table></figure>
+<h2 id="下载frostmourne"><a href="#下载frostmourne" class="headerlink" title="下载frostmourne"></a>下载frostmourne</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /opt<br><span class="hljs-built_in">mkdir</span> frostmourne<br><span class="hljs-built_in">cd</span> frostmourne<br><br>wget https://github.com/AutohomeCorp/frostmourne/releases/download/1.0-RELEASE/frostmourne-monitor-1.0-RELEASE.zip<br><br><span class="hljs-comment">## 可能需要挂国际代理，或浏览器下载，使用SCP上传到opt目录即可.</span><br><span class="hljs-comment">## Github 下载地址 https://github.com/AutohomeCorp/frostmourne/releases</span><br><br>dnf install unzip <br><br>unzip frostmourne-monitor*.zip <br><br>tree <br>.<br>├── application.properties<br>├── <span class="hljs-built_in">env</span><br>├── frostmourne-monitor-1.0-RELEASE.jar<br>├── frostmourne-monitor-1.0-RELEASE.zip<br>└── scripts<br>    ├── shutdown.sh<br>    └── startup.sh<br><br>1 directory, 6 files<br><span class="hljs-comment">## 文件树如上。</span><br><br></code></pre></td></tr></table></figure>
 
-<h3 id="修改ENV-环境文件，配置java路径"><a href="#修改ENV-环境文件，配置java路径" class="headerlink" title="修改ENV 环境文件，配置java路径"></a>修改ENV 环境文件，配置java路径</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs awk">vim <span class="hljs-regexp">/opt/</span>frostmourne/env <br><br><br>JAVA_HOME=<span class="hljs-regexp">/opt/</span>java1.<span class="hljs-number">8</span>/jdk8u362-b09<br><span class="hljs-comment">##配置文件上面操作解压的JDK路径即可</span><br><br>JAVA_OPTS=<span class="hljs-string">&quot;-Xms1200m -Xmx2000m -Xss1024K -XX:PermSize=128m -XX:MaxPermSize=256m -Dfile.encoding=utf-8&quot;</span><br><span class="hljs-comment">##JAVA参数，可适当改大内存等参数。</span><br><br></code></pre></td></tr></table></figure>
+<h3 id="修改ENV-环境文件，配置java路径"><a href="#修改ENV-环境文件，配置java路径" class="headerlink" title="修改ENV 环境文件，配置java路径"></a>修改ENV 环境文件，配置java路径</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim /opt/frostmourne/env <br><br><br>JAVA_HOME=/opt/java1.8/jdk8u362-b09<br><span class="hljs-comment">##配置文件上面操作解压的JDK路径即可</span><br><br>JAVA_OPTS=<span class="hljs-string">&quot;-Xms1200m -Xmx2000m -Xss1024K -XX:PermSize=128m -XX:MaxPermSize=256m -Dfile.encoding=utf-8&quot;</span><br><span class="hljs-comment">##JAVA参数，可适当改大内存等参数。</span><br><br></code></pre></td></tr></table></figure>
 
 <p>修改启动app配置(也可以配置邮件发送服务器和LDAP)</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs routeros">vim /opt/frostmourne/application.properties <br><br><span class="hljs-attribute">alarmlog_reserve_days</span>=30<br><span class="hljs-comment">#配置监控日志保留天数</span><br><br><span class="hljs-attribute">datasource_frostmourne_url</span>=jdbc:mysql://127.0.0.1:3306/frostmourne?characterEncoding=utf8<br><span class="hljs-comment">#配置mysql数据库IP地址、数据库名字、编码。</span><br><br><span class="hljs-attribute">datasource_frostmourne_username</span>=root<br><span class="hljs-attribute">datasource_frostmourne_password</span>=Wow@123<br><span class="hljs-comment">#配置mysql数据库账号密码</span><br><br><br><span class="hljs-attribute">frostmourne_monitor_address</span>=192.168.124.100<br><br><span class="hljs-comment">#配置为本机IP地址即可</span><br><br><span class="hljs-attribute">frostmourne_message_title</span>=Wow<br><span class="hljs-comment">#配置实例名字</span><br><br></code></pre></td></tr></table></figure>
 
-<h3 id="启动测试"><a href="#启动测试" class="headerlink" title="启动测试"></a>启动测试</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/opt/</span>frostmourne<span class="hljs-regexp">/scripts/</span>startup.sh <br><br>./startup.sh: line <span class="hljs-number">7</span>: dos2unix: command not found<br>LOG_DIR: <span class="hljs-regexp">/opt/</span>frostmourne<span class="hljs-regexp">/scripts/</span>../logs<br>PID_FOLDER: <span class="hljs-regexp">/opt/</span>frostmourne<span class="hljs-regexp">/scripts/</span>../pid<br>Sun Mar <span class="hljs-number">26</span> <span class="hljs-number">16</span>:<span class="hljs-number">42</span>:<span class="hljs-number">27</span> CST <span class="hljs-number">2023</span> ==== Starting ==== <br>Application is running as root (UID <span class="hljs-number">0</span>). This is considered insecure.<br>Started [<span class="hljs-number">5477</span>]<br>Waiting <span class="hljs-keyword">for</span> server startup..<br>Sun Mar <span class="hljs-number">26</span> <span class="hljs-number">16</span>:<span class="hljs-number">42</span>:<span class="hljs-number">37</span> CST <span class="hljs-number">2023</span> Server started <span class="hljs-keyword">in</span> <span class="hljs-number">10</span> seconds<br><br>ss -an | grep <span class="hljs-number">10054</span><br>tcp   LISTEN <span class="hljs-number">0</span>      <span class="hljs-number">100</span>                    *:<span class="hljs-number">10054</span>           *:*                  <br><br><span class="hljs-comment">## 查看10054端口监听即可判断已正常启动。</span><br><br><span class="hljs-regexp">/opt/</span>frostmourne<span class="hljs-regexp">/scripts/</span>shutdown.sh <br><br><span class="hljs-comment">## 停止服务</span><br><br>                 <br><br></code></pre></td></tr></table></figure>
+<h3 id="启动测试"><a href="#启动测试" class="headerlink" title="启动测试"></a>启动测试</h3><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs vim">/<span class="hljs-keyword">opt</span>/frostmourne/scripts/startup.<span class="hljs-keyword">sh</span> <br><br>./startup.<span class="hljs-keyword">sh</span>: <span class="hljs-built_in">line</span> <span class="hljs-number">7</span>: dos2unix: <span class="hljs-keyword">command</span> not found<br>LOG_DIR: /<span class="hljs-keyword">opt</span>/frostmourne/scripts/../logs<br>PID_FOLDER: /<span class="hljs-keyword">opt</span>/frostmourne/scripts/../pid<br>Sun Mar <span class="hljs-number">26</span> <span class="hljs-number">16</span>:<span class="hljs-number">42</span>:<span class="hljs-number">27</span> CST <span class="hljs-number">2023</span> ==== Starting ==== <br>Application <span class="hljs-keyword">is</span> running <span class="hljs-keyword">as</span> root (UID <span class="hljs-number">0</span>). This <span class="hljs-keyword">is</span> considered insecure.<br>Started [<span class="hljs-number">5477</span>]<br>Waiting <span class="hljs-keyword">for</span> server startup..<br>Sun Mar <span class="hljs-number">26</span> <span class="hljs-number">16</span>:<span class="hljs-number">42</span>:<span class="hljs-number">37</span> CST <span class="hljs-number">2023</span> Server started in <span class="hljs-number">10</span> seconds<br><br>ss -<span class="hljs-keyword">an</span> | <span class="hljs-keyword">grep</span> <span class="hljs-number">10054</span><br>tcp   LISTEN <span class="hljs-number">0</span>      <span class="hljs-number">100</span>                    *:<span class="hljs-number">10054</span>           *:*                  <br><br>## 查看<span class="hljs-number">10054</span>端口监听即可判断已正常启动。<br><br>/<span class="hljs-keyword">opt</span>/frostmourne/scripts/shutdown.<span class="hljs-keyword">sh</span> <br><br>## 停止服务<br><br>                 <br><br></code></pre></td></tr></table></figure>
 
 <p>Web访问：  http:&#x2F;&#x2F;192.168.124.100:10054    即可测试，注意替换IP</p>
 <p>admin 管理账号默认的账号密码是123456</p>
@@ -461,7 +461,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Frostmourne (霜之哀伤)日志监控系统部署安装</div>
+      <div>Frostmourne (霜之哀伤)日志告警系统部署安装</div>
       <div>https://songxwn.com/frostmourne_install/</div>
     </div>
     <div class="license-meta">
@@ -480,7 +480,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年5月2日</div>
+          <div>2024年2月4日</div>
         </div>
       
       
@@ -664,10 +664,10 @@
     
       
       
-        <a href="/frostmourne_install/" title="Frostmourne (霜之哀伤)日志监控系统部署安装"
+        <a href="/frostmourne_install/" title="Frostmourne (霜之哀伤)日志告警系统部署安装"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">Frostmourne (霜之哀伤)日志监控系统部署安装</span>
+          <span class="category-post">Frostmourne (霜之哀伤)日志告警系统部署安装</span>
         </a>
       
     

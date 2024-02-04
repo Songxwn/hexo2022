@@ -46,6 +46,30 @@
   </entry>
   
   <entry>
+    <title>关闭Ubuntu 默认开启的自动安全更新</title>
+    <link href="https://songxwn.com/Ubuntu-auto-update/"/>
+    <id>https://songxwn.com/Ubuntu-auto-update/</id>
+    <published>2024-01-26T10:42:59.000Z</published>
+    <updated>2024-02-04T10:32:09.845Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;h1 id=&quot;简介-1&quot;&gt;&lt;a href=&quot;#简介-1&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;Ubuntu 和 Debian 应该从很早版本开始预装unattended-upgrades 包，并开启自动更新有&lt;strong&gt;安全问题&lt;/strong&gt;的软件包。&lt;/p&gt;
+&lt;p&gt;（最小化安装不会安装此包）&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Linux" scheme="https://songxwn.com/categories/Linux/"/>
+    
+    
+    <category term="linux" scheme="https://songxwn.com/tags/linux/"/>
+    
+    <category term="Ubuntu" scheme="https://songxwn.com/tags/Ubuntu/"/>
+    
+    <category term="apt" scheme="https://songxwn.com/tags/apt/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Zabbix 中文图形乱码-使用开源字体</title>
     <link href="https://songxwn.com/zabbix-fonts/"/>
     <id>https://songxwn.com/zabbix-fonts/</id>
@@ -537,28 +561,6 @@
     <category term="datacom" scheme="https://songxwn.com/tags/datacom/"/>
     
     <category term="ospf" scheme="https://songxwn.com/tags/ospf/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Windows下网卡跃点数和优先的DNS服务器</title>
-    <link href="https://songxwn.com/Windows-DNS-metric/"/>
-    <id>https://songxwn.com/Windows-DNS-metric/</id>
-    <published>2023-08-29T08:13:44.000Z</published>
-    <updated>2023-08-29T08:17:19.452Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;最近搭建测试 OpenVPN 下发默认路由和dns，发现Windows系统不会使用OpenVPN服务器下发的dns服务器。&lt;/p&gt;
-&lt;p&gt;查询了一番，抓包看出了问题。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="network" scheme="https://songxwn.com/categories/network/"/>
-    
-    
-    <category term="dns" scheme="https://songxwn.com/tags/dns/"/>
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
     
   </entry>
   

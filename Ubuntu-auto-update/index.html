@@ -16,30 +16,28 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
   
-    <meta name="description" content="简介ALS 是一个在线工具集合。 项目地址：https:&#x2F;&#x2F;github.com&#x2F;wikihost-opensource&#x2F;als  Demo：http:&#x2F;&#x2F;lg.hk1-bgp.hkg.50network.com&#x2F;  注：目前只支持Docker 部署 支持以下功能   Ping - IPv4  HTML 5 在线速度测试（支持内网）  文件下载测试  获取访问客户IP地址（可内网使用）  iPer">
+    <meta name="description" content="简介简介Ubuntu 和 Debian 应该从很早版本开始预装unattended-upgrades 包，并开启自动更新有安全问题的软件包。 （最小化安装不会安装此包）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ALS - Web 网络测试工具">
-<meta property="og:url" content="https://songxwn.com/als/index.html">
+<meta property="og:title" content="关闭Ubuntu 默认开启的自动安全更新">
+<meta property="og:url" content="https://songxwn.com/Ubuntu-auto-update/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="简介ALS 是一个在线工具集合。 项目地址：https:&#x2F;&#x2F;github.com&#x2F;wikihost-opensource&#x2F;als  Demo：http:&#x2F;&#x2F;lg.hk1-bgp.hkg.50network.com&#x2F;  注：目前只支持Docker 部署 支持以下功能   Ping - IPv4  HTML 5 在线速度测试（支持内网）  文件下载测试  获取访问客户IP地址（可内网使用）  iPer">
+<meta property="og:description" content="简介简介Ubuntu 和 Debian 应该从很早版本开始预装unattended-upgrades 包，并开启自动更新有安全问题的软件包。 （最小化安装不会安装此包）">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img.songxwn.com/file/2e7e214e3f6ae1e7777a3.png">
-<meta property="article:published_time" content="2023-12-27T01:21:11.000Z">
-<meta property="article:modified_time" content="2023-12-27T05:32:56.107Z">
+<meta property="og:image" content="https://img.songxwn.com/file/d722411e8e9aaba676648.png">
+<meta property="article:published_time" content="2024-01-26T10:42:59.000Z">
+<meta property="article:modified_time" content="2024-02-04T10:32:09.845Z">
 <meta property="article:author" content="Song">
-<meta property="article:tag" content="dns">
-<meta property="article:tag" content="network">
-<meta property="article:tag" content="Linux">
-<meta property="article:tag" content="ping">
-<meta property="article:tag" content="mtr">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="Ubuntu">
+<meta property="article:tag" content="apt">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img.songxwn.com/file/2e7e214e3f6ae1e7777a3.png">
+<meta name="twitter:image" content="https://img.songxwn.com/file/d722411e8e9aaba676648.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>ALS - Web 网络测试工具 - Song`s Blog</title>
+  <title>关闭Ubuntu 默认开启的自动安全更新 - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -246,7 +244,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="ALS - Web 网络测试工具"></span>
+            <span id="subtitle" data-typed-text="关闭Ubuntu 默认开启的自动安全更新"></span>
           
         </div>
 
@@ -257,8 +255,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-12-27 09:21" pubdate>
-          2023年12月27日 上午
+        <time datetime="2024-01-26 18:42" pubdate>
+          2024年1月26日 晚上
         </time>
       </span>
     
@@ -269,7 +267,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          286 字
+          157 字
         
       </span>
     
@@ -280,7 +278,7 @@
         
         
         
-          3 分钟
+          2 分钟
         
       </span>
     
@@ -338,12 +336,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">ALS - Web 网络测试工具</h1>
+            <h1 id="seo-header">关闭Ubuntu 默认开启的自动安全更新</h1>
             
               <p id="updated-time" class="note note-danger" style="">
                 
                   
-                    本文最后更新于 2023年12月27日 下午
+                    本文最后更新于 2024年2月4日 晚上
                   
                 
               </p>
@@ -351,134 +349,17 @@
             
               <div class="markdown-body">
                 
-                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>ALS 是一个在线工具集合。</p>
-<p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/wikihost-opensource/als">https://github.com/wikihost-opensource/als</a> </p>
-<p>Demo：<a target="_blank" rel="noopener" href="http://lg.hk1-bgp.hkg.50network.com/">http://lg.hk1-bgp.hkg.50network.com/</a> </p>
-<p>注：目前只支持Docker 部署</p>
-<p>支持以下功能</p>
-<ul>
-<li><input checked="" disabled="" type="checkbox"> Ping - IPv4</li>
-<li><input checked="" disabled="" type="checkbox"> HTML 5 在线速度测试（支持内网）</li>
-<li><input checked="" disabled="" type="checkbox"> 文件下载测试</li>
-<li><input checked="" disabled="" type="checkbox"> 获取访问客户IP地址（可内网使用）</li>
-<li><input checked="" disabled="" type="checkbox"> iPerf3 服务器</li>
-<li><input checked="" disabled="" type="checkbox"> 服务器流量图</li>
-<li><input checked="" disabled="" type="checkbox"> Speedtest.net 客户端（可指定服务器ID）</li>
-<li><input checked="" disabled="" type="checkbox"> 在线Web shell （有限命令 - ping  - traceroute  - mtr  - nexttrace）</li>
-</ul>
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><h1 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h1><p>Ubuntu 和 Debian 应该从很早版本开始预装unattended-upgrades 包，并开启自动更新有<strong>安全问题</strong>的软件包。</p>
+<p>（最小化安装不会安装此包）</p>
 <span id="more"></span>
 
-<h2 id="图例"><a href="#图例" class="headerlink" title="图例"></a>图例</h2><p><img src="https://img.songxwn.com/file/053f90e8d6559c35b5562.png" srcset="/img/loading.gif" lazyload></p>
-<h1 id="安装（需要提前安装好Docker环境）"><a href="#安装（需要提前安装好Docker环境）" class="headerlink" title="安装（需要提前安装好Docker环境）"></a>安装（需要提前安装好Docker环境）</h1><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">docker run</span> <span class="hljs-literal">-</span><span class="hljs-comment">d</span> <span class="hljs-literal">--</span><span class="hljs-comment">name looking</span><span class="hljs-literal">-</span><span class="hljs-comment">glass</span> <span class="hljs-literal">--</span><span class="hljs-comment">restart always</span> <span class="hljs-literal">--</span><span class="hljs-comment">network host wikihostinc/looking</span><span class="hljs-literal">-</span><span class="hljs-comment">glass</span><span class="hljs-literal">-</span><span class="hljs-comment">server</span><br><br></code></pre></td></tr></table></figure>
+<h1 id="有什么影响？"><a href="#有什么影响？" class="headerlink" title="有什么影响？"></a>有什么影响？</h1><p>如果软件包有安全漏洞，Ubuntu发布更新包后会自动安装更新并重启。这种重启是不可预知的。（尤其是服务器使用上）</p>
+<p>例如：Mysql 会被自动重启，如果是集群可能会导致无法启动。</p>
+<h1 id="如何关闭"><a href="#如何关闭" class="headerlink" title="如何关闭"></a>如何关闭</h1><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">systemctl disable --now unattended-upgrades.service<br># 关闭其服务和禁止启动即可。<br></code></pre></td></tr></table></figure>
 
-<h2 id="安装注意"><a href="#安装注意" class="headerlink" title="安装注意"></a>安装注意</h2><p>默认占用80端口作为Web访问，IPerf3 默认端口范围为30000-31000。</p>
-<p>默认使用主机网络。</p>
-<h2 id="Docker-变量"><a href="#Docker-变量" class="headerlink" title="Docker 变量"></a>Docker 变量</h2><table>
-<thead>
-<tr>
-<th>Key</th>
-<th>示例</th>
-<th>默认</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>LISTEN_IP</td>
-<td>127.0.0.1</td>
-<td>默认使用所有IP</td>
-<td>监听IP</td>
-</tr>
-<tr>
-<td>HTTP_PORT</td>
-<td>80</td>
-<td>80</td>
-<td>Web 访问端口</td>
-</tr>
-<tr>
-<td>SPEEDTEST_FILE_LIST</td>
-<td>100MB 1GB</td>
-<td>1MB 10MB 100MB 1GB</td>
-<td>静态测试文件的大小，以空格分隔</td>
-</tr>
-<tr>
-<td>LOCATION</td>
-<td>“this is location”</td>
-<td>(from maxmind database, ip via PUBLIC_IPV4 or PUBLIC_IPV6)</td>
-<td>位置字符串</td>
-</tr>
-<tr>
-<td>MAXMIND_KEY</td>
-<td>THE_KEY</td>
-<td>(empty)</td>
-<td>about more <a target="_blank" rel="noopener" href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data">https://dev.maxmind.com/geoip/geolite2-free-geolocation-data</a></td>
-</tr>
-<tr>
-<td>PUBLIC_IPV4</td>
-<td>1.1.1.1</td>
-<td>(fetch from <a target="_blank" rel="noopener" href="http://ifconfig.co/">http://ifconfig.co</a>)</td>
-<td>The IPv4 address of the server</td>
-</tr>
-<tr>
-<td>PUBLIC_IPV6</td>
-<td>fe80::1</td>
-<td>(fetch from <a target="_blank" rel="noopener" href="http://ifconfig.co/">http://ifconfig.co</a>)</td>
-<td>The IPv6 address of the server</td>
-</tr>
-<tr>
-<td>DISPLAY_TRAFFIC</td>
-<td>true</td>
-<td>true</td>
-<td>Toggle the streaming traffic graph</td>
-</tr>
-<tr>
-<td>ENABLE_SPEEDTEST</td>
-<td>true</td>
-<td>true</td>
-<td>Toggle the speedtest feature</td>
-</tr>
-<tr>
-<td>UTILITIES_PING</td>
-<td>true</td>
-<td>true</td>
-<td>Toggle the ping feature</td>
-</tr>
-<tr>
-<td>UTILITIES_SPEEDTESTDOTNET</td>
-<td>true</td>
-<td>true</td>
-<td>Toggle the speedtest.net feature</td>
-</tr>
-<tr>
-<td>UTILITIES_FAKESHELL</td>
-<td>true</td>
-<td>true</td>
-<td>Toggle the HTML Shell feature</td>
-</tr>
-<tr>
-<td>UTILITIES_IPERF3</td>
-<td>true</td>
-<td>true</td>
-<td>Toggle the iperf3 feature</td>
-</tr>
-<tr>
-<td>UTILITIES_IPERF3_PORT_MIN</td>
-<td>30000</td>
-<td>30000</td>
-<td>iperf3 监听端口范围 - 开始</td>
-</tr>
-<tr>
-<td>UTILITIES_IPERF3_PORT_MAX</td>
-<td>31000</td>
-<td>31000</td>
-<td>iperf3 监听端口范围 - 结束</td>
-</tr>
-<tr>
-<td>SPONSOR_MESSAGE</td>
-<td>“Test message” or “&#x2F;tmp&#x2F;als_readme.md” or “<a target="_blank" rel="noopener" href="http://some_host/114514.md">http://some_host/114514.md</a>“</td>
-<td>‘’</td>
-<td>显示服务器赞助商消息（支持Markdown文件，需要映射文件到容器）</td>
-</tr>
-</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">apt remove unattended-upgrades<br><span class="hljs-meta prompt_"># </span><span class="language-bash">或者直接完全卸载</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://wiki.debian.org/UnattendedUpgrades" title="https://wiki.debian.org/UnattendedUpgrades">https://wiki.debian.org/UnattendedUpgrades</a></p>
 
                 
               </div>
@@ -497,7 +378,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/linux/" class="category-chain-item">linux</a>
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
   
   
 
@@ -512,15 +393,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/dns/" class="print-no-link">#dns</a>
+        <a href="/tags/linux/" class="print-no-link">#linux</a>
       
-        <a href="/tags/network/" class="print-no-link">#network</a>
+        <a href="/tags/Ubuntu/" class="print-no-link">#Ubuntu</a>
       
-        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
-      
-        <a href="/tags/ping/" class="print-no-link">#ping</a>
-      
-        <a href="/tags/mtr/" class="print-no-link">#mtr</a>
+        <a href="/tags/apt/" class="print-no-link">#apt</a>
       
     </div>
   
@@ -532,8 +409,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>ALS - Web 网络测试工具</div>
-      <div>https://songxwn.com/als/</div>
+      <div>关闭Ubuntu 默认开启的自动安全更新</div>
+      <div>https://songxwn.com/Ubuntu-auto-update/</div>
     </div>
     <div class="license-meta">
       
@@ -545,13 +422,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年12月27日</div>
+          <div>2024年1月26日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年12月27日</div>
+          <div>2024年2月4日</div>
         </div>
       
       
@@ -582,9 +459,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/tun2proxy/" title="tun2proxy -SOCKS5等代理转换为TUN口">
+                      <a href="/switch-ROCEv2-DSCP/" title="盛科交换机配置基于DSCP的RoCEv2-无损网络">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">tun2proxy -SOCKS5等代理转换为TUN口</span>
+                        <span class="hidden-mobile">盛科交换机配置基于DSCP的RoCEv2-无损网络</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -592,8 +469,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/url-get-edge-tools/" title="网站页面域名获取工具-Edge (2.1.5P)">
-                        <span class="hidden-mobile">网站页面域名获取工具-Edge (2.1.5P)</span>
+                      <a href="/zabbix-fonts/" title="Zabbix 中文图形乱码-使用开源字体">
+                        <span class="hidden-mobile">Zabbix 中文图形乱码-使用开源字体</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -653,209 +530,52 @@
     
     <div class="category row nomargin-x">
       <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="linux"
-        id="heading-e206a54e97690cce50cc872dd70ee896" role="tab" data-toggle="collapse" href="#collapse-e206a54e97690cce50cc872dd70ee896"
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Linux"
+        id="heading-edc9f0a5a5d57797bf68e37364743831" role="tab" data-toggle="collapse" href="#collapse-edc9f0a5a5d57797bf68e37364743831"
         aria-expanded="true"
       >
-        linux
-        <span class="list-group-count">(17)</span>
+        Linux
+        <span class="list-group-count">(3)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse show" id="collapse-e206a54e97690cce50cc872dd70ee896"
-           role="tabpanel" aria-labelledby="heading-e206a54e97690cce50cc872dd70ee896">
+      <div class="category-collapse collapse show" id="collapse-edc9f0a5a5d57797bf68e37364743831"
+           role="tabpanel" aria-labelledby="heading-edc9f0a5a5d57797bf68e37364743831">
         
         
-          
           
   <div class="category-post-list">
     
     
       
       
-        <a href="/Linux-growpart/" title="Linux 虚拟机在线热扩容分区"
+        <a href="/Jumpserver-install/" title="JumpServer 开源的跳板机安装指南"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">Linux 虚拟机在线热扩容分区</span>
+          <span class="category-post">JumpServer 开源的跳板机安装指南</span>
         </a>
       
     
       
       
-        <a href="/MariaDB_Galera_Cluster/" title="MariaDB Galera Cluster 10.6 集群部署"
+        <a href="/tun2proxy/" title="tun2proxy -SOCKS5等代理转换为TUN口"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">MariaDB Galera Cluster 10.6 集群部署</span>
+          <span class="category-post">tun2proxy -SOCKS5等代理转换为TUN口</span>
         </a>
       
     
       
       
-        <a href="/Web-Net-Tools/" title="部署私有Web Ping/MTR测试服务 Web Net Tools"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">部署私有Web Ping/MTR测试服务 Web Net Tools</span>
-        </a>
-      
-    
-      
-      
-        <a href="/network-test/" title="Linux下的网络测试"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Linux下的网络测试</span>
-        </a>
-      
-    
-      
-      
-        <a href="/podman/" title="Podman 容器管理工具"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Podman 容器管理工具</span>
-        </a>
-      
-    
-      
-      
-        <a href="/redis-sentinel/" title="Redis 哨兵模式配置 - 在Rocky Linux上"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Redis 哨兵模式配置 - 在Rocky Linux上</span>
-        </a>
-      
-    
-      
-      
-        <a href="/team_nav/" title="部署团队服务导航网站 Team-nav"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">部署团队服务导航网站 Team-nav</span>
-        </a>
-      
-    
-      
-      
-        <a href="/vdo/" title="红帽的重复数据删除VDO"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">红帽的重复数据删除VDO</span>
-        </a>
-      
-    
-      
-      
-        <a href="/als/" title="ALS - Web 网络测试工具"
+        <a href="/Ubuntu-auto-update/" title="关闭Ubuntu 默认开启的自动安全更新"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">ALS - Web 网络测试工具</span>
+          <span class="category-post">关闭Ubuntu 默认开启的自动安全更新</span>
         </a>
       
     
   </div>
 
-          
-  
-    
-    
-    
-    <div class="category-sub row nomargin-x">
-      <a class="category-subitem collapsed
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="ELK"
-        id="heading-9e3164c35d85d881c2249c7894d8e274" role="tab" data-toggle="collapse" href="#collapse-9e3164c35d85d881c2249c7894d8e274"
-        aria-expanded="false"
-      >
-        ELK
-        <span class="list-group-count">(8)</span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-      <div class="category-collapse collapse " id="collapse-9e3164c35d85d881c2249c7894d8e274"
-           role="tabpanel" aria-labelledby="heading-9e3164c35d85d881c2249c7894d8e274">
-        
-        
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/ELK-AD-LDAP-Authentication/" title="Elasticsearch 接入微软Active Directory认证"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Elasticsearch 接入微软Active Directory认证</span>
-        </a>
-      
-    
-      
-      
-        <a href="/ELK-logstash-hostname/" title="ELK Logstash解析系统日志错误"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">ELK Logstash解析系统日志错误</span>
-        </a>
-      
-    
-      
-      
-        <a href="/Elasticsearch-x-pack-core/" title="Elasticsearch 8.7 白金版激活"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Elasticsearch 8.7 白金版激活</span>
-        </a>
-      
-    
-      
-      
-        <a href="/SEC_OTP_UDP-log/" title="接收SEC OTP4000 UDP告警日志"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">接收SEC OTP4000 UDP告警日志</span>
-        </a>
-      
-    
-      
-      
-        <a href="/elk/" title="ELK Stack 安装教程，RHEL及衍生系统。"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">ELK Stack 安装教程，RHEL及衍生系统。</span>
-        </a>
-      
-    
-      
-      
-        <a href="/elk_cluster/" title="Elasticsearch 安装配置集群系统"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Elasticsearch 安装配置集群系统</span>
-        </a>
-      
-    
-      
-      
-        <a href="/elk_snmp_trap/" title="ELK Logstash配置SNMP-Trap"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">ELK Logstash配置SNMP-Trap</span>
-        </a>
-      
-    
-      
-      
-        <a href="/frostmourne_install/" title="Frostmourne (霜之哀伤)日志告警系统部署安装"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Frostmourne (霜之哀伤)日志告警系统部署安装</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
         
       </div>
     </div>
