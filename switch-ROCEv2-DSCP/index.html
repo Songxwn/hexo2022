@@ -16,28 +16,30 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
   
-    <meta name="description" content="简介住宅IP：是由VerizonFiOS、AT＆TU-verse、Cox、Comcast、Charter或TimeWarner等（本地运营商）公司拥有的IP，它们可用于真人家庭。IP地址是由互联网服务提供商（ISP）分配给用户。绑定到家庭地址的IP地址叫住宅IP地址。也叫原生、本地IP、或非广播IP、Native IP。 （国内移动、联通、电信就是一级本地运营商）">
+    <meta name="description" content="简介当前HPC高性能计算、分布式存储、AI人工智能等应用采用RoCEv2网络替代传统的TCP&#x2F;IP网络，来降低CPU的处理和延迟，提升应用的性能。然而，这些分布式高性能应用的特点是“多打一”的Incast流量模型，对于以太交换机，Incast流量易造成交换机内部队列缓存的瞬时突发拥塞甚至丢包，将会带来应用时延的增加和吞吐的下降，从而损害分布式应用的性能。因此，针对RoCEv2流量实现的智">
 <meta property="og:type" content="article">
-<meta property="og:title" content="住宅IP和数据中心IP(广播和非广播)">
-<meta property="og:url" content="https://songxwn.com/Native_IP/index.html">
+<meta property="og:title" content="盛科交换机配置基于DSCP的RoCEv2">
+<meta property="og:url" content="https://songxwn.com/switch-ROCEv2-DSCP/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="简介住宅IP：是由VerizonFiOS、AT＆TU-verse、Cox、Comcast、Charter或TimeWarner等（本地运营商）公司拥有的IP，它们可用于真人家庭。IP地址是由互联网服务提供商（ISP）分配给用户。绑定到家庭地址的IP地址叫住宅IP地址。也叫原生、本地IP、或非广播IP、Native IP。 （国内移动、联通、电信就是一级本地运营商）">
+<meta property="og:description" content="简介当前HPC高性能计算、分布式存储、AI人工智能等应用采用RoCEv2网络替代传统的TCP&#x2F;IP网络，来降低CPU的处理和延迟，提升应用的性能。然而，这些分布式高性能应用的特点是“多打一”的Incast流量模型，对于以太交换机，Incast流量易造成交换机内部队列缓存的瞬时突发拥塞甚至丢包，将会带来应用时延的增加和吞吐的下降，从而损害分布式应用的性能。因此，针对RoCEv2流量实现的智">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img.songxwn.com/file/c2710522ab4b806691ab4.png">
-<meta property="article:published_time" content="2023-12-15T01:33:46.000Z">
-<meta property="article:modified_time" content="2023-12-15T04:57:38.683Z">
+<meta property="og:image" content="https://img.songxwn.com/file/05747fd25ac2b9ec846d2.png">
+<meta property="article:published_time" content="2024-02-04T10:47:24.000Z">
+<meta property="article:modified_time" content="2024-02-04T09:53:45.941Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
-<meta property="article:tag" content="ip">
-<meta property="article:tag" content="Native_IP">
+<meta property="article:tag" content="vmware">
+<meta property="article:tag" content="rdma">
+<meta property="article:tag" content="centec">
+<meta property="article:tag" content="RoCEv2">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img.songxwn.com/file/c2710522ab4b806691ab4.png">
+<meta name="twitter:image" content="https://img.songxwn.com/file/05747fd25ac2b9ec846d2.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>住宅IP和数据中心IP(广播和非广播) - Song`s Blog</title>
+  <title>盛科交换机配置基于DSCP的RoCEv2 - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -244,7 +246,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="住宅IP和数据中心IP(广播和非广播)"></span>
+            <span id="subtitle" data-typed-text="盛科交换机配置基于DSCP的RoCEv2"></span>
           
         </div>
 
@@ -255,8 +257,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-12-15 09:33" pubdate>
-          2023年12月15日 上午
+        <time datetime="2024-02-04 18:47" pubdate>
+          2024年2月4日 晚上
         </time>
       </span>
     
@@ -267,7 +269,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          643 字
+          695 字
         
       </span>
     
@@ -336,12 +338,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">住宅IP和数据中心IP(广播和非广播)</h1>
+            <h1 id="seo-header">盛科交换机配置基于DSCP的RoCEv2</h1>
             
               <p id="updated-time" class="note note-danger" style="">
                 
                   
-                    本文最后更新于 2023年12月15日 下午
+                    本文最后更新于 2024年2月4日 下午
                   
                 
               </p>
@@ -349,30 +351,26 @@
             
               <div class="markdown-body">
                 
-                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>住宅IP：是由VerizonFiOS、AT＆TU-verse、Cox、Comcast、Charter或TimeWarner等（本地运营商）公司拥有的IP，它们可用于真人家庭。IP地址是由互联网服务提供商（ISP）分配给用户。绑定到家庭地址的IP地址叫住宅IP地址。也叫原生、本地IP、或非广播IP、Native IP。</p>
-<p>（国内移动、联通、电信就是一级本地运营商）</p>
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>当前HPC高性能计算、分布式存储、AI人工智能等应用采用RoCEv2网络替代传统的TCP&#x2F;IP网络，来降低CPU的处理和延迟，提升应用的性能。然而，这些分布式高性能应用的特点是“多打一”的Incast流量模型，对于以太交换机，Incast流量易造成交换机内部队列缓存的瞬时突发拥塞甚至丢包，将会带来应用时延的增加和吞吐的下降，从而损害分布式应用的性能。因此，针对RoCEv2流量实现的智能流量分析功能，将对设备经过的RoCEv2流量通过ACL匹配特征报文，上送至TAP后分析其丢包、时延、吞吐和路径信息，实时监控RoCEv2网络状态。</p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>RDMA（Remote Direct Memory Access），远程直接内存访问功能，用于InfiniBand网络，是一种直接内存访问技术，它将数据直接从一台计算机的内存传输到另一台计算机，数据从一个系统快速移动到远程系统存储器中，无需双方操作系统的介入，不需要经过处理器耗时的处理，最终达到高带宽、低延迟和低资源利用率的效果。</p>
+<p>RoCE（RDMA over Converged Ethernet），允许应用通过以太网实现远程内存访问的网络协议，是将RDMA技术运用到以太网上的协议。目前RoCE有两个协议版本，RoCEv1和RoCEv2。</p>
 <span id="more"></span>
 
-<h1 id="其他类型"><a href="#其他类型" class="headerlink" title="其他类型"></a>其他类型</h1><p>当然，市场上还有其他类型的产品：</p>
-<p>1、机房数据中心代理:使用数据中心(机房)拥有和管理IP代理，俗称机房IP代理。（如阿里云、华为云提供的IP）</p>
-<p>2、4G移动代理：由移动运营商分配给移动设备的真实4G IP地址。（蜂窝网络）</p>
-<p>3、隧道转发：基础IP我们可以将代理分为两类:轮换代理和非轮换(粘性固定)IP地址。</p>
-<h2 id="机房ip和住宅ip有什么区别？"><a href="#机房ip和住宅ip有什么区别？" class="headerlink" title="机房ip和住宅ip有什么区别？"></a><strong>机房ip和住宅ip有什么区别？</strong></h2><h3 id="住宅IP："><a href="#住宅IP：" class="headerlink" title="住宅IP："></a>住宅IP：</h3><p>住宅IP是ISP(互联网服务提供商)或ADSL实际住宅由供应商分配给个人用户IP地址，100%WIFI由网络真实用户组成，独家居住IP是真正的用户设备IP，用于普通网民IP完全一致。</p>
-<p>住宅IP与机房相比，它具有连号、散点分布、与普通网民分布一致的特点IP,成功率采集、补量业务、SEO需要大量短效动态P的业务优势很大。</p>
-<h3 id="机房IP："><a href="#机房IP：" class="headerlink" title="机房IP："></a>机房IP：</h3><p>机房IP是机房中心，机房有很多服务器IP具有IP在线固定稳定，价格相对便宜，但机房IP连号、区域分布不平衡等。适用于挂机、下载、伪装访问等需要长期在线的业务。</p>
-<h3 id="区别总结："><a href="#区别总结：" class="headerlink" title="区别总结："></a>区别总结：</h3><p>机房IP稳定性高，在线时间长，价格相对较低。</p>
-<p>住宅IP目标服务器无法检测到，因此无法屏蔽您IP，处理后的数据不能发送给你。</p>
-<h1 id="为什么要住宅IP"><a href="#为什么要住宅IP" class="headerlink" title="为什么要住宅IP"></a>为什么要住宅IP</h1><p>因为某些流媒体、游戏、APP会对IP类型进行区分对待，如Netflix、Tiktok 直播等等。</p>
-<h1 id="如何判断一个ip是机房ip还是住宅ip呢"><a href="#如何判断一个ip是机房ip还是住宅ip呢" class="headerlink" title="如何判断一个ip是机房ip还是住宅ip呢"></a>如何判断一个ip是机房ip还是住宅ip呢</h1><p>原生 IP 就是指该 IP 的注册地址与其BGP ASN所在位置一致的 IP。</p>
-<p>可以用一个网站来判断（<a target="_blank" rel="noopener" href="http://ipinfo.io/">http://ipinfo.io</a>），type&#x3D;ISP 代表为住宅 ，type&#x3D;hosting 或者 type&#x3D;business 为商用机房ip。</p>
-<p>建议type类型为 双ISP比较好。</p>
-<p><img src="https://img.songxwn.com/file/24cd05edc5b364c1d7a3d.png" srcset="/img/loading.gif" lazyload></p>
-<p>然后根据AS号查询归属地是否和IP地址一样。查询网址：<a target="_blank" rel="noopener" href="https://bgp.he.net/">https://bgp.he.net/</a> </p>
-<p><img src="https://img.songxwn.com/file/1bf9c04f005fd8a4443cf.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://img.songxwn.com/file/0872a08b09ff9463805ff.png" srcset="/img/loading.gif" lazyload></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://news.kd010.com/fwqzy/13660.html">https://news.kd010.com/fwqzy/13660.html</a> </p>
-<p><a target="_blank" rel="noopener" href="https://www.kookeey.com/news/archives/4712">https://www.kookeey.com/news/archives/4712</a> </p>
-<p><a target="_blank" rel="noopener" href="https://www.kookeey.com/news/archives/5146">https://www.kookeey.com/news/archives/5146</a> </p>
+
+<h1 id="业务需求"><a href="#业务需求" class="headerlink" title="业务需求"></a>业务需求</h1><p>VMware vSAN的 RoCEv2 网络照要求划分到优先级 3 和 6，开启 PFC 和 ECN 功能，实现无损网络。</p>
+<p>交换机使用盛科E680系列交换机，版本为 v7.4.8。</p>
+<h1 id="策略配置"><a href="#策略配置" class="headerlink" title="策略配置"></a>策略配置</h1><h2 id="ECN-配置策略"><a href="#ECN-配置策略" class="headerlink" title="ECN 配置策略"></a>ECN 配置策略</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">#配置优先级 3 及优先级 6 的 ECN 策略</span><br>class-map type traffic-class ecn-pri-<span class="hljs-number">3</span><br> match traffic-class <span class="hljs-number">3</span><br> <span class="hljs-keyword">exit</span><br>class-map type traffic-class ecn-pri-<span class="hljs-number">6</span><br> match traffic-class <span class="hljs-number">6</span><br> <span class="hljs-keyword">exit</span><br>policy-map type traffic-class ecn-pmap<br> class type traffic-class ecn-pri-<span class="hljs-number">3</span><br> random-detect maximum-threshold <span class="hljs-number">8192</span> minimum-threshold <span class="hljs-number">64</span><br> <span class="hljs-keyword">exit</span><br>class type traffic-class ecn-pri-<span class="hljs-number">6</span><br> random-detect maximum-threshold <span class="hljs-number">8192</span> minimum-threshold <span class="hljs-number">64</span><br> end<br><span class="hljs-comment">#将 ECN 策略应用至对应的物理接口</span><br>interface eth-<span class="hljs-number">0</span>-<span class="hljs-number">1</span><br> service-policy type traffic-class ecn-pmap<br></code></pre></td></tr></table></figure>
+
+<h2 id="PFC-配置策略"><a href="#PFC-配置策略" class="headerlink" title="PFC 配置策略"></a>PFC 配置策略</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">#将 DSCP=26（af31）映射到优先级 3，将 DSCP=48（CS6）映射到优先级 6</span><br>class-map type qos pfc-pri-<span class="hljs-number">3</span><br> match dscp af31<br> <span class="hljs-keyword">exit</span><br>class-map type qos pfc-pri-<span class="hljs-number">6</span><br> match dscp cs6<br> <span class="hljs-keyword">exit</span><br>policy-map type qos pfc-pmap<br> class type qos pfc-pri-<span class="hljs-number">3</span><br> set traffic-class <span class="hljs-number">3</span><br> <span class="hljs-keyword">exit</span><br>class type qos pfc-pri-<span class="hljs-number">6</span><br> set traffic-class <span class="hljs-number">6</span><br> end<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment">#将映射策略应用到对应的物理接口，并开启对应物理接口优先级 3 和优先级 6 的 PFC 功能</span><br><span class="hljs-attribute">interface</span> eth-<span class="hljs-number">0</span>-<span class="hljs-number">1</span><br> <span class="hljs-attribute">priority</span>-flow-control mode <span class="hljs-literal">on</span><br> <span class="hljs-attribute">priority</span>-flow-control enable priority <span class="hljs-number">3</span> <span class="hljs-number">6</span><br> <span class="hljs-attribute">service</span>-policy type qos input pfc-pmap<br></code></pre></td></tr></table></figure>
+
+<h2 id="物理接口最终配置"><a href="#物理接口最终配置" class="headerlink" title="物理接口最终配置"></a>物理接口最终配置</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs text">interface eth-0-4<br> switchport mode trunk<br> switchport trunk allowed vlan add 222,223<br> priority-flow-control mode on<br> priority-flow-control enable priority 3 6<br> service-policy type qos input pfc-pmap<br> service-policy type traffic-class ecn-pmap<br><br><br># 注意交换机与其他交换机互联接口也需要配置。如果需要相互发送RDMA的话。<br></code></pre></td></tr></table></figure>
+
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><h1 id="汇聚口配置"><a href="#汇聚口配置" class="headerlink" title="汇聚口配置"></a>汇聚口配置</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Agg口配置较为特殊，下面为示例</span><br><br>interface eth-0-27<br> switchport mode trunk<br> switchport trunk allowed vlan add 222,223<br> switchport trunk allowed vlan remove 1<br> priority-flow-control mode on<br> priority-flow-control enable priority 3 6<br> service-policy type traffic-class ecn-pmap<br> channel-group 1 mode active<br>!<br>interface eth-0-28<br> switchport mode trunk<br> switchport trunk allowed vlan add 222,223<br> switchport trunk allowed vlan remove 1<br> priority-flow-control mode on<br> priority-flow-control enable priority 3 6<br> service-policy type traffic-class ecn-pmap<br> channel-group 1 mode active<br>!<br>interface agg1<br> switchport mode trunk<br> switchport trunk allowed vlan add 222,223<br> switchport trunk allowed vlan remove 1<br> service-policy type qos input pfc-pmap<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>参考盛科RDMA2.0 文档<br>参考华为文档：<a target="_blank" rel="noopener" href="https://support.huawei.com/enterprise/zh/doc/EDOC1100198802/5d4312fb">https://support.huawei.com/enterprise/zh/doc/EDOC1100198802/5d4312fb</a></p>
 
                 
               </div>
@@ -408,9 +406,13 @@
       
         <a href="/tags/network/" class="print-no-link">#network</a>
       
-        <a href="/tags/ip/" class="print-no-link">#ip</a>
+        <a href="/tags/vmware/" class="print-no-link">#vmware</a>
       
-        <a href="/tags/Native-IP/" class="print-no-link">#Native_IP</a>
+        <a href="/tags/rdma/" class="print-no-link">#rdma</a>
+      
+        <a href="/tags/centec/" class="print-no-link">#centec</a>
+      
+        <a href="/tags/RoCEv2/" class="print-no-link">#RoCEv2</a>
       
     </div>
   
@@ -422,8 +424,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>住宅IP和数据中心IP(广播和非广播)</div>
-      <div>https://songxwn.com/Native_IP/</div>
+      <div>盛科交换机配置基于DSCP的RoCEv2</div>
+      <div>https://songxwn.com/switch-ROCEv2-DSCP/</div>
     </div>
     <div class="license-meta">
       
@@ -435,13 +437,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年12月15日</div>
+          <div>2024年2月4日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年12月15日</div>
+          <div>2024年2月4日</div>
         </div>
       
       
@@ -472,18 +474,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/url-get-edge-tools/" title="网站页面域名获取工具-Edge (2.1.5P)">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">网站页面域名获取工具-Edge (2.1.5P)</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Veeam12.1/" title="Veeam Backup Replication 12.1 12月更新安装">
-                        <span class="hidden-mobile">Veeam Backup Replication 12.1 12月更新安装</span>
+                      <a href="/zabbix-fonts/" title="Zabbix 中文图形乱码-使用开源字体">
+                        <span class="hidden-mobile">Zabbix 中文图形乱码-使用开源字体</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
