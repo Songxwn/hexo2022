@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-02-04T09:53:45.941Z</updated>
+  <updated>2024-02-04T10:02:25.701Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>盛科交换机配置基于DSCP的RoCEv2</title>
+    <title>盛科交换机配置基于DSCP的RoCEv2-无损网络</title>
     <link href="https://songxwn.com/switch-ROCEv2-DSCP/"/>
     <id>https://songxwn.com/switch-ROCEv2-DSCP/</id>
     <published>2024-02-04T10:47:24.000Z</published>
-    <updated>2024-02-04T09:53:45.941Z</updated>
+    <updated>2024-02-04T10:02:25.701Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;当前HPC高性能计算、分布式存储、AI人工智能等应用采用RoCEv2网络替代传统的TCP&amp;#x2F;IP网络，来降低CPU的处理和延迟，提升应用的性能。然而，这些分布式高性能应用的特点是“多打一”的Incast流量模型，对于以太交换机，Incast流量易造成交换机内部队列缓存的瞬时突发拥塞甚至丢包，将会带来应用时延的增加和吞吐的下降，从而损害分布式应用的性能。因此，针对RoCEv2流量实现的智能流量分析功能，将对设备经过的RoCEv2流量通过ACL匹配特征报文，上送至TAP后分析其丢包、时延、吞吐和路径信息，实时监控RoCEv2网络状态。&lt;/p&gt;
