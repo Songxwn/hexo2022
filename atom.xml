@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-02-04T10:02:25.701Z</updated>
+  <updated>2024-02-04T14:35:57.102Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>智能无损网络 - 华为</title>
+    <link href="https://songxwn.com/RDMA/"/>
+    <id>https://songxwn.com/RDMA/</id>
+    <published>2024-02-04T14:30:46.000Z</published>
+    <updated>2024-02-04T14:35:57.102Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;headerlink&quot; title=&quot;定义&quot;&gt;&lt;/a&gt;定义&lt;/h1&gt;&lt;p&gt;智能无损网络是基于PFC优先级流控机制，结合智能化拥塞控制技术，使以太网满足分布式高性能应用无丢包、低时延、高吞吐诉求的能力。&lt;/p&gt;
+&lt;p&gt;本文档介绍了智能无损网络的配置，具体包括PFC优先级流量控制、无损队列的缓存空间优化、无损队列的动态ECN门限、无损队列的AI ECN门限、快速ECN拥塞标记、快速CNP拥塞通知、无损队列的大小流区分调度、动态负载分担和网算一体。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="RoCEv2" scheme="https://songxwn.com/tags/RoCEv2/"/>
+    
+    <category term="RDMA" scheme="https://songxwn.com/tags/RDMA/"/>
+    
+  </entry>
   
   <entry>
     <title>盛科交换机配置基于DSCP的RoCEv2-无损网络</title>
@@ -527,40 +551,6 @@
     <category term="Windows" scheme="https://songxwn.com/tags/Windows/"/>
     
     <category term="Tools" scheme="https://songxwn.com/tags/Tools/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>HCIE Datacom-01.1 IGP高级特性-OSPF-快速收敛</title>
-    <link href="https://songxwn.com/ospf-frr/"/>
-    <id>https://songxwn.com/ospf-frr/</id>
-    <published>2023-09-05T07:52:00.000Z</published>
-    <updated>2023-09-05T13:13:35.643Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;OSPF和IS-IS都是基于链路状态的内部网关路由协议，运行这两种协议的路由器通过同步LSDB，采用SPF算法计算最优路由。&lt;/li&gt;
-&lt;li&gt;当网络拓扑发生变化时，OSPF和IS-IS支持多种快速收敛和保护机制，能够降低网络故障导致的流量丢失。&lt;/li&gt;
-&lt;li&gt;为了实现对路由表规模的控制，OSPF和IS-IS支持路由选路及路由信息的控制，能够减少特定路由器路由表的大小。&lt;/li&gt;
-&lt;li&gt;本系列文章将介绍OSPF和IS-IS的高级特性，包括：快速收敛机制、路由控制、其他特性等。&lt;/li&gt;
-&lt;li&gt;此文章参考于华为认证系列PPT。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&quot;OSPF快速收敛概述&quot;&gt;&lt;a href=&quot;#OSPF快速收敛概述&quot; class=&quot;headerlink&quot; title=&quot;OSPF快速收敛概述&quot;&gt;&lt;/a&gt;OSPF快速收敛概述&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;OSPF快速收敛是为了提高路由的收敛速度而做的扩展特性，包括：PRC（Partial Route Calculation，部分路由计算）和智能定时器。&lt;/li&gt;
-&lt;li&gt;同时，OSPF支持故障恢复快速收敛，例如通过OSPF IP FRR（Fast ReRoute，快速重路由）实现备份链路的快速切换，也可以与BFD联动实现对故障的快速感知。&lt;/li&gt;
-&lt;li&gt;快速收敛是为了满载电信级的要求，50ms内完成收敛减少丢包。&lt;/li&gt;
-&lt;/ul&gt;</summary>
-    
-    
-    
-    <category term="network" scheme="https://songxwn.com/categories/network/"/>
-    
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="datacom" scheme="https://songxwn.com/tags/datacom/"/>
-    
-    <category term="ospf" scheme="https://songxwn.com/tags/ospf/"/>
     
   </entry>
   
