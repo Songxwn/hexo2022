@@ -23,9 +23,9 @@
 <meta property="og:site_name" content="Song&#96;s Blog">
 <meta property="og:description" content="简介本文章主要介绍了Elasticsearch 接入微软的Active Directory（域控）作为身份认证。 LDAP认证接入可参考官方文档。 使用环境：Rocky Linux 8、Elasticsearch 8、Windows Server 2022 注意：由于此功能基础版无法使用，需要白金版本，可参考教程：https:&#x2F;&#x2F;songxwn.com&#x2F;Elasticsearch-x-pack-c">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/05/03/5c9e440808e98f3a.png">
+<meta property="og:image" content="https://img.songxwn.com/file/995d04e7054c3bcdb567f.png">
 <meta property="article:published_time" content="2023-05-03T01:51:41.000Z">
-<meta property="article:modified_time" content="2023-05-03T02:35:36.117Z">
+<meta property="article:modified_time" content="2024-02-07T09:29:12.571Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="elk">
@@ -33,7 +33,7 @@
 <meta property="article:tag" content="ad">
 <meta property="article:tag" content="ldap">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2023/05/03/5c9e440808e98f3a.png">
+<meta name="twitter:image" content="https://img.songxwn.com/file/995d04e7054c3bcdb567f.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -343,7 +343,7 @@
               <p id="updated-time" class="note note-danger" style="">
                 
                   
-                    本文最后更新于 2023年5月3日 上午
+                    本文最后更新于 2024年2月7日 下午
                   
                 
               </p>
@@ -373,9 +373,9 @@
 </ul>
 <p>注意：如果修改了keystore，那么集群上的每一个节点都要同步。</p>
 <p>密钥库管理参考<a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/elasticsearch-keystore.html">官方文档</a>。（增加、列出、查看明文、删除等）</p>
-<h2 id="配置用户组映射"><a href="#配置用户组映射" class="headerlink" title="配置用户组映射"></a>配置用户组映射</h2><h3 id="命令操作-Kibana-gt-http-127-0-0-1-5601-app-dev-tools-console"><a href="#命令操作-Kibana-gt-http-127-0-0-1-5601-app-dev-tools-console" class="headerlink" title="命令操作-Kibana&gt;http://127.0.0.1:5601/app/dev_tools#/console"></a>命令操作-Kibana&gt;<code>http://127.0.0.1:5601/app/dev_tools#/console</code></h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs awk">PUT <span class="hljs-regexp">/_security/</span>role_mapping/admins<br>&#123;<br>  <span class="hljs-string">&quot;roles&quot;</span> : [ <span class="hljs-string">&quot;monitoring&quot;</span> , <span class="hljs-string">&quot;user&quot;</span> ],<br>  <span class="hljs-string">&quot;rules&quot;</span> : &#123; <span class="hljs-string">&quot;field&quot;</span> : &#123;<br>    <span class="hljs-string">&quot;groups&quot;</span> : <span class="hljs-string">&quot;cn=admins,cn=Users,dc=songxwn,dc=com&quot;</span> <br>  &#125; &#125;,<br>  <span class="hljs-string">&quot;enabled&quot;</span>: true<br>&#125;<br><br><span class="hljs-comment"># </span><br><br><span class="hljs-comment"># 映射安全组，dc=songxwn,dc=com 为域名。cn=admins,cn=Users 代表路径，Users是组织单元，而admins为安全组。</span><br>admins安全组在Users组织单元下。<br><br><span class="hljs-comment"># 在AD中，添加到安全组的用户即可登录，并映射到相关角色。</span><br><br><span class="hljs-comment"># 用户可不带域名后缀登录。</span><br><br><span class="hljs-comment"># 具体路径查看，可以参考AD上的ADSI编辑器工具。</span><br><br></code></pre></td></tr></table></figure>
+<h2 id="配置用户组映射"><a href="#配置用户组映射" class="headerlink" title="配置用户组映射"></a>配置用户组映射</h2><h3 id="命令操作-Kibana-http-127-0-0-1-5601-app-dev-tools-console"><a href="#命令操作-Kibana-http-127-0-0-1-5601-app-dev-tools-console" class="headerlink" title="命令操作-Kibana&gt;http://127.0.0.1:5601/app/dev_tools#/console"></a>命令操作-Kibana&gt;<code>http://127.0.0.1:5601/app/dev_tools#/console</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs bash">PUT /_security/role_mapping/admins<br>&#123;<br>  <span class="hljs-string">&quot;roles&quot;</span> : [ <span class="hljs-string">&quot;monitoring&quot;</span> , <span class="hljs-string">&quot;user&quot;</span> ],<br>  <span class="hljs-string">&quot;rules&quot;</span> : &#123; <span class="hljs-string">&quot;field&quot;</span> : &#123;<br>    <span class="hljs-string">&quot;groups&quot;</span> : <span class="hljs-string">&quot;cn=admins,cn=Users,dc=songxwn,dc=com&quot;</span> <br>  &#125; &#125;,<br>  <span class="hljs-string">&quot;enabled&quot;</span>: <span class="hljs-literal">true</span><br>&#125;<br><br><span class="hljs-comment"># </span><br><br><span class="hljs-comment"># 映射安全组，dc=songxwn,dc=com 为域名。cn=admins,cn=Users 代表路径，Users是组织单元，而admins为安全组。</span><br>admins安全组在Users组织单元下。<br><br><span class="hljs-comment"># 在AD中，添加到安全组的用户即可登录，并映射到相关角色。</span><br><br><span class="hljs-comment"># 用户可不带域名后缀登录。</span><br><br><span class="hljs-comment"># 具体路径查看，可以参考AD上的ADSI编辑器工具。</span><br><br></code></pre></td></tr></table></figure>
 
-<h3 id="Web操作-推荐-Kibana-gt-http-127-0-0-1-5601-app-management-security-role-mappings"><a href="#Web操作-推荐-Kibana-gt-http-127-0-0-1-5601-app-management-security-role-mappings" class="headerlink" title="Web操作(推荐)-Kibana&gt;http://127.0.0.1:5601/app/management/security/role_mappings"></a>Web操作(推荐)-Kibana&gt;<code>http://127.0.0.1:5601/app/management/security/role_mappings</code></h3><h1 id=""><a href="#" class="headerlink" title=""></a><img src="https://s3.bmp.ovh/imgs/2023/05/03/7dd920bd443e0a3f.jpg" srcset="/img/loading.gif" lazyload></h1><ul>
+<h3 id="Web操作-推荐-Kibana-http-127-0-0-1-5601-app-management-security-role-mappings"><a href="#Web操作-推荐-Kibana-http-127-0-0-1-5601-app-management-security-role-mappings" class="headerlink" title="Web操作(推荐)-Kibana&gt;http://127.0.0.1:5601/app/management/security/role_mappings"></a>Web操作(推荐)-Kibana&gt;<code>http://127.0.0.1:5601/app/management/security/role_mappings</code></h3><h1 id=""><a href="#" class="headerlink" title=""></a><img src="https://s3.bmp.ovh/imgs/2023/05/03/7dd920bd443e0a3f.jpg" srcset="/img/loading.gif" lazyload></h1><ul>
 <li>映射安全组，dc&#x3D;songxwn,dc&#x3D;com 为域名。cn&#x3D;admins,cn&#x3D;Users 代表路径，Users是组织单元，而admins为安全组。  admins安全组在Users组织单元下。  ﻿ </li>
 <li>在AD中，添加到安全组的用户即可登录，并映射到相关角色。  ﻿  </li>
 <li>用户可不带域名后缀登录。  ﻿  </li>
@@ -461,7 +461,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年5月3日</div>
+          <div>2024年2月7日</div>
         </div>
       
       
