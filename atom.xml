@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-02-04T14:35:57.102Z</updated>
+  <updated>2024-02-07T09:24:57.225Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Zabbix 配置实时开通的LDAP认证-基于AD</title>
+    <link href="https://songxwn.com/zabbix-LDAP-JIT/"/>
+    <id>https://songxwn.com/zabbix-LDAP-JIT/</id>
+    <published>2024-02-07T09:02:59.000Z</published>
+    <updated>2024-02-07T09:24:57.225Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;本教程适用于6.4-7.0版本的Zabbix，域控（AD）使用Windows Server 2022搭建，域控等级为 2016。&lt;/p&gt;
+&lt;p&gt;域控域名为 songxwn.com。&lt;/p&gt;
+&lt;p&gt;最终实现AD用户统一认证，统一改密，Zabbix用户自动添加。（6.4之前不支持）&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Zabbix" scheme="https://songxwn.com/categories/Zabbix/"/>
+    
+    
+    <category term="zabbix" scheme="https://songxwn.com/tags/zabbix/"/>
+    
+    <category term="LDAP" scheme="https://songxwn.com/tags/LDAP/"/>
+    
+    <category term="AD" scheme="https://songxwn.com/tags/AD/"/>
+    
+  </entry>
   
   <entry>
     <title>智能无损网络 - 华为</title>
@@ -522,35 +547,6 @@
     <category term="network" scheme="https://songxwn.com/tags/network/"/>
     
     <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>个人使用软件清单</title>
-    <link href="https://songxwn.com/tools/"/>
-    <id>https://songxwn.com/tools/</id>
-    <published>2023-10-22T22:00:53.000Z</published>
-    <updated>2023-10-25T02:21:18.850Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html"></summary>
-        
-      
-    
-    
-    
-    <category term="Windows" scheme="https://songxwn.com/categories/Windows/"/>
-    
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="Windows" scheme="https://songxwn.com/tags/Windows/"/>
-    
-    <category term="Tools" scheme="https://songxwn.com/tags/Tools/"/>
     
   </entry>
   

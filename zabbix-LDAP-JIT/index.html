@@ -16,29 +16,28 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
   
-    <meta name="description" content="简介本文章简单介绍了MTR监控模板的使用。 只简单获取文本数据，作为历史查询。">
+    <meta name="description" content="介绍本教程适用于6.4-7.0版本的Zabbix，域控（AD）使用Windows Server 2022搭建，域控等级为 2016。 域控域名为 songxwn.com。 最终实现AD用户统一认证，统一改密，Zabbix用户自动添加。（6.4之前不支持）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Zabbix MTR 监测指南">
-<meta property="og:url" content="https://songxwn.com/zabbix-mtr/index.html">
+<meta property="og:title" content="Zabbix 配置实时开通的LDAP认证-基于AD">
+<meta property="og:url" content="https://songxwn.com/zabbix-LDAP-JIT/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="简介本文章简单介绍了MTR监控模板的使用。 只简单获取文本数据，作为历史查询。">
+<meta property="og:description" content="介绍本教程适用于6.4-7.0版本的Zabbix，域控（AD）使用Windows Server 2022搭建，域控等级为 2016。 域控域名为 songxwn.com。 最终实现AD用户统一认证，统一改密，Zabbix用户自动添加。（6.4之前不支持）">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img.songxwn.com/file/a80b948e2dc253169d150.png">
-<meta property="article:published_time" content="2023-10-26T04:02:59.000Z">
-<meta property="article:modified_time" content="2023-10-30T06:00:33.057Z">
+<meta property="og:image" content="https://img.songxwn.com/file/de78fb64b9ffcf233687a.png">
+<meta property="article:published_time" content="2024-02-07T09:02:59.000Z">
+<meta property="article:modified_time" content="2024-02-07T09:24:57.225Z">
 <meta property="article:author" content="Song">
-<meta property="article:tag" content="network">
-<meta property="article:tag" content="ping">
-<meta property="article:tag" content="mtr">
 <meta property="article:tag" content="zabbix">
+<meta property="article:tag" content="LDAP">
+<meta property="article:tag" content="AD">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img.songxwn.com/file/a80b948e2dc253169d150.png">
+<meta name="twitter:image" content="https://img.songxwn.com/file/de78fb64b9ffcf233687a.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Zabbix MTR 监测指南 - Song`s Blog</title>
+  <title>Zabbix 配置实时开通的LDAP认证-基于AD - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -245,7 +244,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Zabbix MTR 监测指南"></span>
+            <span id="subtitle" data-typed-text="Zabbix 配置实时开通的LDAP认证-基于AD"></span>
           
         </div>
 
@@ -256,8 +255,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-26 12:02" pubdate>
-          2023年10月26日 中午
+        <time datetime="2024-02-07 17:02" pubdate>
+          2024年2月7日 下午
         </time>
       </span>
     
@@ -268,7 +267,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          328 字
+          466 字
         
       </span>
     
@@ -279,7 +278,7 @@
         
         
         
-          3 分钟
+          4 分钟
         
       </span>
     
@@ -337,12 +336,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Zabbix MTR 监测指南</h1>
+            <h1 id="seo-header">Zabbix 配置实时开通的LDAP认证-基于AD</h1>
             
               <p id="updated-time" class="note note-danger" style="">
                 
                   
-                    本文最后更新于 2023年10月30日 下午
+                    本文最后更新于 2024年2月7日 下午
                   
                 
               </p>
@@ -350,31 +349,56 @@
             
               <div class="markdown-body">
                 
-                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>本文章简单介绍了MTR监控模板的使用。</p>
-<p>只简单获取文本数据，作为历史查询。</p>
+                <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>本教程适用于6.4-7.0版本的Zabbix，域控（AD）使用Windows Server 2022搭建，域控等级为 2016。</p>
+<p>域控域名为 songxwn.com。</p>
+<p>最终实现AD用户统一认证，统一改密，Zabbix用户自动添加。（6.4之前不支持）</p>
 <span id="more"></span>
 
-<h2 id="安装MTR配置脚本"><a href="#安装MTR配置脚本" class="headerlink" title="安装MTR配置脚本"></a>安装MTR配置脚本</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cmake">dnf <span class="hljs-keyword">install</span> mtr<br><br><span class="hljs-comment">#RHEL 系列</span><br><br>apt <span class="hljs-keyword">install</span> mtr<br><br><span class="hljs-comment">#Debian 系列</span><br><br><br><span class="hljs-comment"># 安装MTR包</span><br><br></code></pre></td></tr></table></figure>
-
-<h3 id="配置脚本"><a href="#配置脚本" class="headerlink" title="配置脚本"></a>配置脚本</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim /usr/lib/zabbix/externalscripts/mtr.sh<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/bash</span><br>  <br>IP=$1<br>mtr -n -z -c3 -r $IP<br><br></code></pre></td></tr></table></figure>
-
-<p>说明：不把IP解析为域名，获取IP的AS号，只执行三次。</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk">chmod +x <span class="hljs-regexp">/usr/</span>lib<span class="hljs-regexp">/zabbix/</span>externalscripts/mtr.sh<br><br><span class="hljs-comment"># 给予脚本执行权限</span><br><br></code></pre></td></tr></table></figure>
-
-<h2 id="修改超时时间"><a href="#修改超时时间" class="headerlink" title="修改超时时间"></a>修改超时时间</h2><p>由于zabbix 监控项默认的获取超时时间为4秒，而mtr执行时间远超这个，所以会导致超时。</p>
-<h3 id="Zabbix-Server"><a href="#Zabbix-Server" class="headerlink" title="Zabbix Server"></a>Zabbix Server</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs awk">vim <span class="hljs-regexp">/etc/</span>zabbix/zabbix_server.conf<br><br>﻿<br><br>﻿<br><br>Timeout=<span class="hljs-number">15</span><br><br>﻿<br><br><span class="hljs-comment"># 修改超时时间，单位为秒，重启生效。</span><br><br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="Zabbix-Proxy"><a href="#Zabbix-Proxy" class="headerlink" title="Zabbix Proxy"></a>Zabbix Proxy</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs awk">vim <span class="hljs-regexp">/etc/</span>zabbix/zabbix_proxy.conf<br><br><br>Timeout=<span class="hljs-number">15</span><br><br><span class="hljs-comment"># 修改超时时间，单位为秒，重启生效。</span><br><br></code></pre></td></tr></table></figure>
-
-<h2 id="导入模板"><a href="#导入模板" class="headerlink" title="导入模板"></a>导入模板</h2><p>MTR模板（6.0）下载地址： <a href="https://songxwn.com/file/mtr_templates.xml">https://songxwn.com/file/mtr_templates.xml</a></p>
-<p>下载导入即可。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><br><span class="hljs-attr">zabbix_export:</span><br>  <span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;6.0&#x27;</span><br>  <span class="hljs-attr">date:</span> <span class="hljs-string">&#x27;2023-10-26T09:04:42Z&#x27;</span><br>  <span class="hljs-attr">groups:</span><br>    <span class="hljs-bullet">-</span><br>      <span class="hljs-attr">uuid:</span> <span class="hljs-string">a571c0d144b14fd4a87a9d9b2aa9fcd6</span><br>      <span class="hljs-attr">name:</span> <span class="hljs-string">Templates/Applications</span><br>  <span class="hljs-attr">templates:</span><br>    <span class="hljs-bullet">-</span><br>      <span class="hljs-attr">uuid:</span> <span class="hljs-string">49944f4008104f5aae90dc570888016c</span><br>      <span class="hljs-attr">template:</span> <span class="hljs-string">&#x27;MTR Template&#x27;</span><br>      <span class="hljs-attr">name:</span> <span class="hljs-string">&#x27;MTR Template&#x27;</span><br>      <span class="hljs-attr">description:</span> <span class="hljs-string">|</span><br><span class="hljs-string">        文档：https://songxwn.com/zabbix-mtr</span><br><span class="hljs-string"></span>        <br>        <span class="hljs-string">Debian</span><br>        <br>        <span class="hljs-string">apt</span> <span class="hljs-string">install</span> <span class="hljs-string">mtr-tiny</span><br>        <br>        <span class="hljs-string">RHEL</span><br>        <br>        <span class="hljs-string">yum</span> <span class="hljs-string">install</span><br>      <span class="hljs-attr">groups:</span><br>        <span class="hljs-bullet">-</span><br>          <span class="hljs-attr">name:</span> <span class="hljs-string">Templates/Applications</span><br>      <span class="hljs-attr">items:</span><br>        <span class="hljs-bullet">-</span><br>          <span class="hljs-attr">uuid:</span> <span class="hljs-string">6777d690f9e540bab1c6b8a77db49169</span><br>          <span class="hljs-attr">name:</span> <span class="hljs-string">&#x27;MTR Get&#x27;</span><br>          <span class="hljs-attr">type:</span> <span class="hljs-string">EXTERNAL</span><br>          <span class="hljs-attr">key:</span> <span class="hljs-string">&#x27;mtr.sh[&#123;HOST.CONN&#125;]&#x27;</span><br>          <span class="hljs-attr">delay:</span> <span class="hljs-string">3m</span><br>          <span class="hljs-attr">history:</span> <span class="hljs-string">30d</span><br>          <span class="hljs-attr">trends:</span> <span class="hljs-string">&#x27;0&#x27;</span><br>          <span class="hljs-attr">value_type:</span> <span class="hljs-string">TEXT</span><br>          <span class="hljs-attr">description:</span> <span class="hljs-string">调用mtr脚本，获取文本数据</span><br>          <span class="hljs-attr">tags:</span><br>            <span class="hljs-bullet">-</span><br>              <span class="hljs-attr">tag:</span> <span class="hljs-string">Application</span><br>              <span class="hljs-attr">value:</span> <span class="hljs-string">&#x27;Master Items&#x27;</span><br></code></pre></td></tr></table></figure>
-
-
-<p>保存为yaml格式即可。</p>
-<h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><p>可以在监控项查看历史记录，数据以文本显示，也可以在Grafana 以文本显示。</p>
+<h1 id="认证配置"><a href="#认证配置" class="headerlink" title="认证配置"></a>认证配置</h1><h2 id="创建Zabbix本地LDAP映射组"><a href="#创建Zabbix本地LDAP映射组" class="headerlink" title="创建Zabbix本地LDAP映射组"></a>创建Zabbix本地LDAP映射组</h2><p>创建一个LDAP用户组，用于权限管理等。注意配置前端访问模式为LDAP。</p>
+<p><img src="https://img.songxwn.com/file/6e7aaa3f6b8b655cd9352.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="修改默认认证方式"><a href="#修改默认认证方式" class="headerlink" title="修改默认认证方式"></a>修改默认认证方式</h2><p>修改默认认证方式为LDAP，并添加取消配置用户组（禁止使用用户组）一般配置自带的Disabled组即可。</p>
+<p><img src="https://img.songxwn.com/file/8abfe8954f9f3fb6e32d7.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="接入AD域控服务器-实现LDAP身份统一认证"><a href="#接入AD域控服务器-实现LDAP身份统一认证" class="headerlink" title="接入AD域控服务器-实现LDAP身份统一认证"></a>接入AD域控服务器-实现LDAP身份统一认证</h2><h3 id="选择启用LDAP验证，启用JIT服务开通功能。然后点击添加LDAP服务器。"><a href="#选择启用LDAP验证，启用JIT服务开通功能。然后点击添加LDAP服务器。" class="headerlink" title="选择启用LDAP验证，启用JIT服务开通功能。然后点击添加LDAP服务器。"></a>选择启用LDAP验证，启用JIT服务开通功能。然后点击添加LDAP服务器。</h3><p><img src="https://img.songxwn.com/file/6621c32d35098a1414f3c.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="配置LDAP服务器"><a href="#配置LDAP服务器" class="headerlink" title="配置LDAP服务器"></a>配置LDAP服务器</h3><ul>
+<li><p>名称：任意填写即可</p>
+</li>
+<li><p>主机为域控的主域名或域控服务器IP地址。（使用域名需要配置对DNS）</p>
+</li>
+<li><p>端口默认389即可。</p>
+</li>
+<li><p>基于DN，参考下面配置，我的域控域名为songxwn.com (可以使用域控上ADSI工具查看)</p>
+</li>
+<li><p>搜索属性AD环境必须为sAMAccountName</p>
+</li>
+<li><p>绑定DN为可登录的域控账号</p>
+</li>
+<li><p>绑定密码为上面域账号的密码</p>
+</li>
+<li><p>勾选配置准时(JIT)服务开通</p>
+</li>
+<li><p>组名属性为CN</p>
+</li>
+<li><p>组成员属性为memberOf</p>
+</li>
+<li><p>用户姓氏属性为givenName</p>
+</li>
+</ul>
+<p>最终，点击用户组映射配置，将Zabbix组和AD的用户组映射</p>
+<p><img src="https://img.songxwn.com/file/85d1955e0da5b4913fa11.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="用户组映射配置"><a href="#用户组映射配置" class="headerlink" title="用户组映射配置"></a>用户组映射配置</h3><ul>
+<li><p>LDAP组模式为AD域控里面的用户组名</p>
+</li>
+<li><p>用户群组写Zabbix 上面创建的组</p>
+</li>
+<li><p>用户角色根据需求选择，一般为User即可。</p>
+</li>
+</ul>
+<p>最后点击添加</p>
+<p><img src="https://img.songxwn.com/file/55b658fac4369737059a5.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="点击添加即可，最终如下面所示。点击测试可以测试配置是否正确。"><a href="#点击添加即可，最终如下面所示。点击测试可以测试配置是否正确。" class="headerlink" title="点击添加即可，最终如下面所示。点击测试可以测试配置是否正确。"></a>点击添加即可，最终如下面所示。点击测试可以测试配置是否正确。</h3><p><img src="https://img.songxwn.com/file/544aafcf3cb65d594070c.png" srcset="/img/loading.gif" lazyload></p>
+<p>&#x20;</p>
+<h3 id="最终点击更新后保存配置，至此配置完成。"><a href="#最终点击更新后保存配置，至此配置完成。" class="headerlink" title="最终点击更新后保存配置，至此配置完成。"></a>最终点击更新后保存配置，至此配置完成。</h3><p><img src="https://img.songxwn.com/file/dfddaad3666761e1eb37a.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://blog.zabbix.com/just-in-time-user-provisioning-explained/25515/" title="https://blog.zabbix.com/just-in-time-user-provisioning-explained/25515/">https://blog.zabbix.com/just-in-time-user-provisioning-explained/25515/</a></p>
 
                 
               </div>
@@ -408,13 +432,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/network/" class="print-no-link">#network</a>
-      
-        <a href="/tags/ping/" class="print-no-link">#ping</a>
-      
-        <a href="/tags/mtr/" class="print-no-link">#mtr</a>
-      
         <a href="/tags/zabbix/" class="print-no-link">#zabbix</a>
+      
+        <a href="/tags/LDAP/" class="print-no-link">#LDAP</a>
+      
+        <a href="/tags/AD/" class="print-no-link">#AD</a>
       
     </div>
   
@@ -426,8 +448,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Zabbix MTR 监测指南</div>
-      <div>https://songxwn.com/zabbix-mtr/</div>
+      <div>Zabbix 配置实时开通的LDAP认证-基于AD</div>
+      <div>https://songxwn.com/zabbix-LDAP-JIT/</div>
     </div>
     <div class="license-meta">
       
@@ -439,13 +461,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年10月26日</div>
+          <div>2024年2月7日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年10月30日</div>
+          <div>2024年2月7日</div>
         </div>
       
       
@@ -476,18 +498,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/BGP-rib-only/" title="节省华为设备的路由表和转发表-rib-only">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">节省华为设备的路由表和转发表-rib-only</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/save-ip/" title="假网关-为了节省公网IP的骚操作">
-                        <span class="hidden-mobile">假网关-为了节省公网IP的骚操作</span>
+                      <a href="/RDMA/" title="智能无损网络 - 华为">
+                        <span class="hidden-mobile">智能无损网络 - 华为</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -604,7 +620,7 @@
       
         <a href="/zabbix-mtr/" title="Zabbix MTR 监测指南"
            class="list-group-item list-group-item-action
-           active">
+           ">
           <span class="category-post">Zabbix MTR 监测指南</span>
         </a>
       
@@ -622,7 +638,7 @@
       
         <a href="/zabbix-LDAP-JIT/" title="Zabbix 配置实时开通的LDAP认证-基于AD"
            class="list-group-item list-group-item-action
-           ">
+           active">
           <span class="category-post">Zabbix 配置实时开通的LDAP认证-基于AD</span>
         </a>
       

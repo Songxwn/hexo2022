@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>Zabbix 配置实时开通的LDAP认证-基于AD</title>
+    <link href="/zabbix-LDAP-JIT/"/>
+    <url>/zabbix-LDAP-JIT/</url>
+    
+    <content type="html"><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>本教程适用于6.4-7.0版本的Zabbix，域控（AD）使用Windows Server 2022搭建，域控等级为 2016。</p><p>域控域名为 songxwn.com。</p><p>最终实现AD用户统一认证，统一改密，Zabbix用户自动添加。（6.4之前不支持）</p><span id="more"></span><h1 id="认证配置"><a href="#认证配置" class="headerlink" title="认证配置"></a>认证配置</h1><h2 id="创建Zabbix本地LDAP映射组"><a href="#创建Zabbix本地LDAP映射组" class="headerlink" title="创建Zabbix本地LDAP映射组"></a>创建Zabbix本地LDAP映射组</h2><p>创建一个LDAP用户组，用于权限管理等。注意配置前端访问模式为LDAP。</p><p><img src="https://img.songxwn.com/file/6e7aaa3f6b8b655cd9352.png" srcset="/img/loading.gif" lazyload></p><h2 id="修改默认认证方式"><a href="#修改默认认证方式" class="headerlink" title="修改默认认证方式"></a>修改默认认证方式</h2><p>修改默认认证方式为LDAP，并添加取消配置用户组（禁止使用用户组）一般配置自带的Disabled组即可。</p><p><img src="https://img.songxwn.com/file/8abfe8954f9f3fb6e32d7.png" srcset="/img/loading.gif" lazyload></p><h2 id="接入AD域控服务器-实现LDAP身份统一认证"><a href="#接入AD域控服务器-实现LDAP身份统一认证" class="headerlink" title="接入AD域控服务器-实现LDAP身份统一认证"></a>接入AD域控服务器-实现LDAP身份统一认证</h2><h3 id="选择启用LDAP验证，启用JIT服务开通功能。然后点击添加LDAP服务器。"><a href="#选择启用LDAP验证，启用JIT服务开通功能。然后点击添加LDAP服务器。" class="headerlink" title="选择启用LDAP验证，启用JIT服务开通功能。然后点击添加LDAP服务器。"></a>选择启用LDAP验证，启用JIT服务开通功能。然后点击添加LDAP服务器。</h3><p><img src="https://img.songxwn.com/file/6621c32d35098a1414f3c.png" srcset="/img/loading.gif" lazyload></p><h3 id="配置LDAP服务器"><a href="#配置LDAP服务器" class="headerlink" title="配置LDAP服务器"></a>配置LDAP服务器</h3><ul><li><p>名称：任意填写即可</p></li><li><p>主机为域控的主域名或域控服务器IP地址。（使用域名需要配置对DNS）</p></li><li><p>端口默认389即可。</p></li><li><p>基于DN，参考下面配置，我的域控域名为songxwn.com (可以使用域控上ADSI工具查看)</p></li><li><p>搜索属性AD环境必须为sAMAccountName</p></li><li><p>绑定DN为可登录的域控账号</p></li><li><p>绑定密码为上面域账号的密码</p></li><li><p>勾选配置准时(JIT)服务开通</p></li><li><p>组名属性为CN</p></li><li><p>组成员属性为memberOf</p></li><li><p>用户姓氏属性为givenName</p></li></ul><p>最终，点击用户组映射配置，将Zabbix组和AD的用户组映射</p><p><img src="https://img.songxwn.com/file/85d1955e0da5b4913fa11.png" srcset="/img/loading.gif" lazyload></p><h3 id="用户组映射配置"><a href="#用户组映射配置" class="headerlink" title="用户组映射配置"></a>用户组映射配置</h3><ul><li><p>LDAP组模式为AD域控里面的用户组名</p></li><li><p>用户群组写Zabbix 上面创建的组</p></li><li><p>用户角色根据需求选择，一般为User即可。</p></li></ul><p>最后点击添加</p><p><img src="https://img.songxwn.com/file/55b658fac4369737059a5.png" srcset="/img/loading.gif" lazyload></p><h3 id="点击添加即可，最终如下面所示。点击测试可以测试配置是否正确。"><a href="#点击添加即可，最终如下面所示。点击测试可以测试配置是否正确。" class="headerlink" title="点击添加即可，最终如下面所示。点击测试可以测试配置是否正确。"></a>点击添加即可，最终如下面所示。点击测试可以测试配置是否正确。</h3><p><img src="https://img.songxwn.com/file/544aafcf3cb65d594070c.png" srcset="/img/loading.gif" lazyload></p><p>&#x20;</p><h3 id="最终点击更新后保存配置，至此配置完成。"><a href="#最终点击更新后保存配置，至此配置完成。" class="headerlink" title="最终点击更新后保存配置，至此配置完成。"></a>最终点击更新后保存配置，至此配置完成。</h3><p><img src="https://img.songxwn.com/file/dfddaad3666761e1eb37a.png" srcset="/img/loading.gif" lazyload></p><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://blog.zabbix.com/just-in-time-user-provisioning-explained/25515/" title="https://blog.zabbix.com/just-in-time-user-provisioning-explained/25515/">https://blog.zabbix.com/just-in-time-user-provisioning-explained/25515/</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Zabbix</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>zabbix</tag>
+      
+      <tag>LDAP</tag>
+      
+      <tag>AD</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>智能无损网络 - 华为</title>
     <link href="/RDMA/"/>
     <url>/RDMA/</url>
