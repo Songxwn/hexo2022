@@ -16,28 +16,28 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
   
-    <meta name="description" content="介绍本教程适用于6.4-7.0+版本的Zabbix，域控（AD）使用Windows Server 2022搭建，域控等级为 2016。 域控域名为 songxwn.com 最终实现AD用户统一认证，统一改密，Zabbix用户自动添加。（6.4之前不支持）">
+    <meta name="description" content="介绍本教程适用于9-10版本的Grafana，域控（AD）使用Windows Server 2022搭建，域控等级为 2016。 域控域名为 songxwn.com 最终实现AD用户统一认证，统一改密，Grafana用户自动添加。权限由Grafana控制">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Zabbix 配置实时开通的LDAP认证-基于AD">
-<meta property="og:url" content="https://songxwn.com/zabbix-LDAP-JIT/index.html">
+<meta property="og:title" content="Grafana 配置实时开通的LDAP认证-基于AD">
+<meta property="og:url" content="https://songxwn.com/Grafana-LDAP-AD/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="介绍本教程适用于6.4-7.0+版本的Zabbix，域控（AD）使用Windows Server 2022搭建，域控等级为 2016。 域控域名为 songxwn.com 最终实现AD用户统一认证，统一改密，Zabbix用户自动添加。（6.4之前不支持）">
+<meta property="og:description" content="介绍本教程适用于9-10版本的Grafana，域控（AD）使用Windows Server 2022搭建，域控等级为 2016。 域控域名为 songxwn.com 最终实现AD用户统一认证，统一改密，Grafana用户自动添加。权限由Grafana控制">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img.songxwn.com/file/448a791215ac5c2bef75f.png">
-<meta property="article:published_time" content="2024-02-07T09:02:59.000Z">
-<meta property="article:modified_time" content="2024-02-07T09:33:46.409Z">
+<meta property="og:image" content="https://img.songxwn.com/file/78f7c3511449b0ac6e838.png">
+<meta property="article:published_time" content="2024-02-09T05:02:59.000Z">
+<meta property="article:modified_time" content="2024-02-09T05:07:11.219Z">
 <meta property="article:author" content="Song">
-<meta property="article:tag" content="zabbix">
 <meta property="article:tag" content="LDAP">
 <meta property="article:tag" content="AD">
+<meta property="article:tag" content="grafana">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img.songxwn.com/file/448a791215ac5c2bef75f.png">
+<meta name="twitter:image" content="https://img.songxwn.com/file/78f7c3511449b0ac6e838.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Zabbix 配置实时开通的LDAP认证-基于AD - Song`s Blog</title>
+  <title>Grafana 配置实时开通的LDAP认证-基于AD - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -244,7 +244,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Zabbix 配置实时开通的LDAP认证-基于AD"></span>
+            <span id="subtitle" data-typed-text="Grafana 配置实时开通的LDAP认证-基于AD"></span>
           
         </div>
 
@@ -255,8 +255,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-02-07 17:02" pubdate>
-          2024年2月7日 下午
+        <time datetime="2024-02-09 13:02" pubdate>
+          2024年2月9日 下午
         </time>
       </span>
     
@@ -267,7 +267,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          466 字
+          529 字
         
       </span>
     
@@ -278,7 +278,7 @@
         
         
         
-          4 分钟
+          5 分钟
         
       </span>
     
@@ -336,12 +336,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Zabbix 配置实时开通的LDAP认证-基于AD</h1>
+            <h1 id="seo-header">Grafana 配置实时开通的LDAP认证-基于AD</h1>
             
               <p id="updated-time" class="note note-danger" style="">
                 
                   
-                    本文最后更新于 2024年2月7日 下午
+                    本文最后更新于 2024年2月9日 下午
                   
                 
               </p>
@@ -349,56 +349,47 @@
             
               <div class="markdown-body">
                 
-                <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>本教程适用于6.4-7.0+版本的Zabbix，域控（AD）使用Windows Server 2022搭建，域控等级为 2016。</p>
+                <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>本教程适用于9-10版本的Grafana，域控（AD）使用Windows Server 2022搭建，域控等级为 2016。</p>
 <p>域控域名为 songxwn.com</p>
-<p>最终实现AD用户统一认证，统一改密，Zabbix用户自动添加。（6.4之前不支持）</p>
+<p>最终实现AD用户统一认证，统一改密，Grafana用户自动添加。权限由Grafana控制</p>
 <span id="more"></span>
 
-<h1 id="认证配置"><a href="#认证配置" class="headerlink" title="认证配置"></a>认证配置</h1><h2 id="创建Zabbix本地LDAP映射组"><a href="#创建Zabbix本地LDAP映射组" class="headerlink" title="创建Zabbix本地LDAP映射组"></a>创建Zabbix本地LDAP映射组</h2><p>创建一个LDAP用户组，用于权限管理等。注意配置前端访问模式为LDAP。</p>
-<p><img src="https://img.songxwn.com/file/6e7aaa3f6b8b655cd9352.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="修改默认认证方式"><a href="#修改默认认证方式" class="headerlink" title="修改默认认证方式"></a>修改默认认证方式</h2><p>修改默认认证方式为LDAP，并添加取消配置用户组（禁止使用用户组）一般配置自带的Disabled组即可。</p>
-<p><img src="https://img.songxwn.com/file/8abfe8954f9f3fb6e32d7.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="接入AD域控服务器-实现LDAP身份统一认证"><a href="#接入AD域控服务器-实现LDAP身份统一认证" class="headerlink" title="接入AD域控服务器-实现LDAP身份统一认证"></a>接入AD域控服务器-实现LDAP身份统一认证</h2><h3 id="选择启用LDAP验证，启用JIT服务开通功能。然后点击添加LDAP服务器。"><a href="#选择启用LDAP验证，启用JIT服务开通功能。然后点击添加LDAP服务器。" class="headerlink" title="选择启用LDAP验证，启用JIT服务开通功能。然后点击添加LDAP服务器。"></a>选择启用LDAP验证，启用JIT服务开通功能。然后点击添加LDAP服务器。</h3><p><img src="https://img.songxwn.com/file/6621c32d35098a1414f3c.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="配置LDAP服务器"><a href="#配置LDAP服务器" class="headerlink" title="配置LDAP服务器"></a>配置LDAP服务器</h3><ul>
-<li><p>名称：任意填写即可</p>
+<h1 id="全局开启LDAP"><a href="#全局开启LDAP" class="headerlink" title="全局开启LDAP"></a>全局开启LDAP</h1><p>修改&#x2F;etc&#x2F;grafana&#x2F;grafana.ini 文件</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">vim</span> /etc/grafana/grafana.ini<br></code></pre></td></tr></table></figure>
+
+<p>修改并取消注释以下参数即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell"><br>[auth.ldap]<br>enabled = true<br>config_file = /etc/grafana/ldap.toml<br>allow_sign_up = true<br><br></code></pre></td></tr></table></figure>
+
+
+<h1 id="配置LDAP对接文件"><a href="#配置LDAP对接文件" class="headerlink" title="配置LDAP对接文件"></a>配置LDAP对接文件</h1><p>修改&#x2F;etc&#x2F;grafana&#x2F;ldap.toml文件</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">vim</span> /etc/grafana/ldap.toml<br></code></pre></td></tr></table></figure>
+
+<p>文件示例</p>
+<ul>
+<li><p>host 为域控制器地址。</p>
 </li>
-<li><p>主机为域控的主域名或域控服务器IP地址。（使用域名需要配置对DNS）</p>
+<li><p>port 默认为 389即可，不开启加密</p>
 </li>
-<li><p>端口默认389即可。</p>
+<li><p>bind_dn 为域控账号，用于搜索域控账号</p>
 </li>
-<li><p>基于DN，参考下面配置，我的域控域名为songxwn.com (可以使用域控上ADSI工具查看)</p>
+<li><p>bind_password 为上面账号的密码</p>
 </li>
-<li><p>搜索属性AD环境必须为sAMAccountName</p>
+<li><p>search_filter AD固定为(sAMAccountName&#x3D;%s)</p>
 </li>
-<li><p>绑定DN为可登录的域控账号</p>
-</li>
-<li><p>绑定密码为上面域账号的密码</p>
-</li>
-<li><p>勾选配置准时(JIT)服务开通</p>
-</li>
-<li><p>组名属性为CN</p>
-</li>
-<li><p>组成员属性为memberOf</p>
-</li>
-<li><p>用户姓氏属性为givenName</p>
+<li><p>search_base_dns 为域控路径，可以去ADSI查看</p>
 </li>
 </ul>
-<p>最终，点击用户组映射配置，将Zabbix组和AD的用户组映射</p>
-<p><img src="https://img.songxwn.com/file/85d1955e0da5b4913fa11.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="用户组映射配置"><a href="#用户组映射配置" class="headerlink" title="用户组映射配置"></a>用户组映射配置</h3><ul>
-<li><p>LDAP组模式为AD域控里面的用户组名</p>
-</li>
-<li><p>用户群组写Zabbix 上面创建的组</p>
-</li>
-<li><p>用户角色根据需求选择，一般为User即可。</p>
-</li>
+<h2 id="用户组权限映射-servers-group-mappings"><a href="#用户组权限映射-servers-group-mappings" class="headerlink" title="用户组权限映射 - [[servers.group_mappings]]"></a>用户组权限映射 - [[servers.group_mappings]]</h2><ul>
+<li>group_dn 为用户组的路径</li>
+<li>org_role 为在Grafana用户组的权限，有 Admin、Editor、Viewer （管理、编辑、只读）</li>
 </ul>
-<p>最后点击添加</p>
-<p><img src="https://img.songxwn.com/file/55b658fac4369737059a5.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="点击添加即可，最终如下面所示。点击测试可以测试配置是否正确。"><a href="#点击添加即可，最终如下面所示。点击测试可以测试配置是否正确。" class="headerlink" title="点击添加即可，最终如下面所示。点击测试可以测试配置是否正确。"></a>点击添加即可，最终如下面所示。点击测试可以测试配置是否正确。</h3><p><img src="https://img.songxwn.com/file/544aafcf3cb65d594070c.png" srcset="/img/loading.gif" lazyload></p>
-<p>&#x20;</p>
-<h3 id="最终点击更新后保存配置，至此配置完成。"><a href="#最终点击更新后保存配置，至此配置完成。" class="headerlink" title="最终点击更新后保存配置，至此配置完成。"></a>最终点击更新后保存配置，至此配置完成。</h3><p><img src="https://img.songxwn.com/file/dfddaad3666761e1eb37a.png" srcset="/img/loading.gif" lazyload></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://blog.zabbix.com/just-in-time-user-provisioning-explained/25515/" title="https://blog.zabbix.com/just-in-time-user-provisioning-explained/25515/">https://blog.zabbix.com/just-in-time-user-provisioning-explained/25515/</a></p>
+<p>如下面所示，我将it1 映射为了Editor，it2 组为Viewer</p>
+<p>PS：具体路径建议用ADSI工具查看。</p>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><code class="hljs toml"><br><span class="hljs-section">[[servers]]</span><br><span class="hljs-comment"># Ldap server host (specify multiple hosts space separated)</span><br><span class="hljs-attr">host</span> = <span class="hljs-string">&quot;songxwn.com&quot;</span><br><span class="hljs-comment"># Default port is 389 or 636 if use_ssl = true</span><br><span class="hljs-attr">port</span> = <span class="hljs-number">389</span><br><span class="hljs-comment"># Set to true if LDAP server should use an encrypted TLS connection (either with STARTTLS or LDAPS)</span><br><span class="hljs-attr">use_ssl</span> = <span class="hljs-literal">false</span><br><span class="hljs-comment"># If set to true, use LDAP with STARTTLS instead of LDAPS</span><br><span class="hljs-attr">start_tls</span> = <span class="hljs-literal">false</span><br><span class="hljs-comment"># The value of an accepted TLS cipher. By default, this value is empty. Example value: [&quot;TLS_AES_256_GCM_SHA384&quot;])</span><br><span class="hljs-comment"># For a complete list of supported ciphers and TLS versions, refer to: https://go.dev/src/crypto/tls/cipher_suites.go</span><br><span class="hljs-attr">tls_ciphers</span> = []<br><span class="hljs-comment"># This is the minimum TLS version allowed. By default, this value is empty. Accepted values are: TLS1.1, TLS1.2, TLS1.3.</span><br><span class="hljs-attr">min_tls_version</span> = <span class="hljs-string">&quot;&quot;</span><br><span class="hljs-comment"># set to true if you want to skip ssl cert validation</span><br><span class="hljs-attr">ssl_skip_verify</span> = <span class="hljs-literal">false</span><br><span class="hljs-comment"># set to the path to your root CA certificate or leave unset to use system defaults</span><br><span class="hljs-comment"># root_ca_cert = &quot;/path/to/certificate.crt&quot;</span><br><span class="hljs-comment"># Authentication against LDAP servers requiring client certificates</span><br><span class="hljs-comment"># client_cert = &quot;/path/to/client.crt&quot;</span><br><span class="hljs-comment"># client_key = &quot;/path/to/client.key&quot;</span><br><br><span class="hljs-comment"># Search user bind dn</span><br><span class="hljs-attr">bind_dn</span> = <span class="hljs-string">&quot;admin@songxwn.com&quot;</span><br><span class="hljs-comment"># Search user bind password</span><br><span class="hljs-comment"># If the password contains # or ; you have to wrap it with triple quotes. Ex &quot;&quot;&quot;#password;&quot;&quot;&quot;</span><br><span class="hljs-attr">bind_password</span> = <span class="hljs-string">&#x27;password@123&#x27;</span><br><span class="hljs-comment"># We recommend using variable expansion for the bind_password, for more info https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#variable-expansion</span><br><span class="hljs-comment"># bind_password = &#x27;$__env&#123;LDAP_BIND_PASSWORD&#125;&#x27;</span><br><br><span class="hljs-comment"># Timeout in seconds (applies to each host specified in the &#x27;host&#x27; entry (space separated))</span><br><span class="hljs-attr">timeout</span> = <span class="hljs-number">15</span><br><br><span class="hljs-comment"># User search filter, for example &quot;(cn=%s)&quot; or &quot;(sAMAccountName=%s)&quot; or &quot;(uid=%s)&quot;</span><br><span class="hljs-attr">search_filter</span> = <span class="hljs-string">&quot;(sAMAccountName=%s)&quot;</span><br><br><span class="hljs-comment"># An array of base dns to search through</span><br><span class="hljs-attr">search_base_dns</span> = [<span class="hljs-string">&quot;dc=songxwn,dc=com&quot;</span>]<br><br><span class="hljs-comment">## For Posix or LDAP setups that does not support member_of attribute you can define the below settings</span><br><span class="hljs-comment">## Please check grafana LDAP docs for examples</span><br><span class="hljs-comment"># group_search_filter = &quot;(&amp;(objectClass=posixGroup)(memberUid=%s))&quot;</span><br><span class="hljs-comment"># group_search_base_dns = [&quot;ou=groups,dc=grafana,dc=org&quot;]</span><br><span class="hljs-comment"># group_search_filter_user_attribute = &quot;uid&quot;</span><br><br><span class="hljs-comment"># Specify names of the ldap attributes your ldap uses</span><br><span class="hljs-section">[servers.attributes]</span><br><span class="hljs-attr">name</span> = <span class="hljs-string">&quot;givenName&quot;</span><br><span class="hljs-attr">surname</span> = <span class="hljs-string">&quot;sn&quot;</span><br><span class="hljs-attr">username</span> = <span class="hljs-string">&quot;sAMAccountName&quot;</span><br><span class="hljs-attr">member_of</span> = <span class="hljs-string">&quot;memberOf&quot;</span><br><span class="hljs-attr">email</span> =  <span class="hljs-string">&quot;mail&quot;</span><br><br><br><span class="hljs-comment"># Map ldap groups to grafana org roles</span><br><span class="hljs-section">[[servers.group_mappings]]</span><br><span class="hljs-attr">group_dn</span> = <span class="hljs-string">&quot;cn=admins,ou=groups,dc=grafana,dc=org&quot;</span><br><span class="hljs-attr">org_role</span> = <span class="hljs-string">&quot;Admin&quot;</span><br><span class="hljs-comment"># To make user an instance admin  (Grafana Admin) uncomment line below</span><br><span class="hljs-comment"># grafana_admin = true</span><br><span class="hljs-comment"># The Grafana organization database id, optional, if left out the default org (id 1) will be used</span><br><span class="hljs-comment"># org_id = 1</span><br><br><span class="hljs-section">[[servers.group_mappings]]</span><br><span class="hljs-attr">group_dn</span> = <span class="hljs-string">&quot;cn=it1,cn=users,dc=songxwn,dc=com&quot;</span><br><span class="hljs-attr">org_role</span> = <span class="hljs-string">&quot;Editor&quot;</span><br><br><span class="hljs-section">[[servers.group_mappings]]</span><br><span class="hljs-comment"># If you want to match all (or no ldap groups) then you can use wildcard</span><br><span class="hljs-attr">group_dn</span> = <span class="hljs-string">&quot;cn=it2,cn=users,dc=songxwn,dc=com&quot;</span><br><span class="hljs-attr">org_role</span> = <span class="hljs-string">&quot;Viewer&quot;</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://grafana.com/docs/grafana/latest/setup-grafana/configure-security/configure-authentication/ldap/">https://grafana.com/docs/grafana/latest/setup-grafana/configure-security/configure-authentication/ldap/</a></p>
 
                 
               </div>
@@ -417,7 +408,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Zabbix/" class="category-chain-item">Zabbix</a>
+  <a href="/categories/Grfana/" class="category-chain-item">Grfana</a>
   
   
 
@@ -432,11 +423,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/zabbix/" class="print-no-link">#zabbix</a>
-      
         <a href="/tags/LDAP/" class="print-no-link">#LDAP</a>
       
         <a href="/tags/AD/" class="print-no-link">#AD</a>
+      
+        <a href="/tags/grafana/" class="print-no-link">#grafana</a>
       
     </div>
   
@@ -448,8 +439,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Zabbix 配置实时开通的LDAP认证-基于AD</div>
-      <div>https://songxwn.com/zabbix-LDAP-JIT/</div>
+      <div>Grafana 配置实时开通的LDAP认证-基于AD</div>
+      <div>https://songxwn.com/Grafana-LDAP-AD/</div>
     </div>
     <div class="license-meta">
       
@@ -461,13 +452,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年2月7日</div>
+          <div>2024年2月9日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年2月7日</div>
+          <div>2024年2月9日</div>
         </div>
       
       
@@ -498,18 +489,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Grafana-LDAP-AD/" title="Grafana 配置实时开通的LDAP认证-基于AD">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Grafana 配置实时开通的LDAP认证-基于AD</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/RDMA/" title="智能无损网络 - 华为">
-                        <span class="hidden-mobile">智能无损网络 - 华为</span>
+                      <a href="/zabbix-LDAP-JIT/" title="Zabbix 配置实时开通的LDAP认证-基于AD">
+                        <span class="hidden-mobile">Zabbix 配置实时开通的LDAP认证-基于AD</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -569,17 +554,17 @@
     
     <div class="category row nomargin-x">
       <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Zabbix"
-        id="heading-d1ddc1b1c3c258570ba6994be1aeaddf" role="tab" data-toggle="collapse" href="#collapse-d1ddc1b1c3c258570ba6994be1aeaddf"
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Grfana"
+        id="heading-582a1313554d54ef889c8261e7f02acd" role="tab" data-toggle="collapse" href="#collapse-582a1313554d54ef889c8261e7f02acd"
         aria-expanded="true"
       >
-        Zabbix
-        <span class="list-group-count">(7)</span>
+        Grfana
+        <span class="list-group-count">(1)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse show" id="collapse-d1ddc1b1c3c258570ba6994be1aeaddf"
-           role="tabpanel" aria-labelledby="heading-d1ddc1b1c3c258570ba6994be1aeaddf">
+      <div class="category-collapse collapse show" id="collapse-582a1313554d54ef889c8261e7f02acd"
+           role="tabpanel" aria-labelledby="heading-582a1313554d54ef889c8261e7f02acd">
         
         
           
@@ -588,64 +573,10 @@
     
       
       
-        <a href="/Zabbix-fping/" title="Zabbix Ping 丢包问题"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Zabbix Ping 丢包问题</span>
-        </a>
-      
-    
-      
-      
-        <a href="/zabbix-SNMP-uptime-497day/" title="Zabbix SNMP开机时间497天重置问题"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Zabbix SNMP开机时间497天重置问题</span>
-        </a>
-      
-    
-      
-      
-        <a href="/zabbix-reboot-SNMPv3/" title="Zabbix SNMPv3 设备重启后无法监控问题"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Zabbix SNMPv3 设备重启后无法监控问题</span>
-        </a>
-      
-    
-      
-      
-        <a href="/zabbix_data/" title="Zabbix：历史数据与趋势数据"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Zabbix：历史数据与趋势数据</span>
-        </a>
-      
-    
-      
-      
-        <a href="/zabbix-mtr/" title="Zabbix MTR 监测指南"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Zabbix MTR 监测指南</span>
-        </a>
-      
-    
-      
-      
-        <a href="/zabbix-fonts/" title="Zabbix 中文图形乱码-使用开源字体"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Zabbix 中文图形乱码-使用开源字体</span>
-        </a>
-      
-    
-      
-      
-        <a href="/zabbix-LDAP-JIT/" title="Zabbix 配置实时开通的LDAP认证-基于AD"
+        <a href="/Grafana-LDAP-AD/" title="Grafana 配置实时开通的LDAP认证-基于AD"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">Zabbix 配置实时开通的LDAP认证-基于AD</span>
+          <span class="category-post">Grafana 配置实时开通的LDAP认证-基于AD</span>
         </a>
       
     

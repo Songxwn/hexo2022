@@ -1,3 +1,4 @@
+https://songxwn.com/Grafana-LDAP-AD/
 https://songxwn.com/zabbix-LDAP-JIT/
 https://songxwn.com/ELK-AD-LDAP-Authentication/
 https://songxwn.com/RDMA/
@@ -183,6 +184,7 @@ https://songxwn.com/tags/apt/
 https://songxwn.com/tags/RDMA/
 https://songxwn.com/tags/LDAP/
 https://songxwn.com/tags/AD/
+https://songxwn.com/tags/grafana/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/VMware/
@@ -201,3 +203,4 @@ https://songxwn.com/categories/Zabbix/
 https://songxwn.com/categories/Ubuntu/
 https://songxwn.com/categories/openai/
 https://songxwn.com/categories/Linux/
+https://songxwn.com/categories/Grfana/

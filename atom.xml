@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-02-07T09:33:46.409Z</updated>
+  <updated>2024-02-09T05:07:11.219Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Grafana 配置实时开通的LDAP认证-基于AD</title>
+    <link href="https://songxwn.com/Grafana-LDAP-AD/"/>
+    <id>https://songxwn.com/Grafana-LDAP-AD/</id>
+    <published>2024-02-09T05:02:59.000Z</published>
+    <updated>2024-02-09T05:07:11.219Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;本教程适用于9-10版本的Grafana，域控（AD）使用Windows Server 2022搭建，域控等级为 2016。&lt;/p&gt;
+&lt;p&gt;域控域名为 songxwn.com&lt;/p&gt;
+&lt;p&gt;最终实现AD用户统一认证，统一改密，Grafana用户自动添加。权限由Grafana控制&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Grfana" scheme="https://songxwn.com/categories/Grfana/"/>
+    
+    
+    <category term="LDAP" scheme="https://songxwn.com/tags/LDAP/"/>
+    
+    <category term="AD" scheme="https://songxwn.com/tags/AD/"/>
+    
+    <category term="grafana" scheme="https://songxwn.com/tags/grafana/"/>
+    
+  </entry>
   
   <entry>
     <title>Zabbix 配置实时开通的LDAP认证-基于AD</title>
@@ -515,38 +540,6 @@
     <category term="network" scheme="https://songxwn.com/tags/network/"/>
     
     <category term="nat" scheme="https://songxwn.com/tags/nat/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JumpServer 开源的跳板机安装指南</title>
-    <link href="https://songxwn.com/Jumpserver-install/"/>
-    <id>https://songxwn.com/Jumpserver-install/</id>
-    <published>2023-10-23T00:35:25.000Z</published>
-    <updated>2024-01-02T04:06:14.599Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;h2 id=&quot;什么是JumpServer&quot;&gt;&lt;a href=&quot;#什么是JumpServer&quot; class=&quot;headerlink&quot; title=&quot;什么是JumpServer&quot;&gt;&lt;/a&gt;什么是JumpServer&lt;/h2&gt;&lt;p&gt;JumpServer 是广受欢迎的开源堡垒机，是符合 4A 规范的专业运维安全审计系统。JumpServer 帮助企业以更安全的方式管控和登录所有类型的资产，包括：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;SSH (Linux &amp;#x2F; Unix &amp;#x2F; 网络设备 等)&lt;/li&gt;
-&lt;li&gt;Windows (Web 方式连接 &amp;#x2F; 原生 RDP 连接)&lt;/li&gt;
-&lt;li&gt;数据库 (MySQL &amp;#x2F; Oracle &amp;#x2F; SQLServer &amp;#x2F; PostgreSQL 等)&lt;/li&gt;
-&lt;li&gt;Kubernetes (支持连接到 K8s 集群中的 Pods)&lt;/li&gt;
-&lt;li&gt;Web 站点 (各类系统的 Web 管理后台)&lt;/li&gt;
-&lt;li&gt;应用 (通过 Remote App 连接各类应用)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;项目地址：&lt;a href=&quot;https://github.com/jumpserver/jumpserver&quot;&gt;https://github.com/jumpserver/jumpserver&lt;/a&gt; &lt;/p&gt;
-&lt;p&gt;功能列表：&lt;a href=&quot;https://www.jumpserver.org/features.html&quot;&gt;https://www.jumpserver.org/features.html&lt;/a&gt; &lt;/p&gt;
-&lt;p&gt;产品介绍PPT：&lt;a href=&quot;https://www.jumpserver.org/documents/introduce-jumpserver_202304.pdf&quot;&gt;https://www.jumpserver.org/documents/introduce-jumpserver_202304.pdf&lt;/a&gt; &lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Linux" scheme="https://songxwn.com/categories/Linux/"/>
-    
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
     
   </entry>
   
