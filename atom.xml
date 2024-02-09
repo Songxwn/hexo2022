@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-02-09T05:07:11.219Z</updated>
+  <updated>2024-02-09T05:14:43.180Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://songxwn.com/Grafana-LDAP-AD/"/>
     <id>https://songxwn.com/Grafana-LDAP-AD/</id>
     <published>2024-02-09T05:02:59.000Z</published>
-    <updated>2024-02-09T05:07:11.219Z</updated>
+    <updated>2024-02-09T05:14:43.180Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;本教程适用于9-10版本的Grafana，域控（AD）使用Windows Server 2022搭建，域控等级为 2016。&lt;/p&gt;
