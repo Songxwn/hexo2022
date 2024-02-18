@@ -1,0 +1,1139 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/images/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Song">
+  <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
+  
+    <meta name="description" content="简介Pigsty 是一个更好的本地自建且开源 RDS for PostgreSQL 替代，具有以下特点：  开箱即用的 PostgreSQL 发行版，深度整合地理、时序、分布式、图、向量、分词、AI等 150 余个扩展插件！  运行于裸操作系统之上，无需容器支持，支持主流操作系统： EL7&#x2F;8&#x2F;9 及其衍生发行版， Ubuntu 20.04&#x2F;22.04 以及 Debi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="猪圈Pigsty-PG私有RDS集群搭建教程">
+<meta property="og:url" content="https://songxwn.com/Pigsty-PG-RDS/index.html">
+<meta property="og:site_name" content="Song&#96;s Blog">
+<meta property="og:description" content="简介Pigsty 是一个更好的本地自建且开源 RDS for PostgreSQL 替代，具有以下特点：  开箱即用的 PostgreSQL 发行版，深度整合地理、时序、分布式、图、向量、分词、AI等 150 余个扩展插件！  运行于裸操作系统之上，无需容器支持，支持主流操作系统： EL7&#x2F;8&#x2F;9 及其衍生发行版， Ubuntu 20.04&#x2F;22.04 以及 Debi">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.songxwn.com/file/30a3f0c6dbefd7843127c.png">
+<meta property="article:published_time" content="2024-02-18T01:32:51.000Z">
+<meta property="article:modified_time" content="2024-02-18T02:40:10.939Z">
+<meta property="article:author" content="Song">
+<meta property="article:tag" content="dns">
+<meta property="article:tag" content="network">
+<meta property="article:tag" content="RDS">
+<meta property="article:tag" content="PostgreSQL">
+<meta property="article:tag" content="Database">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img.songxwn.com/file/30a3f0c6dbefd7843127c.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>猪圈Pigsty-PG私有RDS集群搭建教程 - Song`s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/scroll.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"songxwn.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":100,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Song`s Blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Song`s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/books/" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>书单</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss"></i>
+                <span>RSS</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://img.songxwn.com/file/9a6a3f4c572b478a6a538.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="猪圈Pigsty-PG私有RDS集群搭建教程"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-02-18 09:32" pubdate>
+          2024年2月18日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          32 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">猪圈Pigsty-PG私有RDS集群搭建教程</h1>
+            
+              <p id="updated-time" class="note note-danger" style="">
+                
+                  
+                    本文最后更新于 2024年2月18日 上午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Pigsty 是一个更好的本地自建且开源 <strong>RDS</strong> for PostgreSQL 替代，具有以下特点：</p>
+<ul>
+<li><p>开箱即用的 <a target="_blank" rel="noopener" href="https://www.postgresql.org/">PostgreSQL</a> 发行版，深度整合地理、时序、分布式、图、向量、分词、AI等 150 余个<a target="_blank" rel="noopener" href="https://pigsty.cc/doc/#/zh/README#/zh/PGSQL-EXTENSION">扩展插件</a>！</p>
+</li>
+<li><p>运行于裸操作系统之上，无需容器支持，支持主流操作系统： EL7&#x2F;8&#x2F;9 及其衍生发行版， Ubuntu 20.04&#x2F;22.04 以及 Debian 11&#x2F;12。(推荐使用Rocky Linux)</p>
+</li>
+<li><p>基于现代的 <a target="_blank" rel="noopener" href="https://prometheus.io/">Prometheus</a> 与 <a target="_blank" rel="noopener" href="https://grafana.com/">Grafana</a> 技术栈，提供令人惊艳，无可比拟的数据库观测能力：<a target="_blank" rel="noopener" href="https://github.com/Vonng/pigsty/wiki/Gallery">画廊</a> &amp; <a target="_blank" rel="noopener" href="https://demo.pigsty.cc/">演示站点</a></p>
+</li>
+<li><p>基于 <a target="_blank" rel="noopener" href="https://patroni.readthedocs.io/en/latest/">patroni</a>， <a target="_blank" rel="noopener" href="http://www.haproxy.org/">haproxy</a>， 与<a target="_blank" rel="noopener" href="https://etcd.io/">etcd</a>，打造故障自愈的高可用架构：硬件故障自动切换，流量无缝衔接。</p>
+</li>
+<li><p>基于 <a target="_blank" rel="noopener" href="https://pgbackrest.org/">pgBackRest</a> 与可选的 <a target="_blank" rel="noopener" href="https://min.io/">MinIO</a> 集群提供开箱即用的 PITR 时间点恢复，为软件缺陷与人为删库兜底。</p>
+</li>
+<li><p>基于 <a target="_blank" rel="noopener" href="https://www.ansible.com/">Ansible</a> 提供声明式的 API 对复杂度进行抽象，以 <strong>Database-as-Code</strong> 的方式极大简化了日常运维管理操作。</p>
+</li>
+<li><p>Pigsty用途广泛，可用作完整应用运行时，开发演示数据&#x2F;可视化应用，大量使用 PG 的软件可用 <a target="_blank" rel="noopener" href="https://www.docker.com/">Docker</a> 模板一键拉起。</p>
+</li>
+<li><p>提供基于 <a target="_blank" rel="noopener" href="https://www.vagrantup.com/">Vagrant</a> 的本地开发测试沙箱环境，与基于 <a target="_blank" rel="noopener" href="https://www.terraform.io/">Terraform</a> 的云端自动部署方案，开发测试生产保持环境一致。</p>
+</li>
+<li><p>部署并监控专用的 <a target="_blank" rel="noopener" href="https://redis.io/">Redis</a>（主从，哨兵，集群），MinIO，Etcd，Haproxy，MongoDB（<a target="_blank" rel="noopener" href="https://www.ferretdb.io/">FerretDB）</a> 集群</p>
+</li>
+</ul>
+<p>官方文档：<a target="_blank" rel="noopener" href="https://pigsty.cc/doc/#/zh/README" title="https://pigsty.cc/doc/#/zh/README">https://pigsty.cc/doc/#/zh/README</a></p>
+<p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/Vonng/pigsty" title="https://github.com/Vonng/pigsty">https://github.com/Vonng/pigsty</a></p>
+<span id="more"></span>
+
+<h2 id="本教程说明"><a href="#本教程说明" class="headerlink" title="本教程说明"></a>本教程说明</h2><p>一个非常简单的入门教程，用于构建一个三节点的PG集群（开启VIP），且支持扩展时序数据库timescaledb，主要用于Zabbix的后端数据库。</p>
+<p>基于Pigsty 2.5.1 、Rocky Linux 9.3 编写。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="初始化元节点（管理监控节点）"><a href="#初始化元节点（管理监控节点）" class="headerlink" title="初始化元节点（管理监控节点）"></a>初始化元节点（管理监控节点）</h2><p>准备一个全新的<a target="_blank" rel="noopener" href="https://pigsty.cc/doc/#/zh/INSTALL?id=%e8%a6%81%e6%b1%82" title="符合要求">符合要求</a> 的 Linux x86_64 ，使用带有root权限或有sudo权限的用户执行安装脚本。</p>
+<p>（官方推荐使用Rocky Linux 8.8，配置建议2C4G 100G硬盘）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sehll">curl https://get.pigsty.cc/latest | bash<br></code></pre></td></tr></table></figure>
+
+<p>PS：安装后会移除系统自带yum源，建议提前安装所需软件。</p>
+<p>该命令会下载并解压 Pigsty 源码至用户Home，按提示完成 准备，配置，安装三个步骤即可完成安装。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd ~/pigsty     <br><span class="hljs-meta prompt_"> # </span><span class="language-bash">进入 Pigsty 源码目录，完成后续 准备、配置、安装 三个步骤</span><br>./bootstrap      <br><span class="hljs-meta prompt_"># </span><span class="language-bash">确保 Ansible 正常安装，如果存在 /tmp/pkg.tgz 离线软件包，便使用它。</span><br>./configure      <br><span class="hljs-meta prompt_"># </span><span class="language-bash">执行环境检测，并生成相应的推荐配置文件，如果你知道如何配置 Pigsty 可以跳过。</span><br>./install.yml    <br><span class="hljs-meta prompt_"># </span><span class="language-bash">根据生成的配置文件开始在当前节点上执行安装，使用离线安装包大概需要10分钟完成。</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">可以在里面修改默认信息pigsty.yml，如域名和默认密码等。</span><br></code></pre></td></tr></table></figure>
+
+<p>安装完成后，您可以通过域名或80&#x2F;443端口通过 Nginx 访问 WEB 界面，通过 5432 端口访问元节点默认的 PostgreSQL 数据库服务。</p>
+<h3 id="IP地址规划"><a href="#IP地址规划" class="headerlink" title="IP地址规划"></a>IP地址规划</h3><table>
+<thead>
+<tr>
+<th align="left">IP地址</th>
+<th align="left">主机名</th>
+<th align="left">角色</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">172.18.77.33</td>
+<td align="left">pg-meta-1</td>
+<td align="left">元节点</td>
+</tr>
+<tr>
+<td align="left">172.18.77.101</td>
+<td align="left">pg-cu1-1</td>
+<td align="left">PG集群主机节点</td>
+</tr>
+<tr>
+<td align="left">172.18.77.102</td>
+<td align="left">pg-cu1-2</td>
+<td align="left">PG集群主机节点</td>
+</tr>
+<tr>
+<td align="left">172.18.77.103</td>
+<td align="left">pg-cu1-3</td>
+<td align="left">PG集群主机节点</td>
+</tr>
+<tr>
+<td align="left">172.18.77.99</td>
+<td align="left">vip</td>
+<td align="left">Keepalived 虚拟IP</td>
+</tr>
+</tbody></table>
+<p>PS：Keepalived 集群需要在同一广播域。（其实就是基于VRRP协议）</p>
+<h3 id="DNS-解析配置"><a href="#DNS-解析配置" class="headerlink" title="DNS 解析配置"></a>DNS 解析配置</h3><table>
+<thead>
+<tr>
+<th align="left">组件</th>
+<th align="left">端口</th>
+<th align="left">域名</th>
+<th>说明</th>
+<th>官方Demo地址</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Nginx</td>
+<td align="left">80</td>
+<td align="left"><code>h.pigsty</code></td>
+<td>Web 服务总入口，本地YUM源</td>
+<td><a target="_blank" rel="noopener" href="http://home.pigsty.cc/">home.pigsty.cc</a></td>
+</tr>
+<tr>
+<td align="left">AlertManager</td>
+<td align="left">9093</td>
+<td align="left"><code>a.pigsty</code></td>
+<td>告警聚合&#x2F;屏蔽页面</td>
+<td><a target="_blank" rel="noopener" href="http://a.pigsty.cc/">a.pigsty.cc</a></td>
+</tr>
+<tr>
+<td align="left">Grafana</td>
+<td align="left">3000</td>
+<td align="left"><code>g.pigsty</code></td>
+<td>Grafana 监控面板</td>
+<td><a target="_blank" rel="noopener" href="https://demo.pigsty.cc/">demo.pigsty.cc</a></td>
+</tr>
+<tr>
+<td align="left">Prometheus</td>
+<td align="left">9090</td>
+<td align="left"><code>p.pigsty</code></td>
+<td>Prometheus 管理界面</td>
+<td><a target="_blank" rel="noopener" href="http://p.pigsty.cc/">p.pigsty.cc</a></td>
+</tr>
+</tbody></table>
+<p><strong>你需要修改hosts文件，增加以上解析。或者在内网dns配置上述解析。解析的IP为元节点IP即可</strong>。</p>
+<p>Pigsty 会自动给纳入管理的节点填写hosts文件。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">172.18.77.33 h.pigsty a.pigsty p.pigsty g.pigsty # pigsty dns<br>#示例<br></code></pre></td></tr></table></figure>
+
+<h3 id="访问Web-界面"><a href="#访问Web-界面" class="headerlink" title="访问Web 界面"></a>访问Web 界面</h3><p>主页域名为 h.pigsty ，g.pigsty 为Grafana ，全局应用默认账号密码为 admin&#x2F;pigsty。</p>
+<p>(如果自己电脑要用浏览器访问，注意配置DNS解析或hosts文件)</p>
+<h2 id="部署三节点PG高可用集群"><a href="#部署三节点PG高可用集群" class="headerlink" title="部署三节点PG高可用集群"></a>部署三节点PG高可用集群</h2><h3 id=""><a href="#" class="headerlink" title=""></a></h3><h3 id="编辑Pigsty-配置文件，增加主机节点信息"><a href="#编辑Pigsty-配置文件，增加主机节点信息" class="headerlink" title="编辑Pigsty 配置文件，增加主机节点信息"></a>编辑Pigsty 配置文件，增加主机节点信息</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd ~/pigsty  <br><span class="hljs-meta prompt_"># </span><span class="language-bash">进入pigsty 主目录，所有操作都在此目录执行。</span><br>vim pigsty.yml <br><span class="hljs-meta prompt_"># </span><span class="language-bash">编辑配置文件，增加三台主节点和集群配置。</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="增加PG集群和VIP配置信息"><a href="#增加PG集群和VIP配置信息" class="headerlink" title="增加PG集群和VIP配置信息"></a>增加PG集群和VIP配置信息</h4><p>1、集群名字为pg-cu1</p>
+<p>2、配置172.18.77.101为默认主节点，其他为从节点。</p>
+<p>3、开启keepalived配置，配置VIP地址为 172.18.22.99。配置每台关联VIP的网卡为ens33。（网卡名字注意修改）</p>
+<p>4、此段配置在children 下增加，与默认的pg-meta同级别。</p>
+<p>5、VRRP的id 为35，注意不要冲突。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">pg-cu1:</span><br>  <span class="hljs-attr">hosts:</span><br>    <span class="hljs-attr">172.18.77.101:</span> &#123; <span class="hljs-attr">pg_seq:</span> <span class="hljs-number">1</span>, <span class="hljs-attr">pg_role:</span> <span class="hljs-string">primary</span> &#125;<br>    <span class="hljs-attr">172.18.77.102:</span> &#123; <span class="hljs-attr">pg_seq:</span> <span class="hljs-number">2</span>, <span class="hljs-attr">pg_role:</span> <span class="hljs-string">replica</span> &#125;<br>    <span class="hljs-attr">172.18.77.103:</span> &#123; <span class="hljs-attr">pg_seq:</span> <span class="hljs-number">3</span>, <span class="hljs-attr">pg_role:</span> <span class="hljs-string">replica</span> &#125;<br>  <span class="hljs-attr">vars:</span> <br>    <span class="hljs-attr">pg_cluster:</span> <span class="hljs-string">pg-cu1</span><br>    <span class="hljs-attr">vip_enabled:</span> <span class="hljs-literal">true</span>            <span class="hljs-comment"># enable vip on this node cluster?</span><br>    <span class="hljs-attr">vip_address:</span> <span class="hljs-number">172.18</span><span class="hljs-number">.77</span><span class="hljs-number">.99</span>       <span class="hljs-comment"># node vip address in ipv4 format, required if vip is enabled</span><br>    <span class="hljs-attr">vip_vrid:</span> <span class="hljs-number">35</span>        <span class="hljs-comment"># required, integer, 1-254, should be unique among same VLAN</span><br>    <span class="hljs-attr">vip_role:</span> <span class="hljs-string">backup</span>                  <span class="hljs-comment"># optional, `master/backup`, backup by default, use as init role</span><br>    <span class="hljs-attr">vip_preempt:</span> <span class="hljs-literal">true</span>               <span class="hljs-comment"># optional, `true/false`, false by default, enable vip preemption</span><br>    <span class="hljs-attr">vip_interface:</span> <span class="hljs-string">ens33</span>              <span class="hljs-comment"># node vip network interface to listen, `eth0` by default</span><br>    <span class="hljs-attr">vip_dns_suffix:</span> <span class="hljs-string">&#x27;&#x27;</span>                <span class="hljs-comment"># node vip dns name suffix, empty string by default</span><br>    <span class="hljs-attr">vip_exporter_port:</span> <span class="hljs-number">9650</span>           <span class="hljs-comment"># keepalived exporter listen port, 9650 by default</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="-1"><a href="#-1" class="headerlink" title=""></a></h4><h4 id="增加PG数据库、用户、HBA配置。"><a href="#增加PG数据库、用户、HBA配置。" class="headerlink" title="增加PG数据库、用户、HBA配置。"></a>增加PG数据库、用户、HBA配置。</h4><p>1、增加zabbix、grafana 数据库，Zabbix 开启timescaledb扩展，并配置所属用户。并与pgbouncer同步创建。</p>
+<p>2、增加zabbix、grafana 用户并配置密码、角色。并与pgbouncer同步创建。</p>
+<p>3、配置用户的HBA规则，允许任意IP访问，并配置pgbouncer和HBA</p>
+<p>4、pg_libs 配置PG加载的插件列表，这里加载了timescaledb插件。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">pg-cu1:</span><br>  <span class="hljs-attr">hosts:</span><br>    <span class="hljs-attr">172.18.77.101:</span> &#123; <span class="hljs-attr">pg_seq:</span> <span class="hljs-number">1</span>, <span class="hljs-attr">pg_role:</span> <span class="hljs-string">primary</span> &#125; <br>    <span class="hljs-attr">172.18.77.102:</span> &#123; <span class="hljs-attr">pg_seq:</span> <span class="hljs-number">2</span>, <span class="hljs-attr">pg_role:</span> <span class="hljs-string">replica</span> &#125; <br>    <span class="hljs-attr">172.18.77.103:</span> &#123; <span class="hljs-attr">pg_seq:</span> <span class="hljs-number">3</span>, <span class="hljs-attr">pg_role:</span> <span class="hljs-string">replica</span> &#125; <br>  <span class="hljs-attr">vars:</span> <br>    <span class="hljs-attr">pg_cluster:</span> <span class="hljs-string">pg-cu1</span><br>    <span class="hljs-attr">pg_databases:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">zabbix</span>                    <span class="hljs-comment"># 必选，`name` 是数据库定义的唯一必选字段</span><br>        <span class="hljs-attr">pgbouncer:</span> <span class="hljs-literal">true</span>                 <span class="hljs-comment"># 可选，是否将此数据库添加到 pgbouncer 数据库列表？默认为 true</span><br>        <span class="hljs-attr">extensions:</span>                     <span class="hljs-comment"># 可选，要安装的附加扩展： 扩展对象的数组</span><br>          <span class="hljs-bullet">-</span> &#123; <span class="hljs-attr">name:</span> <span class="hljs-string">timescaledb</span> &#125;       <span class="hljs-comment"># 例如有的扩展会创建并使用固定的模式，就不需要指定模式。</span><br>        <span class="hljs-attr">owner:</span> <span class="hljs-string">zabbix</span>                   <span class="hljs-comment"># 可选，数据库所有者，默认为 postgres</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">grafana</span>                   <span class="hljs-comment"># 必选，`name` 是数据库定义的唯一必选字段</span><br>        <span class="hljs-attr">pgbouncer:</span> <span class="hljs-literal">true</span>                 <span class="hljs-comment"># 可选，是否将此数据库添加到 pgbouncer 数据库列表？默认为 true</span><br>        <span class="hljs-attr">owner:</span> <span class="hljs-string">grafana</span>                  <span class="hljs-comment"># 可选，数据库所有者，默认为 postgres</span><br>    <span class="hljs-attr">pg_users:</span>    <br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">zabbix</span>                    <span class="hljs-comment"># 数据库用户名，必需，`name` 是用户定义的唯一必选字段</span><br>        <span class="hljs-attr">password:</span> <span class="hljs-string">Passwd.zabbix</span>         <span class="hljs-comment"># 可选，密码，可以是 scram-sha-256 哈希字符串或明文</span><br>        <span class="hljs-attr">pgbouncer:</span> <span class="hljs-literal">true</span>                 <span class="hljs-comment"># 可选，默认为 false，将此用户添加到 pgbouncer 用户列表</span><br>        <span class="hljs-attr">roles:</span> [<span class="hljs-string">dbrole_admin</span>]<br>        <span class="hljs-attr">comment:</span> <span class="hljs-string">Zabbix</span>                 <span class="hljs-comment"># 可选，此用户/角色的说明与备注字符串</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">grafana</span>                   <span class="hljs-comment"># 数据库用户名，必需，`name` 是用户定义的唯一必选字段</span><br>        <span class="hljs-attr">password:</span> <br>        <span class="hljs-attr">pgbouncer:</span> <span class="hljs-literal">true</span>                 <span class="hljs-comment"># 可选，默认为 false，将此用户添加到 pgbouncer 用户列表</span><br>        <span class="hljs-attr">roles:</span> [<span class="hljs-string">dbrole_admin</span>]<br>        <span class="hljs-attr">comment:</span> <span class="hljs-string">grafana</span>                <span class="hljs-comment"># 可选，此用户/角色的说明与备注字符串</span><br>    <span class="hljs-attr">pg_hba_rules:</span><br>      <span class="hljs-bullet">-</span> &#123; <span class="hljs-attr">user:</span> <span class="hljs-string">&#x27;zabbix&#x27;</span>  ,<span class="hljs-attr">db:</span> <span class="hljs-string">all</span> ,<span class="hljs-attr">addr:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span><span class="hljs-string">/0</span>    ,<span class="hljs-attr">auth:</span> <span class="hljs-string">pwd</span> ,<span class="hljs-attr">title:</span> <span class="hljs-string">&#x27;zabbix用户不限制登录&#x27;</span>&#125;<br>      <span class="hljs-bullet">-</span> &#123; <span class="hljs-attr">user:</span> <span class="hljs-string">&#x27;grafana&#x27;</span> ,<span class="hljs-attr">db:</span> <span class="hljs-string">all</span> ,<span class="hljs-attr">addr:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span><span class="hljs-string">/0</span>    ,<span class="hljs-attr">auth:</span> <span class="hljs-string">pwd</span> ,<span class="hljs-attr">title:</span> <span class="hljs-string">&#x27;grafana用户不限制登录&#x27;</span>&#125;<br>    <span class="hljs-attr">pgb_hba_rules:</span> <br>      <span class="hljs-bullet">-</span> &#123; <span class="hljs-attr">user:</span> <span class="hljs-string">&#x27;zabbix&#x27;</span>  ,<span class="hljs-attr">db:</span> <span class="hljs-string">all</span>  ,<span class="hljs-attr">addr:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span><span class="hljs-string">/0</span>   ,<span class="hljs-attr">auth:</span> <span class="hljs-string">pwd</span> ,<span class="hljs-attr">title:</span> <span class="hljs-string">&#x27;zabbix用户不限制登录&#x27;</span>&#125;<br>      <span class="hljs-bullet">-</span> &#123; <span class="hljs-attr">user:</span> <span class="hljs-string">&#x27;grafana&#x27;</span> ,<span class="hljs-attr">db:</span> <span class="hljs-string">all</span>  ,<span class="hljs-attr">addr:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span><span class="hljs-string">/0</span>   ,<span class="hljs-attr">auth:</span> <span class="hljs-string">pwd</span> ,<span class="hljs-attr">title:</span> <span class="hljs-string">&#x27;grafana用户不限制登录&#x27;</span>&#125;<br>    <span class="hljs-attr">pg_libs:</span> <span class="hljs-string">&#x27;timescaledb, pg_stat_statements, auto_explain&#x27;</span> <span class="hljs-comment"># 加载时序数据库插件</span><br>    <span class="hljs-attr">vip_enabled:</span> <span class="hljs-literal">true</span>            <span class="hljs-comment"># enable vip on this node cluster?</span><br>    <span class="hljs-attr">vip_address:</span> <span class="hljs-number">172.18</span><span class="hljs-number">.77</span><span class="hljs-number">.99</span>       <span class="hljs-comment"># node vip address in ipv4 format, required if vip is enabled</span><br>    <span class="hljs-attr">vip_vrid:</span> <span class="hljs-number">35</span>        <span class="hljs-comment"># required, integer, 1-254, should be unique among same VLAN</span><br>    <span class="hljs-attr">vip_role:</span> <span class="hljs-string">backup</span>                  <span class="hljs-comment"># optional, `master/backup`, backup by default, use as init role</span><br>    <span class="hljs-attr">vip_preempt:</span> <span class="hljs-literal">true</span>               <span class="hljs-comment"># optional, `true/false`, false by default, enable vip preemption</span><br>    <span class="hljs-attr">vip_interface:</span> <span class="hljs-string">ens33</span>              <span class="hljs-comment"># node vip network interface to listen, `eth0` by default</span><br>    <span class="hljs-attr">vip_dns_suffix:</span> <span class="hljs-string">&#x27;&#x27;</span>                <span class="hljs-comment"># node vip dns name suffix, empty string by default</span><br>    <span class="hljs-attr">vip_exporter_port:</span> <span class="hljs-number">9650</span>           <span class="hljs-comment"># keepalived exporter listen port, 9650 by default</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="-2"><a href="#-2" class="headerlink" title=""></a></h4><h4 id="-3"><a href="#-3" class="headerlink" title=""></a></h4><h4 id="-4"><a href="#-4" class="headerlink" title=""></a></h4><h4 id="-5"><a href="#-5" class="headerlink" title=""></a></h4><h4 id="全部配置展示-仅参考-用于Zabbix服务器的时序数据库"><a href="#全部配置展示-仅参考-用于Zabbix服务器的时序数据库" class="headerlink" title="全部配置展示(仅参考) 用于Zabbix服务器的时序数据库"></a>全部配置展示(仅参考) 用于Zabbix服务器的时序数据库</h4><p>1、注意全局密码已经修改为PG-PWD-01</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">all:</span><br>  <span class="hljs-attr">children:</span><br>    <span class="hljs-comment"># infra cluster for proxy, monitor, alert, etc..</span><br>    <span class="hljs-attr">infra:</span> &#123; <span class="hljs-attr">hosts:</span> &#123; <span class="hljs-attr">172.18.77.33:</span> &#123; <span class="hljs-attr">infra_seq:</span> <span class="hljs-number">1</span> &#125; &#125; &#125;<br>    <span class="hljs-comment"># etcd cluster for ha postgres</span><br>    <span class="hljs-attr">etcd:</span> &#123; <span class="hljs-attr">hosts:</span> &#123; <span class="hljs-attr">172.18.77.33:</span> &#123; <span class="hljs-attr">etcd_seq:</span> <span class="hljs-number">1</span> &#125; &#125;, <span class="hljs-attr">vars:</span> &#123; <span class="hljs-attr">etcd_cluster:</span> <span class="hljs-string">etcd</span> &#125; &#125;<br>    <span class="hljs-comment"># minio cluster, optional backup repo for pgbackrest</span><br>    <span class="hljs-comment">#minio: &#123; hosts: &#123; 172.18.77.33: &#123; minio_seq: 1 &#125; &#125;, vars: &#123; minio_cluster: minio &#125; &#125;</span><br>    <span class="hljs-comment"># postgres cluster &#x27;pg-meta&#x27; with single primary instance</span><br>    <span class="hljs-attr">pg-meta:</span><br>      <span class="hljs-attr">hosts:</span> &#123; <span class="hljs-attr">172.18.77.33:</span> &#123; <span class="hljs-attr">pg_seq:</span> <span class="hljs-number">1</span>, <span class="hljs-attr">pg_role:</span> <span class="hljs-string">primary</span> &#125; &#125;<br>      <span class="hljs-attr">vars:</span><br>        <span class="hljs-attr">pg_cluster:</span> <span class="hljs-string">pg-meta</span><br>        <span class="hljs-attr">pg_databases:</span> [ &#123; <span class="hljs-attr">name:</span> <span class="hljs-string">meta</span> ,<span class="hljs-attr">baseline:</span> <span class="hljs-string">cmdb.sql</span> ,<span class="hljs-attr">comment:</span> <span class="hljs-string">pigsty</span> <span class="hljs-string">meta</span> <span class="hljs-string">database</span> ,<span class="hljs-attr">schemas:</span> [ <span class="hljs-string">pigsty</span> ] ,<span class="hljs-attr">extensions:</span> [&#123;<span class="hljs-attr">name:</span> <span class="hljs-string">postgis</span>, <span class="hljs-attr">schema:</span> <span class="hljs-string">public</span>&#125;] &#125;]<br>        <span class="hljs-attr">pg_users:</span><br>          <span class="hljs-bullet">-</span> &#123; <span class="hljs-attr">name:</span> <span class="hljs-string">dbuser_meta</span> ,<span class="hljs-attr">password:</span> <span class="hljs-string">DBUser.Meta</span>   ,<span class="hljs-attr">pgbouncer:</span> <span class="hljs-literal">true</span> ,<span class="hljs-attr">roles:</span> [ <span class="hljs-string">dbrole_admin</span> ]    ,<span class="hljs-attr">comment:</span> <span class="hljs-string">pigsty</span> <span class="hljs-string">admin</span> <span class="hljs-string">user</span> &#125;<br>          <span class="hljs-bullet">-</span> &#123; <span class="hljs-attr">name:</span> <span class="hljs-string">dbuser_view</span> ,<span class="hljs-attr">password:</span> <span class="hljs-string">DBUser.Viewer</span> ,<span class="hljs-attr">pgbouncer:</span> <span class="hljs-literal">true</span> ,<span class="hljs-attr">roles:</span> [ <span class="hljs-string">dbrole_readonly</span> ] ,<span class="hljs-attr">comment:</span> <span class="hljs-string">read-only</span> <span class="hljs-string">viewer</span> <span class="hljs-string">for</span> <span class="hljs-string">meta</span> <span class="hljs-string">database</span> &#125;<br>        <span class="hljs-attr">pg_libs:</span> <span class="hljs-string">&#x27;pg_stat_statements, auto_explain&#x27;</span> <span class="hljs-comment"># add extra extensions to shared_preload_libraries</span><br>        <span class="hljs-attr">node_crontab:</span> [ <span class="hljs-string">&#x27;00 03 * * * postgres /pg/bin/pg-backup full&#x27;</span> ] <span class="hljs-comment"># make a full backup every 1am</span><br>    <span class="hljs-attr">bj-zjy-pg-cu1:</span><br>      <span class="hljs-attr">hosts:</span><br>        <span class="hljs-attr">172.18.77.101:</span> &#123; <span class="hljs-attr">pg_seq:</span> <span class="hljs-number">1</span>, <span class="hljs-attr">pg_role:</span> <span class="hljs-string">primary</span> &#125; <br>        <span class="hljs-attr">172.18.77.102:</span> &#123; <span class="hljs-attr">pg_seq:</span> <span class="hljs-number">2</span>, <span class="hljs-attr">pg_role:</span> <span class="hljs-string">replica</span> &#125; <br>        <span class="hljs-attr">172.18.77.103:</span> &#123; <span class="hljs-attr">pg_seq:</span> <span class="hljs-number">3</span>, <span class="hljs-attr">pg_role:</span> <span class="hljs-string">replica</span> &#125; <br>      <span class="hljs-attr">vars:</span> <br>        <span class="hljs-attr">pg_cluster:</span> <span class="hljs-string">pg-cu1</span><br>        <span class="hljs-attr">pg_databases:</span><br>          <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">zabbix</span>                    <span class="hljs-comment"># 必选，`name` 是数据库定义的唯一必选字段</span><br>            <span class="hljs-attr">pgbouncer:</span> <span class="hljs-literal">true</span>                 <span class="hljs-comment"># 可选，是否将此数据库添加到 pgbouncer 数据库列表？默认为 true</span><br>            <span class="hljs-attr">extensions:</span>                     <span class="hljs-comment"># 可选，要安装的附加扩展： 扩展对象的数组</span><br>              <span class="hljs-bullet">-</span> &#123; <span class="hljs-attr">name:</span> <span class="hljs-string">timescaledb</span> &#125;       <span class="hljs-comment"># 例如有的扩展会创建并使用固定的模式，就不需要指定模式。</span><br>            <span class="hljs-attr">owner:</span> <span class="hljs-string">zabbix</span>                   <span class="hljs-comment"># 可选，数据库所有者，默认为 postgres</span><br>          <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">grafana</span>                   <span class="hljs-comment"># 必选，`name` 是数据库定义的唯一必选字段</span><br>            <span class="hljs-attr">pgbouncer:</span> <span class="hljs-literal">true</span>                 <span class="hljs-comment"># 可选，是否将此数据库添加到 pgbouncer 数据库列表？默认为 true</span><br>            <span class="hljs-attr">owner:</span> <span class="hljs-string">grafana</span>                  <span class="hljs-comment"># 可选，数据库所有者，默认为 postgres</span><br>        <span class="hljs-attr">pg_users:</span>    <br>          <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">zabbix</span>                    <span class="hljs-comment"># 数据库用户名，必需，`name` 是用户定义的唯一必选字段</span><br>            <span class="hljs-attr">password:</span> <span class="hljs-string">Passwd.Zabbix</span>  <span class="hljs-comment"># 可选，密码，可以是 scram-sha-256 哈希字符串或明文</span><br>            <span class="hljs-attr">pgbouncer:</span> <span class="hljs-literal">true</span>                 <span class="hljs-comment"># 可选，默认为 false，将此用户添加到 pgbouncer 用户列表</span><br>            <span class="hljs-attr">roles:</span> [<span class="hljs-string">dbrole_admin</span>]<br>            <span class="hljs-attr">comment:</span> <span class="hljs-string">Zabbix</span>                 <span class="hljs-comment"># 可选，此用户/角色的说明与备注字符串</span><br>          <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">grafana</span>                    <span class="hljs-comment"># 数据库用户名，必需，`name` 是用户定义的唯一必选字段</span><br>            <span class="hljs-attr">password:</span> <span class="hljs-string">Passwd.grafana</span>  <span class="hljs-comment"># 可选，密码，可以是 scram-sha-256 哈希字符串或明文</span><br>            <span class="hljs-attr">pgbouncer:</span> <span class="hljs-literal">true</span>                 <span class="hljs-comment"># 可选，默认为 false，将此用户添加到 pgbouncer 用户列表</span><br>            <span class="hljs-attr">roles:</span> [<span class="hljs-string">dbrole_admin</span>]<br>            <span class="hljs-attr">comment:</span> <span class="hljs-string">grafana</span>                 <span class="hljs-comment"># 可选，此用户/角色的说明与备注字符串</span><br>        <span class="hljs-attr">pg_hba_rules:</span><br>          <span class="hljs-bullet">-</span> &#123; <span class="hljs-attr">user:</span> <span class="hljs-string">&#x27;zabbix&#x27;</span>  ,<span class="hljs-attr">db:</span> <span class="hljs-string">all</span> ,<span class="hljs-attr">addr:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span><span class="hljs-string">/0</span>    ,<span class="hljs-attr">auth:</span> <span class="hljs-string">pwd</span> ,<span class="hljs-attr">title:</span> <span class="hljs-string">&#x27;zabbix用户不限制登录&#x27;</span>&#125;<br>          <span class="hljs-bullet">-</span> &#123; <span class="hljs-attr">user:</span> <span class="hljs-string">&#x27;grafana&#x27;</span> ,<span class="hljs-attr">db:</span> <span class="hljs-string">all</span> ,<span class="hljs-attr">addr:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span><span class="hljs-string">/0</span>    ,<span class="hljs-attr">auth:</span> <span class="hljs-string">pwd</span> ,<span class="hljs-attr">title:</span> <span class="hljs-string">&#x27;grafana用户不限制登录&#x27;</span>&#125;<br>        <span class="hljs-attr">pgb_hba_rules:</span> <br>          <span class="hljs-bullet">-</span> &#123; <span class="hljs-attr">user:</span> <span class="hljs-string">&#x27;zabbix&#x27;</span>  ,<span class="hljs-attr">db:</span> <span class="hljs-string">all</span>  ,<span class="hljs-attr">addr:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span><span class="hljs-string">/0</span>   ,<span class="hljs-attr">auth:</span> <span class="hljs-string">pwd</span> ,<span class="hljs-attr">title:</span> <span class="hljs-string">&#x27;zabbix用户不限制登录&#x27;</span>&#125;<br>          <span class="hljs-bullet">-</span> &#123; <span class="hljs-attr">user:</span> <span class="hljs-string">&#x27;grafana&#x27;</span> ,<span class="hljs-attr">db:</span> <span class="hljs-string">all</span>  ,<span class="hljs-attr">addr:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span><span class="hljs-string">/0</span>   ,<span class="hljs-attr">auth:</span> <span class="hljs-string">pwd</span> ,<span class="hljs-attr">title:</span> <span class="hljs-string">&#x27;grafana用户不限制登录&#x27;</span>&#125;<br>        <span class="hljs-attr">pg_libs:</span> <span class="hljs-string">&#x27;timescaledb, pg_stat_statements, auto_explain&#x27;</span> <span class="hljs-comment"># 加载时序数据库插件        </span><br>        <span class="hljs-attr">vip_enabled:</span> <span class="hljs-literal">true</span>            <span class="hljs-comment"># enable vip on this node cluster?</span><br>        <span class="hljs-attr">vip_address:</span> <span class="hljs-number">172.18</span><span class="hljs-number">.77</span><span class="hljs-number">.99</span>       <span class="hljs-comment"># node vip address in ipv4 format, required if vip is enabled</span><br>        <span class="hljs-attr">vip_vrid:</span> <span class="hljs-number">35</span>                    <span class="hljs-comment"># required, integer, 1-254, should be unique among same VLAN</span><br>        <span class="hljs-attr">vip_role:</span> <span class="hljs-string">backup</span>                <span class="hljs-comment"># optional, `master/backup`, backup by default, use as init role</span><br>        <span class="hljs-attr">vip_preempt:</span> <span class="hljs-literal">true</span>               <span class="hljs-comment"># optional, `true/false`, false by default, enable vip preemption</span><br>        <span class="hljs-attr">vip_interface:</span> <span class="hljs-string">ens33</span>              <span class="hljs-comment"># node vip network interface to listen, `eth0` by default</span><br>        <span class="hljs-attr">vip_dns_suffix:</span> <span class="hljs-string">&#x27;&#x27;</span>                <span class="hljs-comment"># node vip dns name suffix, empty string by default</span><br>        <span class="hljs-attr">vip_exporter_port:</span> <span class="hljs-number">9650</span>           <span class="hljs-comment"># keepalived exporter listen port, 9650 by default</span><br>  <span class="hljs-attr">vars:</span>                               <span class="hljs-comment"># global parameters</span><br>    <span class="hljs-attr">version:</span> <span class="hljs-string">v2.5.1</span>                   <span class="hljs-comment"># pigsty version string</span><br>    <span class="hljs-attr">admin_ip:</span> <span class="hljs-number">172.18</span><span class="hljs-number">.77</span><span class="hljs-number">.33</span>            <span class="hljs-comment"># admin node ip address</span><br>    <span class="hljs-attr">region:</span> <span class="hljs-string">china</span>                     <span class="hljs-comment"># upstream mirror region: default,china,europe</span><br>    <span class="hljs-attr">infra_portal:</span>                     <span class="hljs-comment"># domain names and upstream servers</span><br>      <span class="hljs-attr">home         :</span> &#123; <span class="hljs-attr">domain:</span> <span class="hljs-string">h.pigsty</span> &#125;<br>      <span class="hljs-attr">grafana      :</span> &#123; <span class="hljs-attr">domain:</span> <span class="hljs-string">g.pigsty</span> ,<span class="hljs-attr">endpoint:</span> <span class="hljs-string">&quot;$&#123;admin_ip&#125;:3000&quot;</span> , <span class="hljs-attr">websocket:</span> <span class="hljs-literal">true</span> &#125;<br>      <span class="hljs-attr">prometheus   :</span> &#123; <span class="hljs-attr">domain:</span> <span class="hljs-string">p.pigsty</span> ,<span class="hljs-attr">endpoint:</span> <span class="hljs-string">&quot;$&#123;admin_ip&#125;:9090&quot;</span> &#125;<br>      <span class="hljs-attr">alertmanager :</span> &#123; <span class="hljs-attr">domain:</span> <span class="hljs-string">a.pigsty</span> ,<span class="hljs-attr">endpoint:</span> <span class="hljs-string">&quot;$&#123;admin_ip&#125;:9093&quot;</span> &#125;<br>      <span class="hljs-attr">blackbox     :</span> &#123; <span class="hljs-attr">endpoint:</span> <span class="hljs-string">&quot;$&#123;admin_ip&#125;:9115&quot;</span> &#125;<br>      <span class="hljs-attr">loki         :</span> &#123; <span class="hljs-attr">endpoint:</span> <span class="hljs-string">&quot;$&#123;admin_ip&#125;:3100&quot;</span> &#125;<br>      <span class="hljs-comment">#minio        : &#123; domain: sss.pigsty  ,endpoint: &quot;$&#123;admin_ip&#125;:9001&quot; ,scheme: https ,websocket: true &#125;</span><br>    <span class="hljs-comment"># if you want to use minio as backup repo instead of local fs, uncomment minio related lines</span><br>    <span class="hljs-comment"># don&#x27;t forget to configure pgbackrest_repo and change credentials there!</span><br>    <span class="hljs-comment">#pgbackrest_method: minio</span><br>    <span class="hljs-comment"># if disabled, original /etc/yum.repos.d will be kept</span><br>    <span class="hljs-attr">repo_remove:</span> <span class="hljs-literal">true</span>       <span class="hljs-comment"># remove existing repo on admin node during repo bootstrap</span><br>    <span class="hljs-attr">node_repo_remove:</span> <span class="hljs-literal">true</span>  <span class="hljs-comment"># remove existing node repo for node managed by pigsty</span><br>    <span class="hljs-comment"># WARNING: CHANGE THESE PASSWORDS</span><br>    <span class="hljs-comment">#grafana_admin_username: admin</span><br>    <span class="hljs-attr">grafana_admin_password:</span> <span class="hljs-string">PG-PWD-01</span><br>    <span class="hljs-comment">#pg_admin_username: dbuser_dba</span><br>    <span class="hljs-attr">pg_admin_password:</span> <span class="hljs-string">PG-PWD-01</span><br>    <span class="hljs-comment">#pg_monitor_username: dbuser_monitor</span><br>    <span class="hljs-attr">pg_monitor_password:</span> <span class="hljs-string">PG-PWD-01</span><br>    <span class="hljs-comment">#pg_replication_username: replicator</span><br>    <span class="hljs-attr">pg_replication_password:</span> <span class="hljs-string">PG-PWD-01</span><br>    <span class="hljs-comment">#patroni_username: postgres</span><br>    <span class="hljs-attr">patroni_password:</span> <span class="hljs-string">PG-PWD-01</span><br>    <span class="hljs-comment">#haproxy_admin_username: admin</span><br>    <span class="hljs-attr">haproxy_admin_password:</span> <span class="hljs-string">PG-PWD-01</span><br>    <span class="hljs-comment"># this config template assume you are using pre-packed offline packages</span><br>    <span class="hljs-comment"># If you wish to download upstream yum packages directly from internet,</span><br>    <span class="hljs-comment"># consider using ad hoc `el7.yml`, `el8.yml`, `el9.yml` config instead.</span><br><span class="hljs-string">...</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="-6"><a href="#-6" class="headerlink" title=""></a></h3><h3 id="配置元节点密钥免密登录主机节点"><a href="#配置元节点密钥免密登录主机节点" class="headerlink" title="配置元节点密钥免密登录主机节点"></a>配置元节点密钥免密登录主机节点</h3><p>Pigsty 会在元节点自动生成一对公私钥，将其拷贝到所有主机节点。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">ssh-copy-id 172.18.77.101<br><span class="hljs-meta prompt_"># </span><span class="language-bash">执行后输入<span class="hljs-built_in">yes</span>，然后再手动输入主机节点的登录密码即可。</span><br>ssh 172.18.77.101<br><span class="hljs-meta prompt_"># </span><span class="language-bash">确认可直接登录即可，所有主机节点都要操作。</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="-7"><a href="#-7" class="headerlink" title=""></a></h3><h3 id="-8"><a href="#-8" class="headerlink" title=""></a></h3><h3 id="将集群节点纳入Pigsty-管理并部署PG集群"><a href="#将集群节点纳入Pigsty-管理并部署PG集群" class="headerlink" title="将集群节点纳入Pigsty 管理并部署PG集群"></a>将集群节点纳入Pigsty 管理并部署PG集群</h3><h4 id="节点纳入管理"><a href="#节点纳入管理" class="headerlink" title="节点纳入管理"></a>节点纳入管理</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">bin/node-add   pg-cu1    <br> <span class="hljs-comment"># 将集群 pg-test1 的3个主机节点纳入 Pigsty 管理</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="PG集群初始化部署（注意：会根据CPU内存等配置自动优化PG参数，建议提前固定好虚拟机配置）"><a href="#PG集群初始化部署（注意：会根据CPU内存等配置自动优化PG参数，建议提前固定好虚拟机配置）" class="headerlink" title="PG集群初始化部署（注意：会根据CPU内存等配置自动优化PG参数，建议提前固定好虚拟机配置）"></a>PG集群初始化部署（注意：会根据CPU内存等配置自动优化PG参数，建议提前固定好虚拟机配置）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">bin/pgsql-add  pg-cu1      <span class="hljs-comment"># 初始化一个3节点的 pg-cu1 可用PG集群</span><br><span class="hljs-comment"># 执行后不到10分钟，就将拥有一个服务接入，监控，备份PITR，高可用配置齐全的 PostgreSQL 数据库集群。</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="PG集群架构图"><a href="#PG集群架构图" class="headerlink" title="PG集群架构图"></a>PG集群架构图</h1><p><img src="https://img.songxwn.com/file/359b8dc5145965a3a3fb5.jpg" srcset="/img/loading.gif" lazyload alt="PG-HA示例图"></p>
+<p>硬件故障由 patroni、etcd 和 Haproxy 提供的自愈高可用架构来兜底，在主库故障的情况下，默认会在 30 秒内执行自动故障转移（Failover）。 客户端无需修改配置重启应用：Haproxy 利用 patroni 健康检查进行流量分发，读写请求会自动分发到新的集群主库中，并避免脑裂的问题。 这一过程十分丝滑，例如在从库故障，或主动切换（switchover）的情况下，客户端只有一瞬间的有感知查询闪断。</p>
+<p>软件故障、人为错误和 数据中心级灾难由 pgbackrest 和可选的 MinIO 集群来兜底。这为您提供了本地&#x2F;云端的 PITR 能力，并在数据中心爆炸的情况下提供了跨地理区域复制，与异地容灾功能。</p>
+<h1 id="管理和使用"><a href="#管理和使用" class="headerlink" title="管理和使用"></a>管理和使用</h1><h2 id="默认用户"><a href="#默认用户" class="headerlink" title="默认用户"></a>默认用户</h2><p>Pigsty 也有四个默认用户（系统用户）：</p>
+<ul>
+<li><p>超级用户 (postgres)，集群的所有者和创建者，与操作系统 dbsu 名称相同。</p>
+</li>
+<li><p>复制用户 (replicator)，用于主-从复制的系统用户。</p>
+</li>
+<li><p>监控用户 (dbuser_monitor)，用于监控数据库和连接池指标的用户。</p>
+</li>
+<li><p>管理用户 (dbuser_dba)，执行日常操作和数据库更改的管理员用户。</p>
+</li>
+</ul>
+<p>这4个默认用户的用户名&#x2F;密码通过4对专用参数进行定义，并在很多地方引用：</p>
+<ul>
+<li><p>pg_dbsu：操作系统 dbsu 名称，默认为 postgres，最好不要更改它</p>
+</li>
+<li><p>pg_dbsu_password：dbsu 密码，默认为空字符串意味着不设置 dbsu 密码，最好不要设置。</p>
+</li>
+<li><p>pg_replication_username：postgres 复制用户名，默认为 replicator</p>
+</li>
+<li><p>pg_replication_password：postgres 复制密码，默认为 DBUser.Replicator</p>
+</li>
+<li><p>pg_admin_username：postgres 管理员用户名，默认为 dbuser_dba</p>
+</li>
+<li><p>pg_admin_password：postgres 管理员密码的明文，默认为 DBUser.DBA</p>
+</li>
+<li><p>pg_monitor_username：postgres 监控用户名，默认为 dbuser_monitor</p>
+</li>
+<li><p>pg_monitor_password：postgres 监控密码，默认为 DBUser.Monitor</p>
+</li>
+</ul>
+<blockquote>
+<p>在生产部署中记得更改这些密码，不要使用默认值！<br>在部署前，可以在pigsty.yml 里面修改。</p>
+</blockquote>
+<h2 id="配置用户"><a href="#配置用户" class="headerlink" title="配置用户"></a>配置用户</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">bin/pgsql-user &lt;cls&gt; &lt;username&gt;    # pgsql-user.yml -l &lt;cls&gt; -e username=&lt;username&gt;<br></code></pre></td></tr></table></figure>
+
+<h2 id="配置HBA"><a href="#配置HBA" class="headerlink" title="配置HBA"></a>配置HBA</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">bin/pgsql-hba &lt;cls&gt;                 # 重新加载指定集群 `&lt;cls&gt;` 的 hba 规则<br>bin/pgsql-hba &lt;cls&gt; ip1 ip2...      # 重新加载特定实例的 hba 规则<br></code></pre></td></tr></table></figure>
+
+<h2 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h2><h3 id="-9"><a href="#-9" class="headerlink" title=""></a></h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">bin/pgsql-db &lt;cls&gt; &lt;dbname&gt;    # pgsql-db.yml -l &lt;cls&gt; -e dbname=&lt;dbname&gt;<br></code></pre></td></tr></table></figure>
+
+<h1 id="数据库集群访问端口说明"><a href="#数据库集群访问端口说明" class="headerlink" title="数据库集群访问端口说明"></a>数据库集群访问端口说明</h1><table>
+<thead>
+<tr>
+<th align="center">组件</th>
+<th align="left">端口</th>
+<th>描述</th>
+<th>状态</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Postgres</td>
+<td align="left">5432</td>
+<td>Pigsty CMDB</td>
+<td>默认启用</td>
+<td></td>
+</tr>
+<tr>
+<td align="center">Pgbouncer</td>
+<td align="left">6432</td>
+<td>Pgbouncer 连接池服务</td>
+<td>默认启用</td>
+<td></td>
+</tr>
+<tr>
+<td align="center">Patroni</td>
+<td align="left">8008</td>
+<td>Patroni 高可用组件</td>
+<td>默认启用</td>
+<td></td>
+</tr>
+<tr>
+<td align="center">Haproxy Primary</td>
+<td align="left">5433</td>
+<td>主连接池：读&#x2F;写服务</td>
+<td>默认启用</td>
+<td></td>
+</tr>
+<tr>
+<td align="center">Haproxy Replica</td>
+<td align="left">5434</td>
+<td>副本连接池：只读服务</td>
+<td>默认启用</td>
+<td></td>
+</tr>
+<tr>
+<td align="center">Haproxy Default</td>
+<td align="left">5436</td>
+<td>主直连服务*</td>
+<td>默认启用</td>
+<td></td>
+</tr>
+<tr>
+<td align="center">Haproxy Offline</td>
+<td align="left">5438</td>
+<td>离线直连：离线读服务</td>
+<td>默认启用</td>
+<td></td>
+</tr>
+<tr>
+<td align="center">Haproxy <code>service</code></td>
+<td align="left">543x</td>
+<td>PostgreSQL 定制服务</td>
+<td><em>按需定制</em></td>
+<td></td>
+</tr>
+<tr>
+<td align="center">Haproxy Admin</td>
+<td align="left">9101</td>
+<td>监控指标和流量管理</td>
+<td>默认启用</td>
+<td></td>
+</tr>
+<tr>
+<td align="center">PG Exporter</td>
+<td align="left">9630</td>
+<td>PG 监控指标导出器</td>
+<td>默认启用</td>
+<td></td>
+</tr>
+<tr>
+<td align="center">PGBouncer Exporter</td>
+<td align="left">9631</td>
+<td>PGBouncer 监控指标导出器</td>
+<td>默认启用</td>
+<td></td>
+</tr>
+<tr>
+<td align="center">Node Exporter</td>
+<td align="left">9100</td>
+<td>节点监控指标导出器</td>
+<td>默认启用</td>
+<td></td>
+</tr>
+<tr>
+<td align="center">Promtail</td>
+<td align="left">9080</td>
+<td>收集数据库组件与主机日志</td>
+<td>默认启用</td>
+<td></td>
+</tr>
+<tr>
+<td align="center">vip-manager</td>
+<td align="left">-</td>
+<td>将 VIP 绑定到主节点</td>
+<td><em>按需启用</em></td>
+<td></td>
+</tr>
+<tr>
+<td align="center">Docker Daemon</td>
+<td align="left">9323</td>
+<td>Docker 守护进程</td>
+<td><em>按需启用</em></td>
+<td></td>
+</tr>
+<tr>
+<td align="center">keepalived</td>
+<td align="left">-</td>
+<td>为整个集群绑定 L2 VIP</td>
+<td><em>按需启用</em></td>
+<td></td>
+</tr>
+<tr>
+<td align="center">Keepalived Exporter</td>
+<td align="left">9650</td>
+<td>Keepalived 指标导出器</td>
+<td><em>按需启用</em></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="-10"><a href="#-10" class="headerlink" title=""></a></h1><p><strong>PS：个人推荐使用 5436端口，并通过VIP地址访问数据库集群</strong>。（绕过pgbouncer）</p>
+<p>使用pgbouncer 则可以使用5433端口，<strong>并通过VIP地址访问集群</strong>。</p>
+<p>默认管理员账号为dbuser_dba。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Pigsty/" class="category-chain-item">Pigsty</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/dns/" class="print-no-link">#dns</a>
+      
+        <a href="/tags/network/" class="print-no-link">#network</a>
+      
+        <a href="/tags/RDS/" class="print-no-link">#RDS</a>
+      
+        <a href="/tags/PostgreSQL/" class="print-no-link">#PostgreSQL</a>
+      
+        <a href="/tags/Database/" class="print-no-link">#Database</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>猪圈Pigsty-PG私有RDS集群搭建教程</div>
+      <div>https://songxwn.com/Pigsty-PG-RDS/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Song</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年2月18日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年2月18日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Grafana-LDAP-AD/" title="Grafana 配置实时开通的LDAP认证-基于AD">
+                        <span class="hidden-mobile">Grafana 配置实时开通的LDAP认证-基于AD</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments">
+      
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script>
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          Fluid.utils.createCssLink('https://lib.baomitu.com/disqusjs/1.3.0/disqusjs.css');
+          Fluid.utils.createScript('https://lib.baomitu.com/disqusjs/1.3.0/disqus.js', function() {
+            new DisqusJS({
+              shortname: 'songxwn',
+              apikey: ''
+            });
+          });
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Pigsty"
+        id="heading-ec94fb8779b0b0e4c805ad0c357a9483" role="tab" data-toggle="collapse" href="#collapse-ec94fb8779b0b0e4c805ad0c357a9483"
+        aria-expanded="true"
+      >
+        Pigsty
+        <span class="list-group-count">(1)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-ec94fb8779b0b0e4c805ad0c357a9483"
+           role="tabpanel" aria-labelledby="heading-ec94fb8779b0b0e4c805ad0c357a9483">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/Pigsty-PG-RDS/" title="猪圈Pigsty-PG私有RDS集群搭建教程"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">猪圈Pigsty-PG私有RDS集群搭建教程</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <a href="https://www.foreverblog.cn/go.html" target="_blank"> <img src="https://img.foreverblog.cn/wormhole_1_tp.gif" alt="" style="width:auto;height:32px;" title="穿梭虫洞-随机访问十年之约友链博客"></a>,<a href="https://www.vultr.com/?ref=7199488" target="_blank"> <img src="https://www.vultr.com/media/logo_ondark.svg" alt="" style="width:auto;height:32px;" title="注册vultr获取免费10美元体验额度"></a>,<a href="https://url.cn/eTx2WPml" target="_blank"> <img src="https://s3.bmp.ovh/imgs/2023/05/06/989aea4d82987ca9.png" alt="" style="width:auto;height:32px;" title="【腾讯云】云服务器、云数据库、COS、CDN、短信等云产品特惠热卖中"></a>
+        </div>
+      </div>
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
