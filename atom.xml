@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-02-20T02:35:56.666Z</updated>
+  <updated>2024-02-20T02:36:29.900Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://songxwn.com/Centec-Zabbix-SNMP/"/>
     <id>https://songxwn.com/Centec-Zabbix-SNMP/</id>
     <published>2024-02-20T01:15:25.000Z</published>
-    <updated>2024-02-20T02:35:56.666Z</updated>
+    <updated>2024-02-20T02:36:29.900Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;适用于盛科使用CentecOS系列的交换机，如E580&amp;#x2F;E530&amp;#x2F;E680等。&lt;/p&gt;
@@ -38,7 +38,7 @@
     
     <category term="Zabbix" scheme="https://songxwn.com/tags/Zabbix/"/>
     
-    <category term="Centec" scheme="https://songxwn.com/tags/Centec/"/>
+    <category term="centec" scheme="https://songxwn.com/tags/centec/"/>
     
   </entry>
   
