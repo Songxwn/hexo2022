@@ -4,6 +4,37 @@
   
   
   <entry>
+    <title>盛科交换机Zabbix SNMP硬件监控模板</title>
+    <link href="/Centec-Zabbix-SNMP/"/>
+    <url>/Centec-Zabbix-SNMP/</url>
+    
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>适用于盛科使用CentecOS系列的交换机，如E580&#x2F;E530&#x2F;E680等。</p><p>1、自动扫描电源，并监测状态。<br>2、自动扫描风扇，并监测状态。<br>3、自动扫描温度传感器，并监测状态，自动匹配最高和最低温度告警，<br>4、监测CPU、内存等状态。<br>5、获取开机时间、序列号、交换机系统版本。<br>6、自动扫描光模块，并记录其收光状态。（无告警）</p><span id="more"></span><p>下载地址：<a href="https://songxwn.com/file/Centec_CentecOS_Hardware_by_SNMP2024.yaml">https://songxwn.com/file/Centec_CentecOS_Hardware_by_SNMP2024.yaml</a></p><p>PS：适用于Zabbix 6.0+</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Zabbix</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>network</tag>
+      
+      <tag>snmp</tag>
+      
+      <tag>Zabbix</tag>
+      
+      <tag>Centec</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>猪圈Pigsty-PG私有RDS集群搭建教程</title>
     <link href="/Pigsty-PG-RDS/"/>
     <url>/Pigsty-PG-RDS/</url>

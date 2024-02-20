@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-02-18T02:40:10.939Z</updated>
+  <updated>2024-02-20T02:33:39.495Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>盛科交换机Zabbix SNMP硬件监控模板</title>
+    <link href="https://songxwn.com/Centec-Zabbix-SNMP/"/>
+    <id>https://songxwn.com/Centec-Zabbix-SNMP/</id>
+    <published>2024-02-20T01:15:25.000Z</published>
+    <updated>2024-02-20T02:33:39.495Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;适用于盛科使用CentecOS系列的交换机，如E580&amp;#x2F;E530&amp;#x2F;E680等。&lt;/p&gt;
+&lt;p&gt;1、自动扫描电源，并监测状态。&lt;br&gt;2、自动扫描风扇，并监测状态。&lt;br&gt;3、自动扫描温度传感器，并监测状态，自动匹配最高和最低温度告警，&lt;br&gt;4、监测CPU、内存等状态。&lt;br&gt;5、获取开机时间、序列号、交换机系统版本。&lt;br&gt;6、自动扫描光模块，并记录其收光状态。（无告警）&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Zabbix" scheme="https://songxwn.com/categories/Zabbix/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="snmp" scheme="https://songxwn.com/tags/snmp/"/>
+    
+    <category term="Zabbix" scheme="https://songxwn.com/tags/Zabbix/"/>
+    
+    <category term="Centec" scheme="https://songxwn.com/tags/Centec/"/>
+    
+  </entry>
   
   <entry>
     <title>猪圈Pigsty-PG私有RDS集群搭建教程</title>
@@ -542,32 +568,6 @@
     <category term="bgp" scheme="https://songxwn.com/tags/bgp/"/>
     
     <category term="rib" scheme="https://songxwn.com/tags/rib/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Zabbix MTR 监测指南</title>
-    <link href="https://songxwn.com/zabbix-mtr/"/>
-    <id>https://songxwn.com/zabbix-mtr/</id>
-    <published>2023-10-26T04:02:59.000Z</published>
-    <updated>2023-10-30T06:00:33.057Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;本文章简单介绍了MTR监控模板的使用。&lt;/p&gt;
-&lt;p&gt;只简单获取文本数据，作为历史查询。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Zabbix" scheme="https://songxwn.com/categories/Zabbix/"/>
-    
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="ping" scheme="https://songxwn.com/tags/ping/"/>
-    
-    <category term="mtr" scheme="https://songxwn.com/tags/mtr/"/>
-    
-    <category term="zabbix" scheme="https://songxwn.com/tags/zabbix/"/>
     
   </entry>
   
