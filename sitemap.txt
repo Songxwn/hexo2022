@@ -1,3 +1,4 @@
+https://songxwn.com/Rsyslog-syslog/
 https://songxwn.com/Native_IP/
 https://songxwn.com/Pigsty-PG-RDS/
 https://songxwn.com/Linux-growpart/
@@ -191,6 +192,7 @@ https://songxwn.com/tags/grafana/
 https://songxwn.com/tags/PostgreSQL/
 https://songxwn.com/tags/Database/
 https://songxwn.com/tags/Centec/
+https://songxwn.com/tags/log/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/VMware/

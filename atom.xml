@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-02-20T02:36:29.900Z</updated>
+  <updated>2024-02-27T06:43:21.111Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Rsyslog 配置接收Syslog</title>
+    <link href="https://songxwn.com/Rsyslog-syslog/"/>
+    <id>https://songxwn.com/Rsyslog-syslog/</id>
+    <published>2024-02-27T01:38:34.000Z</published>
+    <updated>2024-02-27T06:43:21.111Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;基于Rocky LInux 8 搭建，也适用于其他RHEL8-9衍生发行版。&lt;/p&gt;
+&lt;p&gt;注意关闭Selinux和配置防火墙。&lt;/p&gt;
+&lt;p&gt;日志文件存放主目录为 &amp;#x2F;var&amp;#x2F;syslog&amp;#x2F;下，会自动创建发日志主机IP的文件夹，并将日志存放在每天创建的log文件里面。&lt;/p&gt;
+&lt;p&gt;路径格式 &amp;#x2F;var&amp;#x2F;log&amp;#x2F;主机IP地址&amp;#x2F;主机IP地址_年-月-日.log&lt;/p&gt;
+&lt;p&gt;如：192.168.0.1_2038-02-27.log&lt;/p&gt;
+&lt;p&gt;以文本存储方式便于搜索，但可以按照每台每天的日志全部下载，syslog相对于ELK也更&lt;strong&gt;轻量化&lt;/strong&gt;、简单化、占用资源低。&lt;/p&gt;
+&lt;p&gt;也可以配置定时任务，压缩历史日志，以节省存储空间。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Linux" scheme="https://songxwn.com/categories/Linux/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
+    
+    <category term="syslog" scheme="https://songxwn.com/tags/syslog/"/>
+    
+    <category term="log" scheme="https://songxwn.com/tags/log/"/>
+    
+  </entry>
   
   <entry>
     <title>盛科交换机Zabbix SNMP硬件监控模板</title>
@@ -538,36 +569,6 @@
     <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
     
     <category term="WireGuard" scheme="https://songxwn.com/tags/WireGuard/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>节省华为设备的路由表和转发表-rib-only</title>
-    <link href="https://songxwn.com/BGP-rib-only/"/>
-    <id>https://songxwn.com/BGP-rib-only/</id>
-    <published>2023-11-23T06:11:49.000Z</published>
-    <updated>2023-11-23T06:25:18.330Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;由于设备硬件资源限制，所有的路由器和交换机的路由表和转发表都有数量上限的，比如华为的NE20-S路由器的路由表为2M，转发表为1.4M左右。而当要接收超过其上限路由的时候，就可以使用此命令，从而不更换硬件设备。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://img.songxwn.com/file/26fbf985c76fd30930802.png&quot; alt=&quot;路由协议与转发表&quot;&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="network" scheme="https://songxwn.com/categories/network/"/>
-    
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="datacom" scheme="https://songxwn.com/tags/datacom/"/>
-    
-    <category term="huawei" scheme="https://songxwn.com/tags/huawei/"/>
-    
-    <category term="router" scheme="https://songxwn.com/tags/router/"/>
-    
-    <category term="bgp" scheme="https://songxwn.com/tags/bgp/"/>
-    
-    <category term="rib" scheme="https://songxwn.com/tags/rib/"/>
     
   </entry>
   
