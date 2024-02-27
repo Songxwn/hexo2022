@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-02-27T06:43:21.111Z</updated>
+  <updated>2024-02-27T06:51:40.760Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Rsyslog 配置接收Syslog</title>
+    <title>Rsyslog 配置接收Syslog - 轻量化日志存储</title>
     <link href="https://songxwn.com/Rsyslog-syslog/"/>
     <id>https://songxwn.com/Rsyslog-syslog/</id>
     <published>2024-02-27T01:38:34.000Z</published>
-    <updated>2024-02-27T06:43:21.111Z</updated>
+    <updated>2024-02-27T06:51:40.760Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;基于Rocky LInux 8 搭建，也适用于其他RHEL8-9衍生发行版。&lt;/p&gt;
