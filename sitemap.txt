@@ -1,3 +1,5 @@
+https://songxwn.com/ospf-frr-lab/
+https://songxwn.com/ospf-frr/
 https://songxwn.com/Rsyslog-syslog/
 https://songxwn.com/Native_IP/
 https://songxwn.com/Pigsty-PG-RDS/
@@ -37,7 +39,6 @@ https://songxwn.com/KMS/
 https://songxwn.com/about/index.html
 https://songxwn.com/Veeam12.202307/
 https://songxwn.com/Veeam12/
-https://songxwn.com/ospf-frr/
 https://songxwn.com/Windows-DNS-metric/
 https://songxwn.com/openai-proxy/
 https://songxwn.com/Sublime_Text4_4152/
@@ -193,6 +194,7 @@ https://songxwn.com/tags/PostgreSQL/
 https://songxwn.com/tags/Database/
 https://songxwn.com/tags/Centec/
 https://songxwn.com/tags/log/
+https://songxwn.com/tags/lab/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/VMware/
@@ -213,3 +215,4 @@ https://songxwn.com/categories/openai/
 https://songxwn.com/categories/Linux/
 https://songxwn.com/categories/Grfana/
 https://songxwn.com/categories/Pigsty/
+https://songxwn.com/categories/Datacom/

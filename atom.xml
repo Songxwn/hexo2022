@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-03-05T00:51:20.213Z</updated>
+  <updated>2024-03-05T07:53:38.410Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,48 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HCIE Datacom-01-LAB-OSPF快速收敛和BGP联动</title>
+    <link href="https://songxwn.com/ospf-frr-lab/"/>
+    <id>https://songxwn.com/ospf-frr-lab/</id>
+    <published>2024-03-04T23:50:49.000Z</published>
+    <updated>2024-03-05T07:53:38.410Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;配置OSPF FRR+BFD+智能定时器&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;OSPF与BGP联动&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;FRR 快速重路由，提前计算出备份路径，当链路故障时候，将流量快速切换到备份路径上。将中断时间减少到50ms内。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;BFD（Bidirectional Forwarding Detection，双向转发检测）是一种基于RFC 5880标准的高速故障检测机制，两个系统建立BFD会话后，在它们之间的通道上周期性地发送BFD报文，如果一方在协商的检测时间内没有接收到BFD报文，则认为这条双向通道上发生了故障。上层协议通过BFD感知到链路故障后可以及时采取措施，进行故障恢复。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;智能定时器，可以控制加快LSA的生成的接收和根据LSDB计算的路由生成，从而减少因链路变化而造成中断时间。（但调低间隔会占用多余的设备资源）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;BGP联动特性，当有新的设备加入到网络中，或者设备重启时，可能会出现在BGP收敛期间内网络流量丢失的现象。这是由于IGP收敛速度比BGP快而造成的。&lt;/p&gt;
+&lt;p&gt;使能之后OSPF与BGP联动特性的设备会在设定的联动时间内（BGP收敛完成前）保持为Stub路由器，也就是说，该设备发布的LSA中的链路度量值为最大值（65535），从而告知其它OSPF设备不要使用这个路由器来转发数据。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="Datacom" scheme="https://songxwn.com/categories/Datacom/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="datacom" scheme="https://songxwn.com/tags/datacom/"/>
+    
+    <category term="ospf" scheme="https://songxwn.com/tags/ospf/"/>
+    
+    <category term="lab" scheme="https://songxwn.com/tags/lab/"/>
+    
+  </entry>
   
   <entry>
     <title>Rsyslog 配置接收Syslog - 轻量化日志存储</title>
@@ -542,33 +584,6 @@
     <category term="network" scheme="https://songxwn.com/tags/network/"/>
     
     <category term="WDM" scheme="https://songxwn.com/tags/WDM/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>WireGuard-UI 安装和配置</title>
-    <link href="https://songxwn.com/WireGuard-UI-install/"/>
-    <id>https://songxwn.com/WireGuard-UI-install/</id>
-    <published>2023-11-23T08:34:00.000Z</published>
-    <updated>2023-11-24T16:14:03.804Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;WireGuard 是一种通信协议和免费开源软件，可实现加密的三层隧道协议 ，其设计目标是易用性、高速性能和低攻击面。 它旨在获得比 IPsec 和 OpenVPN 这两种常见的隧道协议更好的性能和更强大的功能。其报文承载在UDP。&lt;/p&gt;
-&lt;p&gt;2020 年 5 月，该软件的 Linux 版本达到了稳定的生产版本，并被合并到 Linux 5.6 内核中，并在一些 Linux 发行版中向后移植到早期的 Linux 内核。&lt;/p&gt;
-&lt;p&gt;它最初是为 Linux 内核发布的，现在是跨平台（Windows、macOS、BSD、iOS、Android）并且可以广泛部署。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/ngoduykhanh/wireguard-ui&quot;&gt;WireGuard-UI&lt;/a&gt;则是用来管理WireGuard配置文件的 Web 可视化管理开源项目，可以方便的生成配置，通过邮件、二维码分发。&lt;/p&gt;
-&lt;p&gt;项目地址：&lt;a href=&quot;https://github.com/ngoduykhanh/wireguard-ui&quot;&gt;https://github.com/ngoduykhanh/wireguard-ui&lt;/a&gt; &lt;/p&gt;</summary>
-    
-    
-    
-    <category term="network" scheme="https://songxwn.com/categories/network/"/>
-    
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
-    
-    <category term="WireGuard" scheme="https://songxwn.com/tags/WireGuard/"/>
     
   </entry>
   

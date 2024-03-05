@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://songxwn.com/ospf-frr-lab/</loc>
+    
+    <lastmod>2024-03-05</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://songxwn.com/ospf-frr/</loc>
+    
+    <lastmod>2024-03-05</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://songxwn.com/Rsyslog-syslog/</loc>
     
     <lastmod>2024-03-05</lastmod>
@@ -347,15 +365,6 @@
     <loc>https://songxwn.com/Veeam12/</loc>
     
     <lastmod>2023-09-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://songxwn.com/ospf-frr/</loc>
-    
-    <lastmod>2023-09-05</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -1554,6 +1563,13 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>https://songxwn.com/tags/lab/</loc>
+    <lastmod>2024-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
@@ -1691,6 +1707,13 @@
   
   <url>
     <loc>https://songxwn.com/categories/Pigsty/</loc>
+    <lastmod>2024-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://songxwn.com/categories/Datacom/</loc>
     <lastmod>2024-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

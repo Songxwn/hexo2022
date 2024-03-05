@@ -16,28 +16,29 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
   
-    <meta name="description" content="简介住宅IP：是由VerizonFiOS、AT＆TU-verse、Cox、Comcast、Charter或TimeWarner等（本地运营商）公司拥有的IP，它们可用于真人家庭。IP地址是由互联网服务提供商（ISP）分配给用户。绑定到家庭地址的IP地址叫住宅IP地址。也叫原生、本地IP、或非广播IP、Native IP。 （国内移动、联通、电信就是一级本地运营商）">
+    <meta name="description" content="简介 配置OSPF FRR+BFD+智能定时器  OSPF与BGP联动    FRR 快速重路由，提前计算出备份路径，当链路故障时候，将流量快速切换到备份路径上。将中断时间减少到50ms内。  BFD（Bidirectional Forwarding Detection，双向转发检测）是一种基于RFC 5880标准的高速故障检测机制，两个系统建立BFD会话后，在它们之间的通道上周期性地发送BFD报">
 <meta property="og:type" content="article">
-<meta property="og:title" content="住宅IP和数据中心IP(广播和非广播)">
-<meta property="og:url" content="https://songxwn.com/Native_IP/index.html">
+<meta property="og:title" content="HCIE Datacom-01-LAB-OSPF快速收敛和BGP联动">
+<meta property="og:url" content="https://songxwn.com/ospf-frr-lab/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="简介住宅IP：是由VerizonFiOS、AT＆TU-verse、Cox、Comcast、Charter或TimeWarner等（本地运营商）公司拥有的IP，它们可用于真人家庭。IP地址是由互联网服务提供商（ISP）分配给用户。绑定到家庭地址的IP地址叫住宅IP地址。也叫原生、本地IP、或非广播IP、Native IP。 （国内移动、联通、电信就是一级本地运营商）">
+<meta property="og:description" content="简介 配置OSPF FRR+BFD+智能定时器  OSPF与BGP联动    FRR 快速重路由，提前计算出备份路径，当链路故障时候，将流量快速切换到备份路径上。将中断时间减少到50ms内。  BFD（Bidirectional Forwarding Detection，双向转发检测）是一种基于RFC 5880标准的高速故障检测机制，两个系统建立BFD会话后，在它们之间的通道上周期性地发送BFD报">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img.songxwn.com/file/c2710522ab4b806691ab4.png">
-<meta property="article:published_time" content="2023-12-15T01:33:46.000Z">
-<meta property="article:modified_time" content="2024-02-26T09:12:03.267Z">
+<meta property="og:image" content="https://img.songxwn.com/file/475f6d825849f00f83cfe.png">
+<meta property="article:published_time" content="2024-03-04T23:50:49.000Z">
+<meta property="article:modified_time" content="2024-03-05T07:53:38.410Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
-<meta property="article:tag" content="ip">
-<meta property="article:tag" content="Native_IP">
+<meta property="article:tag" content="datacom">
+<meta property="article:tag" content="ospf">
+<meta property="article:tag" content="lab">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img.songxwn.com/file/c2710522ab4b806691ab4.png">
+<meta name="twitter:image" content="https://img.songxwn.com/file/475f6d825849f00f83cfe.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>住宅IP和数据中心IP(广播和非广播) - Song`s Blog</title>
+  <title>HCIE Datacom-01-LAB-OSPF快速收敛和BGP联动 - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -244,7 +245,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="住宅IP和数据中心IP(广播和非广播)"></span>
+            <span id="subtitle" data-typed-text="HCIE Datacom-01-LAB-OSPF快速收敛和BGP联动"></span>
           
         </div>
 
@@ -255,8 +256,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-12-15 09:33" pubdate>
-          2023年12月15日 上午
+        <time datetime="2024-03-05 07:50" pubdate>
+          2024年3月5日 早上
         </time>
       </span>
     
@@ -267,7 +268,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          655 字
+          597 字
         
       </span>
     
@@ -278,7 +279,7 @@
         
         
         
-          6 分钟
+          5 分钟
         
       </span>
     
@@ -336,12 +337,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">住宅IP和数据中心IP(广播和非广播)</h1>
+            <h1 id="seo-header">HCIE Datacom-01-LAB-OSPF快速收敛和BGP联动</h1>
             
               <p id="updated-time" class="note note-danger" style="">
                 
                   
-                    本文最后更新于 2024年2月26日 下午
+                    本文最后更新于 2024年3月5日 下午
                   
                 
               </p>
@@ -349,32 +350,80 @@
             
               <div class="markdown-body">
                 
-                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>住宅IP：是由VerizonFiOS、AT＆TU-verse、Cox、Comcast、Charter或TimeWarner等（本地运营商）公司拥有的IP，它们可用于真人家庭。IP地址是由互联网服务提供商（ISP）分配给用户。绑定到家庭地址的IP地址叫住宅IP地址。也叫原生、本地IP、或非广播IP、Native IP。</p>
-<p>（国内移动、联通、电信就是一级本地运营商）</p>
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ol>
+<li><p>配置OSPF FRR+BFD+智能定时器</p>
+</li>
+<li><p>OSPF与BGP联动</p>
+</li>
+</ol>
+<ul>
+<li><p>FRR 快速重路由，提前计算出备份路径，当链路故障时候，将流量快速切换到备份路径上。将中断时间减少到50ms内。</p>
+</li>
+<li><p>BFD（Bidirectional Forwarding Detection，双向转发检测）是一种基于RFC 5880标准的高速故障检测机制，两个系统建立BFD会话后，在它们之间的通道上周期性地发送BFD报文，如果一方在协商的检测时间内没有接收到BFD报文，则认为这条双向通道上发生了故障。上层协议通过BFD感知到链路故障后可以及时采取措施，进行故障恢复。</p>
+</li>
+<li><p>智能定时器，可以控制加快LSA的生成的接收和根据LSDB计算的路由生成，从而减少因链路变化而造成中断时间。（但调低间隔会占用多余的设备资源）</p>
+</li>
+<li></li>
+<li><p>BGP联动特性，当有新的设备加入到网络中，或者设备重启时，可能会出现在BGP收敛期间内网络流量丢失的现象。这是由于IGP收敛速度比BGP快而造成的。</p>
+<p>使能之后OSPF与BGP联动特性的设备会在设定的联动时间内（BGP收敛完成前）保持为Stub路由器，也就是说，该设备发布的LSA中的链路度量值为最大值（65535），从而告知其它OSPF设备不要使用这个路由器来转发数据。</p>
+</li>
+</ul>
 <span id="more"></span>
 
-<h1 id="其他类型"><a href="#其他类型" class="headerlink" title="其他类型"></a>其他类型</h1><p>当然，市场上还有其他类型的产品：</p>
-<p>1、机房数据中心代理:使用数据中心(机房)拥有和管理IP代理，俗称机房IP代理。（如阿里云、华为云提供的IP）</p>
-<p>2、4G移动代理：由移动运营商分配给移动设备的真实4G IP地址。（蜂窝网络）</p>
-<p>3、隧道转发：基础IP我们可以将代理分为两类:轮换代理和非轮换(粘性固定)IP地址。</p>
-<h2 id="机房ip和住宅ip有什么区别？"><a href="#机房ip和住宅ip有什么区别？" class="headerlink" title="机房ip和住宅ip有什么区别？"></a><strong>机房ip和住宅ip有什么区别？</strong></h2><h3 id="住宅IP："><a href="#住宅IP：" class="headerlink" title="住宅IP："></a>住宅IP：</h3><p>住宅IP是ISP(互联网服务提供商)或ADSL实际住宅由供应商分配给个人用户IP地址，100%WIFI由网络真实用户组成，独家居住IP是真正的用户设备IP，用于普通网民IP完全一致。</p>
-<p>住宅IP与机房相比，它具有连号、散点分布、与普通网民分布一致的特点IP,成功率采集、补量业务、SEO需要大量短效动态P的业务优势很大。</p>
-<h3 id="机房IP："><a href="#机房IP：" class="headerlink" title="机房IP："></a>机房IP：</h3><p>机房IP是机房中心，机房有很多服务器IP具有IP在线固定稳定，价格相对便宜，但机房IP连号、区域分布不平衡等。适用于挂机、下载、伪装访问等需要长期在线的业务。</p>
-<h3 id="区别总结："><a href="#区别总结：" class="headerlink" title="区别总结："></a>区别总结：</h3><p>机房IP稳定性高，在线时间长，价格相对较低。</p>
-<p>住宅IP目标服务器无法检测到，因此无法屏蔽您IP，处理后的数据不能发送给你。</p>
-<h1 id="为什么要住宅IP"><a href="#为什么要住宅IP" class="headerlink" title="为什么要住宅IP"></a>为什么要住宅IP</h1><p>因为某些流媒体、游戏、APP会对IP类型进行区分对待，如Netflix、Tiktok 直播等等。</p>
-<h1 id="如何判断一个ip是机房ip还是住宅ip呢"><a href="#如何判断一个ip是机房ip还是住宅ip呢" class="headerlink" title="如何判断一个ip是机房ip还是住宅ip呢"></a>如何判断一个ip是机房ip还是住宅ip呢</h1><p>原生 IP 就是指该 IP 的注册地址与其BGP ASN所在位置一致的 IP。</p>
-<p>可以用一个网站来判断（<a target="_blank" rel="noopener" href="http://ipinfo.io/">http://ipinfo.io</a>），type&#x3D;ISP 代表为住宅 ，type&#x3D;hosting 或者 type&#x3D;business 为商用机房ip。</p>
-<p>建议type类型为 双ISP比较好。</p>
-<p><img src="https://img.songxwn.com/file/24cd05edc5b364c1d7a3d.png" srcset="/img/loading.gif" lazyload></p>
-<p>然后根据AS号查询归属地是否和IP地址一样。查询网址：<a target="_blank" rel="noopener" href="https://bgp.he.net/">https://bgp.he.net/</a> </p>
-<p><img src="https://img.songxwn.com/file/1bf9c04f005fd8a4443cf.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://img.songxwn.com/file/0872a08b09ff9463805ff.png" srcset="/img/loading.gif" lazyload></p>
-<h1 id="其他检测网站"><a href="#其他检测网站" class="headerlink" title="其他检测网站"></a>其他检测网站</h1><p>（<a target="_blank" rel="noopener" href="http://ipjiance.com/">http://ipjiance.com</a>）</p>
-<p>（<a target="_blank" rel="noopener" href="http://whoer.net/">http://whoer.net</a>）</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://news.kd010.com/fwqzy/13660.html">https://news.kd010.com/fwqzy/13660.html</a> </p>
-<p><a target="_blank" rel="noopener" href="https://www.kookeey.com/news/archives/4712">https://www.kookeey.com/news/archives/4712</a> </p>
-<p><a target="_blank" rel="noopener" href="https://www.kookeey.com/news/archives/5146">https://www.kookeey.com/news/archives/5146</a> </p>
+<h2 id="相关文章："><a href="#相关文章：" class="headerlink" title="相关文章："></a>相关文章：</h2><p><a href="https://songxwn.com/ospf-frr" title="https://songxwn.com/ospf-frr">https://songxwn.com/ospf-frr</a></p>
+<p><a href="https://songxwn.com/ospf-route-FA/" title="https://songxwn.com/ospf-route-FA/">https://songxwn.com/ospf-route-FA/</a></p>
+<h1 id="实验规划"><a href="#实验规划" class="headerlink" title="实验规划"></a>实验规划</h1><p>接口互联地址为 AZ.1.1.A - AZ.1.1.A，AZ为两边设备</p>
+<table>
+<thead>
+<tr>
+<th align="left">路由器</th>
+<th align="left">LookBack&#x2F;Router id</th>
+<th align="left">AS</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">R1</td>
+<td align="left">1.1.1.1</td>
+<td align="left">1</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">R2</td>
+<td align="left">2.2.2.2</td>
+<td align="left">2</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">R3</td>
+<td align="left">3.3.3.3</td>
+<td align="left">3</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">R4</td>
+<td align="left">4.4.4.4</td>
+<td align="left">4</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h1 id="实验拓扑"><a href="#实验拓扑" class="headerlink" title="实验拓扑"></a>实验拓扑</h1><p><img src="https://img.songxwn.com/file/1ed82c0f1639c114edfb2.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="实验主要配置和验证"><a href="#实验主要配置和验证" class="headerlink" title="实验主要配置和验证"></a>实验主要配置和验证</h1><h2 id="FRR"><a href="#FRR" class="headerlink" title="FRR"></a>FRR</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">ospf 1<br> frr<br>  loop-free-alternate<br></code></pre></td></tr></table></figure>
+
+<h3 id="验证-（出现了Backup字段）"><a href="#验证-（出现了Backup字段）" class="headerlink" title="验证 （出现了Backup字段）"></a>验证 （出现了Backup字段）</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs text">[R1]display ospf routing 34.1.1.0<br><br>	 OSPF Process 1 with Router ID 1.1.1.1<br><br> Destination : 34.1.1.0/24        <br> AdverRouter : 4.4.4.4                  Area      : 0.0.0.0  <br> Cost        : 2                        Type      : Transit <br> NextHop     : 13.1.1.3                 Interface : GigabitEthernet0/0/1  <br> Priority    : Low                      Age       : 00h02m53s  <br> Backup Nexthop : 12.1.1.2              Backup Interface: GigabitEthernet0/0/0<br> Backup Type : LFA LINK-NODE  <br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="BFD"><a href="#BFD" class="headerlink" title="BFD"></a>BFD</h1><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs text">bfd<br><br># 全局视图开启BFD全局使能<br><br><br>interface GigabitEthernet0/0/0<br> ospf bfd enable<br> ospf bfd min-rx-interval 500 min-tx-interval 500 detect<br><br># 接口视图下配置开启OSPF的BFD，并配置时间间隔。<br></code></pre></td></tr></table></figure>
+
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs text">[R1]display bfd session all<br>--------------------------------------------------------------------------------<br>Local Remote     PeerIpAddr      State     Type        InterfaceName            <br>--------------------------------------------------------------------------------<br><br>8192  8192       12.1.1.2        Up        D_IP_IF     GigabitEthernet0/0/0     <br>8193  8192       13.1.1.3        Up        D_IP_IF     GigabitEthernet0/0/1     <br>--------------------------------------------------------------------------------<br>     Total UP/DOWN Session Number : 2/0<br></code></pre></td></tr></table></figure>
+
+<h2 id="BGP-联动"><a href="#BGP-联动" class="headerlink" title="BGP 联动"></a>BGP 联动</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">ospf 1<br> stub-router on-startup 30<br><br><br># 配置OSPF启动后，路由器作为stub-router的时间<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><h1 id="实验下载"><a href="#实验下载" class="headerlink" title="实验下载"></a>实验下载</h1><p><a href="https://songxwn.com/file/ENSP_OSPF-FRR.7z" title="https://songxwn.com/file/ENSP_OSPF-FRR.7z">https://songxwn.com/file/ENSP_OSPF-FRR.7z</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://support.huawei.com/enterprise/zh/doc/EDOC1100033741/c2dc9498" title="https://support.huawei.com/enterprise/zh/doc/EDOC1100033741/c2dc9498">https://support.huawei.com/enterprise/zh/doc/EDOC1100033741/c2dc9498</a></p>
 
                 
               </div>
@@ -393,7 +442,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/network/" class="category-chain-item">network</a>
+  <a href="/categories/Datacom/" class="category-chain-item">Datacom</a>
   
   
 
@@ -410,9 +459,11 @@
       
         <a href="/tags/network/" class="print-no-link">#network</a>
       
-        <a href="/tags/ip/" class="print-no-link">#ip</a>
+        <a href="/tags/datacom/" class="print-no-link">#datacom</a>
       
-        <a href="/tags/Native-IP/" class="print-no-link">#Native_IP</a>
+        <a href="/tags/ospf/" class="print-no-link">#ospf</a>
+      
+        <a href="/tags/lab/" class="print-no-link">#lab</a>
       
     </div>
   
@@ -424,8 +475,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>住宅IP和数据中心IP(广播和非广播)</div>
-      <div>https://songxwn.com/Native_IP/</div>
+      <div>HCIE Datacom-01-LAB-OSPF快速收敛和BGP联动</div>
+      <div>https://songxwn.com/ospf-frr-lab/</div>
     </div>
     <div class="license-meta">
       
@@ -437,13 +488,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年12月15日</div>
+          <div>2024年3月5日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年2月26日</div>
+          <div>2024年3月5日</div>
         </div>
       
       
@@ -474,18 +525,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/url-get-edge-tools/" title="网站页面域名获取工具-Edge (2.1.5P)">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">网站页面域名获取工具-Edge (2.1.5P)</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Veeam12.1/" title="Veeam Backup Replication 12.1 12月更新安装">
-                        <span class="hidden-mobile">Veeam Backup Replication 12.1 12月更新安装</span>
+                      <a href="/Rsyslog-syslog/" title="Rsyslog 配置接收Syslog - 轻量化日志存储">
+                        <span class="hidden-mobile">Rsyslog 配置接收Syslog - 轻量化日志存储</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -545,140 +590,17 @@
     
     <div class="category row nomargin-x">
       <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="network"
-        id="heading-91e02cd2b8621d0c05197f645668c5c4" role="tab" data-toggle="collapse" href="#collapse-91e02cd2b8621d0c05197f645668c5c4"
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Datacom"
+        id="heading-2c1b3b5061d0b9424707a49705161bac" role="tab" data-toggle="collapse" href="#collapse-2c1b3b5061d0b9424707a49705161bac"
         aria-expanded="true"
       >
-        network
-        <span class="list-group-count">(32)</span>
+        Datacom
+        <span class="list-group-count">(2)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse show" id="collapse-91e02cd2b8621d0c05197f645668c5c4"
-           role="tabpanel" aria-labelledby="heading-91e02cd2b8621d0c05197f645668c5c4">
-        
-        
-          
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/DNS_recursive_Server/" title="建立自有递归DNS服务器"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">建立自有递归DNS服务器</span>
-        </a>
-      
-    
-      
-      
-        <a href="/Full_Stack_Network_Engineer/" title="如何成为全栈网络工程师？"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">如何成为全栈网络工程师？</span>
-        </a>
-      
-    
-      
-      
-        <a href="/IP_Mask_Gateway/" title="IP地址 子网掩码 默认网关 随笔"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">IP地址 子网掩码 默认网关 随笔</span>
-        </a>
-      
-    
-      
-      
-        <a href="/Juniper_L3-MPLS/" title="Juniper MPLS L3VPN实验配置"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Juniper MPLS L3VPN实验配置</span>
-        </a>
-      
-    
-      
-      
-        <a href="/Juniper_RE-Protect/" title="Juniper RE防护-过滤SSH&amp;Telnet登录"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Juniper RE防护-过滤SSH&amp;Telnet登录</span>
-        </a>
-      
-    
-      
-      
-        <a href="/MPLS_VPN/" title="MPLS VPN随笔（L3 单域）"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">MPLS VPN随笔（L3 单域）</span>
-        </a>
-      
-    
-      
-      
-        <a href="/MikroTik_ROS_WinBox_DNS/" title="MikroTik ROS Winbox Ping工具DNS问题"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">MikroTik ROS Winbox Ping工具DNS问题</span>
-        </a>
-      
-    
-      
-      
-        <a href="/OSI/" title="OSI七层网络参考模型 随笔"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">OSI七层网络参考模型 随笔</span>
-        </a>
-      
-    
-      
-      
-        <a href="/QINQ/" title="QinQ 随笔"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">QinQ 随笔</span>
-        </a>
-      
-    
-      
-      
-        <a href="/TCP_BBR/" title="TCP拥塞控制算法–从 CUBIC 到 BBRv2"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">TCP拥塞控制算法–从 CUBIC 到 BBRv2</span>
-        </a>
-      
-    
-      
-      
-        <a href="/categories/network/" class="list-group-item list-group-item-action">
-          <span class="category-post">More...</span>
-        </a>
-        
-  </div>
-
-          
-  
-    
-    
-    
-    <div class="category-sub row nomargin-x">
-      <a class="category-subitem collapsed
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="vxlan"
-        id="heading-cc9fdff17fe90752400924ef32962330" role="tab" data-toggle="collapse" href="#collapse-cc9fdff17fe90752400924ef32962330"
-        aria-expanded="false"
-      >
-        vxlan
-        <span class="list-group-count">(5)</span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-      <div class="category-collapse collapse " id="collapse-cc9fdff17fe90752400924ef32962330"
-           role="tabpanel" aria-labelledby="heading-cc9fdff17fe90752400924ef32962330">
+      <div class="category-collapse collapse show" id="collapse-2c1b3b5061d0b9424707a49705161bac"
+           role="tabpanel" aria-labelledby="heading-2c1b3b5061d0b9424707a49705161bac">
         
         
           
@@ -687,55 +609,24 @@
     
       
       
-        <a href="/VXLAN/" title="什么是VXLAN"
+        <a href="/ospf-frr/" title="HCIE Datacom-01.1 IGP高级特性-OSPF-快速收敛"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">什么是VXLAN</span>
+          <span class="category-post">HCIE Datacom-01.1 IGP高级特性-OSPF-快速收敛</span>
         </a>
       
     
       
       
-        <a href="/VXLAN_Basic/" title="VXLAN 基本概念"
+        <a href="/ospf-frr-lab/" title="HCIE Datacom-01-LAB-OSPF快速收敛和BGP联动"
            class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">VXLAN 基本概念</span>
-        </a>
-      
-    
-      
-      
-        <a href="/VXLAN_Configuration/" title="VXLAN 基本配置"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">VXLAN 基本配置</span>
-        </a>
-      
-    
-      
-      
-        <a href="/VXLAN_Principle/" title="VXLAN 转发原理"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">VXLAN 转发原理</span>
-        </a>
-      
-    
-      
-      
-        <a href="/BGP_EVPN_Basic/" title="什么是EVPN？"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">什么是EVPN？</span>
+           active">
+          <span class="category-post">HCIE Datacom-01-LAB-OSPF快速收敛和BGP联动</span>
         </a>
       
     
   </div>
 
-        
-      </div>
-    </div>
-  
         
       </div>
     </div>
