@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-03-05T07:53:38.410Z</updated>
+  <updated>2024-03-05T07:55:36.881Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://songxwn.com/ospf-frr-lab/"/>
     <id>https://songxwn.com/ospf-frr-lab/</id>
     <published>2024-03-04T23:50:49.000Z</published>
-    <updated>2024-03-05T07:53:38.410Z</updated>
+    <updated>2024-03-05T07:55:36.881Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;ol&gt;
@@ -37,7 +37,6 @@
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;智能定时器，可以控制加快LSA的生成的接收和根据LSDB计算的路由生成，从而减少因链路变化而造成中断时间。（但调低间隔会占用多余的设备资源）&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;BGP联动特性，当有新的设备加入到网络中，或者设备重启时，可能会出现在BGP收敛期间内网络流量丢失的现象。这是由于IGP收敛速度比BGP快而造成的。&lt;/p&gt;
 &lt;p&gt;使能之后OSPF与BGP联动特性的设备会在设定的联动时间内（BGP收敛完成前）保持为Stub路由器，也就是说，该设备发布的LSA中的链路度量值为最大值（65535），从而告知其它OSPF设备不要使用这个路由器来转发数据。&lt;/p&gt;
 &lt;/li&gt;
