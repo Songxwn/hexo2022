@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img.songxwn.com/file/57a31a9d4a5525f4b61ac.png">
 <meta property="article:published_time" content="2024-03-07T11:04:15.000Z">
-<meta property="article:modified_time" content="2024-03-07T10:08:54.704Z">
+<meta property="article:modified_time" content="2024-03-07T10:10:53.817Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="syslog">
@@ -267,7 +267,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          159 字
+          218 字
         
       </span>
     
@@ -353,10 +353,11 @@
 <p>所以需要将其过滤掉，不写入到本地存储和发送到syslog服务器。</p>
 <span id="more"></span>
 
-<h2 id="配置命令"><a href="#配置命令" class="headerlink" title="配置命令"></a>配置命令</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs text">set system syslog file messages match &quot;!(.*license*)&quot;<br><br><br># 本地文件过滤掉和license相关的日志<br><br>set system syslog host 1.1.1.1 match &quot;!(.*license*)&quot;<br><br># 远程syslog服务器过滤掉和license相关的日志<br><br></code></pre></td></tr></table></figure>
+<h2 id="配置命令"><a href="#配置命令" class="headerlink" title="配置命令"></a>配置命令</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell">set system syslog file messages match &quot;!(.*license*)&quot;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">本地文件过滤掉和license相关的日志</span><br><br>set system syslog host 1.1.1.1 match &quot;!(.*license*)&quot;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">远程syslog服务器过滤掉和license相关的日志</span><br><br></code></pre></td></tr></table></figure>
 
 <p>PS：也适用于其他类型的日志过滤和其他Juniper设备。</p>
-
+<h1 id="扩展-其他告警消除"><a href="#扩展-其他告警消除" class="headerlink" title="扩展-其他告警消除"></a>扩展-其他告警消除</h1><p>默认配置下会有以下告警造成红灯。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell"><br>request system configuration rescue save <br>// 保存当前配置为救援配置，消除 alarm 告警。<br><br>set chassis alarm management-ethernet link-down ignore <br><br>// 消除管理端口未连接告警，消除 alarm 告警。<br><br></code></pre></td></tr></table></figure>
                 
               </div>
             
