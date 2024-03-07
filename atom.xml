@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-03-07T06:50:52.704Z</updated>
+  <updated>2024-03-07T10:08:54.704Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Juniper 设备配置日志过滤-过滤license高级日志</title>
+    <link href="https://songxwn.com/Juniper-log-match/"/>
+    <id>https://songxwn.com/Juniper-log-match/</id>
+    <published>2024-03-07T11:04:15.000Z</published>
+    <updated>2024-03-07T10:08:54.704Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;Juniper QFX5110 系列交换机是支持OSPF ISIS BGP MPLS等高级路由功能的，但需要对应的license许可。虽然你没有license也可以用，但日志会持续打印设备没有license，影响日常排障、占用过多的存储、也可能影响稳定性。&lt;/p&gt;
+&lt;p&gt;所以需要将其过滤掉，不写入到本地存储和发送到syslog服务器。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Juniper" scheme="https://songxwn.com/categories/Juniper/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="syslog" scheme="https://songxwn.com/tags/syslog/"/>
+    
+    <category term="Juniper" scheme="https://songxwn.com/tags/Juniper/"/>
+    
+  </entry>
   
   <entry>
     <title>HCIE Datacom-02.3 BGP高级特性-RR路由反射器组网</title>
@@ -569,31 +593,6 @@
     <category term="Windows" scheme="https://songxwn.com/tags/Windows/"/>
     
     <category term="IDE" scheme="https://songxwn.com/tags/IDE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Windows 上的TCP BBRv2</title>
-    <link href="https://songxwn.com/Windows-BBRv2/"/>
-    <id>https://songxwn.com/Windows-BBRv2/</id>
-    <published>2023-12-12T01:20:08.000Z</published>
-    <updated>2023-12-12T02:34:47.484Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;Windows 11 22H2 现已支持 TCP BBR 拥塞控制。&lt;/p&gt;
-&lt;p&gt;从10.0.22621版本开始，而尚未发布的Windows Server 2025也会支持此功能。&lt;/p&gt;
-&lt;p&gt;什么是BBR：&lt;a href=&quot;https://songxwn.com/TCP_BBR/&quot;&gt;https://songxwn.com/TCP_BBR/&lt;/a&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="network" scheme="https://songxwn.com/categories/network/"/>
-    
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="BBR" scheme="https://songxwn.com/tags/BBR/"/>
-    
-    <category term="TCP" scheme="https://songxwn.com/tags/TCP/"/>
     
   </entry>
   

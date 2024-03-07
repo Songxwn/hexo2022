@@ -16,29 +16,28 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
   
-    <meta name="description" content="路由反射器简介引入路由反射器，可以简化IBGP全互联的需求和配置，也可以减轻网络和CPU的负担、和不必要的BGP Update。 相对于BGP联盟也更利于排错。 PS：iBGP全互联是因为iBGP的水平分割防环机制。  引入路由反射器之后存在3种角色： RR（Route Reflector）： 路由反射器 Client：客户机 Non-Client：非客户机PS：是否为客户机，是由RR指定的。">
+    <meta name="description" content="简介Juniper QFX5110 系列交换机是支持OSPF ISIS BGP MPLS等高级路由功能的，但需要对应的license许可。虽然你没有license也可以用，但日志会持续打印设备没有license，影响日常排障、占用过多的存储、也可能影响稳定性。 所以需要将其过滤掉，不写入到本地存储和发送到syslog服务器。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HCIE Datacom-02.3 BGP高级特性-RR路由反射器组网">
-<meta property="og:url" content="https://songxwn.com/BGP-RR/index.html">
+<meta property="og:title" content="Juniper 设备配置日志过滤-过滤license高级日志">
+<meta property="og:url" content="https://songxwn.com/Juniper-log-match/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="路由反射器简介引入路由反射器，可以简化IBGP全互联的需求和配置，也可以减轻网络和CPU的负担、和不必要的BGP Update。 相对于BGP联盟也更利于排错。 PS：iBGP全互联是因为iBGP的水平分割防环机制。  引入路由反射器之后存在3种角色： RR（Route Reflector）： 路由反射器 Client：客户机 Non-Client：非客户机PS：是否为客户机，是由RR指定的。">
+<meta property="og:description" content="简介Juniper QFX5110 系列交换机是支持OSPF ISIS BGP MPLS等高级路由功能的，但需要对应的license许可。虽然你没有license也可以用，但日志会持续打印设备没有license，影响日常排障、占用过多的存储、也可能影响稳定性。 所以需要将其过滤掉，不写入到本地存储和发送到syslog服务器。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img.songxwn.com/file/cab23b887da8c10c03712.png">
-<meta property="article:published_time" content="2024-03-07T01:23:23.000Z">
-<meta property="article:modified_time" content="2024-03-07T06:50:52.704Z">
+<meta property="og:image" content="https://img.songxwn.com/file/57a31a9d4a5525f4b61ac.png">
+<meta property="article:published_time" content="2024-03-07T11:04:15.000Z">
+<meta property="article:modified_time" content="2024-03-07T10:08:54.704Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
-<meta property="article:tag" content="datacom">
-<meta property="article:tag" content="BGP">
-<meta property="article:tag" content="BGP RR">
+<meta property="article:tag" content="syslog">
+<meta property="article:tag" content="Juniper">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img.songxwn.com/file/cab23b887da8c10c03712.png">
+<meta name="twitter:image" content="https://img.songxwn.com/file/57a31a9d4a5525f4b61ac.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>HCIE Datacom-02.3 BGP高级特性-RR路由反射器组网 - Song`s Blog</title>
+  <title>Juniper 设备配置日志过滤-过滤license高级日志 - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -245,7 +244,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="HCIE Datacom-02.3 BGP高级特性-RR路由反射器组网"></span>
+            <span id="subtitle" data-typed-text="Juniper 设备配置日志过滤-过滤license高级日志"></span>
           
         </div>
 
@@ -256,8 +255,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-03-07 09:23" pubdate>
-          2024年3月7日 上午
+        <time datetime="2024-03-07 19:04" pubdate>
+          2024年3月7日 晚上
         </time>
       </span>
     
@@ -268,7 +267,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.1k 字
+          159 字
         
       </span>
     
@@ -279,7 +278,7 @@
         
         
         
-          18 分钟
+          2 分钟
         
       </span>
     
@@ -337,12 +336,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">HCIE Datacom-02.3 BGP高级特性-RR路由反射器组网</h1>
+            <h1 id="seo-header">Juniper 设备配置日志过滤-过滤license高级日志</h1>
             
               <p id="updated-time" class="note note-danger" style="">
                 
                   
-                    本文最后更新于 2024年3月7日 下午
+                    本文最后更新于 2024年3月7日 晚上
                   
                 
               </p>
@@ -350,142 +349,13 @@
             
               <div class="markdown-body">
                 
-                <h1 id="路由反射器简介"><a href="#路由反射器简介" class="headerlink" title="路由反射器简介"></a>路由反射器简介</h1><p>引入路由反射器，可以简化IBGP全互联的需求和配置，也可以减轻网络和CPU的负担、和不必要的BGP Update。</p>
-<p>相对于BGP联盟也更利于排错。</p>
-<p>PS：iBGP全互联是因为iBGP的水平分割防环机制。</p>
-<blockquote>
-<p>引入路由反射器之后存在3种角色：</p>
-<p>RR（Route Reflector）： 路由反射器</p>
-<p>Client：客户机</p>
-<p>Non-Client：非客户机<br>PS：是否为客户机，是由RR指定的。</p>
-</blockquote>
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Juniper QFX5110 系列交换机是支持OSPF ISIS BGP MPLS等高级路由功能的，但需要对应的license许可。虽然你没有license也可以用，但日志会持续打印设备没有license，影响日常排障、占用过多的存储、也可能影响稳定性。</p>
+<p>所以需要将其过滤掉，不写入到本地存储和发送到syslog服务器。</p>
 <span id="more"></span>
 
+<h2 id="配置命令"><a href="#配置命令" class="headerlink" title="配置命令"></a>配置命令</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs text">set system syslog file messages match &quot;!(.*license*)&quot;<br><br><br># 本地文件过滤掉和license相关的日志<br><br>set system syslog host 1.1.1.1 match &quot;!(.*license*)&quot;<br><br># 远程syslog服务器过滤掉和license相关的日志<br><br></code></pre></td></tr></table></figure>
 
-<p>RR会将学习的路由反射出去，从而使得IBGP路由在AS内传播无需建立IBGP全互联。</p>
-<p>当RR收到对等体发来的路由，首先使用BGP选路策略来选择最佳路由。在向IBGP邻居发布学习到的路由信息时，RR会按照一定规则来发布路由。</p>
-<p><img src="https://img.songxwn.com/file/ddd5b4a1514d39a5c2029.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="路由反射器相关角色："><a href="#路由反射器相关角色：" class="headerlink" title="路由反射器相关角色："></a>路由反射器相关角色：</h2><p>RR：允许把从IBGP对等体学到的路由反射到其他IBGP对等体的BGP设备，类似OSPF网络中的DR。</p>
-<p>Client：与RR形成反射邻居关系的IBGP设备。在AS内部客户机只需要与RR直连。</p>
-<p>Non-Client：既不是RR也不是客户机的IBGP设备。在AS内部非客户机与RR之间，以及所有的非客户机之间仍然必须建立全互联关系。</p>
-<p>Originator（始发者）：在AS内部始发路由的设备。Originator_ID属性用于防止集群内产生路由环路。</p>
-<p>Cluster（集群）：路由反射器及其客户机的集合。Cluster_List属性用于防止集群间产生路由环路。</p>
-<p>PS：将一台BGP路由器指定为RR的同时，还需要指定其Client。至于Client本身，无需做任何RR相关配置，它并不知晓网络中存在RR。</p>
-<h2 id="RR发布路由规则："><a href="#RR发布路由规则：" class="headerlink" title="RR发布路由规则："></a>RR发布路由规则：</h2><p>从非客户机IBGP对等体学到的路由，发布给此RR的所有客户机。</p>
-<p>从客户机学到的路由，发布给此RR的所有非客户机和客户机。</p>
-<p>从EBGP对等体学到的路由，发布给所有的非客户机和客户机。</p>
-<p>PS：非客户端不传非客户端，其他都传。</p>
-<h1 id="路由反射器防环机制：Originator-ID与Cluster-List"><a href="#路由反射器防环机制：Originator-ID与Cluster-List" class="headerlink" title="路由反射器防环机制：Originator ID与Cluster List"></a>路由反射器防环机制：Originator ID与Cluster List</h1><h2 id="一、Originator-ID"><a href="#一、Originator-ID" class="headerlink" title="一、Originator ID"></a>一、Originator ID</h2><ol>
-<li><p>该属性属于BGP的可选非过渡属性；</p>
-</li>
-<li><p>Originator ID由RR产生，使用的Router ID的值标识路由的发送者，用于防止集群内产生路由环路；</p>
-</li>
-<li><p>当一条路由第一次被RR反射的时候，RR将Originator ID属性加入这条路由，标识这条路由的起始设备。如果一条路由中已经存在了Originator ID屡性，则RR将不会创建新的Originator ID属性（此时的Originator ID 指的是将该路由传递给RR的路由器的Router ID，不是RR的Router ID）；</p>
-</li>
-<li><p>当设备接收到这条路由的时候，将比较收到的Originator ID和本地的Router ID，如果两个ID相同则不接收此路由。</p>
-</li>
-</ol>
-<h2 id="二、Cluster-List"><a href="#二、Cluster-List" class="headerlink" title="二、Cluster List"></a>二、Cluster List</h2><ol>
-<li><p>该属性属于BGP的可选非过渡属性，用于集群间的防环，由每个路由反射器 (RR)产生，记录反射路由经过的集群；</p>
-</li>
-<li><p>路由反射器和它的客户机组成一个集群 (Cluster)。在一个AS内，每个路由反射器便用唯一的ClusterlD作为集群标识。缺省情况下，每个路由反射器使用自己的Router ID作为集群ID；</p>
-</li>
-<li><p>为了防止集群间产生路由环路，路由反射器便用Cluster List属性，记示路由经过的所有集群的Cluster ID；</p>
-</li>
-<li><p>当RR在它的客户机之间或客户机与非客户机之间反射路由时，RR会把本地Cluster ID添加到Cluster List的前面，如果Cluster List为空，RR就创建一个；</p>
-</li>
-<li><p>当RR接收到一条更新路由时，RR会检查Cluster List。 如果Cluster List中已经有本地Cluster ID，则丢弃该路由；如果Cluster List中没有本地Cluster ID，则将其加入Cluster List，然后反射该路由。</p>
-</li>
-</ol>
-<h1 id="常见组网：备份RR组网"><a href="#常见组网：备份RR组网" class="headerlink" title="常见组网：备份RR组网"></a>常见组网：备份RR组网</h1><ul>
-<li><p>为增加网络的可靠性，防止单点故障对网络造成影响，有时需要在一个集群中配置一个以上的RR。</p>
-</li>
-<li><p>转发路径上的路由器与所有RR均建立IBGP关系，任意一个RR均有完整的BGP路由。</p>
-</li>
-</ul>
-<p><img src="https://img.songxwn.com/file/cab23b887da8c10c03712.png" srcset="/img/loading.gif" lazyload></p>
-<ul>
-<li><p>RR1和RR2在同一个集群内，配置了<strong>相同的Cluster ID</strong>。</p>
-</li>
-<li><p>单级RR组网路由反射原理（图示以RR1的反射路径为例）：</p>
-</li>
-</ul>
-<ol>
-<li><p>当客户机Client1从EBGP对等体接收到一条更新路由，它将通过IBGP向RR1和RR2通告这条路由。</p>
-</li>
-<li><p>RR1和RR2在接收到该更新路由后，将本地Cluster ID添加到Cluster List前面，然后向其他的客户机（Client2）反射，同时相互反射。</p>
-</li>
-<li><p>RR1和RR2在接收到该反射路由后，检查Cluster List，发现<strong>自己的Cluster ID</strong>已经包含在Cluster List中。于是RR1和RR2丢弃该更新路由，从而降低BGP的内存占用。（RR之间根据Cluster List 防环）</p>
-</li>
-</ol>
-<p>PS：<strong>Cluster ID很类似于使用AS Path防环</strong></p>
-<h1 id="常见组网：多集群RR组网-1"><a href="#常见组网：多集群RR组网-1" class="headerlink" title="常见组网：多集群RR组网 (1)"></a>常见组网：多集群RR组网 (1)</h1><ul>
-<li><p>一个AS中可以存在多个集群，各个集群的RR之间建立IBGP对等体。</p>
-</li>
-<li><p>当RR所处的网络层相同时，可以将不同集群的RR全互联，形成同级RR。</p>
-</li>
-</ul>
-<p><img src="https://img.songxwn.com/file/eb9d1b926a835670df724.png" srcset="/img/loading.gif" lazyload></p>
-<ul>
-<li><p>一个骨干网AS可能被分成多个集群。各集群的RR互为非客户机关系，并建立IBGP全互联。</p>
-</li>
-<li><p>此时虽然每个客户机只与所在集群的RR建立IBGP连接，但所有RR和客户机都能收到全部路由信息。</p>
-</li>
-<li><p>如图所示：四个RR分别处于Cluster1、Cluster2、Cluster3、Cluster4中，它们之间互相建立IBGP连接，而每个客户机只与所在集群内的RR建立IBGP连接。</p>
-</li>
-</ul>
-<h1 id="常见组网：多集群RR组网-2"><a href="#常见组网：多集群RR组网-2" class="headerlink" title="常见组网：多集群RR组网 (2)"></a>常见组网：多集群RR组网 (2)</h1><ul>
-<li><p>一个AS中可以存在多个集群，各个集群的RR之间建立IBGP对等体。</p>
-</li>
-<li><p>当RR所处的网络层不同时，可以将较低网络层次的RR配成客户机，形成分级RR。</p>
-</li>
-</ul>
-<p><img src="https://img.songxwn.com/file/2da8b54ba36af567724a8.png" srcset="/img/loading.gif" lazyload></p>
-<p>在实际的RR部署中，常用的是分级RR的场景。</p>
-<p>如图所示，AS 101内部分为三个集群：</p>
-<blockquote>
-<p>其中Cluster1内的四台设备是核心路由器，采用备份RR的形式保证可靠性。Cluster1部署了两个1级RR，其余两台路由器作为1级RR的客户机。</p>
-<p>Cluster2和Cluster3中分别部署了一个2级RR，而2级RR同时也是1级RR的客户机。两个2级RR之间无需建立IBGP连接关系。</p>
-</blockquote>
-<p>分级RR与单级RR的路由发布规则相同。</p>
-<p>分级RR设计需要考虑两个因素：</p>
-<blockquote>
-<p>顶层全互联的拓扑大小：如果IBGP全互联数量已经多到难以管理了，则可考虑引入RR分级部署。</p>
-<p>可替代路径的数量：该因素影响负载分担和资源消耗。越多的层次越会减少负载分担链路的数量，但需要的路由器资源更少。</p>
-</blockquote>
-<h1 id="单集群问题"><a href="#单集群问题" class="headerlink" title="单集群问题"></a>单集群问题</h1><ul>
-<li>为了在基于RR的架构中提供所期望的冗余，正确的集群划分是非常重要的。</li>
-</ul>
-<p><img src="https://img.songxwn.com/file/235275c84a60e76a751bd.png" srcset="/img/loading.gif" lazyload></p>
-<p>场景描述：</p>
-<blockquote>
-<p>如图AS 101采用备份RR组网，RR1和RR2使用<strong>相同的Cluster ID</strong>，两台RR为R1访问10.1.5.5&#x2F;32提供了冗余链路。</p>
-<p>R4通告了10.1.5.5&#x2F;32路由后，两台RR向R1通告，并相互之间通告。由于RR1和RR2有相同的Cluster ID，因此RR之间的更新消息会被丢弃。</p>
-</blockquote>
-<p>IBGP会话失效导致冗余失效：</p>
-<blockquote>
-<p>假设R3和R4间的IBGP会话失效（如：错误配置），由于R3忽略R2通告的10.1.5.5&#x2F;32的路由，因此R1访问10.1.5.5&#x2F;32就没有了冗余链路。</p>
-</blockquote>
-<h1 id="多集群设计-解决问题"><a href="#多集群设计-解决问题" class="headerlink" title="多集群设计-解决问题"></a>多集群设计-解决问题</h1><ul>
-<li>多集群设计不仅提供了针对链路失效的物理冗余，同时提供了针对客户机与RR之间的IBGP会话失效的逻辑冗余。</li>
-</ul>
-<p><img src="https://img.songxwn.com/file/e12e7cdd1bba9075cf16b.png" srcset="/img/loading.gif" lazyload></p>
-<p>如图：将R2和R4划入Cluster1中，将R3和R4划入Cluster2中。</p>
-<p>当R3和R4间的IBGP会话失效后，R3仍然可以继续转发流量，因为R3会学习R2通告的10.1.5.5&#x2F;32路由。</p>
-<h1 id="配置命令"><a href="#配置命令" class="headerlink" title="配置命令"></a>配置命令</h1><p><img src="https://img.songxwn.com/file/2fa172260897417caa0a2.png" srcset="/img/loading.gif" lazyload></p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs text"># RouterB RR的配置<br>bgp 100 <br> router-id 2.2.2.2<br> peer 10.1.2.1 as-number 100<br> peer 10.1.3.2 as-number 100<br> #  <br> ipv4-family unicast<br>  undo synchronization<br>  peer 10.1.2.1 enable<br>  peer 10.1.3.2 enable<br>  peer 10.1.3.2 reflect-client //配置RR及其客户机 <br></code></pre></td></tr></table></figure>
-
-<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>(判断题)BGP的备份RR组网中，主备RR收到对方反射的路由会丢弃，避免路由环路。(     )</p>
-<ol>
-<li><p>正确</p>
-</li>
-<li><p>错误</p>
-</li>
-</ol>
-<p>答案：  <details> <summary>Show</summary> 正确 因为主备RR配置一样的Cluster ID，如果Cluster List有自己的ID会丢弃路由 </details></p>
-<h1 id="参考文档："><a href="#参考文档：" class="headerlink" title="参考文档："></a>参考文档：</h1><p><a target="_blank" rel="noopener" href="https://support.huawei.com/enterprise/zh/doc/EDOC1100130778/404b3fd6" title="https://support.huawei.com/enterprise/zh/doc/EDOC1100130778/404b3fd6">https://support.huawei.com/enterprise/zh/doc/EDOC1100130778/404b3fd6</a></p>
-<p><a target="_blank" rel="noopener" href="https://support.huawei.com/enterprise/zh/doc/EDOC1100112408/ba3d67a5" title="https://support.huawei.com/enterprise/zh/doc/EDOC1100112408/ba3d67a5">https://support.huawei.com/enterprise/zh/doc/EDOC1100112408/ba3d67a5</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tushanpeipei/article/details/112788723" title="https://blog.csdn.net/tushanpeipei/article/details/112788723">https://blog.csdn.net/tushanpeipei/article/details/112788723</a></p>
+<p>PS：也适用于其他类型的日志过滤和其他Juniper设备。</p>
 
                 
               </div>
@@ -504,7 +374,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Datacom/" class="category-chain-item">Datacom</a>
+  <a href="/categories/Juniper/" class="category-chain-item">Juniper</a>
   
   
 
@@ -521,11 +391,9 @@
       
         <a href="/tags/network/" class="print-no-link">#network</a>
       
-        <a href="/tags/datacom/" class="print-no-link">#datacom</a>
+        <a href="/tags/syslog/" class="print-no-link">#syslog</a>
       
-        <a href="/tags/BGP/" class="print-no-link">#BGP</a>
-      
-        <a href="/tags/BGP-RR/" class="print-no-link">#BGP RR</a>
+        <a href="/tags/Juniper/" class="print-no-link">#Juniper</a>
       
     </div>
   
@@ -537,8 +405,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>HCIE Datacom-02.3 BGP高级特性-RR路由反射器组网</div>
-      <div>https://songxwn.com/BGP-RR/</div>
+      <div>Juniper 设备配置日志过滤-过滤license高级日志</div>
+      <div>https://songxwn.com/Juniper-log-match/</div>
     </div>
     <div class="license-meta">
       
@@ -587,18 +455,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Juniper-log-match/" title="Juniper 设备配置日志过滤-过滤license高级日志">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Juniper 设备配置日志过滤-过滤license高级日志</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/ospf-frr-lab/" title="HCIE Datacom-01-LAB-OSPF快速收敛和BGP联动">
-                        <span class="hidden-mobile">HCIE Datacom-01-LAB-OSPF快速收敛和BGP联动</span>
+                      <a href="/BGP-RR/" title="HCIE Datacom-02.3 BGP高级特性-RR路由反射器组网">
+                        <span class="hidden-mobile">HCIE Datacom-02.3 BGP高级特性-RR路由反射器组网</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -658,17 +520,17 @@
     
     <div class="category row nomargin-x">
       <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Datacom"
-        id="heading-2c1b3b5061d0b9424707a49705161bac" role="tab" data-toggle="collapse" href="#collapse-2c1b3b5061d0b9424707a49705161bac"
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Juniper"
+        id="heading-b2ec6b780f1e52f7e21396021047e0b4" role="tab" data-toggle="collapse" href="#collapse-b2ec6b780f1e52f7e21396021047e0b4"
         aria-expanded="true"
       >
-        Datacom
-        <span class="list-group-count">(3)</span>
+        Juniper
+        <span class="list-group-count">(1)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse show" id="collapse-2c1b3b5061d0b9424707a49705161bac"
-           role="tabpanel" aria-labelledby="heading-2c1b3b5061d0b9424707a49705161bac">
+      <div class="category-collapse collapse show" id="collapse-b2ec6b780f1e52f7e21396021047e0b4"
+           role="tabpanel" aria-labelledby="heading-b2ec6b780f1e52f7e21396021047e0b4">
         
         
           
@@ -677,28 +539,10 @@
     
       
       
-        <a href="/ospf-frr/" title="HCIE Datacom-01.1 IGP高级特性-OSPF-快速收敛"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">HCIE Datacom-01.1 IGP高级特性-OSPF-快速收敛</span>
-        </a>
-      
-    
-      
-      
-        <a href="/ospf-frr-lab/" title="HCIE Datacom-01-LAB-OSPF快速收敛和BGP联动"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">HCIE Datacom-01-LAB-OSPF快速收敛和BGP联动</span>
-        </a>
-      
-    
-      
-      
-        <a href="/BGP-RR/" title="HCIE Datacom-02.3 BGP高级特性-RR路由反射器组网"
+        <a href="/Juniper-log-match/" title="Juniper 设备配置日志过滤-过滤license高级日志"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">HCIE Datacom-02.3 BGP高级特性-RR路由反射器组网</span>
+          <span class="category-post">Juniper 设备配置日志过滤-过滤license高级日志</span>
         </a>
       
     

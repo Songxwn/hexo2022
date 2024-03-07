@@ -1,3 +1,4 @@
+https://songxwn.com/Juniper-log-match/
 https://songxwn.com/BGP-RR/
 https://songxwn.com/ospf-frr-lab/
 https://songxwn.com/ospf-frr/
@@ -198,6 +199,7 @@ https://songxwn.com/tags/log/
 https://songxwn.com/tags/lab/
 https://songxwn.com/tags/BGP/
 https://songxwn.com/tags/BGP-RR/
+https://songxwn.com/tags/Juniper/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/VMware/
@@ -220,3 +222,4 @@ https://songxwn.com/categories/Grfana/
 https://songxwn.com/categories/Pigsty/
 https://songxwn.com/categories/Datacom/
 https://songxwn.com/categories/datacom/
+https://songxwn.com/categories/Juniper/
