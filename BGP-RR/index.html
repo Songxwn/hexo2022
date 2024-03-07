@@ -25,11 +25,12 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img.songxwn.com/file/cab23b887da8c10c03712.png">
 <meta property="article:published_time" content="2024-03-07T01:23:23.000Z">
-<meta property="article:modified_time" content="2024-03-07T06:28:16.561Z">
+<meta property="article:modified_time" content="2024-03-07T06:50:52.704Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="datacom">
 <meta property="article:tag" content="BGP">
+<meta property="article:tag" content="BGP RR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://img.songxwn.com/file/cab23b887da8c10c03712.png">
   
@@ -374,7 +375,7 @@
 <p>从客户机学到的路由，发布给此RR的所有非客户机和客户机。</p>
 <p>从EBGP对等体学到的路由，发布给所有的非客户机和客户机。</p>
 <p>PS：非客户端不传非客户端，其他都传。</p>
-<h1 id="路由反射器防环机制：Originator-ID与Cluster-List"><a href="#路由反射器防环机制：Originator-ID与Cluster-List" class="headerlink" title="路由反射器防环机制：Originator ID与Cluster List"></a>路由反射器防环机制：Originator ID与Cluster List</h1><h1 id=""><a href="#" class="headerlink" title=""></a></h1><h2 id="一、Originator-ID"><a href="#一、Originator-ID" class="headerlink" title="一、Originator ID"></a>一、Originator ID</h2><ol>
+<h1 id="路由反射器防环机制：Originator-ID与Cluster-List"><a href="#路由反射器防环机制：Originator-ID与Cluster-List" class="headerlink" title="路由反射器防环机制：Originator ID与Cluster List"></a>路由反射器防环机制：Originator ID与Cluster List</h1><h2 id="一、Originator-ID"><a href="#一、Originator-ID" class="headerlink" title="一、Originator ID"></a>一、Originator ID</h2><ol>
 <li><p>该属性属于BGP的可选非过渡属性；</p>
 </li>
 <li><p>Originator ID由RR产生，使用的Router ID的值标识路由的发送者，用于防止集群内产生路由环路；</p>
@@ -446,7 +447,7 @@
 <p>其中Cluster1内的四台设备是核心路由器，采用备份RR的形式保证可靠性。Cluster1部署了两个1级RR，其余两台路由器作为1级RR的客户机。</p>
 <p>Cluster2和Cluster3中分别部署了一个2级RR，而2级RR同时也是1级RR的客户机。两个2级RR之间无需建立IBGP连接关系。</p>
 </blockquote>
-<h1 id="-1"><a href="#-1" class="headerlink" title=""></a></h1><p>分级RR与单级RR的路由发布规则相同。</p>
+<p>分级RR与单级RR的路由发布规则相同。</p>
 <p>分级RR设计需要考虑两个因素：</p>
 <blockquote>
 <p>顶层全互联的拓扑大小：如果IBGP全互联数量已经多到难以管理了，则可考虑引入RR分级部署。</p>
@@ -523,6 +524,8 @@
         <a href="/tags/datacom/" class="print-no-link">#datacom</a>
       
         <a href="/tags/BGP/" class="print-no-link">#BGP</a>
+      
+        <a href="/tags/BGP-RR/" class="print-no-link">#BGP RR</a>
       
     </div>
   

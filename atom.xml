@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-03-07T06:28:16.561Z</updated>
+  <updated>2024-03-07T06:50:52.704Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://songxwn.com/BGP-RR/"/>
     <id>https://songxwn.com/BGP-RR/</id>
     <published>2024-03-07T01:23:23.000Z</published>
-    <updated>2024-03-07T06:28:16.561Z</updated>
+    <updated>2024-03-07T06:50:52.704Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;路由反射器简介&quot;&gt;&lt;a href=&quot;#路由反射器简介&quot; class=&quot;headerlink&quot; title=&quot;路由反射器简介&quot;&gt;&lt;/a&gt;路由反射器简介&lt;/h1&gt;&lt;p&gt;引入路由反射器，可以简化IBGP全互联的需求和配置，也可以减轻网络和CPU的负担、和不必要的BGP Update。&lt;/p&gt;
@@ -44,6 +44,8 @@
     <category term="datacom" scheme="https://songxwn.com/tags/datacom/"/>
     
     <category term="BGP" scheme="https://songxwn.com/tags/BGP/"/>
+    
+    <category term="BGP RR" scheme="https://songxwn.com/tags/BGP-RR/"/>
     
   </entry>
   
