@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-03-07T10:10:53.817Z</updated>
+  <updated>2024-03-07T10:11:19.135Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Juniper 设备配置日志过滤-过滤license高级日志</title>
+    <title>Juniper 设备配置日志过滤-过滤license告警日志</title>
     <link href="https://songxwn.com/Juniper-log-match/"/>
     <id>https://songxwn.com/Juniper-log-match/</id>
     <published>2024-03-07T11:04:15.000Z</published>
-    <updated>2024-03-07T10:10:53.817Z</updated>
+    <updated>2024-03-07T10:11:19.135Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;Juniper QFX5110 系列交换机是支持OSPF ISIS BGP MPLS等高级路由功能的，但需要对应的license许可。虽然你没有license也可以用，但日志会持续打印设备没有license，影响日常排障、占用过多的存储、也可能影响稳定性。&lt;/p&gt;
