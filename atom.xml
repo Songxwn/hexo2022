@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-03-07T06:26:23.398Z</updated>
+  <updated>2024-03-07T06:27:43.735Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>HCIE-02.3 BGP高级特性-RR路由反射器组网</title>
+    <title>HCIE Datacom-02.3 BGP高级特性-RR路由反射器组网</title>
     <link href="https://songxwn.com/BGP-RR/"/>
     <id>https://songxwn.com/BGP-RR/</id>
     <published>2024-03-07T01:23:23.000Z</published>
-    <updated>2024-03-07T06:26:23.398Z</updated>
+    <updated>2024-03-07T06:27:43.735Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;路由反射器简介&quot;&gt;&lt;a href=&quot;#路由反射器简介&quot; class=&quot;headerlink&quot; title=&quot;路由反射器简介&quot;&gt;&lt;/a&gt;路由反射器简介&lt;/h1&gt;&lt;p&gt;引入路由反射器，可以简化IBGP全互联的需求和配置，也可以减轻网络和CPU的负担、和不必要的BGP Update。&lt;/p&gt;
