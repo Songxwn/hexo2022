@@ -1,3 +1,4 @@
+https://songxwn.com/VMware-anti-affinity/
 https://songxwn.com/Juniper-log-match/
 https://songxwn.com/BGP-RR/
 https://songxwn.com/ospf-frr-lab/
@@ -200,6 +201,7 @@ https://songxwn.com/tags/lab/
 https://songxwn.com/tags/BGP/
 https://songxwn.com/tags/BGP-RR/
 https://songxwn.com/tags/Juniper/
+https://songxwn.com/tags/Virtualization/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/VMware/

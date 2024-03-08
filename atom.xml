@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-03-07T10:11:19.135Z</updated>
+  <updated>2024-03-08T05:52:39.020Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>VMware 集群-虚拟机配置反亲和性（互斥）</title>
+    <link href="https://songxwn.com/VMware-anti-affinity/"/>
+    <id>https://songxwn.com/VMware-anti-affinity/</id>
+    <published>2024-03-08T01:48:35.000Z</published>
+    <updated>2024-03-08T05:52:39.020Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;为实现应用系统的冗余，经常会双机或者多机部署（如数据库集群等）。在VMware 集群里面，要保证不同应用集群的节点虚拟机&lt;strong&gt;在不同的物理宿主机上&lt;/strong&gt;，防止单个宿主机故障，影响多个应用集群的节点故障。（尤其在开启RDS的集群上）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;此功能基本 vCenter 6.5 以上就有.&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="VMware" scheme="https://songxwn.com/categories/VMware/"/>
+    
+    
+    <category term="VMware" scheme="https://songxwn.com/tags/VMware/"/>
+    
+    <category term="HA" scheme="https://songxwn.com/tags/HA/"/>
+    
+    <category term="Virtualization" scheme="https://songxwn.com/tags/Virtualization/"/>
+    
+  </entry>
   
   <entry>
     <title>Juniper 设备配置日志过滤-过滤license告警日志</title>
@@ -570,29 +596,6 @@
     <category term="backups" scheme="https://songxwn.com/tags/backups/"/>
     
     <category term="veeam" scheme="https://songxwn.com/tags/veeam/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Sublime Text4 4169 安装激活</title>
-    <link href="https://songxwn.com/Sublime_Text4_4169/"/>
-    <id>https://songxwn.com/Sublime_Text4_4169/</id>
-    <published>2023-12-12T04:52:00.000Z</published>
-    <updated>2023-12-12T08:20:53.435Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;此教程用于Windows 下Sublime Text4 4169版本的安装和激活。&lt;/p&gt;
-&lt;p&gt;无需安装其他软件，无需下载替换文件，无需注册机等。&lt;/p&gt;
-&lt;p&gt;官网： &lt;a href=&quot;https://www.sublimetext.com/&quot;&gt;https://www.sublimetext.com&lt;/a&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="IDE" scheme="https://songxwn.com/categories/IDE/"/>
-    
-    
-    <category term="Windows" scheme="https://songxwn.com/tags/Windows/"/>
-    
-    <category term="IDE" scheme="https://songxwn.com/tags/IDE/"/>
     
   </entry>
   

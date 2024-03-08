@@ -16,28 +16,28 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
   
-    <meta name="description" content="简介Juniper QFX5110 系列交换机是支持OSPF ISIS BGP MPLS等高级路由功能的，但需要对应的license许可。虽然你没有license也可以用，但日志会持续打印设备没有license，影响日常排障、占用过多的存储、也可能影响稳定性。 所以需要将其过滤掉，不写入到本地存储和发送到syslog服务器。">
+    <meta name="description" content="简介为实现应用系统的冗余，经常会双机或者多机部署（如数据库集群等）。在VMware 集群里面，要保证不同应用集群的节点虚拟机在不同的物理宿主机上，防止单个宿主机故障，影响多个应用集群的节点故障。（尤其在开启RDS的集群上）  此功能基本 vCenter 6.5 以上就有.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Juniper 设备配置日志过滤-过滤license告警日志">
-<meta property="og:url" content="https://songxwn.com/Juniper-log-match/index.html">
+<meta property="og:title" content="VMware 集群-虚拟机配置反亲和性（互斥）">
+<meta property="og:url" content="https://songxwn.com/VMware-anti-affinity/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="简介Juniper QFX5110 系列交换机是支持OSPF ISIS BGP MPLS等高级路由功能的，但需要对应的license许可。虽然你没有license也可以用，但日志会持续打印设备没有license，影响日常排障、占用过多的存储、也可能影响稳定性。 所以需要将其过滤掉，不写入到本地存储和发送到syslog服务器。">
+<meta property="og:description" content="简介为实现应用系统的冗余，经常会双机或者多机部署（如数据库集群等）。在VMware 集群里面，要保证不同应用集群的节点虚拟机在不同的物理宿主机上，防止单个宿主机故障，影响多个应用集群的节点故障。（尤其在开启RDS的集群上）  此功能基本 vCenter 6.5 以上就有.">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img.songxwn.com/file/57a31a9d4a5525f4b61ac.png">
-<meta property="article:published_time" content="2024-03-07T11:04:15.000Z">
-<meta property="article:modified_time" content="2024-03-07T10:11:19.135Z">
+<meta property="og:image" content="https://img.songxwn.com/file/2023c4e569289a47f70d5.png">
+<meta property="article:published_time" content="2024-03-08T01:48:35.000Z">
+<meta property="article:modified_time" content="2024-03-08T05:52:39.020Z">
 <meta property="article:author" content="Song">
-<meta property="article:tag" content="network">
-<meta property="article:tag" content="syslog">
-<meta property="article:tag" content="Juniper">
+<meta property="article:tag" content="VMware">
+<meta property="article:tag" content="HA">
+<meta property="article:tag" content="Virtualization">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img.songxwn.com/file/57a31a9d4a5525f4b61ac.png">
+<meta name="twitter:image" content="https://img.songxwn.com/file/2023c4e569289a47f70d5.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Juniper 设备配置日志过滤-过滤license告警日志 - Song`s Blog</title>
+  <title>VMware 集群-虚拟机配置反亲和性（互斥） - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -244,7 +244,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Juniper 设备配置日志过滤-过滤license告警日志"></span>
+            <span id="subtitle" data-typed-text="VMware 集群-虚拟机配置反亲和性（互斥）"></span>
           
         </div>
 
@@ -255,8 +255,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-03-07 19:04" pubdate>
-          2024年3月7日 晚上
+        <time datetime="2024-03-08 09:48" pubdate>
+          2024年3月8日 上午
         </time>
       </span>
     
@@ -267,7 +267,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          218 字
+          202 字
         
       </span>
     
@@ -336,12 +336,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Juniper 设备配置日志过滤-过滤license告警日志</h1>
+            <h1 id="seo-header">VMware 集群-虚拟机配置反亲和性（互斥）</h1>
             
               <p id="updated-time" class="note note-danger" style="">
                 
                   
-                    本文最后更新于 2024年3月7日 晚上
+                    本文最后更新于 2024年3月8日 下午
                   
                 
               </p>
@@ -349,15 +349,21 @@
             
               <div class="markdown-body">
                 
-                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Juniper QFX5110 系列交换机是支持OSPF ISIS BGP MPLS等高级路由功能的，但需要对应的license许可。虽然你没有license也可以用，但日志会持续打印设备没有license，影响日常排障、占用过多的存储、也可能影响稳定性。</p>
-<p>所以需要将其过滤掉，不写入到本地存储和发送到syslog服务器。</p>
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>为实现应用系统的冗余，经常会双机或者多机部署（如数据库集群等）。在VMware 集群里面，要保证不同应用集群的节点虚拟机<strong>在不同的物理宿主机上</strong>，防止单个宿主机故障，影响多个应用集群的节点故障。（尤其在开启RDS的集群上）</p>
+<ul>
+<li>此功能基本 vCenter 6.5 以上就有.</li>
+</ul>
 <span id="more"></span>
 
-<h2 id="配置命令"><a href="#配置命令" class="headerlink" title="配置命令"></a>配置命令</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell">set system syslog file messages match &quot;!(.*license*)&quot;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">本地文件过滤掉和license相关的日志</span><br><br>set system syslog host 1.1.1.1 match &quot;!(.*license*)&quot;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">远程syslog服务器过滤掉和license相关的日志</span><br><br></code></pre></td></tr></table></figure>
+<p><img src="https://img.songxwn.com/file/2023c4e569289a47f70d5.png" srcset="/img/loading.gif" lazyload alt="示例"></p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>配置方法如下（以 vCenter 8.0为例）：</p>
+<p>选择集群 &gt; 点击配置界面 &gt; 点击虚拟机&#x2F;主机规则 &gt; 点击添加</p>
+<p><img src="https://img.songxwn.com/file/2e9a02f14181fc583dc75.png" srcset="/img/loading.gif" lazyload></p>
+<p>选择类型为单独的虚拟机 &gt; 然后添加需要互斥的虚拟机。</p>
+<p><img src="https://seafile.tianchic.com/lib/9dad6c87-9d2a-40ba-b208-ca4370bf1dd9/file/images/auto-upload/image-1709876641101.png?raw=1" srcset="/img/loading.gif" lazyload></p>
+<p>参考文档：<a target="_blank" rel="noopener" href="https://docs.vmware.com/cn/VMware-vSphere/8.0/vsphere-resource-management/GUID-0591F865-91B5-4311-ABA6-84FBA5AAFB59.html" title="https://docs.vmware.com/cn/VMware-vSphere/8.0/vsphere-resource-management/GUID-0591F865-91B5-4311-ABA6-84FBA5AAFB59.html">https://docs.vmware.com/cn/VMware-vSphere/8.0/vsphere-resource-management/GUID-0591F865-91B5-4311-ABA6-84FBA5AAFB59.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://blogs.vmware.com/vsphere/2012/05/combining-affinity-rule-types.html">https://blogs.vmware.com/vsphere/2012/05/combining-affinity-rule-types.html</a></p>
 
-<p>PS：也适用于其他类型的日志过滤和其他Juniper设备。</p>
-<h1 id="扩展-其他告警消除"><a href="#扩展-其他告警消除" class="headerlink" title="扩展-其他告警消除"></a>扩展-其他告警消除</h1><p>默认配置下会有以下告警造成红灯。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell"><br>request system configuration rescue save <br>// 保存当前配置为救援配置，消除 alarm 告警。<br><br>set chassis alarm management-ethernet link-down ignore <br><br>// 消除管理端口未连接告警，消除 alarm 告警。<br><br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -375,7 +381,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Juniper/" class="category-chain-item">Juniper</a>
+  <a href="/categories/VMware/" class="category-chain-item">VMware</a>
   
   
 
@@ -390,11 +396,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/network/" class="print-no-link">#network</a>
+        <a href="/tags/VMware/" class="print-no-link">#VMware</a>
       
-        <a href="/tags/syslog/" class="print-no-link">#syslog</a>
+        <a href="/tags/HA/" class="print-no-link">#HA</a>
       
-        <a href="/tags/Juniper/" class="print-no-link">#Juniper</a>
+        <a href="/tags/Virtualization/" class="print-no-link">#Virtualization</a>
       
     </div>
   
@@ -406,8 +412,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Juniper 设备配置日志过滤-过滤license告警日志</div>
-      <div>https://songxwn.com/Juniper-log-match/</div>
+      <div>VMware 集群-虚拟机配置反亲和性（互斥）</div>
+      <div>https://songxwn.com/VMware-anti-affinity/</div>
     </div>
     <div class="license-meta">
       
@@ -419,13 +425,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年3月7日</div>
+          <div>2024年3月8日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年3月7日</div>
+          <div>2024年3月8日</div>
         </div>
       
       
@@ -456,18 +462,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/VMware-anti-affinity/" title="VMware 集群-虚拟机配置反亲和性（互斥）">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">VMware 集群-虚拟机配置反亲和性（互斥）</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/BGP-RR/" title="HCIE Datacom-02.3 BGP高级特性-RR路由反射器组网">
-                        <span class="hidden-mobile">HCIE Datacom-02.3 BGP高级特性-RR路由反射器组网</span>
+                      <a href="/Juniper-log-match/" title="Juniper 设备配置日志过滤-过滤license告警日志">
+                        <span class="hidden-mobile">Juniper 设备配置日志过滤-过滤license告警日志</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -527,17 +527,17 @@
     
     <div class="category row nomargin-x">
       <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Juniper"
-        id="heading-b2ec6b780f1e52f7e21396021047e0b4" role="tab" data-toggle="collapse" href="#collapse-b2ec6b780f1e52f7e21396021047e0b4"
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="VMware"
+        id="heading-56079badd056a19303cc26e6a4fcc7e0" role="tab" data-toggle="collapse" href="#collapse-56079badd056a19303cc26e6a4fcc7e0"
         aria-expanded="true"
       >
-        Juniper
+        VMware
         <span class="list-group-count">(1)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse show" id="collapse-b2ec6b780f1e52f7e21396021047e0b4"
-           role="tabpanel" aria-labelledby="heading-b2ec6b780f1e52f7e21396021047e0b4">
+      <div class="category-collapse collapse show" id="collapse-56079badd056a19303cc26e6a4fcc7e0"
+           role="tabpanel" aria-labelledby="heading-56079badd056a19303cc26e6a4fcc7e0">
         
         
           
@@ -546,10 +546,10 @@
     
       
       
-        <a href="/Juniper-log-match/" title="Juniper 设备配置日志过滤-过滤license告警日志"
+        <a href="/VMware-anti-affinity/" title="VMware 集群-虚拟机配置反亲和性（互斥）"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">Juniper 设备配置日志过滤-过滤license告警日志</span>
+          <span class="category-post">VMware 集群-虚拟机配置反亲和性（互斥）</span>
         </a>
       
     

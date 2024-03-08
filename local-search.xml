@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>VMware 集群-虚拟机配置反亲和性（互斥）</title>
+    <link href="/VMware-anti-affinity/"/>
+    <url>/VMware-anti-affinity/</url>
+    
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>为实现应用系统的冗余，经常会双机或者多机部署（如数据库集群等）。在VMware 集群里面，要保证不同应用集群的节点虚拟机<strong>在不同的物理宿主机上</strong>，防止单个宿主机故障，影响多个应用集群的节点故障。（尤其在开启RDS的集群上）</p><ul><li>此功能基本 vCenter 6.5 以上就有.</li></ul><span id="more"></span><p><img src="https://img.songxwn.com/file/2023c4e569289a47f70d5.png" srcset="/img/loading.gif" lazyload alt="示例"></p><h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>配置方法如下（以 vCenter 8.0为例）：</p><p>选择集群 &gt; 点击配置界面 &gt; 点击虚拟机&#x2F;主机规则 &gt; 点击添加</p><p><img src="https://img.songxwn.com/file/2e9a02f14181fc583dc75.png" srcset="/img/loading.gif" lazyload></p><p>选择类型为单独的虚拟机 &gt; 然后添加需要互斥的虚拟机。</p><p><img src="https://seafile.tianchic.com/lib/9dad6c87-9d2a-40ba-b208-ca4370bf1dd9/file/images/auto-upload/image-1709876641101.png?raw=1" srcset="/img/loading.gif" lazyload></p><p>参考文档：<a href="https://docs.vmware.com/cn/VMware-vSphere/8.0/vsphere-resource-management/GUID-0591F865-91B5-4311-ABA6-84FBA5AAFB59.html" title="https://docs.vmware.com/cn/VMware-vSphere/8.0/vsphere-resource-management/GUID-0591F865-91B5-4311-ABA6-84FBA5AAFB59.html">https://docs.vmware.com/cn/VMware-vSphere/8.0/vsphere-resource-management/GUID-0591F865-91B5-4311-ABA6-84FBA5AAFB59.html</a></p><p><a href="https://blogs.vmware.com/vsphere/2012/05/combining-affinity-rule-types.html">https://blogs.vmware.com/vsphere/2012/05/combining-affinity-rule-types.html</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>VMware</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>VMware</tag>
+      
+      <tag>HA</tag>
+      
+      <tag>Virtualization</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Juniper 设备配置日志过滤-过滤license告警日志</title>
     <link href="/Juniper-log-match/"/>
     <url>/Juniper-log-match/</url>
