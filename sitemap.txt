@@ -202,6 +202,7 @@ https://songxwn.com/tags/BGP/
 https://songxwn.com/tags/BGP-RR/
 https://songxwn.com/tags/Juniper/
 https://songxwn.com/tags/Virtualization/
+https://songxwn.com/tags/vCenter/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/VMware/

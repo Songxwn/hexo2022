@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-03-08T06:05:12.610Z</updated>
+  <updated>2024-03-08T06:05:25.754Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://songxwn.com/VMware-anti-affinity/"/>
     <id>https://songxwn.com/VMware-anti-affinity/</id>
     <published>2024-03-08T01:48:35.000Z</published>
-    <updated>2024-03-08T06:05:12.610Z</updated>
+    <updated>2024-03-08T06:05:25.754Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;为实现应用系统的冗余，经常会双机或者多机部署（如数据库集群等）。在VMware 集群里面，要保证不同应用集群的节点虚拟机&lt;strong&gt;在不同的物理宿主机上&lt;/strong&gt;，防止单个宿主机故障，影响多个应用集群的节点故障。（尤其在开启RDS的集群上）&lt;/p&gt;
@@ -40,6 +40,8 @@
     <category term="HA" scheme="https://songxwn.com/tags/HA/"/>
     
     <category term="Virtualization" scheme="https://songxwn.com/tags/Virtualization/"/>
+    
+    <category term="vCenter" scheme="https://songxwn.com/tags/vCenter/"/>
     
   </entry>
   
