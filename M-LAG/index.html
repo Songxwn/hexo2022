@@ -38,12 +38,15 @@
 <meta property="og:image" content="https://download.huawei.com/mdl/image/download?uuid=bd814117515d48119c9ac35c64b5668a">
 <meta property="og:image" content="https://download.huawei.com/mdl/image/download?uuid=7961747a3ee34e20bb44278923a24346">
 <meta property="og:image" content="https://download.huawei.com/mdl/image/download?uuid=a1bd4f6ca4a14051b4d326a38ebccd4d">
+<meta property="og:image" content="https://download.huawei.com/mdl/image/download?uuid=df3d406f14da442587560fd99f8fbbbe">
+<meta property="og:image" content="https://download.huawei.com/mdl/image/download?uuid=7108ab052b2147b0bc521a9e12f99410">
 <meta property="article:published_time" content="2024-03-10T18:44:10.000Z">
-<meta property="article:modified_time" content="2024-03-11T08:22:45.202Z">
+<meta property="article:modified_time" content="2024-03-11T08:30:03.535Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="datacom">
 <meta property="article:tag" content="M-LAG">
+<meta property="article:tag" content="LACP">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://download.huawei.com/mdl/image/download?uuid=c403fc15d88f44a3be78317ea1c1366f">
   
@@ -281,7 +284,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.9k 字
+          3.3k 字
         
       </span>
     
@@ -292,7 +295,7 @@
         
         
         
-          24 分钟
+          28 分钟
         
       </span>
     
@@ -438,8 +441,22 @@
 <p>多级M-LAG应用场景，不能使用手动配置根桥的方式来进行STP破环，需要通过VSTP协议来同步M-LAG双归设备的STP协议状态信息。</p>
 <p><img src="https://download.huawei.com/mdl/image/download?uuid=a1bd4f6ca4a14051b4d326a38ebccd4d" srcset="/img/loading.gif" lazyload alt="多级M-LAG网络示意图" title="多级M-LAG网络示意图"></p>
 <p>多级M-LAG网络示意图</p>
-<h2 id="防环机制-单向隔离机制"><a href="#防环机制-单向隔离机制" class="headerlink" title="防环机制-单向隔离机制"></a>防环机制-单向隔离机制</h2><p>M-LAG本身具有防环机制，可以构造出一个无环网络。当流量通过peer-link链路广播到对端M-LAG设备时，在peer-link链路与M-LAG成员口之间设置单方向的流量隔离。从peer-link口进来的流量不会再从M-LAG口转发出去，因此不会形成环路。这就是M-LAG的单向隔离机制。</p>
-<h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://info.support.huawei.com/info-finder/encyclopedia/zh/M-LAG.html" title="https://info.support.huawei.com/info-finder/encyclopedia/zh/M-LAG.html">https://info.support.huawei.com/info-finder/encyclopedia/zh/M-LAG.html</a></p>
+<h2 id="防环机制-单向隔离机制"><a href="#防环机制-单向隔离机制" class="headerlink" title="防环机制-单向隔离机制"></a>防环机制-单向隔离机制</h2><p>M-LAG本身具有防环机制，可以构造出一个无环网络。那么M-LAG是如何构造无环网络的呢？如下图所示，从接入设备或网络侧到达M-LAG配对设备的单播流量，会优先从本地转发出去，peer-link链路一般情况下不用来转发数据流量。当流量通过peer-link链路广播到对端M-LAG设备，在peer-link链路与M-LAG成员口之间设置单方向的流量隔离，即从peer-link口进来的流量不会再从M-LAG口转发出去，所以不会形成环路，这就是M-LAG单向隔离机制。</p>
+<p><img src="https://download.huawei.com/mdl/image/download?uuid=df3d406f14da442587560fd99f8fbbbe" srcset="/img/loading.gif" lazyload alt="M-LAG接入二层网络流量转发示意图"></p>
+<h3 id="单向隔离机制-生效前提"><a href="#单向隔离机制-生效前提" class="headerlink" title="单向隔离机制-生效前提"></a>单向隔离机制-生效前提</h3><p>当M-LAG两台设备协商出M-LAG主备后，系统通过M-LAG同步报文判断接入设备是否双活接入：</p>
+<ul>
+<li>若接入设备双活接入M-LAG系统，则M-LAG两台设备下发对应M-LAG成员口的单向隔离配置，来隔离由peer-link口发往M-LAG成员口的流量。</li>
+</ul>
+<p>PS：M-LAG防环机制中的单向隔离对二层(包括单播、组播、广播)流量生效，三层组播流量生效，三层单播流量不生效。</p>
+<h3 id="单向隔离机制实现原理"><a href="#单向隔离机制实现原理" class="headerlink" title="单向隔离机制实现原理"></a>单向隔离机制实现原理</h3><p>如下图所示，在设备双活接入M-LAG场景下，设备会默认按下列顺序下发全局ACL配置：</p>
+<ul>
+<li>Rule1：允许通过源端口为peer-link接口，目的端口为M-LAG成员口的三层单播报文；</li>
+<li>Rule2：拒绝通过源端口为peer-link接口，目的端口为M-LAG成员口的所有报文；</li>
+</ul>
+<p>设备通过匹配ACL规则组来对实现peer-link接口与M-LAG成员口之间的单向隔离，隔离由peer-link接口发往M-LAG成员口的广播等泛洪流量。当M-LAG设备感知到本端的M-LAG成员口状态为Down时，会通过peer-link发送M-LAG同步报文，通知对端设备撤销自动下发的相应的M-LAG成员端口的单向隔离ACL规则组。</p>
+<p><img src="https://download.huawei.com/mdl/image/download?uuid=7108ab052b2147b0bc521a9e12f99410" srcset="/img/loading.gif" lazyload alt="M-LAG单向隔离示意图"></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://info.support.huawei.com/info-finder/encyclopedia/zh/M-LAG.html" title="https://info.support.huawei.com/info-finder/encyclopedia/zh/M-LAG.html">https://info.support.huawei.com/info-finder/encyclopedia/zh/M-LAG.html</a></p>
+<p>[<a target="_blank" rel="noopener" href="https://support.huawei.com/enterprise/zh/doc/EDOC1100138437/8cad2ccf]">https://support.huawei.com/enterprise/zh/doc/EDOC1100138437/8cad2ccf]</a></p>
 
                 
               </div>
@@ -478,6 +495,8 @@
         <a href="/tags/datacom/" class="print-no-link">#datacom</a>
       
         <a href="/tags/M-LAG/" class="print-no-link">#M-LAG</a>
+      
+        <a href="/tags/LACP/" class="print-no-link">#LACP</a>
       
     </div>
   
