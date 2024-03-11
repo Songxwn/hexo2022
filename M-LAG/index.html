@@ -16,12 +16,12 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
   
-    <meta name="description" content="什么是M-LAG ?M-LAG（Multichassis Link Aggregation Group）提供一种跨设备链路聚合的技术。M-LAG通过将两台接入交换机以同一个状态和用户侧设备或服务器进行跨设备的链路聚合，把链路的可靠性从单板级提升到设备级。同时，由于M-LAG设备可以单独升级，保证了业务流量的稳定性，使得M-LAG技术在数据中心网络广泛应用。">
+    <meta name="description" content="什么是M-LAG ?M-LAG（Multichassis Link Aggregation Group）提供一种跨设备链路聚合的技术。M-LAG通过将两台接入交换机以同一个状态和用户侧设备或服务器进行跨设备的链路聚合，把链路的可靠性从单板级提升到设备级。同时，由于M-LAG设备可以单独升级，保证了业务流量的稳定性，使得M-LAG技术在数据中心网络广泛应用。 PS：M-LAG 技术虽然大家都有，但各">
 <meta property="og:type" content="article">
 <meta property="og:title" content="什么是M-LAG？ 为什么需要M-LAG">
 <meta property="og:url" content="https://songxwn.com/M-LAG/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="什么是M-LAG ?M-LAG（Multichassis Link Aggregation Group）提供一种跨设备链路聚合的技术。M-LAG通过将两台接入交换机以同一个状态和用户侧设备或服务器进行跨设备的链路聚合，把链路的可靠性从单板级提升到设备级。同时，由于M-LAG设备可以单独升级，保证了业务流量的稳定性，使得M-LAG技术在数据中心网络广泛应用。">
+<meta property="og:description" content="什么是M-LAG ?M-LAG（Multichassis Link Aggregation Group）提供一种跨设备链路聚合的技术。M-LAG通过将两台接入交换机以同一个状态和用户侧设备或服务器进行跨设备的链路聚合，把链路的可靠性从单板级提升到设备级。同时，由于M-LAG设备可以单独升级，保证了业务流量的稳定性，使得M-LAG技术在数据中心网络广泛应用。 PS：M-LAG 技术虽然大家都有，但各">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://download.huawei.com/mdl/image/download?uuid=c403fc15d88f44a3be78317ea1c1366f">
 <meta property="og:image" content="https://download.huawei.com/mdl/image/download?uuid=18fba8abd39840f199220420b1f2780c">
@@ -41,7 +41,7 @@
 <meta property="og:image" content="https://download.huawei.com/mdl/image/download?uuid=df3d406f14da442587560fd99f8fbbbe">
 <meta property="og:image" content="https://download.huawei.com/mdl/image/download?uuid=7108ab052b2147b0bc521a9e12f99410">
 <meta property="article:published_time" content="2024-03-10T18:44:10.000Z">
-<meta property="article:modified_time" content="2024-03-11T08:30:03.535Z">
+<meta property="article:modified_time" content="2024-03-11T08:33:10.424Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="datacom">
@@ -367,6 +367,7 @@
               <div class="markdown-body">
                 
                 <h2 id="什么是M-LAG"><a href="#什么是M-LAG" class="headerlink" title="什么是M-LAG ?"></a>什么是M-LAG ?</h2><p>M-LAG（Multichassis Link Aggregation Group）提供一种跨设备链路聚合的技术。M-LAG通过将两台接入交换机以同一个状态和用户侧设备或服务器进行跨设备的链路聚合，把链路的可靠性从单板级提升到设备级。同时，由于M-LAG设备可以单独升级，保证了业务流量的稳定性，使得M-LAG技术在数据中心网络广泛应用。</p>
+<p>PS：M-LAG 技术虽然大家都有，但各大品牌并不互相兼容。</p>
 <span id="more"></span>
 
 <h2 id="为什么需要M-LAG"><a href="#为什么需要M-LAG" class="headerlink" title="为什么需要M-LAG"></a>为什么需要M-LAG</h2><p>近几年来，M-LAG作为一项虚拟化技术被广泛使用，然而M-LAG技术的发展并非一蹴而就。</p>
@@ -434,6 +435,7 @@
 <p>我们可以通过手动配置双归设备为STP网络根桥或配置VSTP协议，将M-LAG两个设备模拟成一个STP节点。其中，VSTP协议的作用主要是在双归设备之间同步STP协议状态，将两台设备以同一个状态对外进行STP协商。</p>
 <p><img src="https://download.huawei.com/mdl/image/download?uuid=8ddbccd3d79147f2b5346aaa4290ac28" srcset="/img/loading.gif" lazyload alt="M-LAG双归接入二层网络示意图" title="M-LAG双归接入二层网络示意图">M-LAG双归接入二层网络示意图</p>
 <h3 id="M-LAG双归接入VXLAN网络"><a href="#M-LAG双归接入VXLAN网络" class="headerlink" title="M-LAG双归接入VXLAN网络"></a>M-LAG双归接入VXLAN网络</h3><p>M-LAG双归接入VXLAN网络时，需要将两台M-LAG设备虚拟成一个VTEP。无论是手工建立隧道还是通过MP-BGP自动建立隧道，DeviceA和DeviceB均用这个虚拟的VTEP的IP和外界建立VXLAN隧道。</p>
+<p>PS：VTEP IP地址需要在两台设备上都配置。</p>
 <p><img src="https://download.huawei.com/mdl/image/download?uuid=bd814117515d48119c9ac35c64b5668a" srcset="/img/loading.gif" lazyload alt="M-LAG双归接入VXLAN网络示意图" title="M-LAG双归接入VXLAN网络示意图">M-LAG双归接入VXLAN网络示意图</p>
 <h3 id="M-LAG双归接入三层网络"><a href="#M-LAG双归接入三层网络" class="headerlink" title="M-LAG双归接入三层网络"></a>M-LAG双归接入三层网络</h3><p>M-LAG双归接入三层网络时，M-LAG双归设备成为二层网络和三层网络的分界点，即承担网关的作用。由于是两台设备做网关，他们对网络侧需要展示相同的网关IP和MAC。在DeviceA和DeviceB上配置相同IP地址和虚拟MAC地址，达到相同网关的目的。</p>
 <p><img src="https://download.huawei.com/mdl/image/download?uuid=7961747a3ee34e20bb44278923a24346" srcset="/img/loading.gif" lazyload alt="M-LAG双归接入三层网络示意图" title="M-LAG双归接入三层网络示意图">M-LAG双归接入三层网络示意图</p>

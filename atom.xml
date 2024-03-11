@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-03-11T08:30:03.535Z</updated>
+  <updated>2024-03-11T08:33:10.424Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -21,10 +21,11 @@
     <link href="https://songxwn.com/M-LAG/"/>
     <id>https://songxwn.com/M-LAG/</id>
     <published>2024-03-10T18:44:10.000Z</published>
-    <updated>2024-03-11T08:30:03.535Z</updated>
+    <updated>2024-03-11T08:33:10.424Z</updated>
     
     
-    <summary type="html">&lt;h2 id=&quot;什么是M-LAG&quot;&gt;&lt;a href=&quot;#什么是M-LAG&quot; class=&quot;headerlink&quot; title=&quot;什么是M-LAG ?&quot;&gt;&lt;/a&gt;什么是M-LAG ?&lt;/h2&gt;&lt;p&gt;M-LAG（Multichassis Link Aggregation Group）提供一种跨设备链路聚合的技术。M-LAG通过将两台接入交换机以同一个状态和用户侧设备或服务器进行跨设备的链路聚合，把链路的可靠性从单板级提升到设备级。同时，由于M-LAG设备可以单独升级，保证了业务流量的稳定性，使得M-LAG技术在数据中心网络广泛应用。&lt;/p&gt;</summary>
+    <summary type="html">&lt;h2 id=&quot;什么是M-LAG&quot;&gt;&lt;a href=&quot;#什么是M-LAG&quot; class=&quot;headerlink&quot; title=&quot;什么是M-LAG ?&quot;&gt;&lt;/a&gt;什么是M-LAG ?&lt;/h2&gt;&lt;p&gt;M-LAG（Multichassis Link Aggregation Group）提供一种跨设备链路聚合的技术。M-LAG通过将两台接入交换机以同一个状态和用户侧设备或服务器进行跨设备的链路聚合，把链路的可靠性从单板级提升到设备级。同时，由于M-LAG设备可以单独升级，保证了业务流量的稳定性，使得M-LAG技术在数据中心网络广泛应用。&lt;/p&gt;
+&lt;p&gt;PS：M-LAG 技术虽然大家都有，但各大品牌并不互相兼容。&lt;/p&gt;</summary>
     
     
     
