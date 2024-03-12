@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-03-12T02:38:59.527Z</updated>
+  <updated>2024-03-12T02:40:06.441Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://songxwn.com/frostmourne_use/"/>
     <id>https://songxwn.com/frostmourne_use/</id>
     <published>2024-03-12T01:48:00.000Z</published>
-    <updated>2024-03-12T02:38:59.527Z</updated>
+    <updated>2024-03-12T02:40:06.441Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;配置Frostmourne 接入Elasticsearch源进行日志匹配告警，并静默规则，告警消息发送到企业微信，告警信息使用Markdown。&lt;/p&gt;
