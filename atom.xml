@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-03-11T08:38:43.100Z</updated>
+  <updated>2024-03-12T02:36:55.141Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Frostmourne - Elasticsearch源日志告警配置</title>
+    <link href="https://songxwn.com/frostmourne_use/"/>
+    <id>https://songxwn.com/frostmourne_use/</id>
+    <published>2024-03-12T01:48:00.000Z</published>
+    <updated>2024-03-12T02:36:55.141Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;配置Frostmourne 接入Elasticsearch源进行日志匹配告警，并静默规则，告警消息发送到企业微信，告警信息使用Markdown。&lt;/p&gt;
+&lt;p&gt;部署安装教程查看： &lt;a href=&quot;https://songxwn.com/frostmourne_install&quot; title=&quot;https://songxwn.com/frostmourne_install&quot;&gt;https://songxwn.com/frostmourne_install&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;ELK 安装教程：&lt;a href=&quot;https://songxwn.com/elk/&quot; title=&quot;https://songxwn.com/elk/&quot;&gt;https://songxwn.com/elk/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;ELK集群：&lt;a href=&quot;https://songxwn.com/elk_cluster/&quot; title=&quot;https://songxwn.com/elk_cluster/&quot;&gt;https://songxwn.com/elk_cluster&amp;#x2F;&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
+    
+    <category term="ELK" scheme="https://songxwn.com/categories/linux/ELK/"/>
+    
+    
+    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
+    
+    <category term="elk" scheme="https://songxwn.com/tags/elk/"/>
+    
+    <category term="syslog" scheme="https://songxwn.com/tags/syslog/"/>
+    
+    <category term="wecom" scheme="https://songxwn.com/tags/wecom/"/>
+    
+  </entry>
   
   <entry>
     <title>什么是M-LAG？ 为什么需要M-LAG</title>
@@ -574,30 +604,6 @@
     <category term="Windows" scheme="https://songxwn.com/tags/Windows/"/>
     
     <category term="Url_get-Edge" scheme="https://songxwn.com/tags/Url-get-Edge/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>住宅IP和数据中心IP(广播和非广播)</title>
-    <link href="https://songxwn.com/Native_IP/"/>
-    <id>https://songxwn.com/Native_IP/</id>
-    <published>2023-12-15T01:33:46.000Z</published>
-    <updated>2024-02-26T09:12:03.267Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;住宅IP：是由VerizonFiOS、AT＆TU-verse、Cox、Comcast、Charter或TimeWarner等（本地运营商）公司拥有的IP，它们可用于真人家庭。IP地址是由互联网服务提供商（ISP）分配给用户。绑定到家庭地址的IP地址叫住宅IP地址。也叫原生、本地IP、或非广播IP、Native IP。&lt;/p&gt;
-&lt;p&gt;（国内移动、联通、电信就是一级本地运营商）&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="network" scheme="https://songxwn.com/categories/network/"/>
-    
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="ip" scheme="https://songxwn.com/tags/ip/"/>
-    
-    <category term="Native_IP" scheme="https://songxwn.com/tags/Native-IP/"/>
     
   </entry>
   

@@ -16,28 +16,29 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
   
-    <meta name="description" content="简介本文章适用于ELK的logstash 配置SNMP Trap插件,接收告警通知。默认情况下是安装此插件的，如没有可手动安装。 一般用于网络设备。 注意此插件不支持v3版本。 ELK系列教程：https:&#x2F;&#x2F;songxwn.com&#x2F;categories&#x2F;linux&#x2F;ELK&#x2F; 参考：https:&#x2F;&#x2F;www.elastic.co&#x2F;guide&#x2F;en&#x2F;logstash&#x2F;current&#x2F;plugins-i">
+    <meta name="description" content="简介配置Frostmourne 接入Elasticsearch源进行日志匹配告警，并静默规则，告警消息发送到企业微信，告警信息使用Markdown。 部署安装教程查看： https:&#x2F;&#x2F;songxwn.com&#x2F;frostmourne_install ELK 安装教程：https:&#x2F;&#x2F;songxwn.com&#x2F;elk&#x2F; ELK集群：https:&#x2F;&#x2F;songxwn.com&#x2F;elk_cluster&amp;#x2">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ELK Logstash配置SNMP-Trap">
-<meta property="og:url" content="https://songxwn.com/elk_snmp_trap/index.html">
+<meta property="og:title" content="Frostmourne - Elasticsearch源日志告警配置">
+<meta property="og:url" content="https://songxwn.com/frostmourne_use/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="简介本文章适用于ELK的logstash 配置SNMP Trap插件,接收告警通知。默认情况下是安装此插件的，如没有可手动安装。 一般用于网络设备。 注意此插件不支持v3版本。 ELK系列教程：https:&#x2F;&#x2F;songxwn.com&#x2F;categories&#x2F;linux&#x2F;ELK&#x2F; 参考：https:&#x2F;&#x2F;www.elastic.co&#x2F;guide&#x2F;en&#x2F;logstash&#x2F;current&#x2F;plugins-i">
+<meta property="og:description" content="简介配置Frostmourne 接入Elasticsearch源进行日志匹配告警，并静默规则，告警消息发送到企业微信，告警信息使用Markdown。 部署安装教程查看： https:&#x2F;&#x2F;songxwn.com&#x2F;frostmourne_install ELK 安装教程：https:&#x2F;&#x2F;songxwn.com&#x2F;elk&#x2F; ELK集群：https:&#x2F;&#x2F;songxwn.com&#x2F;elk_cluster&amp;#x2">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/04/24/655e1eed1d766dd0.png">
-<meta property="article:published_time" content="2023-04-24T06:59:00.000Z">
-<meta property="article:modified_time" content="2023-05-08T12:53:50.684Z">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/03/26/b19fb3c35402bf29.png">
+<meta property="article:published_time" content="2024-03-12T01:48:00.000Z">
+<meta property="article:modified_time" content="2024-03-12T02:36:55.141Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="elk">
-<meta property="article:tag" content="snmp">
+<meta property="article:tag" content="syslog">
+<meta property="article:tag" content="wecom">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2023/04/24/655e1eed1d766dd0.png">
+<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2023/03/26/b19fb3c35402bf29.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>ELK Logstash配置SNMP-Trap - Song`s Blog</title>
+  <title>Frostmourne - Elasticsearch源日志告警配置 - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -244,7 +245,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="ELK Logstash配置SNMP-Trap"></span>
+            <span id="subtitle" data-typed-text="Frostmourne - Elasticsearch源日志告警配置"></span>
           
         </div>
 
@@ -255,8 +256,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-24 14:59" pubdate>
-          2023年4月24日 下午
+        <time datetime="2024-03-12 09:48" pubdate>
+          2024年3月12日 上午
         </time>
       </span>
     
@@ -267,7 +268,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          199 字
+          725 字
         
       </span>
     
@@ -278,7 +279,7 @@
         
         
         
-          2 分钟
+          7 分钟
         
       </span>
     
@@ -336,12 +337,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">ELK Logstash配置SNMP-Trap</h1>
+            <h1 id="seo-header">Frostmourne - Elasticsearch源日志告警配置</h1>
             
               <p id="updated-time" class="note note-danger" style="">
                 
                   
-                    本文最后更新于 2023年5月8日 晚上
+                    本文最后更新于 2024年3月12日 上午
                   
                 
               </p>
@@ -349,17 +350,109 @@
             
               <div class="markdown-body">
                 
-                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>本文章适用于ELK的logstash 配置SNMP Trap插件,接收告警通知。<br>默认情况下是安装此插件的，如没有可手动安装。</p>
-<p>一般用于网络设备。</p>
-<p>注意此插件不支持v3版本。</p>
-<p>ELK系列教程：<a href="https://songxwn.com/categories/linux/ELK/">https://songxwn.com/categories/linux/ELK/</a></p>
-<p>参考：<a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/logstash/current/plugins-inputs-snmptrap.html">https://www.elastic.co/guide/en/logstash/current/plugins-inputs-snmptrap.html</a> </p>
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>配置Frostmourne 接入Elasticsearch源进行日志匹配告警，并静默规则，告警消息发送到企业微信，告警信息使用Markdown。</p>
+<p>部署安装教程查看： <a href="https://songxwn.com/frostmourne_install" title="https://songxwn.com/frostmourne_install">https://songxwn.com/frostmourne_install</a></p>
+<p>ELK 安装教程：<a href="https://songxwn.com/elk/" title="https://songxwn.com/elk/">https://songxwn.com/elk/</a></p>
+<p>ELK集群：<a href="https://songxwn.com/elk_cluster/" title="https://songxwn.com/elk_cluster/">https://songxwn.com/elk_cluster&#x2F;</a></p>
 <span id="more"></span>
 
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs puppet">vim /etc/logstash/conf.d/trap.conf<br><br><span class="hljs-keyword">input</span> &#123;<br>  snmptrap &#123;<br>    <span class="hljs-attr">type</span> =&gt; <span class="hljs-string">&quot;snmp-trap&quot;</span><br>	<span class="hljs-attr">community</span> =&gt;<span class="hljs-string">&quot;public&quot;</span><br>    <span class="hljs-attr">port</span> =&gt; <span class="hljs-number">162</span><br>  &#125;<br>&#125;<br><br><span class="hljs-keyword">output</span> &#123;<br>  elasticsearch &#123;<br>    <span class="hljs-attr">hosts</span> =&gt; [<span class="hljs-string">&quot;http://192.168.0.1:9200&quot;</span>]<br>    <span class="hljs-attr">index</span> =&gt; <span class="hljs-string">&quot;snmp-trap-v2-%&#123;+YYYY.MM&#125;&quot;</span><br>	<span class="hljs-attr">user</span> =&gt; elastic<br>    <span class="hljs-attr">password</span> =&gt; <span class="hljs-string">&quot;songxwn.com&quot;</span><br>  &#125;<br>&#125;<br><br><br><span class="hljs-comment"># 以上示例文件中，团体名字为public，配置端口为默认的162。</span><br><br></code></pre></td></tr></table></figure>
+<p>G# 添加ES 数据源</p>
+<p>数据管理 &gt; 数据源 &gt; 新增</p>
+<p><img src="https://img.songxwn.com/file/ea93a4bda318648b9dd56.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>类型选择 ES</p>
+</li>
+<li><p>名称任意填写</p>
+</li>
+<li><p>服务地址需要写ES地址+端口号，支持写多个ES地址方便集群接入，以逗号隔离。如 192.168.0.1:9200,192.168.0.2:9200</p>
+</li>
+<li><p>版本选择你的ES对应版本。</p>
+</li>
+<li><p>HTTPS、认证用户、密码。根据自己清空填写。</p>
+</li>
+</ul>
+<h1 id="添加数据名-（索引集合）"><a href="#添加数据名-（索引集合）" class="headerlink" title="添加数据名 （索引集合）"></a>添加数据名 （索引集合）</h1><p>用于匹配多个索引，选择数据管理  &gt; 数据名 &gt; 新增</p>
+<p><img src="https://img.songxwn.com/file/58c01adf2d79b3d9c4313.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>类型选择ES</p>
+</li>
+<li><p>名称按需填写</p>
+</li>
+<li><p>数据源选择上一步添加的</p>
+</li>
+<li><p>说明任意填写</p>
+</li>
+<li><p>时间字段写 @timestamp</p>
+</li>
+<li><p>索引前缀填写你要匹配的索引组</p>
+</li>
+<li><p>时间后缀写YYYY.MM</p>
+</li>
+<li><p>显示字段按需填写就行，syslog 一般写message 、host.hostname  、log.syslog.severity.name 即可。</p>
+</li>
+</ul>
+<p>PS：配置对应我的教程 <a href="https://songxwn.com/elk/" title="https://songxwn.com/elk/">https://songxwn.com/elk/</a></p>
+<h1 id="数据查询-验证生效"><a href="#数据查询-验证生效" class="headerlink" title="数据查询-验证生效"></a>数据查询-验证生效</h1><p>选择上面创建的数据名，查询到对应日志即确认配置无问题。</p>
+<p><img src="https://img.songxwn.com/file/105d4fc0c40d4a9e153b7.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="添加监控"><a href="#添加监控" class="headerlink" title="添加监控"></a>添加监控</h1><p>选择监控管理 &gt; 监控列表 &gt; 添加报警</p>
+<h2 id="基础信息"><a href="#基础信息" class="headerlink" title="基础信息"></a>基础信息</h2><p><img src="https://img.songxwn.com/file/0102a62743b33a3d619cd.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>填写监控名字</p>
+</li>
+<li><p>团队可以选择默认的</p>
+</li>
+<li><p>描述写监控的描述</p>
+</li>
+</ul>
+<h2 id="数据配置"><a href="#数据配置" class="headerlink" title="数据配置"></a>数据配置</h2><p><img src="https://img.songxwn.com/file/d4b73ea8b32b6d45c1aa8.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>数据选择上面创建的数据名</p>
+</li>
+<li><p>聚合类型选择count即可</p>
+</li>
+<li><p>查询语句 message: “bfd”，匹配message字段中的bfd字段进行告警。</p>
+</li>
+</ul>
+<p>可参考： <a target="_blank" rel="noopener" href="https://github.com/AutohomeCorp/frostmourne/blob/master/doc/wiki/es.md" title="https://github.com/AutohomeCorp/frostmourne/blob/master/doc/wiki/es.md">https://github.com/AutohomeCorp/frostmourne/blob/master/doc/wiki/es.md</a></p>
+<h2 id="报警规则"><a href="#报警规则" class="headerlink" title="报警规则"></a>报警规则</h2><p><img src="https://img.songxwn.com/file/957111fe8a0fa1b60c999.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>判断类型选择数值比较</p>
+</li>
+<li><p>判断规则选择最近2分钟</p>
+</li>
+<li><p>指标数值选择大于等于 1.00</p>
+</li>
+<li><p>报警跳转选择连续一次满足</p>
+</li>
+</ul>
+<h2 id="消息模板"><a href="#消息模板" class="headerlink" title="消息模板"></a>消息模板</h2><p><img src="https://img.songxwn.com/file/da3a830e6f55772fe9627.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>消息类型选择 markdown</li>
+</ul>
+<p>模板为一下，适用于企业微信机器人。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs text"># 告警名称：$&#123;ALARM_NAME&#125;<br># $&#123;ALERT_SILENCE&#125;分钟内重复报警将不发送<br>&gt; ## 日志信息:$&#123;message&#125;<br>&gt; ## 主机IP:$&#123;host.ip&#125;<br>&gt; ## 主机名:$&#123;host.hostname&#125;<br>&gt; ## 告警时间:$&#123;endTime&#125;<br></code></pre></td></tr></table></figure>
 
-<p>注意：如果要需要解析OID，需要指定mib库yaml格式的目录。</p>
-<p>ELK安装可参考： <a href="https://songxwn.com/elk/">https://songxwn.com/elk/</a></p>
+<p>最后点击预览数据</p>
+<h2 id="报警发送-企业微信机器人"><a href="#报警发送-企业微信机器人" class="headerlink" title="报警发送 - 企业微信机器人"></a>报警发送 - 企业微信机器人</h2><p><img src="https://img.songxwn.com/file/e16ad583204b1d9ff9867.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>报警方式选择企业微信</p>
+</li>
+<li><p>微信机器人填写你的机器人链接</p>
+</li>
+<li><p>静默条件选填，我这里是3分钟，判断消息和主机名相同则静默 $.message &amp;&amp; $.host.hostname</p>
+</li>
+<li><p>报警接收人因为是webhook 随便填写即可。</p>
+</li>
+</ul>
+<p>企业微信机器人创建 ：<a target="_blank" rel="noopener" href="https://hiflow.tencent.com/docs/applications/wwx-robot/" title="https://hiflow.tencent.com/docs/applications/wwx-robot/">https://hiflow.tencent.com/docs/applications/wwx-robot/</a></p>
+<h2 id="调度配置-查询批量"><a href="#调度配置-查询批量" class="headerlink" title="调度配置 - 查询批量"></a>调度配置 - 查询批量</h2><p><img src="https://img.songxwn.com/file/1b6b0d5c3dd6349ee8ee0.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>用于填写监控的执行间隔时间，一般一分钟即可。</li>
+</ul>
+<p>最后点击保存，监控生效。</p>
+<p><img src="https://img.songxwn.com/file/50d08a875a8e2133899ad.png" srcset="/img/loading.gif" lazyload></p>
+<p>点击执行一次可立即执行，查看日志是否匹配成功。</p>
+<p>更多可参考官方文档： <a target="_blank" rel="noopener" href="https://github.com/AutohomeCorp/frostmourne/tree/master" title="https://github.com/AutohomeCorp/frostmourne/tree/master">https://github.com/AutohomeCorp/frostmourne/tree/master</a></p>
 
                 
               </div>
@@ -404,7 +497,9 @@
       
         <a href="/tags/elk/" class="print-no-link">#elk</a>
       
-        <a href="/tags/snmp/" class="print-no-link">#snmp</a>
+        <a href="/tags/syslog/" class="print-no-link">#syslog</a>
+      
+        <a href="/tags/wecom/" class="print-no-link">#wecom</a>
       
     </div>
   
@@ -416,8 +511,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>ELK Logstash配置SNMP-Trap</div>
-      <div>https://songxwn.com/elk_snmp_trap/</div>
+      <div>Frostmourne - Elasticsearch源日志告警配置</div>
+      <div>https://songxwn.com/frostmourne_use/</div>
     </div>
     <div class="license-meta">
       
@@ -429,13 +524,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月24日</div>
+          <div>2024年3月12日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年5月8日</div>
+          <div>2024年3月12日</div>
         </div>
       
       
@@ -466,18 +561,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/elk_cluster/" title="Elasticsearch 安装配置集群系统">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Elasticsearch 安装配置集群系统</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/team_nav/" title="部署团队服务导航网站 Team-nav">
-                        <span class="hidden-mobile">部署团队服务导航网站 Team-nav</span>
+                      <a href="/M-LAG/" title="什么是M-LAG？ 为什么需要M-LAG">
+                        <span class="hidden-mobile">什么是M-LAG？ 为什么需要M-LAG</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -612,7 +701,7 @@
       
         <a href="/elk_snmp_trap/" title="ELK Logstash配置SNMP-Trap"
            class="list-group-item list-group-item-action
-           active">
+           ">
           <span class="category-post">ELK Logstash配置SNMP-Trap</span>
         </a>
       
@@ -630,7 +719,7 @@
       
         <a href="/frostmourne_use/" title="Frostmourne - Elasticsearch源日志告警配置"
            class="list-group-item list-group-item-action
-           ">
+           active">
           <span class="category-post">Frostmourne - Elasticsearch源日志告警配置</span>
         </a>
       
