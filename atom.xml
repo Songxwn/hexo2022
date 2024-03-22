@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-03-22T06:23:05.198Z</updated>
+  <updated>2024-03-22T10:06:06.182Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -17,16 +17,17 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Juniper SRX 防火墙基础上网配置</title>
-    <link href="https://songxwn.com/Juniper-SRX-snat/"/>
-    <id>https://songxwn.com/Juniper-SRX-snat/</id>
-    <published>2024-03-22T01:55:54.000Z</published>
-    <updated>2024-03-22T06:23:05.198Z</updated>
+    <title>Juniper SRX 防火墙IPsec VPN 站点-站点</title>
+    <link href="https://songxwn.com/Juniper-SRX-IPsec/"/>
+    <id>https://songxwn.com/Juniper-SRX-IPsec/</id>
+    <published>2024-03-22T02:55:54.000Z</published>
+    <updated>2024-03-22T10:06:06.182Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;基于PNET-LAB模拟器，使用 vSRX-NG 23.4R1.9 镜像进行实验。&lt;/p&gt;
-&lt;h2 id=&quot;实验需求&quot;&gt;&lt;a href=&quot;#实验需求&quot; class=&quot;headerlink&quot; title=&quot;实验需求&quot;&gt;&lt;/a&gt;实验需求&lt;/h2&gt;&lt;p&gt;配置WAN口 LAN口，实现基础的上网功能。配置NAT、DHCP。&lt;/p&gt;
-&lt;p&gt;ISP 路由器使用Cisco IOS模拟，与SRX对接口配置 1.1.1.2，Lookback0配置114.114.114.114&amp;#x2F;32&lt;/p&gt;</summary>
+&lt;h2 id=&quot;实验需求&quot;&gt;&lt;a href=&quot;#实验需求&quot; class=&quot;headerlink&quot; title=&quot;实验需求&quot;&gt;&lt;/a&gt;实验需求&lt;/h2&gt;&lt;p&gt;两台防火墙配置基于路由的 IPsec VPN，打通两边站点内网。&lt;/p&gt;
+&lt;p&gt;ISP 路由器使用Cisco IOS模拟。&lt;/p&gt;
+&lt;p&gt;基础配置参考：&lt;a href=&quot;https://songxwn.com/Juniper-SRX-snat/&quot; title=&quot;https://songxwn.com/Juniper-SRX-snat/&quot;&gt;https://songxwn.com/Juniper-SRX-snat/&lt;/a&gt;&lt;/p&gt;</summary>
     
     
     
@@ -41,20 +42,21 @@
     
     <category term="SRX" scheme="https://songxwn.com/tags/SRX/"/>
     
+    <category term="IPsec" scheme="https://songxwn.com/tags/IPsec/"/>
+    
   </entry>
   
   <entry>
-    <title>Juniper SRX 防火墙IPsec VPN 站点-站点</title>
-    <link href="https://songxwn.com/Juniper-SRX-IPsec/"/>
-    <id>https://songxwn.com/Juniper-SRX-IPsec/</id>
+    <title>Juniper SRX 防火墙基础上网配置</title>
+    <link href="https://songxwn.com/Juniper-SRX-snat/"/>
+    <id>https://songxwn.com/Juniper-SRX-snat/</id>
     <published>2024-03-22T01:55:54.000Z</published>
-    <updated>2024-03-22T10:05:29.591Z</updated>
+    <updated>2024-03-22T06:23:05.198Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;基于PNET-LAB模拟器，使用 vSRX-NG 23.4R1.9 镜像进行实验。&lt;/p&gt;
-&lt;h2 id=&quot;实验需求&quot;&gt;&lt;a href=&quot;#实验需求&quot; class=&quot;headerlink&quot; title=&quot;实验需求&quot;&gt;&lt;/a&gt;实验需求&lt;/h2&gt;&lt;p&gt;两台防火墙配置基于路由的 IPsec VPN，打通两边站点内网。&lt;/p&gt;
-&lt;p&gt;ISP 路由器使用Cisco IOS模拟。&lt;/p&gt;
-&lt;p&gt;基础配置参考：&lt;a href=&quot;https://songxwn.com/Juniper-SRX-snat/&quot; title=&quot;https://songxwn.com/Juniper-SRX-snat/&quot;&gt;https://songxwn.com/Juniper-SRX-snat/&lt;/a&gt;&lt;/p&gt;</summary>
+&lt;h2 id=&quot;实验需求&quot;&gt;&lt;a href=&quot;#实验需求&quot; class=&quot;headerlink&quot; title=&quot;实验需求&quot;&gt;&lt;/a&gt;实验需求&lt;/h2&gt;&lt;p&gt;配置WAN口 LAN口，实现基础的上网功能。配置NAT、DHCP。&lt;/p&gt;
+&lt;p&gt;ISP 路由器使用Cisco IOS模拟，与SRX对接口配置 1.1.1.2，Lookback0配置114.114.114.114&amp;#x2F;32&lt;/p&gt;</summary>
     
     
     

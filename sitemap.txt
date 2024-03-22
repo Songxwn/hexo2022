@@ -211,6 +211,7 @@ https://songxwn.com/tags/M-LAG/
 https://songxwn.com/tags/LACP/
 https://songxwn.com/tags/Office/
 https://songxwn.com/tags/SRX/
+https://songxwn.com/tags/IPsec/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/VMware/
