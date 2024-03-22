@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-03-22T05:58:08.363Z</updated>
+  <updated>2024-03-22T06:23:05.198Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -21,16 +21,16 @@
     <link href="https://songxwn.com/Juniper-SRX-snat/"/>
     <id>https://songxwn.com/Juniper-SRX-snat/</id>
     <published>2024-03-22T01:55:54.000Z</published>
-    <updated>2024-03-22T05:58:08.363Z</updated>
+    <updated>2024-03-22T06:23:05.198Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;基于PNET-LAB模拟器，使用 vSRX-NG 23.4R1.9 镜像进行实验。&lt;/p&gt;
 &lt;h2 id=&quot;实验需求&quot;&gt;&lt;a href=&quot;#实验需求&quot; class=&quot;headerlink&quot; title=&quot;实验需求&quot;&gt;&lt;/a&gt;实验需求&lt;/h2&gt;&lt;p&gt;配置WAN口 LAN口，实现基础的上网功能。配置NAT、DHCP。&lt;/p&gt;
-&lt;p&gt;ISP 路由器使用Cisco IOS模拟，与SRX对接口配置 1.1.1.2，Lookback0配置 114.114.114.114&amp;#x2F;32&lt;/p&gt;</summary>
+&lt;p&gt;ISP 路由器使用Cisco IOS模拟，与SRX对接口配置 1.1.1.2，Lookback0配置114.114.114.114&amp;#x2F;32&lt;/p&gt;</summary>
     
     
     
-    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    <category term="Juniper" scheme="https://songxwn.com/categories/Juniper/"/>
     
     
     <category term="network" scheme="https://songxwn.com/tags/network/"/>

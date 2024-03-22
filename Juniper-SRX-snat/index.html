@@ -16,17 +16,17 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
   
-    <meta name="description" content="简介基于PNET-LAB模拟器，使用 vSRX-NG 23.4R1.9 镜像进行实验。 实验需求配置WAN口 LAN口，实现基础的上网功能。配置NAT、DHCP。 ISP 路由器使用Cisco IOS模拟，与SRX对接口配置 1.1.1.2，Lookback0配置 114.114.114.114&#x2F;32">
+    <meta name="description" content="简介基于PNET-LAB模拟器，使用 vSRX-NG 23.4R1.9 镜像进行实验。 实验需求配置WAN口 LAN口，实现基础的上网功能。配置NAT、DHCP。 ISP 路由器使用Cisco IOS模拟，与SRX对接口配置 1.1.1.2，Lookback0配置114.114.114.114&#x2F;32">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Juniper SRX 防火墙基础上网配置">
 <meta property="og:url" content="https://songxwn.com/Juniper-SRX-snat/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="简介基于PNET-LAB模拟器，使用 vSRX-NG 23.4R1.9 镜像进行实验。 实验需求配置WAN口 LAN口，实现基础的上网功能。配置NAT、DHCP。 ISP 路由器使用Cisco IOS模拟，与SRX对接口配置 1.1.1.2，Lookback0配置 114.114.114.114&#x2F;32">
+<meta property="og:description" content="简介基于PNET-LAB模拟器，使用 vSRX-NG 23.4R1.9 镜像进行实验。 实验需求配置WAN口 LAN口，实现基础的上网功能。配置NAT、DHCP。 ISP 路由器使用Cisco IOS模拟，与SRX对接口配置 1.1.1.2，Lookback0配置114.114.114.114&#x2F;32">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img.songxwn.com/file/bad3923ed1eae8533e8e0.png">
 <meta property="og:image" content="https://img.songxwn.com/file/eedd32c763c925aa93fdd.png">
 <meta property="article:published_time" content="2024-03-22T01:55:54.000Z">
-<meta property="article:modified_time" content="2024-03-22T05:58:08.363Z">
+<meta property="article:modified_time" content="2024-03-22T06:23:05.198Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="nat">
@@ -269,7 +269,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          875 字
+          874 字
         
       </span>
     
@@ -353,7 +353,7 @@
                 
                 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>基于PNET-LAB模拟器，使用 vSRX-NG 23.4R1.9 镜像进行实验。</p>
 <h2 id="实验需求"><a href="#实验需求" class="headerlink" title="实验需求"></a>实验需求</h2><p>配置WAN口 LAN口，实现基础的上网功能。配置NAT、DHCP。</p>
-<p>ISP 路由器使用Cisco IOS模拟，与SRX对接口配置 1.1.1.2，Lookback0配置 114.114.114.114&#x2F;32</p>
+<p>ISP 路由器使用Cisco IOS模拟，与SRX对接口配置 1.1.1.2，Lookback0配置114.114.114.114&#x2F;32</p>
 <span id="more"></span>
 
 <h1 id="实验步骤"><a href="#实验步骤" class="headerlink" title="实验步骤"></a>实验步骤</h1><h2 id="实验拓扑"><a href="#实验拓扑" class="headerlink" title="实验拓扑"></a>实验拓扑</h2><p><img src="https://img.songxwn.com/file/bad3923ed1eae8533e8e0.png" srcset="/img/loading.gif" lazyload></p>
@@ -374,7 +374,7 @@
 
 
 
-<h2 id="最终验证"><a href="#最终验证" class="headerlink" title="最终验证"></a>最终验证</h2><p>最终win-PC 可以DHCP自动获取到IP，并可以ping通 114.114.114.114&#x20;</p>
+<h2 id="最终验证"><a href="#最终验证" class="headerlink" title="最终验证"></a>最终验证</h2><p>最终win-PC 可以DHCP自动获取到IP，并可以ping通 114.114.114.114;</p>
 <p><img src="https://img.songxwn.com/file/eedd32c763c925aa93fdd.png" srcset="/img/loading.gif" lazyload></p>
 
                 
@@ -394,7 +394,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/network/" class="category-chain-item">network</a>
+  <a href="/categories/Juniper/" class="category-chain-item">Juniper</a>
   
   
 
@@ -542,140 +542,17 @@
     
     <div class="category row nomargin-x">
       <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="network"
-        id="heading-91e02cd2b8621d0c05197f645668c5c4" role="tab" data-toggle="collapse" href="#collapse-91e02cd2b8621d0c05197f645668c5c4"
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Juniper"
+        id="heading-b2ec6b780f1e52f7e21396021047e0b4" role="tab" data-toggle="collapse" href="#collapse-b2ec6b780f1e52f7e21396021047e0b4"
         aria-expanded="true"
       >
-        network
-        <span class="list-group-count">(34)</span>
+        Juniper
+        <span class="list-group-count">(2)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse show" id="collapse-91e02cd2b8621d0c05197f645668c5c4"
-           role="tabpanel" aria-labelledby="heading-91e02cd2b8621d0c05197f645668c5c4">
-        
-        
-          
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/DNS_recursive_Server/" title="建立自有递归DNS服务器"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">建立自有递归DNS服务器</span>
-        </a>
-      
-    
-      
-      
-        <a href="/Full_Stack_Network_Engineer/" title="如何成为全栈网络工程师？"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">如何成为全栈网络工程师？</span>
-        </a>
-      
-    
-      
-      
-        <a href="/IP_Mask_Gateway/" title="IP地址 子网掩码 默认网关 随笔"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">IP地址 子网掩码 默认网关 随笔</span>
-        </a>
-      
-    
-      
-      
-        <a href="/Juniper_L3-MPLS/" title="Juniper MPLS L3VPN实验配置"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Juniper MPLS L3VPN实验配置</span>
-        </a>
-      
-    
-      
-      
-        <a href="/Juniper_RE-Protect/" title="Juniper RE防护-过滤SSH&amp;Telnet登录"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Juniper RE防护-过滤SSH&amp;Telnet登录</span>
-        </a>
-      
-    
-      
-      
-        <a href="/MPLS_VPN/" title="MPLS VPN随笔（L3 单域）"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">MPLS VPN随笔（L3 单域）</span>
-        </a>
-      
-    
-      
-      
-        <a href="/MikroTik_ROS_WinBox_DNS/" title="MikroTik ROS Winbox Ping工具DNS问题"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">MikroTik ROS Winbox Ping工具DNS问题</span>
-        </a>
-      
-    
-      
-      
-        <a href="/OSI/" title="OSI七层网络参考模型 随笔"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">OSI七层网络参考模型 随笔</span>
-        </a>
-      
-    
-      
-      
-        <a href="/QINQ/" title="QinQ 随笔"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">QinQ 随笔</span>
-        </a>
-      
-    
-      
-      
-        <a href="/TCP_BBR/" title="TCP拥塞控制算法–从 CUBIC 到 BBRv2"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">TCP拥塞控制算法–从 CUBIC 到 BBRv2</span>
-        </a>
-      
-    
-      
-      
-        <a href="/categories/network/" class="list-group-item list-group-item-action">
-          <span class="category-post">More...</span>
-        </a>
-        
-  </div>
-
-          
-  
-    
-    
-    
-    <div class="category-sub row nomargin-x">
-      <a class="category-subitem collapsed
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="vxlan"
-        id="heading-cc9fdff17fe90752400924ef32962330" role="tab" data-toggle="collapse" href="#collapse-cc9fdff17fe90752400924ef32962330"
-        aria-expanded="false"
-      >
-        vxlan
-        <span class="list-group-count">(5)</span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-      <div class="category-collapse collapse " id="collapse-cc9fdff17fe90752400924ef32962330"
-           role="tabpanel" aria-labelledby="heading-cc9fdff17fe90752400924ef32962330">
+      <div class="category-collapse collapse show" id="collapse-b2ec6b780f1e52f7e21396021047e0b4"
+           role="tabpanel" aria-labelledby="heading-b2ec6b780f1e52f7e21396021047e0b4">
         
         
           
@@ -684,55 +561,24 @@
     
       
       
-        <a href="/VXLAN/" title="什么是VXLAN"
+        <a href="/Juniper-log-match/" title="Juniper 设备配置日志过滤-过滤license告警日志"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">什么是VXLAN</span>
+          <span class="category-post">Juniper 设备配置日志过滤-过滤license告警日志</span>
         </a>
       
     
       
       
-        <a href="/VXLAN_Basic/" title="VXLAN 基本概念"
+        <a href="/Juniper-SRX-snat/" title="Juniper SRX 防火墙基础上网配置"
            class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">VXLAN 基本概念</span>
-        </a>
-      
-    
-      
-      
-        <a href="/VXLAN_Configuration/" title="VXLAN 基本配置"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">VXLAN 基本配置</span>
-        </a>
-      
-    
-      
-      
-        <a href="/VXLAN_Principle/" title="VXLAN 转发原理"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">VXLAN 转发原理</span>
-        </a>
-      
-    
-      
-      
-        <a href="/BGP_EVPN_Basic/" title="什么是EVPN？"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">什么是EVPN？</span>
+           active">
+          <span class="category-post">Juniper SRX 防火墙基础上网配置</span>
         </a>
       
     
   </div>
 
-        
-      </div>
-    </div>
-  
         
       </div>
     </div>
