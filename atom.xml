@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-03-12T02:47:16.122Z</updated>
+  <updated>2024-03-22T05:58:08.363Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Juniper SRX 防火墙基础上网配置</title>
+    <link href="https://songxwn.com/Juniper-SRX-snat/"/>
+    <id>https://songxwn.com/Juniper-SRX-snat/</id>
+    <published>2024-03-22T01:55:54.000Z</published>
+    <updated>2024-03-22T05:58:08.363Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;基于PNET-LAB模拟器，使用 vSRX-NG 23.4R1.9 镜像进行实验。&lt;/p&gt;
+&lt;h2 id=&quot;实验需求&quot;&gt;&lt;a href=&quot;#实验需求&quot; class=&quot;headerlink&quot; title=&quot;实验需求&quot;&gt;&lt;/a&gt;实验需求&lt;/h2&gt;&lt;p&gt;配置WAN口 LAN口，实现基础的上网功能。配置NAT、DHCP。&lt;/p&gt;
+&lt;p&gt;ISP 路由器使用Cisco IOS模拟，与SRX对接口配置 1.1.1.2，Lookback0配置 114.114.114.114&amp;#x2F;32&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="nat" scheme="https://songxwn.com/tags/nat/"/>
+    
+    <category term="Juniper" scheme="https://songxwn.com/tags/Juniper/"/>
+    
+    <category term="SRX" scheme="https://songxwn.com/tags/SRX/"/>
+    
+  </entry>
   
   <entry>
     <title>Frostmourne - Elasticsearch源日志告警配置</title>
@@ -578,32 +605,6 @@
     <category term="ping" scheme="https://songxwn.com/tags/ping/"/>
     
     <category term="mtr" scheme="https://songxwn.com/tags/mtr/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>网站页面域名获取工具-Edge (2.1.5P)</title>
-    <link href="https://songxwn.com/url-get-edge-tools/"/>
-    <id>https://songxwn.com/url-get-edge-tools/</id>
-    <published>2023-12-16T03:38:43.000Z</published>
-    <updated>2024-01-31T04:50:58.024Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;用Python写了一个小工具，可以打开指定网站，抓取此网站的所有域名。&lt;/p&gt;
-&lt;p&gt;适合用来做分流和过滤。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="network" scheme="https://songxwn.com/categories/network/"/>
-    
-    
-    <category term="dns" scheme="https://songxwn.com/tags/dns/"/>
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="Windows" scheme="https://songxwn.com/tags/Windows/"/>
-    
-    <category term="Url_get-Edge" scheme="https://songxwn.com/tags/Url-get-Edge/"/>
     
   </entry>
   

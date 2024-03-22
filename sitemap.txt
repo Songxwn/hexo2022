@@ -1,5 +1,6 @@
-https://songxwn.com/WireGuard-UI-install/
+https://songxwn.com/Juniper-SRX-snat/
 https://songxwn.com/vdo/
+https://songxwn.com/WireGuard-UI-install/
 https://songxwn.com/frostmourne_use/
 https://songxwn.com/frostmourne_install/
 https://songxwn.com/KMS/
@@ -208,6 +209,7 @@ https://songxwn.com/tags/vCenter/
 https://songxwn.com/tags/M-LAG/
 https://songxwn.com/tags/LACP/
 https://songxwn.com/tags/Office/
+https://songxwn.com/tags/SRX/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/VMware/
