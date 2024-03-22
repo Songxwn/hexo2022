@@ -44,6 +44,34 @@
   </entry>
   
   <entry>
+    <title>Juniper SRX 防火墙IPsec VPN 站点-站点</title>
+    <link href="https://songxwn.com/Juniper-SRX-IPsec/"/>
+    <id>https://songxwn.com/Juniper-SRX-IPsec/</id>
+    <published>2024-03-22T01:55:54.000Z</published>
+    <updated>2024-03-22T10:05:29.591Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;基于PNET-LAB模拟器，使用 vSRX-NG 23.4R1.9 镜像进行实验。&lt;/p&gt;
+&lt;h2 id=&quot;实验需求&quot;&gt;&lt;a href=&quot;#实验需求&quot; class=&quot;headerlink&quot; title=&quot;实验需求&quot;&gt;&lt;/a&gt;实验需求&lt;/h2&gt;&lt;p&gt;两台防火墙配置基于路由的 IPsec VPN，打通两边站点内网。&lt;/p&gt;
+&lt;p&gt;ISP 路由器使用Cisco IOS模拟。&lt;/p&gt;
+&lt;p&gt;基础配置参考：&lt;a href=&quot;https://songxwn.com/Juniper-SRX-snat/&quot; title=&quot;https://songxwn.com/Juniper-SRX-snat/&quot;&gt;https://songxwn.com/Juniper-SRX-snat/&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Juniper" scheme="https://songxwn.com/categories/Juniper/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="nat" scheme="https://songxwn.com/tags/nat/"/>
+    
+    <category term="Juniper" scheme="https://songxwn.com/tags/Juniper/"/>
+    
+    <category term="SRX" scheme="https://songxwn.com/tags/SRX/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Frostmourne - Elasticsearch源日志告警配置</title>
     <link href="https://songxwn.com/frostmourne_use/"/>
     <id>https://songxwn.com/frostmourne_use/</id>
@@ -564,47 +592,6 @@
     <category term="Socks5" scheme="https://songxwn.com/tags/Socks5/"/>
     
     <category term="HTTP_Proxy" scheme="https://songxwn.com/tags/HTTP-Proxy/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ALS - Web 网络测试工具</title>
-    <link href="https://songxwn.com/als/"/>
-    <id>https://songxwn.com/als/</id>
-    <published>2023-12-27T01:21:11.000Z</published>
-    <updated>2023-12-27T05:32:56.107Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;ALS 是一个在线工具集合。&lt;/p&gt;
-&lt;p&gt;项目地址：&lt;a href=&quot;https://github.com/wikihost-opensource/als&quot;&gt;https://github.com/wikihost-opensource/als&lt;/a&gt; &lt;/p&gt;
-&lt;p&gt;Demo：&lt;a href=&quot;http://lg.hk1-bgp.hkg.50network.com/&quot;&gt;http://lg.hk1-bgp.hkg.50network.com/&lt;/a&gt; &lt;/p&gt;
-&lt;p&gt;注：目前只支持Docker 部署&lt;/p&gt;
-&lt;p&gt;支持以下功能&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;input checked=&quot;&quot; disabled=&quot;&quot; type=&quot;checkbox&quot;&gt; Ping - IPv4&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&quot;&quot; disabled=&quot;&quot; type=&quot;checkbox&quot;&gt; HTML 5 在线速度测试（支持内网）&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&quot;&quot; disabled=&quot;&quot; type=&quot;checkbox&quot;&gt; 文件下载测试&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&quot;&quot; disabled=&quot;&quot; type=&quot;checkbox&quot;&gt; 获取访问客户IP地址（可内网使用）&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&quot;&quot; disabled=&quot;&quot; type=&quot;checkbox&quot;&gt; iPerf3 服务器&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&quot;&quot; disabled=&quot;&quot; type=&quot;checkbox&quot;&gt; 服务器流量图&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&quot;&quot; disabled=&quot;&quot; type=&quot;checkbox&quot;&gt; Speedtest.net 客户端（可指定服务器ID）&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&quot;&quot; disabled=&quot;&quot; type=&quot;checkbox&quot;&gt; 在线Web shell （有限命令 - ping  - traceroute  - mtr  - nexttrace）&lt;/li&gt;
-&lt;/ul&gt;</summary>
-    
-    
-    
-    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
-    
-    
-    <category term="dns" scheme="https://songxwn.com/tags/dns/"/>
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
-    
-    <category term="ping" scheme="https://songxwn.com/tags/ping/"/>
-    
-    <category term="mtr" scheme="https://songxwn.com/tags/mtr/"/>
     
   </entry>
   

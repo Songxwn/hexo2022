@@ -1,4 +1,5 @@
 https://songxwn.com/Juniper-SRX-snat/
+https://songxwn.com/Juniper-SRX-IPsec/
 https://songxwn.com/frostmourne_use/
 https://songxwn.com/M-LAG/
 https://songxwn.com/VMware-anti-affinity/
@@ -12,4 +13,3 @@ https://songxwn.com/Grafana-LDAP-AD/
 https://songxwn.com/zabbix-LDAP-JIT/
 https://songxwn.com/RDMA/
 https://songxwn.com/switch-ROCEv2-DSCP/
-https://songxwn.com/Ubuntu-auto-update/
