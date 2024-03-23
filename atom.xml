@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-03-22T10:06:06.182Z</updated>
+  <updated>2024-03-23T01:34:52.941Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Juniper SRX 防火墙IPsec VPN 站点-站点</title>
+    <title>Juniper SRX 防火墙IPsec VPN 站点到站点</title>
     <link href="https://songxwn.com/Juniper-SRX-IPsec/"/>
     <id>https://songxwn.com/Juniper-SRX-IPsec/</id>
     <published>2024-03-22T02:55:54.000Z</published>
-    <updated>2024-03-22T10:06:06.182Z</updated>
+    <updated>2024-03-23T01:34:52.941Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;基于PNET-LAB模拟器，使用 vSRX-NG 23.4R1.9 镜像进行实验。&lt;/p&gt;

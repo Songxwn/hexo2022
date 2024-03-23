@@ -18,7 +18,7 @@
   
     <meta name="description" content="简介基于PNET-LAB模拟器，使用 vSRX-NG 23.4R1.9 镜像进行实验。 实验需求两台防火墙配置基于路由的 IPsec VPN，打通两边站点内网。 ISP 路由器使用Cisco IOS模拟。 基础配置参考：https:&#x2F;&#x2F;songxwn.com&#x2F;Juniper-SRX-snat&#x2F;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Juniper SRX 防火墙IPsec VPN 站点-站点">
+<meta property="og:title" content="Juniper SRX 防火墙IPsec VPN 站点到站点">
 <meta property="og:url" content="https://songxwn.com/Juniper-SRX-IPsec/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
 <meta property="og:description" content="简介基于PNET-LAB模拟器，使用 vSRX-NG 23.4R1.9 镜像进行实验。 实验需求两台防火墙配置基于路由的 IPsec VPN，打通两边站点内网。 ISP 路由器使用Cisco IOS模拟。 基础配置参考：https:&#x2F;&#x2F;songxwn.com&#x2F;Juniper-SRX-snat&#x2F;">
@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://img.songxwn.com/file/54e2460372461f196fafc.png">
 <meta property="og:image" content="https://img.songxwn.com/file/a9a3fe428eb057b72b8a7.png">
 <meta property="article:published_time" content="2024-03-22T02:55:54.000Z">
-<meta property="article:modified_time" content="2024-03-22T10:06:06.182Z">
+<meta property="article:modified_time" content="2024-03-23T01:34:52.941Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="nat">
@@ -41,7 +41,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Juniper SRX 防火墙IPsec VPN 站点-站点 - Song`s Blog</title>
+  <title>Juniper SRX 防火墙IPsec VPN 站点到站点 - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -248,7 +248,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Juniper SRX 防火墙IPsec VPN 站点-站点"></span>
+            <span id="subtitle" data-typed-text="Juniper SRX 防火墙IPsec VPN 站点到站点"></span>
           
         </div>
 
@@ -271,7 +271,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          1.4k 字
         
       </span>
     
@@ -340,12 +340,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Juniper SRX 防火墙IPsec VPN 站点-站点</h1>
+            <h1 id="seo-header">Juniper SRX 防火墙IPsec VPN 站点到站点</h1>
             
               <p id="updated-time" class="note note-danger" style="">
                 
                   
-                    本文最后更新于 2024年3月22日 晚上
+                    本文最后更新于 2024年3月23日 上午
                   
                 
               </p>
@@ -386,6 +386,7 @@
 
 <h2 id="配置二阶段IPsec策略（vSRX-NG02）"><a href="#配置二阶段IPsec策略（vSRX-NG02）" class="headerlink" title="配置二阶段IPsec策略（vSRX-NG02）"></a>配置二阶段IPsec策略（vSRX-NG02）</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs text">set security ipsec proposal TO_site2_ipsec_pp protocol esp<br># 配置IPsec提议，指定加密封装类型为ESP。<br>set security ipsec proposal TO_site2_ipsec_pp encryption-algorithm aes-256-gcm<br>set security ipsec proposal TO_site2_ipsec_pp lifetime-seconds 43200<br># 配置IPsec提议，指定加密算法、生存时间。<br>set security ipsec policy TO_site2_ipsec_pl proposals TO_site2_ipsec_pp<br>set security ipsec policy TO_site2_ipsec_pl perfect-forward-secrecy keys group14<br># 配置IPsec策略，关联上面的IPsec提议。并配置PFS使用group14.<br>set security ipsec vpn TO_site2_ipsec_vpn bind-interface st0.0<br>set security ipsec vpn TO_site2_ipsec_vpn ike gateway TO_site2_ike_gw<br>set security ipsec vpn TO_site2_ipsec_vpn ike ipsec-policy TO_site2_ipsec_pl <br># 配置IPsec VPN，关联虚拟隧道接口为st0.0，关联IKE 网关为TO_site2_ike_gw。关联IPsec策略。<br>set security ipsec vpn TO_site2_ipsec_vpn traffic-selector ts-1 local-ip 192.168.0.0/24<br>set security ipsec vpn TO_site2_ipsec_vpn traffic-selector ts-1 remote-ip 192.168.10.0/24<br># 配置流量策略,本地IP段为 192.168.10.0/24 ，远程IP段为 192.186.0.0/24<br>set security ipsec vpn TO_site2_ipsec_vpn establish-tunnels immediately<br># 配置隧道在 VPN 配置更改提交后立即协商。<br></code></pre></td></tr></table></figure>
 
+<p>PS：如果增加新的网段，只需要增加traffic-selector ts-2 即可，但需要注意放通安全策略。</p>
 <h1 id=""><a href="#" class="headerlink" title=""></a></h1><h1 id="配置验证"><a href="#配置验证" class="headerlink" title="配置验证"></a>配置验证</h1><h2 id="Web管理验证"><a href="#Web管理验证" class="headerlink" title="Web管理验证"></a>Web管理验证</h2><p><img src="https://img.songxwn.com/file/54e2460372461f196fafc.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="命令验证"><a href="#命令验证" class="headerlink" title="命令验证"></a>命令验证</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs text">show security ike security-associations<br># 查看IKE SA 当前状态<br>show security ipsec security-associations<br># 查看IPsec SA当前状态<br>show security ipsec statistics<br># 查看IPsec 统计信息<br>restart ipsec-key-management <br># 重启IPsec进程<br></code></pre></td></tr></table></figure>
 
@@ -444,7 +445,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Juniper SRX 防火墙IPsec VPN 站点-站点</div>
+      <div>Juniper SRX 防火墙IPsec VPN 站点到站点</div>
       <div>https://songxwn.com/Juniper-SRX-IPsec/</div>
     </div>
     <div class="license-meta">
@@ -463,7 +464,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年3月22日</div>
+          <div>2024年3月23日</div>
         </div>
       
       
@@ -596,10 +597,10 @@
     
       
       
-        <a href="/Juniper-SRX-IPsec/" title="Juniper SRX 防火墙IPsec VPN 站点-站点"
+        <a href="/Juniper-SRX-IPsec/" title="Juniper SRX 防火墙IPsec VPN 站点到站点"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">Juniper SRX 防火墙IPsec VPN 站点-站点</span>
+          <span class="category-post">Juniper SRX 防火墙IPsec VPN 站点到站点</span>
         </a>
       
     
