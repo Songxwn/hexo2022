@@ -43,16 +43,10 @@
     <link href="https://songxwn.com/Juniper-SRX-security-zone/"/>
     <id>https://songxwn.com/Juniper-SRX-security-zone/</id>
     <published>2024-03-23T11:55:54.000Z</published>
-    <updated>2024-03-23T14:31:42.627Z</updated>
+    <updated>2024-03-25T03:26:02.202Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html"></summary>
-        
-      
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;为了保护其业务，组织必须控制对其 LAN 和资源的访问。安全策略通常用于此目的。无论是在公司内部通过 LAN 进行安全访问，还是在与外部网络（如 Internet）的交互中，都需要安全访问。Junos OS 通过其状态防火墙、应用程序防火墙和用户身份防火墙提供强大的网络安全功能。所有这三种类型的防火墙实施都是通过安全策略实现的。状态防火墙策略语法将扩大，以包括应用程序防火墙和用户身份防火墙的其他元组。&lt;/p&gt;</summary>
     
     
     

@@ -23,14 +23,16 @@
 <meta property="og:site_name" content="Song&#96;s Blog">
 <meta property="og:description" content="简介为了保护其业务，组织必须控制对其 LAN 和资源的访问。安全策略通常用于此目的。无论是在公司内部通过 LAN 进行安全访问，还是在与外部网络（如 Internet）的交互中，都需要安全访问。Junos OS 通过其状态防火墙、应用程序防火墙和用户身份防火墙提供强大的网络安全功能。所有这三种类型的防火墙实施都是通过安全策略实现的。状态防火墙策略语法将扩大，以包括应用程序防火墙和用户身份防火墙的其">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.songxwn.com/file/369c97982da0af28a26da.png">
 <meta property="article:published_time" content="2024-03-23T11:55:54.000Z">
-<meta property="article:modified_time" content="2024-03-23T14:31:42.627Z">
+<meta property="article:modified_time" content="2024-03-25T03:26:02.202Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="Juniper">
 <meta property="article:tag" content="SRX">
 <meta property="article:tag" content="security-zone">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img.songxwn.com/file/369c97982da0af28a26da.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -266,7 +268,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          766 字
+          2.6k 字
         
       </span>
     
@@ -277,7 +279,7 @@
         
         
         
-          7 分钟
+          22 分钟
         
       </span>
     
@@ -340,7 +342,7 @@
               <p id="updated-time" class="note note-danger" style="">
                 
                   
-                    本文最后更新于 2024年3月23日 晚上
+                    本文最后更新于 2024年3月25日 上午
                   
                 
               </p>
@@ -349,10 +351,12 @@
               <div class="markdown-body">
                 
                 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>为了保护其业务，组织必须控制对其 LAN 和资源的访问。安全策略通常用于此目的。无论是在公司内部通过 LAN 进行安全访问，还是在与外部网络（如 Internet）的交互中，都需要安全访问。Junos OS 通过其状态防火墙、应用程序防火墙和用户身份防火墙提供强大的网络安全功能。所有这三种类型的防火墙实施都是通过安全策略实现的。状态防火墙策略语法将扩大，以包括应用程序防火墙和用户身份防火墙的其他元组。</p>
+<span id="more"></span>
+
 <p>在 Junos OS 有状态防火墙中，安全策略根据哪些流量可以通过防火墙以及流量通过防火墙时需要对流量执行的操作来强制执行传输流量规则。从安全策略的角度来看，流量进入一个安全区域并退出另一个安全区域。 这种从区域 和 目标区域 的组合称为 上下文。每个上下文都包含一个 有序的策略列表 。每个策略都按照其在上下文中定义的顺序进行处理。<br>可以从用户界面配置的安全策略通过定义在计划时间允许从指定 IP 源到指定 IP 目标的流量类型，控制从一个区域到另一个区域的流量流。<br>通过策略，可以拒绝、允许、拒绝（拒绝并将 TCP RST 或 ICMP 端口无法访问的消息发送到源主机）、加密和解密、进行身份验证、确定优先级、安排、过滤和监控试图从一个安全区域跨越到另一个安全区域的流量。您可以决定哪些用户和哪些数据可以进入和退出，以及他们可以在何时何地访问。</p>
-<ul>
-<li>注意： 对于支持虚拟系统的 SRX 系列防火墙，根系统中设置的策略不会影响虚拟系统中设置的策略。</li>
-</ul>
+<blockquote>
+<p>注意： 对于支持虚拟系统的 SRX 系列防火墙，根系统中设置的策略不会影响虚拟系统中设置的策略。</p>
+</blockquote>
 <p>对于 SRX300、SRX320、SRX340、SRX345、SRX380 和 SRX550M 设备，提供了出厂默认安全策略：</p>
 <ul>
 <li><p>允许从信任区域到不信任区域的所有流量。</p>
@@ -363,7 +367,63 @@
 </li>
 </ul>
 <p>通过创建策略，您可以通过定义允许在计划时间从指定源传递到指定目标的流量类型来控制区域之间的流量。</p>
-<p>在最广泛的层面上，您可以允许从一个区域中的任何源到所有其他区域中任何目标的各种流量，而没有任何计划限制。在最窄的级别上，您可以创建一个策略，在计划的时间间隔内，只允许一个区域中的指定主机与另一个区域中的另一个指定主机之间的一种流量。</p>
+<p>在最广泛的层面上，您可以允许从一个区域中的任何源到所有其他区域中任何目标的各种流量，而没有任何计划限制。在最窄的级别上，您可以创建一个策略，在计划的时间间隔内，只允许一个区域中的指定主机与另一个区域中的另一个指定主机之间的一种流量。如下图所示。</p>
+<p><img src="https://img.songxwn.com/file/369c97982da0af28a26da.png" srcset="/img/loading.gif" lazyload></p>
+<p>每次数据包尝试从一个区域传递到另一个区域或在绑定到同一区域的两个接口之间传递时，设备都会检查允许此类流量的策略（请参阅 了解安全区域 和 示例：配置安全策略应用程序和应用程序集）。若要允许流量从一个安全区域传递到另一个安全区域（例如，从区域 A 传递到区域 B），必须配置允许区域 A 将流量发送到区域 B 的策略。要允许流量以其他方式流动，您必须配置另一个策略，以允许从区域 B 到区域 A 的流量。</p>
+<p>要允许数据流量在区域之间传递，必须配置防火墙策略。</p>
+<h1 id="安全区域"><a href="#安全区域" class="headerlink" title="安全区域"></a>安全区域</h1><p>安全区域是一个或多个网段的集合，需要通过策略来调节入站和出站流量。安全区域是一个或多个接口绑定到的逻辑实体。您可以定义多个安全区域，其确切数量可根据您的网络需求确定。</p>
+<h2 id="安全区域概述"><a href="#安全区域概述" class="headerlink" title="安全区域概述"></a>安全区域概述</h2><p>接口充当流量进出瞻博网络设备的入口。许多接口可以共享完全相同的安全要求;但是，不同的接口对入站和出站数据包也可能有不同的安全要求。具有相同安全要求的接口可以组合到单个安全区域中。</p>
+<p>安全区域是一个或多个网段的集合，需要通过策略来调节入站和出站流量。</p>
+<p>安全区域是一个或多个接口绑定到的逻辑实体。对于多种类型的瞻博网络设备，您可以定义多个安全区域，并根据您的网络需求确定确切数量。</p>
+<p>在单个设备上，您可以配置多个安全区域，将网络划分为多个网段，您可以在其中应用各种安全选项来满足每个网段的需求。至少，您必须定义两个安全区域，基本上是为了保护网络的一个区域免受另一个区域的影响。在某些安全平台上，您可以定义多个安全区域，从而为您的网络安全设计提供更精细的粒度，而无需部署多个安全设备。</p>
+<p>从安全策略的角度来看，流量进入一个安全区域，然后流出另一个安全区域。a from-zone 和 a to-zone 的这种组合定义为 上下文。每个上下文都包含一个有序的策略列表。有关策略的详细信息，请参阅 安全策略概述。</p>
+<h2 id="了解安全区域接口"><a href="#了解安全区域接口" class="headerlink" title="了解安全区域接口"></a>了解安全区域接口</h2><p>可以将安全区域的接口视为可在该区域与任何其他区域之间传递的 TCP&#x2F;IP 通信的入口。</p>
+<p>通过您定义的策略，您可以允许区域之间的流量沿一个方向或两个方向流动。通过您定义的路由，您可以指定从一个区域的流量到另一个区域的流量必须使用的接口。由于您可以将多个接口绑定到一个区域，因此您绘制的路由对于将流量定向到您选择的接口非常重要。</p>
+<p>接口可以配置为 IPv4 地址和&#x2F;或 IPv6 地址。</p>
+<h2 id="了解功能区"><a href="#了解功能区" class="headerlink" title="了解功能区"></a>了解功能区</h2><p>功能区用于特殊用途，如管理接口。目前，仅支持管理 （MGT） 区域。管理区域具有以下属性：</p>
+<ul>
+<li><p>管理区域主机管理接口。</p>
+</li>
+<li></li>
+<li><p>进入管理区域的流量与策略不匹配;因此，如果在管理接口中收到流量，则无法从任何其他接口传输。</p>
+</li>
+<li></li>
+<li><p>管理区域只能用于专用管理接口。</p>
+</li>
+</ul>
+<h2 id="了解安全区域"><a href="#了解安全区域" class="headerlink" title="了解安全区域"></a>了解安全区域</h2><p>安全区域是策略的构建基块;它们是一个或多个接口绑定到的逻辑实体。安全区域提供了一种区分主机组（用户系统和其他主机，如服务器）及其资源的方法，以便对其应用不同的安全措施。</p>
+<p>安全区域具有以下属性：</p>
+<ul>
+<li><p>策略 - 主动安全策略，根据哪些流量可以通过防火墙以及流量通过防火墙时需要对流量执行的操作来实施传输流量规则。有关详细信息，请参阅 <a target="_blank" rel="noopener" href="https://www.juniper.net/documentation/us/en/software/junos/security-policies/topics/concept/policy-overview.html">安全策略概述</a>。</p>
+</li>
+<li><p>筛选 — 瞻博网络状态防火墙通过检查并允许或拒绝所有需要从一个安全区域传递到另一个安全区域的连接尝试来保护网络。对于每个安全区域，您可以启用一组预定义的屏幕选项，用于检测和阻止设备确定为可能有害的各种流量。有关详细信息，请参阅 <a target="_blank" rel="noopener" href="https://www.juniper.net/documentation/en_US/junos/topics/concept/reconnaissance-deterrence-overview.html">侦察威慑概述</a>。</p>
+</li>
+<li><p>地址簿 - 组成地址簿的 IP 地址和地址集，用于标识其成员，以便您可以对其应用策略。通讯簿条目可以包括 IPv4 地址、IPv6 地址和域名系统 （DNS） 名称的任意组合。有关更多信息，请参阅 <a target="_blank" rel="noopener" href="https://www.juniper.net/documentation/us/en/software/junos/security-policies/topics/topic-map/security-address-books-sets.html#id-example-configuring-address-books-and-address-sets">示例：配置通讯簿和地址集</a>。</p>
+</li>
+<li><p>TCP-RST — 启用此功能后，当流量到达时，系统会发送一个设置了 RESET 标志的 TCP 分段，该分段与现有会话不匹配且未设置 SYNchronize 标志。</p>
+</li>
+<li><p>接口 — 区域中的接口列表。</p>
+</li>
+</ul>
+<p>安全区域具有以下预配置区域：</p>
+<ul>
+<li>信任区域 - 仅在出厂配置中可用，用于与设备的初始连接。提交配置后，可以覆盖信任区域。</li>
+</ul>
+<h2 id="创建安全区域-CLI"><a href="#创建安全区域-CLI" class="headerlink" title="创建安全区域-CLI"></a>创建安全区域-CLI</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">set interfaces ge-0/0/1 unit 0 family inet address 203.0.113.1/24<br>set interfaces ge-0/0/1 unit 0 family inet6 address 2001:db8:1::1/64<br>set security zones security-zone ABC interfaces ge-0/0/1.0<br></code></pre></td></tr></table></figure>
+
+<h2 id="配置安全区域主机入站流量限制"><a href="#配置安全区域主机入站流量限制" class="headerlink" title="配置安全区域主机入站流量限制"></a>配置安全区域主机入站流量限制</h2><ul>
+<li><p>您可以在区域级别配置这些参数，在这种情况下，它们会影响区域的所有接口，也可以在接口级别配置这些参数。（接口配置将覆盖区域的接口配置。）</p>
+</li>
+<li><p>您必须启用所有预期的主机入站流量。默认情况下，发往此设备的入站流量将被丢弃。</p>
+</li>
+<li><p>您还可以配置区域的接口以允许动态路由协议使用。</p>
+</li>
+</ul>
+<p>此功能允许您保护设备免受从直接或间接连接到其任何接口的系统发起的攻击。它还使您能够有选择地配置设备，以便管理员可以在某些接口上使用某些应用程序对其进行管理。您可以禁止在区域的相同或不同接口上使用其他应用程序。例如，您很可能希望确保外部人员不会从 Internet 使用 Telnet 应用程序登录设备，因为您不希望他们连接到您的系统。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs text">set security zones security-zone ABC host-inbound-traffic system-services all<br>set security zones security-zone ABC interfaces ge-0/0/1.3 host-inbound-traffic system-services telnet<br>set security zones security-zone ABC interfaces ge-0/0/1.3 host-inbound-traffic system-services ftp<br>set security zones security-zone ABC interfaces ge-0/0/1.3 host-inbound-traffic system-services snmp<br>set security zones security-zone ABC interfaces ge-0/0/1.0 host-inbound-traffic system-services all<br>set security zones security-zone ABC interfaces ge-0/0/1.0 host-inbound-traffic system-services ftp except<br>set security zones security-zone ABC interfaces ge-0/0/1.0 host-inbound-traffic system-services http except<br></code></pre></td></tr></table></figure>
+
+<h2 id="配置安全区域基于协议控制入站流量"><a href="#配置安全区域基于协议控制入站流量" class="headerlink" title="配置安全区域基于协议控制入站流量"></a>配置安全区域基于协议控制入站流量</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">set security zones security-zone ABC interfaces ge-0/0/1.0 host-inbound-traffic protocols ospf<br>set security zones security-zone ABC interfaces ge-0/0/1.0 host-inbound-traffic protocols ospf3<br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
@@ -434,7 +494,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年3月23日</div>
+          <div>2024年3月25日</div>
         </div>
       
       
