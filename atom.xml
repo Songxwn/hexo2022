@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-03-25T03:40:10.294Z</updated>
+  <updated>2024-03-25T06:33:47.625Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,41 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>EES 索引模板、生命周期策略、节点角色</title>
+    <link href="https://songxwn.com/elk_role/"/>
+    <id>https://songxwn.com/elk_role/</id>
+    <published>2024-03-25T01:59:00.000Z</published>
+    <updated>2024-03-25T06:33:47.625Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;索引模板可以帮助简化创建和二次配置索引的过程，让我们更高效地管理索引的配置和映射。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;索引生命周期策略是一项有意义的功能。它通常用于管理索引和分片的热（hot）、温（warm）和冷（cold）数据，以及定期删除过期的数据，以确保Elasticsearch的健康运行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Elasticsearch集群中，不同节点扮演着不同的角色（热（hot）、温（warm）和冷（cold）主节点），共同构成了强大的搜索和分析引擎。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;此文档基于 8.0版本编写。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://songxwn.com/categories/linux/"/>
+    
+    <category term="ELK" scheme="https://songxwn.com/categories/linux/ELK/"/>
+    
+    
+    <category term="Linux" scheme="https://songxwn.com/tags/Linux/"/>
+    
+    <category term="elk" scheme="https://songxwn.com/tags/elk/"/>
+    
+    <category term="elasticsearch" scheme="https://songxwn.com/tags/elasticsearch/"/>
+    
+    <category term="syslog" scheme="https://songxwn.com/tags/syslog/"/>
+    
+  </entry>
   
   <entry>
     <title>H3C WLAN本地转发实验</title>
@@ -554,31 +589,6 @@
     <category term="zabbix" scheme="https://songxwn.com/tags/zabbix/"/>
     
     <category term="fonts" scheme="https://songxwn.com/tags/fonts/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>VMware vCenter（VCSA） 配置静态路由</title>
-    <link href="https://songxwn.com/VMware-vCenter-IProute/"/>
-    <id>https://songxwn.com/VMware-vCenter-IProute/</id>
-    <published>2024-01-26T04:57:26.000Z</published>
-    <updated>2024-01-26T05:48:06.642Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;本教程适用于基于Linux的VCSA版本，Linux版本是基于VMware开源的Linux发行版 VMware Photon OS来作为底层系统的。&lt;br&gt;首先需要在后台开启SSH和Shell访问。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="vmware" scheme="https://songxwn.com/categories/vmware/"/>
-    
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="esxi" scheme="https://songxwn.com/tags/esxi/"/>
-    
-    <category term="vmware" scheme="https://songxwn.com/tags/vmware/"/>
-    
-    <category term="vcenter" scheme="https://songxwn.com/tags/vcenter/"/>
     
   </entry>
   

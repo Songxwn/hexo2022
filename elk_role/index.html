@@ -1,0 +1,1102 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/images/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Song">
+  <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
+  
+    <meta name="description" content="简介 索引模板可以帮助简化创建和二次配置索引的过程，让我们更高效地管理索引的配置和映射。  索引生命周期策略是一项有意义的功能。它通常用于管理索引和分片的热（hot）、温（warm）和冷（cold）数据，以及定期删除过期的数据，以确保Elasticsearch的健康运行。  Elasticsearch集群中，不同节点扮演着不同的角色（热（hot）、温（warm）和冷（cold）主节点），共同构成了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EES 索引模板、生命周期策略、节点角色">
+<meta property="og:url" content="https://songxwn.com/elk_role/index.html">
+<meta property="og:site_name" content="Song&#96;s Blog">
+<meta property="og:description" content="简介 索引模板可以帮助简化创建和二次配置索引的过程，让我们更高效地管理索引的配置和映射。  索引生命周期策略是一项有意义的功能。它通常用于管理索引和分片的热（hot）、温（warm）和冷（cold）数据，以及定期删除过期的数据，以确保Elasticsearch的健康运行。  Elasticsearch集群中，不同节点扮演着不同的角色（热（hot）、温（warm）和冷（cold）主节点），共同构成了">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.songxwn.com/file/df86ebe1a243672dc5ca6.png">
+<meta property="og:image" content="https://img.songxwn.com/file/0a7a7adaf0d968b9eeabf.png">
+<meta property="og:image" content="https://img.songxwn.com/file/417de2d87940eb07cb565.png">
+<meta property="og:image" content="https://img.songxwn.com/file/8cf2c4731e542253669ed.png">
+<meta property="og:image" content="https://img.songxwn.com/file/f8f5a5294bd7704b68c1d.png">
+<meta property="og:image" content="https://img.songxwn.com/file/aa8baf0c6ddd2c25031f3.png">
+<meta property="og:image" content="https://img.songxwn.com/file/97d95f926ba9698744667.png">
+<meta property="og:image" content="https://img.songxwn.com/file/c22c0d1abe8903fc6b9ee.png">
+<meta property="og:image" content="https://img.songxwn.com/file/6dc5988f2e6e7ef9aa8e9.png">
+<meta property="og:image" content="https://seafile.tianchic.com/lib/9dad6c87-9d2a-40ba-b208-ca4370bf1dd9/file/images/auto-upload/image-1711347487945.png?raw=1">
+<meta property="og:image" content="https://img.songxwn.com/file/afa9e2e04080b21ac4595.png">
+<meta property="og:image" content="https://img.songxwn.com/file/ad4f145a79bf57b0943c6.png">
+<meta property="og:image" content="https://img.songxwn.com/file/0d5954c83bd6a4c41ab1a.gif">
+<meta property="og:image" content="https://img.songxwn.com/file/4eda1f34e9d96f7625bdb.png">
+<meta property="article:published_time" content="2024-03-25T01:59:00.000Z">
+<meta property="article:modified_time" content="2024-03-25T06:33:47.625Z">
+<meta property="article:author" content="Song">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="elk">
+<meta property="article:tag" content="elasticsearch">
+<meta property="article:tag" content="syslog">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img.songxwn.com/file/df86ebe1a243672dc5ca6.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>EES 索引模板、生命周期策略、节点角色 - Song`s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/scroll.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"songxwn.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":100,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Song`s Blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Song`s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/books/" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>书单</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss"></i>
+                <span>RSS</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://img.songxwn.com/file/9a6a3f4c572b478a6a538.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="EES 索引模板、生命周期策略、节点角色"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-03-25 09:59" pubdate>
+          2024年3月25日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          20 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">EES 索引模板、生命周期策略、节点角色</h1>
+            
+              <p id="updated-time" class="note note-danger" style="">
+                
+                  
+                    本文最后更新于 2024年3月25日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
+<li><p>索引模板可以帮助简化创建和二次配置索引的过程，让我们更高效地管理索引的配置和映射。</p>
+</li>
+<li><p>索引生命周期策略是一项有意义的功能。它通常用于管理索引和分片的热（hot）、温（warm）和冷（cold）数据，以及定期删除过期的数据，以确保Elasticsearch的健康运行。</p>
+</li>
+<li><p>Elasticsearch集群中，不同节点扮演着不同的角色（热（hot）、温（warm）和冷（cold）主节点），共同构成了强大的搜索和分析引擎。</p>
+</li>
+</ul>
+<p>此文档基于 8.0版本编写。</p>
+<span id="more"></span>
+
+<h1 id="索引模板-Template"><a href="#索引模板-Template" class="headerlink" title="索引模板 - Template"></a>索引模板 - Template</h1><p>索引可使用预定义的模板进行创建，这个模板称作Index templates。模板设置包括设置和映射，通过模式匹配的方式使得多个索引重用一个模板。</p>
+<h2 id="索引模式"><a href="#索引模式" class="headerlink" title="索引模式"></a>索引模式</h2><p>用于匹配创建的索引。</p>
+<h2 id="索引设置"><a href="#索引设置" class="headerlink" title="索引设置"></a>索引设置</h2><p>settings主要作用于index的一些相关配置信息，如分片数、副本数，tranlog同步条件、refresh等。</p>
+<p><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/index-modules.html#index-modules-settings" title="官方文档">官方文档</a></p>
+<p>下面就是把副本数量指定为2，默认副本数量为1。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">&#123;<br>  &quot;index&quot;: &#123;<br>    &quot;number_of_replicas&quot;: &quot;2&quot;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>index.codec    默认使用 LZ4 压缩存储的数 压缩，但可以将其设置为使用 DEFLATE 进行更高的压缩比，以较慢的存储字段性能为代价。</p>
+</li>
+<li><p>index.number_of_replicas 每个主分片的副本数。默认值为 1。</p>
+</li>
+<li><p>index.number_of_shards  索引应具有的主分片数。默认值为1 。此设置只能在创建索引时设置。不能在索引上的更改它。</p>
+</li>
+</ul>
+<h2 id="索引映射"><a href="#索引映射" class="headerlink" title="索引映射"></a>索引映射</h2><p>mappings主要是一些说明信息，大致又分为_all、_source、prpperties这三部分：</p>
+<ol>
+<li><p>_all：主要指的是AllField字段，我们可以将一个或多个都包含进来，在进行检索时无需指定字段的情况下检索多个字段。设置</p>
+</li>
+<li><p>&#x20;_source：主要指的是SourceField字段，Source可以理解为ES除了将数据保存在索引文件中，另外还有一份源数据。_source字段在我们进行检索时相当重要，如果在{“enabled” ： false}情况下默认检索只会返回ID， 你需要通过Fields字段去到索引中去取数据，效率不是很高。但是enabled设置为true时，索引会比较大，这时可以通过Compress进行压缩和inclueds、excludes来在字段级别上进行一些限制，自定义哪些字段允许存储。</p>
+</li>
+<li><p>properties：这是最重要的步骤，主要针对索引结构和字段级别上的一些设置。”_all” : {“enabled” : true}</p>
+</li>
+</ol>
+<p>咱们通常在elasticsearch中 post mapping信息，每重新创建索引便到设置mapping，分片，副本信息。非常繁琐。强烈建议大家通过设置模板方式设置索引信息。设置索引名，通过正则匹配的方式匹配到相应的模板。</p>
+<p>直接修改mapping的优先级&gt;索引模板。索引匹配了多个模板，当属性等配置出现不一致的，以order的最大值为准，order默认值为0</p>
+<h2 id="创建过程-Kibana"><a href="#创建过程-Kibana" class="headerlink" title="创建过程 - Kibana"></a>创建过程 - Kibana</h2><p>选择 Stack Management &gt; 数据 &gt; 索引管理 &gt; 索引模板 &gt; 创建模板</p>
+<p><img src="https://img.songxwn.com/file/df86ebe1a243672dc5ca6.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="配置名称和索引模式"><a href="#配置名称和索引模式" class="headerlink" title="配置名称和索引模式"></a>配置名称和索引模式</h3><p>填写名称、和索引模式和开启允许自动创建索引。点击下一步，跳过组件模板。</p>
+<p>注意索引模式需要匹配要创建的索引名称。</p>
+<p><img src="https://img.songxwn.com/file/0a7a7adaf0d968b9eeabf.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="索引设置-x20"><a href="#索引设置-x20" class="headerlink" title="索引设置&#x20;"></a>索引设置&#x20;</h3><p>配置副本数量为2，点击下一步到复查模板。最后点击创建模板。</p>
+<p><img src="https://img.songxwn.com/file/417de2d87940eb07cb565.png" srcset="/img/loading.gif" lazyload></p>
+<p>最终索引模式匹配的创建模板，都会套用模板配置。</p>
+<p><img src="https://img.songxwn.com/file/8cf2c4731e542253669ed.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="索引生命周期"><a href="#索引生命周期" class="headerlink" title="索引生命周期"></a>索引生命周期</h1><p>索引生命周期可以手动关联模板，也可以通过索引模板自动关联。</p>
+<p><img src="https://img.songxwn.com/file/f8f5a5294bd7704b68c1d.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><p>选择 Stack Management &gt; 数据 &gt; 索引管理 &gt; 索引生命周期策略 &gt; 点击创建策略。</p>
+<p>创建策略，配置热阶段 180天后转换为冷阶段，并把副本数量改为0。再过365天后删除。</p>
+<p><img src="https://img.songxwn.com/file/aa8baf0c6ddd2c25031f3.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="冷阶段配置"><a href="#冷阶段配置" class="headerlink" title="冷阶段配置"></a>冷阶段配置</h3><p>配置副本分片重定为0，并配置此阶段后删除。</p>
+<p><img src="https://img.songxwn.com/file/97d95f926ba9698744667.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="删除阶段"><a href="#删除阶段" class="headerlink" title="删除阶段"></a>删除阶段</h3><p>配置冷阶段365天后删除索引。</p>
+<p><img src="https://img.songxwn.com/file/c22c0d1abe8903fc6b9ee.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="关联索引模板"><a href="#关联索引模板" class="headerlink" title="关联索引模板"></a>关联索引模板</h2><p>点击+号关联索引模板，之后创建的索引就会自动关联索引生命周期策略。</p>
+<p><img src="https://img.songxwn.com/file/6dc5988f2e6e7ef9aa8e9.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://seafile.tianchic.com/lib/9dad6c87-9d2a-40ba-b208-ca4370bf1dd9/file/images/auto-upload/image-1711347487945.png?raw=1" srcset="/img/loading.gif" lazyload></p>
+<h1 id="集群角色"><a href="#集群角色" class="headerlink" title="集群角色"></a>集群角色</h1><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">node.roles: [ data, master ]<br># 配置文件示例<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://img.songxwn.com/file/afa9e2e04080b21ac4595.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="主节点（Master-eligible-node）"><a href="#主节点（Master-eligible-node）" class="headerlink" title="主节点（Master-eligible node）"></a><strong>主节点（Master-eligible node</strong>）</h2><ul>
+<li><p>主节点的核心用途：集群层面的管理，例如创建或删除索引、跟踪哪些节点是集群的一部分，以及决定将哪些分片分配给哪些节点。主节点的path.data 用于存储集群元数据信息，不可缺少。</p>
+</li>
+<li><p>主节点的重要性：拥有稳定的主节点对于集群健康非常重要。</p>
+</li>
+</ul>
+<p>和早期版本不同，节点角色划分后，主节点又被细分为：候选主节点和仅投票主节点。</p>
+<ul>
+<li>主节点存储数据：集群中每个索引的索引元数据，集群层面的元数据。</li>
+</ul>
+<h3 id="专用候选主节点（Dedicated-master-eligible-node）"><a href="#专用候选主节点（Dedicated-master-eligible-node）" class="headerlink" title="专用候选主节点（Dedicated master-eligible node）"></a><strong>专用候选主节点（Dedicated master-eligible node</strong>）</h3><p>如果集群规模大、节点多之后，有必要独立设置专用候选主节点。</p>
+<p>专用候选主节点配置：</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">node.roles: [ <span class="hljs-keyword">master</span> <span class="hljs-title">]</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="仅投票主节点（Voting-only-master-eligible-node）"><a href="#仅投票主节点（Voting-only-master-eligible-node）" class="headerlink" title="仅投票主节点（Voting-only master-eligible node）"></a><strong>仅投票主节点（Voting-only master-eligible node</strong>）</h3><p>用途：仅投票，不会被选为主节点。</p>
+<p>硬件配置可以较专用候选主节点低一些。</p>
+<p>仅投票主节点配置：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">node<span class="hljs-selector-class">.roles</span>: <span class="hljs-selector-attr">[ master, voting_only ]</span><br></code></pre></td></tr></table></figure>
+
+<p>注意：master 在集群中必不可少。</p>
+<p>关于集群主节点配置，要强调说明如下：</p>
+<ul>
+<li><p>高可用性 (HA) 集群需要至少三个符合主节点资格的节点；其中至少两个不是仅投票节点。</p>
+</li>
+<li><p>即使其中一个节点发生故障，这样的集群也将能够选举一个主节点。</p>
+</li>
+</ul>
+<h2 id="数据节点（Data-node）"><a href="#数据节点（Data-node）" class="headerlink" title="数据节点（Data node）"></a><strong>数据节点（Data node</strong>）</h2><p>数据节点用途：数据落地存储、数据增、删、改、查、搜索、聚合操作等处理操作。</p>
+<p>数据节点硬件配置：CPU 要求高、内存要求高、磁盘要求高。</p>
+<p>专属数据节点好处：主节点和数据节点分离，各司其职。</p>
+<p>数据节点存储内容：</p>
+<ul>
+<li><p>分片数据。</p>
+</li>
+<li><p>每个分片对应的元数据。</p>
+</li>
+<li><p>集群层面的元数据，如：setting 和 索引模板。</p>
+</li>
+</ul>
+<p>拥有专用数据节点的主要好处是主角色和数据角色的分离。</p>
+<p>数据节点的配置：</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs haskell"><span class="hljs-title">node</span>.roles: [ <span class="hljs-class"><span class="hljs-keyword">data</span> ]</span><br></code></pre></td></tr></table></figure>
+
+<p>用途：运行转换并处理转换 API 请求。这块，咱们之前文章没有涉及。</p>
+<p>在 Elastic 多层（tires）冷热集群架构体系下，数据节点又可以细分为：</p>
+<ul>
+<li><p>内容数据节点（Content data node）</p>
+</li>
+<li><p>热数据节点（Hot data node）</p>
+</li>
+<li><p>温数据节点（Warm data node）</p>
+</li>
+<li><p>冷数据节点（Cold data node）</p>
+</li>
+<li><p>冷冻数据节点（Frozen data node）</p>
+</li>
+</ul>
+<p><img src="https://img.songxwn.com/file/ad4f145a79bf57b0943c6.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://img.songxwn.com/file/0d5954c83bd6a4c41ab1a.gif" srcset="/img/loading.gif" lazyload></p>
+<h2 id="内容数据节点"><a href="#内容数据节点" class="headerlink" title="内容数据节点"></a><strong>内容数据节点</strong></h2><p>用途：处理写入和查询负载，具有较长的数据保留要求。</p>
+<p>建议至少设置一个副本，以保证数据的高可用。</p>
+<p>不属于数据流的系统索引或其他索引会自动分配到内容数据节点。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">node<span class="hljs-selector-class">.roles</span>: <span class="hljs-selector-attr">[ data_content ]</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="热数据节点"><a href="#热数据节点" class="headerlink" title="热数据节点"></a><strong>热数据节点</strong></h3><p>用途：保存最近、最常访问的时序数据。</p>
+<p>推荐使用：SSD 磁盘，至少设置一个副本。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">node<span class="hljs-selector-class">.roles</span>: <span class="hljs-selector-attr">[ data_hot ]</span><br><br></code></pre></td></tr></table></figure>
+
+<h5 id=""><a href="#" class="headerlink" title="****"></a>****</h5><h3 id="温数据节点"><a href="#温数据节点" class="headerlink" title="温数据节点"></a><strong>温数据节点</strong></h3><p>用途：保存访问频次低且很少更新的时序数据。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">node<span class="hljs-selector-class">.roles</span>: <span class="hljs-selector-attr">[ data_warm ]</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="冷数据节点"><a href="#冷数据节点" class="headerlink" title="冷数据节点"></a><strong>冷数据节点</strong></h3><p>用途：保存不经常访问且通常不更新的时序数据。可存储可搜索快照。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">node<span class="hljs-selector-class">.roles</span>: <span class="hljs-selector-attr">[ data_cold ]</span><br><br></code></pre></td></tr></table></figure>
+
+<h3 id="冷冻数据节点"><a href="#冷冻数据节点" class="headerlink" title="冷冻数据节点"></a><strong>冷冻数据节点</strong></h3><p>用途：保存很少访问且从不更新的时序数据。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">node<span class="hljs-selector-class">.roles</span>: <span class="hljs-selector-attr">[ data_frozen ]</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+<p>在冷热集群架构时序数据 <a href="https://cloud.tencent.com/developer/tools/blog-entry?target=http://mp.weixin.qq.com/s?__biz=MzI2NDY1MTA3OQ==&mid=2247488541&idx=1&sn=16b07ca9247f23990dd69d4d264063b5&chksm=eaa83c35dddfb523e357c738d64d02b8b7fc7febbd911e254c6b043690356e6db33b73ba2f34&scene=21%23wechat_redirect&source=article&objectId=2009025">ILM 索引生命周期管理</a>的实战演练环节，验证发现：</p>
+<p>在配置节点角色时，data_hot、data_warm、data_cold 要和 data_content 要一起配置。且 data_hot、data_warm、data_cold 不要和原有的data 节点一起配置了。</p>
+<p>如果仅data_hot 不设置 data_content 会导致集群数据写入后无法落地。</p>
+<p>我的理解：data_hot, data_warm, data_cold 是标识性的节点，实际落地存储还得靠 data_content 角色。</p>
+<h2 id="数据预处理节点（ingest-node）"><a href="#数据预处理节点（ingest-node）" class="headerlink" title="数据预处理节点（ingest node）"></a><strong>数据预处理节点（ingest node</strong>）</h2><p>用途：执行由预处理管道组成的预处理任务。</p>
+<p>关于啥是数据的预处理？之前有多篇文章解读过：</p>
+<p><a href="https://cloud.tencent.com/developer/tools/blog-entry?target=http://mp.weixin.qq.com/s?__biz=MzI2NDY1MTA3OQ==&mid=2247485003&idx=1&sn=1f0d1c933d458bb9e3c71794d354aff1&chksm=eaa82e63dddfa77584bde5083adcdb4b33ef0c35fce8749dd6b6980ff92071b567a6a7ff93f7&scene=21%23wechat_redirect&source=article&objectId=2009025">Elasticsearch 预处理没有奇技淫巧，请先用好这一招！</a></p>
+<p><a href="https://cloud.tencent.com/developer/tools/blog-entry?target=http://mp.weixin.qq.com/s?__biz=MzI2NDY1MTA3OQ==&mid=2247484473&idx=1&sn=1b3b07b9893f36e32ba20845f906e04a&chksm=eaa82c11dddfa50788e996fa50d2dce2d88ec0b42d2e28a9d43d8e220519eda7e9d854ce964b&scene=21%23wechat_redirect&source=article&objectId=2009025">Elasticsearch的ETL利器——Ingest节点</a></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">node<span class="hljs-selector-class">.roles</span>: <span class="hljs-selector-attr">[ ingest ]</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="仅协调节点（Coordinating-only-node）"><a href="#仅协调节点（Coordinating-only-node）" class="headerlink" title="仅协调节点（Coordinating only node）"></a><strong>仅协调节点（Coordinating only node</strong>）</h2><p>用途：类似智能负载均衡器，负责：路由分发请求、聚集搜索或聚合结果。</p>
+<p>注意事项：在一个集群中添加太多的仅协调节点会增加整个集群的负担，因为当选的主节点必须等待来自每个节点的集群状态更新的确认。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">node</span>.roles:<span class="hljs-meta"> [ ]</span><br><br><span class="hljs-comment"># 空配置</span><br></code></pre></td></tr></table></figure>
+
+<p>空即是“色”，不对，这里空即是“仅协调节点”。</p>
+<h2 id="远程节点（Remote-eligible-node）"><a href="#远程节点（Remote-eligible-node）" class="headerlink" title="远程节点（Remote-eligible node）"></a><strong>远程节点（Remote-eligible node</strong>）</h2><p>用途：跨集群检索或跨集群复制。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">node<span class="hljs-selector-class">.roles</span>: <span class="hljs-selector-attr">[ remote_cluster_client ]</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-6-机器学习节点（Machine-learning-node）"><a href="#3-6-机器学习节点（Machine-learning-node）" class="headerlink" title="3.6 机器学习节点（Machine learning node）"></a><strong>3.6 机器学习节点（Machine learning node</strong>）</h4><p>用途：机器学习，系收费功能。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">node<span class="hljs-selector-class">.roles</span>: <span class="hljs-selector-attr">[ ml, remote_cluster_client]</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-7-转换节点（Transform-node）"><a href="#3-7-转换节点（Transform-node）" class="headerlink" title="3.7 转换节点（Transform node）"></a><strong>3.7 转换节点（Transform node</strong>）</h4><p>用途：运行转换并处理转换 API 请求。这块，咱们之前文章没有涉及。</p>
+<p>推荐阅读：</p>
+<p>https:&#x2F;&#x2F;www.elastic.co&#x2F;guide&#x2F;en&#x2F;elasticsearch&#x2F;reference&#x2F;current&#x2F;transform-overview.html</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">node.roles: [ transform, remote_cluster_client ]<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="角色资源耗费"><a href="#角色资源耗费" class="headerlink" title="角色资源耗费"></a>角色资源耗费</h2><p><img src="https://img.songxwn.com/file/4eda1f34e9d96f7625bdb.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://chenzhonzhou.github.io/2021/01/31/elasticsearch-suo-yin-mo-ban-template/" title="https://chenzhonzhou.github.io/2021/01/31/elasticsearch-suo-yin-mo-ban-template/">https://chenzhonzhou.github.io/2021/01/31/elasticsearch-suo-yin-mo-ban-template/</a></p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2009025" title="https://cloud.tencent.com/developer/article/2009025">https://cloud.tencent.com/developer/article/2009025</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/linux/" class="category-chain-item">linux</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/linux/ELK/" class="category-chain-item">ELK</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
+      
+        <a href="/tags/elk/" class="print-no-link">#elk</a>
+      
+        <a href="/tags/elasticsearch/" class="print-no-link">#elasticsearch</a>
+      
+        <a href="/tags/syslog/" class="print-no-link">#syslog</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>EES 索引模板、生命周期策略、节点角色</div>
+      <div>https://songxwn.com/elk_role/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Song</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年3月25日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年3月25日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/H3C-WLAN-LocalFA_LAB/" title="H3C WLAN本地转发实验">
+                        <span class="hidden-mobile">H3C WLAN本地转发实验</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments">
+      
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script>
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          Fluid.utils.createCssLink('https://lib.baomitu.com/disqusjs/1.3.0/disqusjs.css');
+          Fluid.utils.createScript('https://lib.baomitu.com/disqusjs/1.3.0/disqus.js', function() {
+            new DisqusJS({
+              shortname: 'songxwn',
+              apikey: ''
+            });
+          });
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="ELK"
+        id="heading-9e3164c35d85d881c2249c7894d8e274" role="tab" data-toggle="collapse" href="#collapse-9e3164c35d85d881c2249c7894d8e274"
+        aria-expanded="true"
+      >
+        ELK
+        <span class="list-group-count">(10)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-9e3164c35d85d881c2249c7894d8e274"
+           role="tabpanel" aria-labelledby="heading-9e3164c35d85d881c2249c7894d8e274">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/ELK-AD-LDAP-Authentication/" title="Elasticsearch 接入微软Active Directory认证"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Elasticsearch 接入微软Active Directory认证</span>
+        </a>
+      
+    
+      
+      
+        <a href="/ELK-logstash-hostname/" title="ELK Logstash解析系统日志错误"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">ELK Logstash解析系统日志错误</span>
+        </a>
+      
+    
+      
+      
+        <a href="/Elasticsearch-x-pack-core/" title="Elasticsearch 8.7 白金版激活"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Elasticsearch 8.7 白金版激活</span>
+        </a>
+      
+    
+      
+      
+        <a href="/SEC_OTP_UDP-log/" title="接收SEC OTP4000 UDP告警日志"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">接收SEC OTP4000 UDP告警日志</span>
+        </a>
+      
+    
+      
+      
+        <a href="/elk/" title="ELK Stack 安装教程，RHEL及衍生系统。"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">ELK Stack 安装教程，RHEL及衍生系统。</span>
+        </a>
+      
+    
+      
+      
+        <a href="/elk_cluster/" title="Elasticsearch 安装配置集群系统"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Elasticsearch 安装配置集群系统</span>
+        </a>
+      
+    
+      
+      
+        <a href="/elk_snmp_trap/" title="ELK Logstash配置SNMP-Trap"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">ELK Logstash配置SNMP-Trap</span>
+        </a>
+      
+    
+      
+      
+        <a href="/frostmourne_install/" title="Frostmourne (霜之哀伤)日志告警系统部署教程"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Frostmourne (霜之哀伤)日志告警系统部署教程</span>
+        </a>
+      
+    
+      
+      
+        <a href="/frostmourne_use/" title="Frostmourne - Elasticsearch源日志告警配置"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Frostmourne - Elasticsearch源日志告警配置</span>
+        </a>
+      
+    
+      
+      
+        <a href="/elk_role/" title="EES 索引模板、生命周期策略、节点角色"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">EES 索引模板、生命周期策略、节点角色</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <a href="https://www.foreverblog.cn/go.html" target="_blank"> <img src="https://img.foreverblog.cn/wormhole_1_tp.gif" alt="" style="width:auto;height:32px;" title="穿梭虫洞-随机访问十年之约友链博客"></a>,<a href="https://www.vultr.com/?ref=7199488" target="_blank"> <img src="https://www.vultr.com/media/logo_ondark.svg" alt="" style="width:auto;height:32px;" title="注册vultr获取免费10美元体验额度"></a>,<a href="https://url.cn/eTx2WPml" target="_blank"> <img src="https://s3.bmp.ovh/imgs/2023/05/06/989aea4d82987ca9.png" alt="" style="width:auto;height:32px;" title="【腾讯云】云服务器、云数据库、COS、CDN、短信等云产品特惠热卖中"></a>
+        </div>
+      </div>
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
