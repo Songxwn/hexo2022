@@ -1,3 +1,5 @@
+https://songxwn.com/H3C-WLAN-LocalFA_LAB/
+https://songxwn.com/Juniper-SRX-security-zone/
 https://songxwn.com/Juniper-SRX-IPsec/
 https://songxwn.com/Juniper-SRX-snat/
 https://songxwn.com/frostmourne_use/
@@ -11,5 +13,3 @@ https://songxwn.com/Centec-Zabbix-SNMP/
 https://songxwn.com/Pigsty-PG-RDS/
 https://songxwn.com/Grafana-LDAP-AD/
 https://songxwn.com/zabbix-LDAP-JIT/
-https://songxwn.com/RDMA/
-https://songxwn.com/switch-ROCEv2-DSCP/

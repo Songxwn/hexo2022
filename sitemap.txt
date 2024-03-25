@@ -1,3 +1,5 @@
+https://songxwn.com/H3C-WLAN-LocalFA_LAB/
+https://songxwn.com/Juniper-SRX-security-zone/
 https://songxwn.com/Juniper-SRX-IPsec/
 https://songxwn.com/Juniper-SRX-snat/
 https://songxwn.com/vdo/
@@ -212,6 +214,8 @@ https://songxwn.com/tags/LACP/
 https://songxwn.com/tags/Office/
 https://songxwn.com/tags/SRX/
 https://songxwn.com/tags/IPsec/
+https://songxwn.com/tags/WLAN/
+https://songxwn.com/tags/security-zone/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/VMware/
@@ -235,3 +239,4 @@ https://songxwn.com/categories/Pigsty/
 https://songxwn.com/categories/Datacom/
 https://songxwn.com/categories/datacom/
 https://songxwn.com/categories/Juniper/
+https://songxwn.com/categories/H3C/

@@ -16,28 +16,29 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
   
-    <meta name="description" content="简介Juniper QFX5110 系列交换机是支持OSPF ISIS BGP MPLS等高级路由功能的，但需要对应的license许可。虽然你没有license也可以用，但日志会持续打印设备没有license，影响日常排障、占用过多的存储、也可能影响稳定性。 所以需要将其过滤掉，不写入到本地存储和发送到syslog服务器。">
+    <meta name="description" content="简介基于 H3C HCL Cloud 搭建测试。 使用一个AC控制三个AP，业务VLAN为100，AP管理VLAN为50。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Juniper 设备配置日志过滤-过滤license告警日志">
-<meta property="og:url" content="https://songxwn.com/Juniper-log-match/index.html">
+<meta property="og:title" content="H3C 本地转发无线实验">
+<meta property="og:url" content="https://songxwn.com/H3C-WLAN-LocalFA_LAB/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="简介Juniper QFX5110 系列交换机是支持OSPF ISIS BGP MPLS等高级路由功能的，但需要对应的license许可。虽然你没有license也可以用，但日志会持续打印设备没有license，影响日常排障、占用过多的存储、也可能影响稳定性。 所以需要将其过滤掉，不写入到本地存储和发送到syslog服务器。">
+<meta property="og:description" content="简介基于 H3C HCL Cloud 搭建测试。 使用一个AC控制三个AP，业务VLAN为100，AP管理VLAN为50。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img.songxwn.com/file/57a31a9d4a5525f4b61ac.png">
-<meta property="article:published_time" content="2024-03-07T11:04:15.000Z">
-<meta property="article:modified_time" content="2024-03-07T10:11:19.135Z">
+<meta property="og:image" content="https://img.songxwn.com/file/0411556e4dee31afacd6a.png">
+<meta property="og:image" content="https://img.songxwn.com/file/0763d05e0971cedd8d33c.png">
+<meta property="og:image" content="https://img.songxwn.com/file/177a1813232e6e5949093.png">
+<meta property="article:published_time" content="2024-03-24T19:12:26.000Z">
+<meta property="article:modified_time" content="2024-03-25T03:13:36.345Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
-<meta property="article:tag" content="syslog">
-<meta property="article:tag" content="Juniper">
+<meta property="article:tag" content="WLAN">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img.songxwn.com/file/57a31a9d4a5525f4b61ac.png">
+<meta name="twitter:image" content="https://img.songxwn.com/file/0411556e4dee31afacd6a.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Juniper 设备配置日志过滤-过滤license告警日志 - Song`s Blog</title>
+  <title>H3C 本地转发无线实验 - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -244,7 +245,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Juniper 设备配置日志过滤-过滤license告警日志"></span>
+            <span id="subtitle" data-typed-text="H3C 本地转发无线实验"></span>
           
         </div>
 
@@ -255,8 +256,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-03-07 19:04" pubdate>
-          2024年3月7日 晚上
+        <time datetime="2024-03-25 03:12" pubdate>
+          2024年3月25日 凌晨
         </time>
       </span>
     
@@ -267,7 +268,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          218 字
+          688 字
         
       </span>
     
@@ -278,7 +279,7 @@
         
         
         
-          2 分钟
+          6 分钟
         
       </span>
     
@@ -336,12 +337,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Juniper 设备配置日志过滤-过滤license告警日志</h1>
+            <h1 id="seo-header">H3C 本地转发无线实验</h1>
             
               <p id="updated-time" class="note note-danger" style="">
                 
                   
-                    本文最后更新于 2024年3月7日 晚上
+                    本文最后更新于 2024年3月25日 上午
                   
                 
               </p>
@@ -349,15 +350,34 @@
             
               <div class="markdown-body">
                 
-                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Juniper QFX5110 系列交换机是支持OSPF ISIS BGP MPLS等高级路由功能的，但需要对应的license许可。虽然你没有license也可以用，但日志会持续打印设备没有license，影响日常排障、占用过多的存储、也可能影响稳定性。</p>
-<p>所以需要将其过滤掉，不写入到本地存储和发送到syslog服务器。</p>
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>基于 H3C HCL Cloud 搭建测试。</p>
+<p>使用一个AC控制三个AP，业务VLAN为100，AP管理VLAN为50。</p>
 <span id="more"></span>
 
-<h2 id="配置命令"><a href="#配置命令" class="headerlink" title="配置命令"></a>配置命令</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell">set system syslog file messages match &quot;!(.*license*)&quot;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">本地文件过滤掉和license相关的日志</span><br><br>set system syslog host 1.1.1.1 match &quot;!(.*license*)&quot;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">远程syslog服务器过滤掉和license相关的日志</span><br><br></code></pre></td></tr></table></figure>
+<h1 id="实验拓扑"><a href="#实验拓扑" class="headerlink" title="实验拓扑"></a>实验拓扑</h1><p><img src="https://img.songxwn.com/file/0411556e4dee31afacd6a.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><h1 id="实验步骤"><a href="#实验步骤" class="headerlink" title="实验步骤"></a>实验步骤</h1><h2 id="核心交换机配置"><a href="#核心交换机配置" class="headerlink" title="核心交换机配置"></a>核心交换机配置</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs text">vlan 50<br>#<br>vlan 100<br>dhcp server ip-pool VLAN100<br> gateway-list 192.168.0.1<br> network 192.168.0.0 mask 255.255.255.0<br> dns-list 1.1.1.1<br> forbidden-ip 192.168.0.1<br> forbidden-ip 192.168.0.2<br> forbidden-ip 192.168.0.3<br><br>interface Vlan-interface100<br> ip address 192.168.0.2 255.255.255.0<br> dhcp server apply ip-pool vlan100<br>interface GigabitEthernet1/0/1<br> port link-mode bridge<br> port access vlan 100<br> combo enable fiber<br>#<br>interface GigabitEthernet1/0/2<br> port link-mode bridge<br> port link-type trunk<br> port trunk permit vlan 1 50 100<br> port trunk pvid vlan 50<br> combo enable fiber<br>#<br>interface GigabitEthernet1/0/3<br> port link-mode bridge<br> port link-type trunk<br> port trunk permit vlan 1 50 100<br> port trunk pvid vlan 50<br> combo enable fiber<br>#<br>interface GigabitEthernet1/0/4<br> port link-mode bridge<br> port link-type trunk<br> port trunk permit vlan 1 50 100<br> port trunk pvid vlan 50<br> combo enable fiber<br>#<br>interface GigabitEthernet1/0/7<br> port link-mode bridge<br> port access vlan 100<br> combo enable fiber<br></code></pre></td></tr></table></figure>
 
-<p>PS：也适用于其他类型的日志过滤和其他Juniper设备。</p>
-<h1 id="扩展-其他告警消除"><a href="#扩展-其他告警消除" class="headerlink" title="扩展-其他告警消除"></a>扩展-其他告警消除</h1><p>默认配置下会有以下告警造成红灯。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell"><br>request system configuration rescue save <br>// 保存当前配置为救援配置，消除 alarm 告警。<br><br>set chassis alarm management-ethernet link-down ignore <br><br>// 消除管理端口未连接告警，消除 alarm 告警。<br><br></code></pre></td></tr></table></figure>
+<h1 id="AC开启Web管理"><a href="#AC开启Web管理" class="headerlink" title="AC开启Web管理"></a>AC开启Web管理</h1><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs text">ip http enable<br>ip https enable<br># 开启Web服务<br>[H3C]local-user admin<br>[H3C-luser-manage-admin]password simple Abc@123456<br>[H3C-luser-manage-admin]service-type http https<br>[H3C-luser-manage-admin]authorization-attribute user-role network-admin<br># 创建登录管理用户<br>interface GigabitEthernet1/0/0<br> port link-mode route<br> ip address 192.168.56.122 255.255.255.0<br># 配置Web管理接口，与本机打通网络。<br></code></pre></td></tr></table></figure>
+
+<h2 id="AC配置AP-DHCP-开启AP自动接入。"><a href="#AC配置AP-DHCP-开启AP自动接入。" class="headerlink" title="AC配置AP DHCP 开启AP自动接入。"></a>AC配置AP DHCP 开启AP自动接入。</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs text">sysname AC1<br># 配置主机名<br>vlan 50<br>vlan 100<br># 创建VLAN<br>dhcp enabled<br># 开启全局DHCP <br>dhcp server ip-pool ap-mg<br> gateway-list 192.168.50.1<br> network 192.168.50.0 mask 255.255.255.0<br> dns-list 1.1.1.1<br> forbidden-ip 192.168.50.1<br># 配置AP管理网的DHCP服务器，配置网关为AP，配置网段范围、DNS、保留IP。<br>interface Vlan-interface50<br> ip address 192.168.50.1 255.255.255.0<br> dhcp server apply ip-pool ap-mg<br># 配置AP管理网三层接口，配置IP，应用DHCP。<br>interface GigabitEthernet1/0/23<br> port link-mode bridge<br> port link-type trunk<br> port trunk permit vlan 1 50 100<br># 配置与核心交换机二层接口，允许 50 100VLAN通过。<br>wlan auto-ap enable<br># 开启自动AP功能<br>wlan auto-persistent enable<br># 使用自动AP固化功能后，可以对固化后的手工AP进行配置。<br></code></pre></td></tr></table></figure>
+
+<h2 id="无线模板"><a href="#无线模板" class="headerlink" title="无线模板"></a>无线模板</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs text">wlan service-template songxwn_st<br> ssid songxwn.com<br> vlan 100<br> client forwarding-location ap vlan 100<br> service-template enable<br># 配置无线模板 songxwn_st，SSID名字为 songxwn.com ，默认VLAN为100，配置本地转发，VLAN为100。<br># 最后开启此模板。<br># 注意：未开启链路认证，因模拟器手机无法连接加密的认证。<br></code></pre></td></tr></table></figure>
+
+<h2 id="创建并上传map文件"><a href="#创建并上传map文件" class="headerlink" title="创建并上传map文件"></a>创建并上传map文件</h2><p>map文件用于给AP增加配置，添加vlan，修改上联接口的vlan类型等。</p>
+<p>本地转发需要增加VLAN。</p>
+<p>将下面字符保存文件为apcfg_songxwn.com.txt ，上传到AC1的flash:&#x2F; 目录下。（可通过Web上传）</p>
+<p><img src="https://img.songxwn.com/file/0763d05e0971cedd8d33c.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs text">sys<br>#<br>vlan 100<br>#<br>int g0/0/0<br>port link-type trunk<br>port trunk permit vlan 100<br>#<br></code></pre></td></tr></table></figure>
+
+<h2 id="查看已注册的AP"><a href="#查看已注册的AP" class="headerlink" title="查看已注册的AP"></a>查看已注册的AP</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs text">&lt;AC1&gt;display wlan ap all<br>Total number of APs: 3<br>Total number of connected APs: 3<br>Total number of connected manual APs: 3<br>Total number of connected auto APs: 0<br>Total number of connected common APs: 3<br>Total number of connected WTUs: 0<br>Total number of inside APs: 0<br>Maximum supported APs: 60000<br>Remaining APs: 59997<br>Total AP licenses: 60000<br>Local AP licenses: 60000<br>Server AP licenses: 0<br>Remaining local AP licenses: 59997<br>Sync AP licenses: 0<br>                                 AP information<br> State : I = Idle,      J  = Join,       JA = JoinAck,    IL = ImageLoad<br>         C = Config,    DC = DataCheck,  R  = Run,   M = Master,  B = Backup<br>AP name                        APID  State Model           Serial ID<br>8afa-b141-0200                 1     R/M   WA6320-HCL      H3C_8A-FA-B1-41-02-00<br>8afa-b368-0300                 2     R/M   WA6320-HCL      H3C_8A-FA-B3-68-03-00<br>8afa-b50f-0400                 3     R/M   WA6320-HCL      H3C_8A-FA-B5-0F-04-00<br><br># 当配置好VLAN、接口配置、DHCP、AP自动上线功能后。就可以查看到有三个AP已注册到AC.<br># 使用wlan rename-ap 命令可重命名AP<br></code></pre></td></tr></table></figure>
+
+<h2 id="创建AP组并关联无线模板"><a href="#创建AP组并关联无线模板" class="headerlink" title="创建AP组并关联无线模板"></a>创建AP组并关联无线模板</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs text">wlan ap-group apg1<br>  ap 8afa-b141-0200<br>  ap 8afa-b368-0300<br>  ap 8afa-b50f-0400<br>  # 创建AP组，关联AP。<br>  <br>  ap-model WA6320-HCL<br>   map-configuration flash:/apcfg_songxwn.com.txt<br>  # 进入型号WA6320-HCL，关联本地map文件。（因为模拟器的AP型号为此）<br><br>  radio 1<br>   radio enable<br>   service-template <br>  radio 2<br>   radio enable<br>   service-template <br>  # 进入Radio1/2 开启并关联无线模板songxwn_st，指定VLAN 100.<br><br></code></pre></td></tr></table></figure>
+
+<h1 id="-1"><a href="#-1" class="headerlink" title=""></a></h1><h1 id="验证手机"><a href="#验证手机" class="headerlink" title="验证手机"></a>验证手机</h1><p>选择任意一个手机，选择配置。&#x20;</p>
+<p>连接WIFI、开启DHCP获取地址，ping核心交换机。</p>
+<p>获取到地址、ping通即可确认配置无问题。</p>
+<p><img src="https://img.songxwn.com/file/177a1813232e6e5949093.png" srcset="/img/loading.gif" lazyload></p>
+
                 
               </div>
             
@@ -375,7 +395,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Juniper/" class="category-chain-item">Juniper</a>
+  <a href="/categories/H3C/" class="category-chain-item">H3C</a>
   
   
 
@@ -392,9 +412,7 @@
       
         <a href="/tags/network/" class="print-no-link">#network</a>
       
-        <a href="/tags/syslog/" class="print-no-link">#syslog</a>
-      
-        <a href="/tags/Juniper/" class="print-no-link">#Juniper</a>
+        <a href="/tags/WLAN/" class="print-no-link">#WLAN</a>
       
     </div>
   
@@ -406,8 +424,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Juniper 设备配置日志过滤-过滤license告警日志</div>
-      <div>https://songxwn.com/Juniper-log-match/</div>
+      <div>H3C 本地转发无线实验</div>
+      <div>https://songxwn.com/H3C-WLAN-LocalFA_LAB/</div>
     </div>
     <div class="license-meta">
       
@@ -419,13 +437,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年3月7日</div>
+          <div>2024年3月25日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年3月7日</div>
+          <div>2024年3月25日</div>
         </div>
       
       
@@ -456,18 +474,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/VMware-anti-affinity/" title="VMware 集群-虚拟机配置反亲和性（互斥）">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">VMware 集群-虚拟机配置反亲和性（互斥）</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/BGP-RR/" title="HCIE Datacom-02.3 BGP高级特性-RR路由反射器组网">
-                        <span class="hidden-mobile">HCIE Datacom-02.3 BGP高级特性-RR路由反射器组网</span>
+                      <a href="/Juniper-SRX-security-zone/" title="Juniper SRX 安全策略和安全区域">
+                        <span class="hidden-mobile">Juniper SRX 安全策略和安全区域</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -527,17 +539,17 @@
     
     <div class="category row nomargin-x">
       <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Juniper"
-        id="heading-b2ec6b780f1e52f7e21396021047e0b4" role="tab" data-toggle="collapse" href="#collapse-b2ec6b780f1e52f7e21396021047e0b4"
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="H3C"
+        id="heading-49e5ba9892ce7b545316c9aca16306c0" role="tab" data-toggle="collapse" href="#collapse-49e5ba9892ce7b545316c9aca16306c0"
         aria-expanded="true"
       >
-        Juniper
-        <span class="list-group-count">(4)</span>
+        H3C
+        <span class="list-group-count">(1)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse show" id="collapse-b2ec6b780f1e52f7e21396021047e0b4"
-           role="tabpanel" aria-labelledby="heading-b2ec6b780f1e52f7e21396021047e0b4">
+      <div class="category-collapse collapse show" id="collapse-49e5ba9892ce7b545316c9aca16306c0"
+           role="tabpanel" aria-labelledby="heading-49e5ba9892ce7b545316c9aca16306c0">
         
         
           
@@ -546,37 +558,10 @@
     
       
       
-        <a href="/Juniper-log-match/" title="Juniper 设备配置日志过滤-过滤license告警日志"
+        <a href="/H3C-WLAN-LocalFA_LAB/" title="H3C 本地转发无线实验"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">Juniper 设备配置日志过滤-过滤license告警日志</span>
-        </a>
-      
-    
-      
-      
-        <a href="/Juniper-SRX-snat/" title="Juniper SRX 防火墙基础上网配置"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Juniper SRX 防火墙基础上网配置</span>
-        </a>
-      
-    
-      
-      
-        <a href="/Juniper-SRX-IPsec/" title="Juniper SRX 防火墙IPsec VPN 站点到站点"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Juniper SRX 防火墙IPsec VPN 站点到站点</span>
-        </a>
-      
-    
-      
-      
-        <a href="/Juniper-SRX-security-zone/" title="Juniper SRX 安全策略和安全区域"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Juniper SRX 安全策略和安全区域</span>
+          <span class="category-post">H3C 本地转发无线实验</span>
         </a>
       
     
