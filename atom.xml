@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-03-25T06:34:50.451Z</updated>
+  <updated>2024-03-25T06:36:16.677Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>EES 索引模板、生命周期策略、节点角色</title>
+    <title>Elasticsearch 索引模板、生命周期策略、节点角色</title>
     <link href="https://songxwn.com/elk_role/"/>
     <id>https://songxwn.com/elk_role/</id>
     <published>2024-03-25T01:59:00.000Z</published>
-    <updated>2024-03-25T06:34:50.451Z</updated>
+    <updated>2024-03-25T06:36:16.677Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;ul&gt;
