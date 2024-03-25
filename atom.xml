@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-03-25T06:33:47.625Z</updated>
+  <updated>2024-03-25T06:34:50.451Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://songxwn.com/elk_role/"/>
     <id>https://songxwn.com/elk_role/</id>
     <published>2024-03-25T01:59:00.000Z</published>
-    <updated>2024-03-25T06:33:47.625Z</updated>
+    <updated>2024-03-25T06:34:50.451Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;ul&gt;
@@ -32,6 +32,7 @@
 &lt;li&gt;&lt;p&gt;Elasticsearch集群中，不同节点扮演着不同的角色（热（hot）、温（warm）和冷（cold）主节点），共同构成了强大的搜索和分析引擎。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;ELK系列文章: &lt;a href=&quot;https://songxwn.com/categories/linux/ELK/&quot;&gt;ELK&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;此文档基于 8.0版本编写。&lt;/p&gt;</summary>
     
     
