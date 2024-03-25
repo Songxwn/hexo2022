@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-03-25T03:13:36.345Z</updated>
+  <updated>2024-03-25T03:40:10.294Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>H3C 本地转发无线实验</title>
+    <title>H3C WLAN本地转发实验</title>
     <link href="https://songxwn.com/H3C-WLAN-LocalFA_LAB/"/>
     <id>https://songxwn.com/H3C-WLAN-LocalFA_LAB/</id>
     <published>2024-03-24T19:12:26.000Z</published>
-    <updated>2024-03-25T03:13:36.345Z</updated>
+    <updated>2024-03-25T03:40:10.294Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;基于 H3C HCL Cloud 搭建测试。&lt;/p&gt;
