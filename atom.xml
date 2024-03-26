@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-03-26T06:17:24.405Z</updated>
+  <updated>2024-03-26T06:18:43.784Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Panabit 派网设备配置 iWAN服务</title>
+    <title>Panabit 派网设备配置 iWAN VPN服务</title>
     <link href="https://songxwn.com/Panabit-iwan/"/>
     <id>https://songxwn.com/Panabit-iwan/</id>
     <published>2024-03-25T22:14:30.000Z</published>
-    <updated>2024-03-26T06:17:24.405Z</updated>
+    <updated>2024-03-26T06:18:43.784Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;Panabit SD-WAN作为优质高效的多分支组网解决方案，在组网的基础上，能够通过精细化的业务QoS保障，给用户带来安全顺畅的业务体验。其中，稳定高效的iWAN隧道作为SD-WAN的载体，是实现组网与优化的前提。&lt;/p&gt;
