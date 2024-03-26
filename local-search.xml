@@ -4,6 +4,39 @@
   
   
   <entry>
+    <title>Panabit 派网设备配置 iWAN服务</title>
+    <link href="/Panabit-iwan/"/>
+    <url>/Panabit-iwan/</url>
+    
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Panabit SD-WAN作为优质高效的多分支组网解决方案，在组网的基础上，能够通过精细化的业务QoS保障，给用户带来安全顺畅的业务体验。其中，稳定高效的iWAN隧道作为SD-WAN的载体，是实现组网与优化的前提。</p><p>iWAN作为派网的私有协议，iWAN的承载平台，从一开始的Panabit网关，到后来的小派AP，再到之后的Windows和Linux系统*，延伸的范围越来越广。目前也开始支持Android平台。</p><p>本教程讲解Panabit iWAN的服务搭建。</p><p>iWAN 安装客户端下载地址：<a href="https://www.panabit.com/download" title="https://www.panabit.com/download">https://www.panabit.com/download</a></p><p>PS：iWAN第三方系统的客户端并不支持明细路由。</p><span id="more"></span><h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><ul><li><p>重连速度很快：比L2TP的要快一个数量级，L2TP要重连，需要有几十次交互，而iWAN只需要一次即可。</p></li><li><p>客户端不受底层承载线路IP变化影响：当底层承载线路（比如PPPOE拨号线路）的IP地址发生变化时，不会影响iWAN隧道，iWAN隧道不会中断，保证通信正常进行；因为很多用户是通过PPPOE拨号线路出去的，PPPOE拨号线路重拨时一般会改变IP地址，如果用L2TP的话，那么这个L2TP会话就要重建；而用iWAN的话，现有的会话可以照常使用，不需要做任何改变；</p></li><li><p>传输效率高：iWAN的包头很小，只有8个字节，而且在后续版本里，我们会压缩IP报文头，这样可以继续减少额外报文头的大小，所以能大幅度提升传输效率；</p></li><li><p>抗干扰：不像L2TP，中间人可以直接发包TERMINATE，iWAN控制命令有完整性检查，可以避免中间人攻击。</p></li></ul><p>基于R8.56[TANG(大唐)r5p6] 版本编写。</p><h1 id="iWAN-服务器配置"><a href="#iWAN-服务器配置" class="headerlink" title="iWAN 服务器配置"></a>iWAN 服务器配置</h1><p>iWAN的服务是支持多实例的，不同实例可以使用不同的对外端口。使用UDP承载。</p><h2 id="添加用户组-地址池"><a href="#添加用户组-地址池" class="headerlink" title="添加用户组-地址池"></a>添加用户组-地址池</h2><p>对象管理 &gt; 本地账号 &gt; 组织架构  &gt; 点击添加</p><p>填写名称、地址范围、DNS等。</p><p><img src="https://img.songxwn.com/file/77a74cc7f3851f2d1b666.png" srcset="/img/loading.gif" lazyload></p><h2 id="添加服务和服务映射"><a href="#添加服务和服务映射" class="headerlink" title="添加服务和服务映射"></a>添加服务和服务映射</h2><p>虚拟专网  &gt; iWAN服务 &gt; 服务列表 &gt; 点击添加</p><p>需要填写服务器名称、 服务器网关、MTU、认证方式、地址池选择上面添加的。</p><p><img src="https://img.songxwn.com/file/afce22fe94533c9ac3207.png" srcset="/img/loading.gif" lazyload></p><h3 id="服务映射"><a href="#服务映射" class="headerlink" title="服务映射"></a>服务映射</h3><p>虚拟专网  &gt; iWAN服务 &gt; 服务映射 &gt; 点击添加</p><p>映射线路选择公网口，映射端口任意，服务选择上面创建的服务。然后点击添加</p><p><img src="https://img.songxwn.com/file/e29b4d5b4599c7c562d94.png" srcset="/img/loading.gif" lazyload></p><h2 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h2><p>对象管理 &gt; 账号管理 &gt; 本地账号 &gt; 点击添加</p><p>填写选择上面创建的用户组、账号名称、 密码、可用时间等。</p><p><img src="https://img.songxwn.com/file/04eaef991b9c761eb50f7.png" srcset="/img/loading.gif" lazyload></p><p>至此， iWAN服务端配置完成。</p><h1 id="IPv4-策略路由和NAT的简单配置"><a href="#IPv4-策略路由和NAT的简单配置" class="headerlink" title="IPv4 策略路由和NAT的简单配置"></a>IPv4 策略路由和NAT的简单配置</h1><p>网络管理  &gt; IPv4路由&#x2F;NAT &gt; 添加</p><ul><li><p>指定源地址为 iWAN的地址范围进行匹配</p></li><li><p>执行动作为NAT，选择NAT线路和下一跳</p></li></ul><p><img src="https://img.songxwn.com/file/b2f4cbe5a753a21e1c9fa.png" srcset="/img/loading.gif" lazyload></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>network</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>network</tag>
+      
+      <tag>sdwan</tag>
+      
+      <tag>Panabit</tag>
+      
+      <tag>VPN</tag>
+      
+      <tag>iwan</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Elasticsearch 索引模板、生命周期策略、节点角色</title>
     <link href="/elk_role/"/>
     <url>/elk_role/</url>

@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-03-25T09:33:16.418Z</updated>
+  <updated>2024-03-26T06:17:24.405Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Panabit 派网设备配置 iWAN服务</title>
+    <link href="https://songxwn.com/Panabit-iwan/"/>
+    <id>https://songxwn.com/Panabit-iwan/</id>
+    <published>2024-03-25T22:14:30.000Z</published>
+    <updated>2024-03-26T06:17:24.405Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;Panabit SD-WAN作为优质高效的多分支组网解决方案，在组网的基础上，能够通过精细化的业务QoS保障，给用户带来安全顺畅的业务体验。其中，稳定高效的iWAN隧道作为SD-WAN的载体，是实现组网与优化的前提。&lt;/p&gt;
+&lt;p&gt;iWAN作为派网的私有协议，iWAN的承载平台，从一开始的Panabit网关，到后来的小派AP，再到之后的Windows和Linux系统*，延伸的范围越来越广。目前也开始支持Android平台。&lt;/p&gt;
+&lt;p&gt;本教程讲解Panabit iWAN的服务搭建。&lt;/p&gt;
+&lt;p&gt;iWAN 安装客户端下载地址：&lt;a href=&quot;https://www.panabit.com/download&quot; title=&quot;https://www.panabit.com/download&quot;&gt;https://www.panabit.com/download&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;PS：iWAN第三方系统的客户端并不支持明细路由。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="network" scheme="https://songxwn.com/categories/network/"/>
+    
+    
+    <category term="network" scheme="https://songxwn.com/tags/network/"/>
+    
+    <category term="sdwan" scheme="https://songxwn.com/tags/sdwan/"/>
+    
+    <category term="Panabit" scheme="https://songxwn.com/tags/Panabit/"/>
+    
+    <category term="VPN" scheme="https://songxwn.com/tags/VPN/"/>
+    
+    <category term="iwan" scheme="https://songxwn.com/tags/iwan/"/>
+    
+  </entry>
   
   <entry>
     <title>Elasticsearch 索引模板、生命周期策略、节点角色</title>
@@ -569,27 +600,6 @@
     <category term="Ubuntu" scheme="https://songxwn.com/tags/Ubuntu/"/>
     
     <category term="apt" scheme="https://songxwn.com/tags/apt/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Zabbix 中文图形乱码-使用开源字体</title>
-    <link href="https://songxwn.com/zabbix-fonts/"/>
-    <id>https://songxwn.com/zabbix-fonts/</id>
-    <published>2024-01-26T09:02:59.000Z</published>
-    <updated>2024-01-26T09:34:50.730Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;Zabbix 图形默认安装使用的字体是英文字体，显示中文会乱码，需要替换为中文字体。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Zabbix" scheme="https://songxwn.com/categories/Zabbix/"/>
-    
-    
-    <category term="zabbix" scheme="https://songxwn.com/tags/zabbix/"/>
-    
-    <category term="fonts" scheme="https://songxwn.com/tags/fonts/"/>
     
   </entry>
   
