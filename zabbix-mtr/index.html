@@ -23,16 +23,14 @@
 <meta property="og:site_name" content="Song&#96;s Blog">
 <meta property="og:description" content="简介本文章简单介绍了MTR监控模板的使用。 只简单获取文本数据，作为历史查询。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img.songxwn.com/file/a80b948e2dc253169d150.png">
 <meta property="article:published_time" content="2023-10-26T04:02:59.000Z">
-<meta property="article:modified_time" content="2023-10-30T06:00:33.057Z">
+<meta property="article:modified_time" content="2024-03-26T09:40:21.983Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="ping">
 <meta property="article:tag" content="mtr">
 <meta property="article:tag" content="zabbix">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img.songxwn.com/file/a80b948e2dc253169d150.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -342,7 +340,7 @@
               <p id="updated-time" class="note note-danger" style="">
                 
                   
-                    本文最后更新于 2023年10月30日 下午
+                    本文最后更新于 2024年3月26日 下午
                   
                 
               </p>
@@ -362,11 +360,11 @@
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk">chmod +x <span class="hljs-regexp">/usr/</span>lib<span class="hljs-regexp">/zabbix/</span>externalscripts/mtr.sh<br><br><span class="hljs-comment"># 给予脚本执行权限</span><br><br></code></pre></td></tr></table></figure>
 
 <h2 id="修改超时时间"><a href="#修改超时时间" class="headerlink" title="修改超时时间"></a>修改超时时间</h2><p>由于zabbix 监控项默认的获取超时时间为4秒，而mtr执行时间远超这个，所以会导致超时。</p>
-<h3 id="Zabbix-Server"><a href="#Zabbix-Server" class="headerlink" title="Zabbix Server"></a>Zabbix Server</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs awk">vim <span class="hljs-regexp">/etc/</span>zabbix/zabbix_server.conf<br><br>﻿<br><br>﻿<br><br>Timeout=<span class="hljs-number">15</span><br><br>﻿<br><br><span class="hljs-comment"># 修改超时时间，单位为秒，重启生效。</span><br><br></code></pre></td></tr></table></figure>
+<h3 id="Zabbix-Server"><a href="#Zabbix-Server" class="headerlink" title="Zabbix Server"></a>Zabbix Server</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs routeros">vim /etc/zabbix/zabbix_server.conf<br><br>﻿<br><br>﻿<br><br><span class="hljs-attribute">Timeout</span>=15<br><br>﻿<br><br><span class="hljs-comment"># 修改超时时间，单位为秒，重启生效。</span><br><br></code></pre></td></tr></table></figure>
 
 
 
-<h3 id="Zabbix-Proxy"><a href="#Zabbix-Proxy" class="headerlink" title="Zabbix Proxy"></a>Zabbix Proxy</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs awk">vim <span class="hljs-regexp">/etc/</span>zabbix/zabbix_proxy.conf<br><br><br>Timeout=<span class="hljs-number">15</span><br><br><span class="hljs-comment"># 修改超时时间，单位为秒，重启生效。</span><br><br></code></pre></td></tr></table></figure>
+<h3 id="Zabbix-Proxy"><a href="#Zabbix-Proxy" class="headerlink" title="Zabbix Proxy"></a>Zabbix Proxy</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs routeros">vim /etc/zabbix/zabbix_proxy.conf<br><br><br><span class="hljs-attribute">Timeout</span>=15<br><br><span class="hljs-comment"># 修改超时时间，单位为秒，重启生效。</span><br><br></code></pre></td></tr></table></figure>
 
 <h2 id="导入模板"><a href="#导入模板" class="headerlink" title="导入模板"></a>导入模板</h2><p>MTR模板（6.0）下载地址： <a href="https://songxwn.com/file/mtr_templates.xml">https://songxwn.com/file/mtr_templates.xml</a></p>
 <p>下载导入即可。</p>
@@ -445,7 +443,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年10月30日</div>
+          <div>2024年3月26日</div>
         </div>
       
       

@@ -23,15 +23,13 @@
 <meta property="og:site_name" content="Song&#96;s Blog">
 <meta property="og:description" content="实验说明使用Juniper vMX进行实验。 ISIS L2 作为 IGP打通底层路由，LDP 作为公网MPLS标签分发，PE之间使用MP-IBGP PS: 此文章只有PE的配置，用于学习和理解Juniper的MPLS VPN配置。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s3.bmp.ovh/imgs/2022/10/04/623eaaf6ba57d122.png">
 <meta property="article:published_time" content="2022-09-30T09:09:00.000Z">
-<meta property="article:modified_time" content="2023-10-31T02:41:38.386Z">
+<meta property="article:modified_time" content="2024-03-26T09:40:22.011Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="juniper">
 <meta property="article:tag" content="vpn">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2022/10/04/623eaaf6ba57d122.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -341,7 +339,7 @@
               <p id="updated-time" class="note note-danger" style="">
                 
                   
-                    本文最后更新于 2023年10月31日 上午
+                    本文最后更新于 2024年3月26日 下午
                   
                 
               </p>
@@ -386,7 +384,7 @@
 <h2 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">set</span> protocols<span class="hljs-built_in"> bgp group </span>RR<span class="hljs-built_in"> neighbor </span>2.2.2.2<br><span class="hljs-comment">#与RR反射器建立对等体。</span><br></code></pre></td></tr></table></figure>
 
 
-<h1 id="MPLS-MTU-x2F-Jumbo-frames-配置"><a href="#MPLS-MTU-x2F-Jumbo-frames-配置" class="headerlink" title="MPLS MTU &#x2F; Jumbo frames 配置"></a>MPLS MTU &#x2F; Jumbo frames 配置</h1><p>由于多层的MPLS标签会占用有效负载大小，使默认的MTU 1500无法传输（MPLS的MTU会默认使用接口的MTU），所以要改大运营设备所有的接口帧大小和MTU。</p>
+<h1 id="MPLS-MTU-Jumbo-frames-配置"><a href="#MPLS-MTU-Jumbo-frames-配置" class="headerlink" title="MPLS MTU &#x2F; Jumbo frames 配置"></a>MPLS MTU &#x2F; Jumbo frames 配置</h1><p>由于多层的MPLS标签会占用有效负载大小，使默认的MTU 1500无法传输（MPLS的MTU会默认使用接口的MTU），所以要改大运营设备所有的接口帧大小和MTU。</p>
 <p>MPLS标签栈象“垫层”一样，位于二层数据帧头和数据之间。在MPLS转发过程中，虽然网络层报文长度小于接口的MTU，但是增加MPLS标签后，报文长度可能超过链路层允许发送的范围，从而导致报文无法正常转发。为此，设备上定义了MPLS MTU，MPLS转发时将增加标签后的报文长度与MPLS MTU比较。报文长度大于MPLS MTU时，如果允许分片，则将报文分片后再进行转发；如果不允许分片，则直接丢弃。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.juniper.net/documentation/us/en/software/junos/bgp/topics/topic-map/bgp-rr.html#id-understanding-bgp-route-reflectors">https://www.juniper.net/documentation/us/en/software/junos/bgp/topics/topic-map/bgp-rr.html#id-understanding-bgp-route-reflectors</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.h3c.com/cn/d_200805/606207_30003_0.htm#_Toc227661962">https://www.h3c.com/cn/d_200805/606207_30003_0.htm#_Toc227661962</a></p>
@@ -460,7 +458,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年10月31日</div>
+          <div>2024年3月26日</div>
         </div>
       
       

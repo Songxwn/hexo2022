@@ -23,16 +23,19 @@
 <meta property="og:site_name" content="Song&#96;s Blog">
 <meta property="og:description" content="介绍本文章介绍了静态VXLAN配置方案。 本文章是针对华为系列网络设备的学习笔记。 VNI在VXLAN网络上有全局意义，而BD只有本地意义。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img.songxwn.com/file/b1baddd26ac2b22c26427.jpg">
+<meta property="og:image" content="https://img.songxwn.com/file/78cba5225e099a91dbb0b.png">
+<meta property="og:image" content="https://img.songxwn.com/file/438ad283ad03c30999d57.png">
+<meta property="og:image" content="https://img.songxwn.com/file/2d3427afd98904bbd3d42.png">
+<meta property="og:image" content="https://img.songxwn.com/file/cc08a9353996bd693603a.png">
 <meta property="article:published_time" content="2023-05-10T07:01:00.000Z">
-<meta property="article:modified_time" content="2023-05-20T05:45:56.562Z">
+<meta property="article:modified_time" content="2024-03-26T09:40:22.003Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="vxlan">
 <meta property="article:tag" content="l2vpn">
 <meta property="article:tag" content="datacom">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img.songxwn.com/file/b1baddd26ac2b22c26427.jpg">
+<meta name="twitter:image" content="https://img.songxwn.com/file/78cba5225e099a91dbb0b.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -342,7 +345,7 @@
               <p id="updated-time" class="note note-danger" style="">
                 
                   
-                    本文最后更新于 2023年5月20日 下午
+                    本文最后更新于 2024年3月26日 下午
                   
                 
               </p>
@@ -372,7 +375,7 @@
 <li>两台交换机配置VXLAN隧道，实现相同网段三台PC之间的互访。 </li>
 <li>子接口接入的VLAN配置，和交换机本身的VLAN并无关联。</li>
 </ul>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs gradle">[SW1] <span class="hljs-keyword">interface</span> GigabitEthernet <span class="hljs-number">1</span><span class="hljs-regexp">/0/</span><span class="hljs-number">1.1</span> mode l2<br>[SW1-GigabitEthernet1<span class="hljs-regexp">/0/</span><span class="hljs-number">1.1</span>] encapsulation untag<br>[SW1-GigabitEthernet1<span class="hljs-regexp">/0/</span><span class="hljs-number">1.1</span>] bridge-domain <span class="hljs-number">100</span><br><br>[SW1] <span class="hljs-keyword">interface</span> GigabitEthernet <span class="hljs-number">1</span><span class="hljs-regexp">/0/</span><span class="hljs-number">2.1</span> mode l2<br>[SW1-GigabitEthernet1<span class="hljs-regexp">/0/</span><span class="hljs-number">2.1</span>] encapsulation untag<br>[SW1-GigabitEthernet1<span class="hljs-regexp">/0/</span><span class="hljs-number">2.1</span>] bridge-domain <span class="hljs-number">100</span><br><br>[SW2] bridge-domain <span class="hljs-number">100</span><br>[SW2-bd100] l2 binding vlan <span class="hljs-number">1</span><br><br><br></code></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-attr">[SW1]</span> interface GigabitEthernet <span class="hljs-number">1</span>/<span class="hljs-number">0</span>/<span class="hljs-number">1.1</span> mode l2<br><span class="hljs-selector-attr">[SW1-GigabitEthernet1/0/1.1]</span> encapsulation untag<br><span class="hljs-selector-attr">[SW1-GigabitEthernet1/0/1.1]</span> bridge-domain <span class="hljs-number">100</span><br><br><span class="hljs-selector-attr">[SW1]</span> interface GigabitEthernet <span class="hljs-number">1</span>/<span class="hljs-number">0</span>/<span class="hljs-number">2.1</span> mode l2<br><span class="hljs-selector-attr">[SW1-GigabitEthernet1/0/2.1]</span> encapsulation untag<br><span class="hljs-selector-attr">[SW1-GigabitEthernet1/0/2.1]</span> bridge-domain <span class="hljs-number">100</span><br><br><span class="hljs-selector-attr">[SW2]</span> bridge-domain <span class="hljs-number">100</span><br><span class="hljs-selector-attr">[SW2-bd100]</span> l2 binding vlan <span class="hljs-number">1</span><br><br><br></code></pre></td></tr></table></figure>
 
 
 
@@ -478,7 +481,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年5月20日</div>
+          <div>2024年3月26日</div>
         </div>
       
       

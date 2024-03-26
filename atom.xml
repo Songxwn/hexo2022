@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-03-26T06:22:01.049Z</updated>
+  <updated>2024-03-26T09:40:21.994Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://songxwn.com/Panabit-iwan/"/>
     <id>https://songxwn.com/Panabit-iwan/</id>
     <published>2024-03-25T22:14:30.000Z</published>
-    <updated>2024-03-26T06:22:01.049Z</updated>
+    <updated>2024-03-26T09:40:21.994Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;Panabit SD-WAN作为优质高效的多分支组网解决方案，在组网的基础上，能够通过精细化的业务QoS保障，给用户带来安全顺畅的业务体验。其中，稳定高效的iWAN隧道作为SD-WAN的载体，是实现组网与优化的前提。&lt;/p&gt;
@@ -52,7 +52,7 @@
     <link href="https://songxwn.com/elk_role/"/>
     <id>https://songxwn.com/elk_role/</id>
     <published>2024-03-25T01:59:00.000Z</published>
-    <updated>2024-03-26T07:10:50.849Z</updated>
+    <updated>2024-03-26T09:40:22.001Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;ul&gt;
@@ -192,7 +192,7 @@
     <link href="https://songxwn.com/frostmourne_use/"/>
     <id>https://songxwn.com/frostmourne_use/</id>
     <published>2024-03-12T01:48:00.000Z</published>
-    <updated>2024-03-12T02:47:16.122Z</updated>
+    <updated>2024-03-26T09:40:22.007Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;配置Frostmourne 接入Elasticsearch源进行日志匹配告警，并静默规则，告警消息发送到企业微信，告警信息使用Markdown。&lt;/p&gt;
@@ -248,7 +248,7 @@
     <link href="https://songxwn.com/VMware-anti-affinity/"/>
     <id>https://songxwn.com/VMware-anti-affinity/</id>
     <published>2024-03-08T01:48:35.000Z</published>
-    <updated>2024-03-08T06:05:25.754Z</updated>
+    <updated>2024-03-26T09:40:22.030Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;为实现应用系统的冗余，经常会双机或者多机部署（如数据库集群等）。在VMware 集群里面，要保证不同应用集群的节点虚拟机&lt;strong&gt;在不同的物理宿主机上&lt;/strong&gt;，防止单个宿主机故障，影响多个应用集群的节点故障。（尤其在开启RDS的集群上）&lt;/p&gt;
@@ -277,7 +277,7 @@
     <link href="https://songxwn.com/Juniper-log-match/"/>
     <id>https://songxwn.com/Juniper-log-match/</id>
     <published>2024-03-07T11:04:15.000Z</published>
-    <updated>2024-03-07T10:11:19.135Z</updated>
+    <updated>2024-03-26T09:40:21.994Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;Juniper QFX5110 系列交换机是支持OSPF ISIS BGP MPLS等高级路由功能的，但需要对应的license许可。虽然你没有license也可以用，但日志会持续打印设备没有license，影响日常排障、占用过多的存储、也可能影响稳定性。&lt;/p&gt;
@@ -301,7 +301,7 @@
     <link href="https://songxwn.com/BGP-RR/"/>
     <id>https://songxwn.com/BGP-RR/</id>
     <published>2024-03-07T01:23:23.000Z</published>
-    <updated>2024-03-07T06:50:52.704Z</updated>
+    <updated>2024-03-26T09:40:22.033Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;路由反射器简介&quot;&gt;&lt;a href=&quot;#路由反射器简介&quot; class=&quot;headerlink&quot; title=&quot;路由反射器简介&quot;&gt;&lt;/a&gt;路由反射器简介&lt;/h1&gt;&lt;p&gt;引入路由反射器，可以简化IBGP全互联的需求和配置，也可以减轻网络和CPU的负担、和不必要的BGP Update。&lt;/p&gt;
@@ -334,7 +334,7 @@
     <link href="https://songxwn.com/ospf-frr-lab/"/>
     <id>https://songxwn.com/ospf-frr-lab/</id>
     <published>2024-03-04T23:50:49.000Z</published>
-    <updated>2024-03-05T08:18:17.119Z</updated>
+    <updated>2024-03-26T09:40:22.029Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;ol&gt;
@@ -375,7 +375,7 @@
     <link href="https://songxwn.com/Rsyslog-syslog/"/>
     <id>https://songxwn.com/Rsyslog-syslog/</id>
     <published>2024-02-27T01:38:34.000Z</published>
-    <updated>2024-03-05T00:51:20.213Z</updated>
+    <updated>2024-03-26T09:40:21.999Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;基于Rocky LInux 8 搭建，也适用于其他RHEL8-9衍生发行版。&lt;/p&gt;
@@ -406,7 +406,7 @@
     <link href="https://songxwn.com/Centec-Zabbix-SNMP/"/>
     <id>https://songxwn.com/Centec-Zabbix-SNMP/</id>
     <published>2024-02-20T01:15:25.000Z</published>
-    <updated>2024-02-20T02:36:29.900Z</updated>
+    <updated>2024-03-26T09:40:22.018Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;适用于盛科使用CentecOS系列的交换机，如E580&amp;#x2F;E530&amp;#x2F;E680等。&lt;/p&gt;
@@ -432,7 +432,7 @@
     <link href="https://songxwn.com/Pigsty-PG-RDS/"/>
     <id>https://songxwn.com/Pigsty-PG-RDS/</id>
     <published>2024-02-18T01:32:51.000Z</published>
-    <updated>2024-02-26T06:40:26.838Z</updated>
+    <updated>2024-03-26T09:40:21.993Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;Pigsty 是一个更好的本地自建且开源 &lt;strong&gt;RDS&lt;/strong&gt; for PostgreSQL 替代，具有以下特点：&lt;/p&gt;
@@ -481,7 +481,7 @@
     <link href="https://songxwn.com/Grafana-LDAP-AD/"/>
     <id>https://songxwn.com/Grafana-LDAP-AD/</id>
     <published>2024-02-09T05:02:59.000Z</published>
-    <updated>2024-02-09T05:19:05.460Z</updated>
+    <updated>2024-03-26T09:40:21.998Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;本教程适用于9-10版本的Grafana，域控（AD）使用Windows Server 2022搭建，域控等级为 2016。&lt;/p&gt;
@@ -506,7 +506,7 @@
     <link href="https://songxwn.com/zabbix-LDAP-JIT/"/>
     <id>https://songxwn.com/zabbix-LDAP-JIT/</id>
     <published>2024-02-07T09:02:59.000Z</published>
-    <updated>2024-02-07T09:33:46.409Z</updated>
+    <updated>2024-03-26T09:40:21.985Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;本教程适用于6.4-7.0+版本的Zabbix，域控（AD）使用Windows Server 2022搭建，域控等级为 2016。&lt;/p&gt;
@@ -531,7 +531,7 @@
     <link href="https://songxwn.com/RDMA/"/>
     <id>https://songxwn.com/RDMA/</id>
     <published>2024-02-04T14:30:46.000Z</published>
-    <updated>2024-02-04T14:35:57.102Z</updated>
+    <updated>2024-03-26T09:40:22.019Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;headerlink&quot; title=&quot;定义&quot;&gt;&lt;/a&gt;定义&lt;/h1&gt;&lt;p&gt;智能无损网络是基于PFC优先级流控机制，结合智能化拥塞控制技术，使以太网满足分布式高性能应用无丢包、低时延、高吞吐诉求的能力。&lt;/p&gt;
@@ -555,7 +555,7 @@
     <link href="https://songxwn.com/switch-ROCEv2-DSCP/"/>
     <id>https://songxwn.com/switch-ROCEv2-DSCP/</id>
     <published>2024-02-04T10:47:24.000Z</published>
-    <updated>2024-02-04T10:02:25.701Z</updated>
+    <updated>2024-03-26T09:40:22.017Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;当前HPC高性能计算、分布式存储、AI人工智能等应用采用RoCEv2网络替代传统的TCP&amp;#x2F;IP网络，来降低CPU的处理和延迟，提升应用的性能。然而，这些分布式高性能应用的特点是“多打一”的Incast流量模型，对于以太交换机，Incast流量易造成交换机内部队列缓存的瞬时突发拥塞甚至丢包，将会带来应用时延的增加和吞吐的下降，从而损害分布式应用的性能。因此，针对RoCEv2流量实现的智能流量分析功能，将对设备经过的RoCEv2流量通过ACL匹配特征报文，上送至TAP后分析其丢包、时延、吞吐和路径信息，实时监控RoCEv2网络状态。&lt;/p&gt;
@@ -584,7 +584,7 @@
     <link href="https://songxwn.com/Ubuntu-auto-update/"/>
     <id>https://songxwn.com/Ubuntu-auto-update/</id>
     <published>2024-01-26T10:42:59.000Z</published>
-    <updated>2024-02-04T10:35:07.686Z</updated>
+    <updated>2024-03-26T09:40:22.004Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;Ubuntu 和 Debian 应该从很早版本开始预装unattended-upgrades 包，并开启自动更新有&lt;strong&gt;安全问题&lt;/strong&gt;的软件包。&lt;/p&gt;

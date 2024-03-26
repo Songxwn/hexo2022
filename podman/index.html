@@ -23,16 +23,14 @@
 <meta property="og:site_name" content="Song&#96;s Blog">
 <meta property="og:description" content="介绍Podman是一个用于在 Linux 系统上构建、管理和运行OCI标准容器的CLI工具，是Docker的直接替代品。 由红帽主导，与开源社区一起开发。在RHEL8开始预装并替代Docker。命令上与Docker并无区别。 主要特点是不需要守护进程，可以支持非root用户运行容器，提高了安全性和可访问性。 本教程也适用于RHEL其他衍生版本，如Rocky Linux。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/05/02/00c467c2a7987e9e.png">
 <meta property="article:published_time" content="2023-05-02T04:50:52.000Z">
-<meta property="article:modified_time" content="2023-05-02T13:23:51.436Z">
+<meta property="article:modified_time" content="2024-03-26T09:40:22.016Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Docker">
 <meta property="article:tag" content="Dodman">
 <meta property="article:tag" content="container">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2023/05/02/00c467c2a7987e9e.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -342,7 +340,7 @@
               <p id="updated-time" class="note note-danger" style="">
                 
                   
-                    本文最后更新于 2023年5月2日 晚上
+                    本文最后更新于 2024年3月26日 下午
                   
                 
               </p>
@@ -363,9 +361,9 @@
 
 <h1 id="默认仓库顺序"><a href="#默认仓库顺序" class="headerlink" title="默认仓库顺序"></a>默认仓库顺序</h1><h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>红帽把自己的两个仓库源放在了前面，导致拉取前两个仓库源不存在的镜像时候，要手动选择。</p>
 <p>很麻烦🤬</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs awk">podman pull songxwn/webnettools:<span class="hljs-number">1.4</span><br>Emulate Docker CLI using podman. Create <span class="hljs-regexp">/etc/</span>containers/nodocker to quiet msg.<br>? Please select an image: <br>  ▸ registry.access.redhat.com<span class="hljs-regexp">/songxwn/</span>webnettools:<span class="hljs-number">1.4</span><br>    registry.redhat.io<span class="hljs-regexp">/songxwn/</span>webnettools:<span class="hljs-number">1.4</span><br>    docker.io<span class="hljs-regexp">/songxwn/</span>webnettools:<span class="hljs-number">1.4</span><br><br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">podman pull songxwn/webnettools:1.4<br>Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.<br>? Please <span class="hljs-keyword">select</span> an image: <br>  ▸ registry.access.redhat.com/songxwn/webnettools:1.4<br>    registry.redhat.io/songxwn/webnettools:1.4<br>    docker.io/songxwn/webnettools:1.4<br><br></code></pre></td></tr></table></figure>
 
-<h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs awk">vim <span class="hljs-regexp">/etc/</span>containers/registries.conf<br><br><br>unqualified-search-registries = [<span class="hljs-string">&quot;docker.io&quot;</span>, <span class="hljs-string">&quot;registry.redhat.io&quot;</span>, <span class="hljs-string">&quot;registry.access.redhat.com&quot;</span>]<br><br><br><span class="hljs-comment"># 将unqualified-search-registries选项，修改为上面的即可。</span><br><br><br>systemctl restart podman<br><br><span class="hljs-comment"># 然后重启一下即可。</span><br><br><br></code></pre></td></tr></table></figure>
+<h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">vim</span> /etc/containers/registries.<span class="hljs-keyword">conf</span><br><br><br>unqualified-<span class="hljs-built_in">search</span>-registries = [<span class="hljs-string">&quot;docker.io&quot;</span>, <span class="hljs-string">&quot;registry.redhat.io&quot;</span>, <span class="hljs-string">&quot;registry.access.redhat.com&quot;</span>]<br><br><br># 将unqualified-<span class="hljs-built_in">search</span>-registries选项，修改为上面的即可。<br><br><br>systemctl restart podman<br><br># 然后重启一下即可。<br><br><br></code></pre></td></tr></table></figure>
 
 
 
@@ -441,7 +439,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年5月2日</div>
+          <div>2024年3月26日</div>
         </div>
       
       

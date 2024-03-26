@@ -23,16 +23,16 @@
 <meta property="og:site_name" content="Song&#96;s Blog">
 <meta property="og:description" content="介绍 MariaDB Galera Cluster 是 MariaDB 的虚拟同步多主集群。它仅在Linux上可用，并且仅支持InnoDB存储引擎（尽管有 对MyISAM和MariaDB 10.6的Aria的实验性支持。请参阅wsrep_replicate_myisam系统变量，或者从 MariaDB 10.6 开始，wsrep_mode系统变量）。 个人为了替代主从复制而使用。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/04/02/2cfba736f96c1c36.png">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/04/02/1342a2c99e7d1161.png">
 <meta property="article:published_time" content="2023-04-02T08:48:00.000Z">
-<meta property="article:modified_time" content="2023-05-30T12:46:55.509Z">
+<meta property="article:modified_time" content="2024-03-26T09:40:21.996Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="mariadb">
 <meta property="article:tag" content="cluster">
 <meta property="article:tag" content="mysql">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2023/04/02/2cfba736f96c1c36.png">
+<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2023/04/02/1342a2c99e7d1161.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -342,7 +342,7 @@
               <p id="updated-time" class="note note-danger" style="">
                 
                   
-                    本文最后更新于 2023年5月30日 晚上
+                    本文最后更新于 2024年3月26日 下午
                   
                 
               </p>
@@ -408,7 +408,7 @@
 <h1 id="安装-每台服务器都要配置安装"><a href="#安装-每台服务器都要配置安装" class="headerlink" title="安装(每台服务器都要配置安装)"></a>安装(每台服务器都要配置安装)</h1><h2 id="NTP"><a href="#NTP" class="headerlink" title="NTP"></a>NTP</h2><p>每台节点都配置统一的NTP服务器，确保时间差不大于3秒。</p>
 <h2 id="关闭SElinux-关闭防火墙"><a href="#关闭SElinux-关闭防火墙" class="headerlink" title="关闭SElinux 关闭防火墙"></a>关闭SElinux 关闭防火墙</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros">systemctl <span class="hljs-built_in">disable</span> --now firewalld<br>sed -i <span class="hljs-string">&#x27;s/^SELINUX=enforcing$/SELINUX=disabled/&#x27;</span> /etc/selinux<span class="hljs-built_in">/config </span>&amp;&amp; setenforce 0<br><br></code></pre></td></tr></table></figure>
 
-<h2 id="添加yum源"><a href="#添加yum源" class="headerlink" title="添加yum源"></a>添加yum源</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">cat</span> &gt; /etc/yum.repos.d/mariadb.repo &lt;&lt;EOF<span class="hljs-meta"></span><br><span class="hljs-meta">[mariadb]</span><br><span class="hljs-attribute">name</span> = MariaDB<br><span class="hljs-attribute">baseurl</span> = https://mirrors.cloud.tencent.com/mariadb/yum/<span class="hljs-number">10</span>.<span class="hljs-number">6</span>/centos8-amd64<br><span class="hljs-attribute">module_hotfixes</span>=<span class="hljs-number">1</span><br><span class="hljs-attribute">gpgkey</span>=https://mirrors.cloud.tencent.com/mariadb/yum/RPM-GPG-KEY-MariaDB<br><span class="hljs-attribute">gpgcheck</span>=<span class="hljs-number">1</span><br><span class="hljs-attribute">EOF</span><br><br><span class="hljs-comment">## 注意，使用了腾讯云镜像源，mariadb 10.6</span><br><br></code></pre></td></tr></table></figure>
+<h2 id="添加yum源"><a href="#添加yum源" class="headerlink" title="添加yum源"></a>添加yum源</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs awk">cat &gt; <span class="hljs-regexp">/etc/yum</span>.repos.d/mariadb.repo &lt;&lt;EOF<br>[mariadb]<br>name = MariaDB<br>baseurl = https:<span class="hljs-regexp">//mi</span>rrors.cloud.tencent.com<span class="hljs-regexp">/mariadb/yum</span><span class="hljs-regexp">/10.6/</span>centos8-amd64<br>module_hotfixes=<span class="hljs-number">1</span><br>gpgkey=https:<span class="hljs-regexp">//mi</span>rrors.cloud.tencent.com<span class="hljs-regexp">/mariadb/yum</span>/RPM-GPG-KEY-MariaDB<br>gpgcheck=<span class="hljs-number">1</span><br>EOF<br><br><span class="hljs-comment">## 注意，使用了腾讯云镜像源，mariadb 10.6</span><br><br></code></pre></td></tr></table></figure>
 
 <figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs axapta">yum install -y MariaDB-<span class="hljs-keyword">server</span> MariaDB-<span class="hljs-keyword">client</span> MariaDB-backup rsync galera<span class="hljs-number">-4</span><br><br><br><span class="hljs-meta">## 安装数据库和galera</span><br><br></code></pre></td></tr></table></figure>
 
@@ -599,7 +599,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年5月30日</div>
+          <div>2024年3月26日</div>
         </div>
       
       
