@@ -24,7 +24,7 @@
 <meta property="og:description" content="简介FRU的技术最早使用在服务器等大型设备上，以IBM的水平最高，后来FRU技术被dell移植在PC上，接着联想等厂商也开始了FRU的步伐。现在连太和攒电脑的都使用FRU技术了 记录服务器的序列号、厂家名称、服务器型号、主板型号、资产编号等信息。 ESXi IPMITools使用： https:&#x2F;&#x2F;songxwn.com&#x2F;ESXi8_IPMI&#x2F;   （Linux也可以直接使用） Linu">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-27T03:54:00.000Z">
-<meta property="article:modified_time" content="2024-03-27T10:30:56.067Z">
+<meta property="article:modified_time" content="2024-03-27T10:35:27.450Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="esxi">
 <meta property="article:tag" content="ipmi">
@@ -265,7 +265,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          302 字
+          309 字
         
       </span>
     
@@ -356,7 +356,7 @@
 <p>主要是有些OEM的服务器FRU信息比较乱，需要二次修改。</p>
 <span id="more"></span>
 
-<h1 id="IPMITool修改命令"><a href="#IPMITool修改命令" class="headerlink" title="IPMITool修改命令"></a>IPMITool修改命令</h1><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs text">ipmitool fru print 0<br># 打印当前的fru信息<br>ipmitool fru edit 0 field b 1 &quot;Board Product Nama&quot;<br># 修改主板名称<br>ipmitool fru edit 0 field b 2 &quot;&quot;.<br># 修改主板序列号<br>ipmitool fru edit 0 field b 0 &quot;Dela&quot;<br># 修改主板制造商<br>ipmitool fru edit 0 field b 3 &quot;Dela&quot;<br># 修改主板部件号<br>ipmitool fru edit 0 field p 0 &quot;Manufacturer Name&quot;<br># <br>ipmitool fru edit 0 field p 1 &quot;<br># 修改产品名字<br>ipmitool fru edit 0 field p 2 &quot;Product-Name&quot;<br># 修改产品部件号<br>ipmitool fru edit 0 field p 3 &quot;Product-Name&quot;<br># 修改产品版本号<br>ipmitool fru edit 0 field p 4 &quot;Product-Name&quot;<br># 修改产品序列号<br>ipmitool fru edit 0 field p 5 &quot;Product-Name&quot;<br># 修改产品资产标签<br>ipmitool fru edit 0 field c 0 &quot;Product-Name&quot;<br># 修改机箱部件编号<br>ipmitool fru edit 0 field c 1 &quot;Product-Name&quot;<br># 修改机箱机箱序列号<br></code></pre></td></tr></table></figure>
+<h1 id="IPMITool修改命令"><a href="#IPMITool修改命令" class="headerlink" title="IPMITool修改命令"></a>IPMITool修改命令</h1><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs text">ipmitool fru print 0<br># 打印当前的fru信息<br>ipmitool fru edit 0 field b 1 &quot;Board Product Nama&quot;<br># 修改主板名称<br>ipmitool fru edit 0 field b 2 &quot;&quot;.<br># 修改主板序列号<br>ipmitool fru edit 0 field b 0 &quot;Dela&quot;<br># 修改主板制造商<br>ipmitool fru edit 0 field b 3 &quot;Dela&quot;<br># 修改主板部件号<br>ipmitool fru edit 0 field p 0 &quot;Manufacturer Name&quot;<br><br><br><br># 修改产品制造商<br>ipmitool fru edit 0 field p 1 &quot;<br># 修改产品名字<br>ipmitool fru edit 0 field p 2 &quot;Product-Name&quot;<br># 修改产品部件号<br>ipmitool fru edit 0 field p 3 &quot;Product-Name&quot;<br># 修改产品版本号<br>ipmitool fru edit 0 field p 4 &quot;Product-Name&quot;<br># 修改产品序列号<br>ipmitool fru edit 0 field p 5 &quot;Product-Name&quot;<br># 修改产品资产标签<br><br><br><br>ipmitool fru edit 0 field c 0 &quot;Product-Name&quot;<br># 修改机箱部件编号<br>ipmitool fru edit 0 field c 1 &quot;Product-Name&quot;<br># 修改机箱机箱序列号<br></code></pre></td></tr></table></figure>
                 
               </div>
             
