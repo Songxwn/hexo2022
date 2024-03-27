@@ -16,27 +16,26 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
   
-    <meta name="description" content="简介基于Rocky LInux 8 搭建，也适用于其他RHEL8-9衍生发行版。 注意关闭Selinux和配置防火墙。 日志文件存放主目录为 &#x2F;var&#x2F;syslog&#x2F;下，会自动创建发日志主机IP的文件夹，并将日志存放在每天创建的log文件里面。 路径格式 &#x2F;var&#x2F;log&#x2F;主机IP地址&#x2F;主机IP地址_年-月-日.log 如：19">
+    <meta name="description" content="简介FRU的技术最早使用在服务器等大型设备上，以IBM的水平最高，后来FRU技术被dell移植在PC上，接着联想等厂商也开始了FRU的步伐。现在连太和攒电脑的都使用FRU技术了 记录服务器的序列号、厂家名称、服务器型号、主板型号、资产编号等信息。 ESXi IPMITools使用： https:&#x2F;&#x2F;songxwn.com&#x2F;ESXi8_IPMI&#x2F;   （Linux也可以直接使用） Linu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Rsyslog 配置接收Syslog - 轻量化日志存储">
-<meta property="og:url" content="https://songxwn.com/Rsyslog-syslog/index.html">
+<meta property="og:title" content="IPMITool 修改服务器FRU信息">
+<meta property="og:url" content="https://songxwn.com/IPMItool-FRU/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="简介基于Rocky LInux 8 搭建，也适用于其他RHEL8-9衍生发行版。 注意关闭Selinux和配置防火墙。 日志文件存放主目录为 &#x2F;var&#x2F;syslog&#x2F;下，会自动创建发日志主机IP的文件夹，并将日志存放在每天创建的log文件里面。 路径格式 &#x2F;var&#x2F;log&#x2F;主机IP地址&#x2F;主机IP地址_年-月-日.log 如：19">
+<meta property="og:description" content="简介FRU的技术最早使用在服务器等大型设备上，以IBM的水平最高，后来FRU技术被dell移植在PC上，接着联想等厂商也开始了FRU的步伐。现在连太和攒电脑的都使用FRU技术了 记录服务器的序列号、厂家名称、服务器型号、主板型号、资产编号等信息。 ESXi IPMITools使用： https:&#x2F;&#x2F;songxwn.com&#x2F;ESXi8_IPMI&#x2F;   （Linux也可以直接使用） Linu">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-02-27T01:38:34.000Z">
-<meta property="article:modified_time" content="2024-03-26T09:40:21.999Z">
+<meta property="article:published_time" content="2024-03-27T03:54:00.000Z">
+<meta property="article:modified_time" content="2024-03-27T10:30:56.067Z">
 <meta property="article:author" content="Song">
-<meta property="article:tag" content="network">
-<meta property="article:tag" content="Linux">
-<meta property="article:tag" content="syslog">
-<meta property="article:tag" content="log">
+<meta property="article:tag" content="esxi">
+<meta property="article:tag" content="ipmi">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Rsyslog 配置接收Syslog - 轻量化日志存储 - Song`s Blog</title>
+  <title>IPMITool 修改服务器FRU信息 - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -243,7 +242,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Rsyslog 配置接收Syslog - 轻量化日志存储"></span>
+            <span id="subtitle" data-typed-text="IPMITool 修改服务器FRU信息"></span>
           
         </div>
 
@@ -254,8 +253,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-02-27 09:38" pubdate>
-          2024年2月27日 上午
+        <time datetime="2024-03-27 11:54" pubdate>
+          2024年3月27日 中午
         </time>
       </span>
     
@@ -266,7 +265,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          647 字
+          302 字
         
       </span>
     
@@ -277,7 +276,7 @@
         
         
         
-          6 分钟
+          3 分钟
         
       </span>
     
@@ -335,12 +334,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Rsyslog 配置接收Syslog - 轻量化日志存储</h1>
+            <h1 id="seo-header">IPMITool 修改服务器FRU信息</h1>
             
               <p id="updated-time" class="note note-danger" style="">
                 
                   
-                    本文最后更新于 2024年3月26日 下午
+                    本文最后更新于 2024年3月27日 晚上
                   
                 
               </p>
@@ -348,38 +347,16 @@
             
               <div class="markdown-body">
                 
-                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>基于Rocky LInux 8 搭建，也适用于其他RHEL8-9衍生发行版。</p>
-<p>注意关闭Selinux和配置防火墙。</p>
-<p>日志文件存放主目录为 &#x2F;var&#x2F;syslog&#x2F;下，会自动创建发日志主机IP的文件夹，并将日志存放在每天创建的log文件里面。</p>
-<p>路径格式 &#x2F;var&#x2F;log&#x2F;主机IP地址&#x2F;主机IP地址_年-月-日.log</p>
-<p>如：192.168.0.1_2038-02-27.log</p>
-<p>以文本存储方式虽然不便于搜索，但可以按照每台每天的日志全部下载，Rsyslog相对于ELK也更<strong>轻量化</strong>、简单化、占用资源低。</p>
-<p>也可以配置定时任务，压缩历史日志，以节省存储空间。</p>
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>FRU的技术最早使用在服务器等大型设备上，以IBM的水平最高，后来FRU技术被dell移植在PC上，接着联想等厂商也开始了FRU的步伐。现在连太和攒电脑的都使用FRU技术了</p>
+<p>记录服务器的序列号、厂家名称、服务器型号、主板型号、资产编号等信息。</p>
+<p>ESXi IPMITools使用： <a href="https://songxwn.com/ESXi8_IPMI/" title="https://songxwn.com/ESXi8_IPMI/">https://songxwn.com/ESXi8_IPMI&#x2F;</a>   （Linux也可以直接使用）</p>
+<p>Linux &#x2F; ESXi IPMITool下载： <a href="https://songxwn.com/file/ipmitool" title="https://songxwn.com/file/ipmitool">https://songxwn.com/file/ipmitool</a></p>
+<p>Windows下载： <a target="_blank" rel="noopener" href="https://ipmiutil.sourceforge.net/" title="https://ipmiutil.sourceforge.net/">https://ipmiutil.sourceforge.net/</a></p>
+<p>官方开源地址：<a target="_blank" rel="noopener" href="https://codeberg.org/IPMITool/ipmitool" title="https://codeberg.org/IPMITool/ipmitool">https://codeberg.org/IPMITool/ipmitool</a></p>
+<p>主要是有些OEM的服务器FRU信息比较乱，需要二次修改。</p>
 <span id="more"></span>
 
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">dnf install rsyslog<br>systemctl enable --now  rsyslog<br># 确认已经按照和配置开机启动。<br></code></pre></td></tr></table></figure>
-
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p><code>vim /etc/rsyslog.conf</code></p>
-<h3 id="增加或取消注释，配置UDP-TCP-514-端口接收syslog日志"><a href="#增加或取消注释，配置UDP-TCP-514-端口接收syslog日志" class="headerlink" title="增加或取消注释，配置UDP&#x2F;TCP 514 端口接收syslog日志"></a>增加或取消注释，配置UDP&#x2F;TCP 514 端口接收syslog日志</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs conf">$ModLoad imudp<br>$UDPServerRun 514<br>$ModLoad imtcp<br>$InputTCPServerRun 514<br></code></pre></td></tr></table></figure>
-
-<h3 id="配置所有来源IP的日志到指定文件夹的指定文件"><a href="#配置所有来源IP的日志到指定文件夹的指定文件" class="headerlink" title="配置所有来源IP的日志到指定文件夹的指定文件"></a>配置所有来源IP的日志到指定文件夹的指定文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs conf">$template Remote,&quot;/var/syslog/%fromhost-ip%/%fromhost-ip%_%$YEAR%-%$MONTH%-%$DAY%.log&quot;<br>:fromhost-ip, !isequal, &quot;127.0.0.1&quot; ?Remote<br># 日志文件存放主目录为 /var/syslog/下，会自动创建发日志主机IP的文件夹，并将日志存放在每天创建的log文件里面。<br># 路径格式 /var/log/主机IP地址/主机IP地址_年-月-日.log<br></code></pre></td></tr></table></figure>
-
-<h3 id="配置根据IP来源分类配置（可选）"><a href="#配置根据IP来源分类配置（可选）" class="headerlink" title="配置根据IP来源分类配置（可选）"></a>配置根据IP来源分类配置（可选）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs conf">$template aaa,&quot;/log/%$YEAR%-%$MONTH%/%fromhost-ip%/%fromhost-ip%_%$YEAR%-%$MONTH%-%$DAY%-%$HOUR%.log&quot;<br>:fromhost-ip, isequal,&quot;192.168.10.1&quot; ? aaa<br>:fromhost-ip, isequal, &quot;192.168.20.1&quot;? aaa<br>注：将192.168.10.1 and 192.168.20.1的log存放到aaa指定的目录中<br>$template bbb,&quot;/log/%$YEAR%-%$MONTH%/%fromhost-ip%/%fromhost-ip%_%$YEAR%-%$MONTH%-%$DAY%-%$HOUR%.log&quot;<br>:fromhost-ip, startswith,&quot;192.168.10.&quot; ?bbb<br>:fromhost-ip, startswith,&quot;192.168.20.&quot; ?bbb<br>:fromhost-ip, startswith,&quot;192.168.30.&quot; ?bbb<br>注：将192.168.10.X , 192.168.20.X, 192.168.30.X的设备log存到bbb指定的目录中<br></code></pre></td></tr></table></figure>
-
-<p>PS：配置完成需要重启生效。</p>
-<p>PS：可以配合<a href="https://songxwn.com/vdo/" title="VDO">VDO</a> 进行透明重删存储。（文本文件压缩率高）</p>
-<h1 id="定时压缩-shell脚本"><a href="#定时压缩-shell脚本" class="headerlink" title="定时压缩 shell脚本"></a>定时压缩 shell脚本</h1><p>将&#x2F;data&#x2F;syslog&#x2F;下七天以上未修改过的log文件压缩gz文件，并删除源文件。 配置到 corntab 定时执行即可。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/bash</span><br>cd /data/syslog/<br>find . -name &quot;*.log&quot; -type f -mtime +7 | xargs -I &#123;&#125; tar -zcvf &#123;&#125;.tar.gz &#123;&#125; --remove-files<br></code></pre></td></tr></table></figure>
-
-<h2 id="使用-Zstd"><a href="#使用-Zstd" class="headerlink" title="使用 Zstd"></a>使用 Zstd</h2><p><a target="_blank" rel="noopener" href="https://github.com/facebook/zstd" title="Zstd">Zstd</a>是Facebook开源的压缩算法，有更好的压缩率和解压缩性能。</p>
-<p>PS：Windows 上推荐使用<a target="_blank" rel="noopener" href="https://www.bandisoft.com/bandizip/" title="Bandizip">Bandizip</a>打开。</p>
-<h3 id="安装zstd"><a href="#安装zstd" class="headerlink" title="安装zstd"></a>安装zstd</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">yum install zstd -y<br></code></pre></td></tr></table></figure>
-
-<h1 id=""><a href="#" class="headerlink" title=""></a></h1><h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">#!/bin/bash<br>cd /data/syslog/<br>find . -name &quot;*.log&quot; -type f -mtime +7 | xargs -I &#123;&#125; zstd &#123;&#125; --rm<br></code></pre></td></tr></table></figure>
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/arelinzhi/article/details/80404841" title="https://blog.csdn.net/arelinzhi/article/details/80404841">https://blog.csdn.net/arelinzhi/article/details/80404841</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.mbrjun.cn/archives/467/" title="https://www.mbrjun.cn/archives/467/">https://www.mbrjun.cn/archives/467/</a></p>
-
+<h1 id="IPMITool修改命令"><a href="#IPMITool修改命令" class="headerlink" title="IPMITool修改命令"></a>IPMITool修改命令</h1><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs text">ipmitool fru print 0<br># 打印当前的fru信息<br>ipmitool fru edit 0 field b 1 &quot;Board Product Nama&quot;<br># 修改主板名称<br>ipmitool fru edit 0 field b 2 &quot;&quot;.<br># 修改主板序列号<br>ipmitool fru edit 0 field b 0 &quot;Dela&quot;<br># 修改主板制造商<br>ipmitool fru edit 0 field b 3 &quot;Dela&quot;<br># 修改主板部件号<br>ipmitool fru edit 0 field p 0 &quot;Manufacturer Name&quot;<br># <br>ipmitool fru edit 0 field p 1 &quot;<br># 修改产品名字<br>ipmitool fru edit 0 field p 2 &quot;Product-Name&quot;<br># 修改产品部件号<br>ipmitool fru edit 0 field p 3 &quot;Product-Name&quot;<br># 修改产品版本号<br>ipmitool fru edit 0 field p 4 &quot;Product-Name&quot;<br># 修改产品序列号<br>ipmitool fru edit 0 field p 5 &quot;Product-Name&quot;<br># 修改产品资产标签<br>ipmitool fru edit 0 field c 0 &quot;Product-Name&quot;<br># 修改机箱部件编号<br>ipmitool fru edit 0 field c 1 &quot;Product-Name&quot;<br># 修改机箱机箱序列号<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -412,13 +389,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/network/" class="print-no-link">#network</a>
+        <a href="/tags/esxi/" class="print-no-link">#esxi</a>
       
-        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
+        <a href="/tags/ipmi/" class="print-no-link">#ipmi</a>
       
-        <a href="/tags/syslog/" class="print-no-link">#syslog</a>
-      
-        <a href="/tags/log/" class="print-no-link">#log</a>
+        <a href="/tags/linux/" class="print-no-link">#linux</a>
       
     </div>
   
@@ -430,8 +405,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Rsyslog 配置接收Syslog - 轻量化日志存储</div>
-      <div>https://songxwn.com/Rsyslog-syslog/</div>
+      <div>IPMITool 修改服务器FRU信息</div>
+      <div>https://songxwn.com/IPMItool-FRU/</div>
     </div>
     <div class="license-meta">
       
@@ -443,13 +418,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年2月27日</div>
+          <div>2024年3月27日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年3月26日</div>
+          <div>2024年3月27日</div>
         </div>
       
       
@@ -480,18 +455,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/ospf-frr-lab/" title="HCIE Datacom-01-LAB-OSPF快速收敛和BGP联动">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">HCIE Datacom-01-LAB-OSPF快速收敛和BGP联动</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Centec-Zabbix-SNMP/" title="盛科交换机Zabbix SNMP硬件监控模板">
-                        <span class="hidden-mobile">盛科交换机Zabbix SNMP硬件监控模板</span>
+                      <a href="/Panabit-iwan/" title="Panabit 派网设备配置 iWAN VPN服务">
+                        <span class="hidden-mobile">Panabit 派网设备配置 iWAN VPN服务</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -599,7 +568,7 @@
       
         <a href="/Rsyslog-syslog/" title="Rsyslog 配置接收Syslog - 轻量化日志存储"
            class="list-group-item list-group-item-action
-           active">
+           ">
           <span class="category-post">Rsyslog 配置接收Syslog - 轻量化日志存储</span>
         </a>
       
@@ -608,7 +577,7 @@
       
         <a href="/IPMItool-FRU/" title="IPMITool 修改服务器FRU信息"
            class="list-group-item list-group-item-action
-           ">
+           active">
           <span class="category-post">IPMITool 修改服务器FRU信息</span>
         </a>
       

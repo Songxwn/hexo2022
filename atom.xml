@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-03-26T09:40:21.994Z</updated>
+  <updated>2024-03-27T10:30:56.067Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>IPMITool 修改服务器FRU信息</title>
+    <link href="https://songxwn.com/IPMItool-FRU/"/>
+    <id>https://songxwn.com/IPMItool-FRU/</id>
+    <published>2024-03-27T03:54:00.000Z</published>
+    <updated>2024-03-27T10:30:56.067Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;FRU的技术最早使用在服务器等大型设备上，以IBM的水平最高，后来FRU技术被dell移植在PC上，接着联想等厂商也开始了FRU的步伐。现在连太和攒电脑的都使用FRU技术了&lt;/p&gt;
+&lt;p&gt;记录服务器的序列号、厂家名称、服务器型号、主板型号、资产编号等信息。&lt;/p&gt;
+&lt;p&gt;ESXi IPMITools使用： &lt;a href=&quot;https://songxwn.com/ESXi8_IPMI/&quot; title=&quot;https://songxwn.com/ESXi8_IPMI/&quot;&gt;https://songxwn.com/ESXi8_IPMI&amp;#x2F;&lt;/a&gt;   （Linux也可以直接使用）&lt;/p&gt;
+&lt;p&gt;Linux &amp;#x2F; ESXi IPMITool下载： &lt;a href=&quot;https://songxwn.com/file/ipmitool&quot; title=&quot;https://songxwn.com/file/ipmitool&quot;&gt;https://songxwn.com/file/ipmitool&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Windows下载： &lt;a href=&quot;https://ipmiutil.sourceforge.net/&quot; title=&quot;https://ipmiutil.sourceforge.net/&quot;&gt;https://ipmiutil.sourceforge.net/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;官方开源地址：&lt;a href=&quot;https://codeberg.org/IPMITool/ipmitool&quot; title=&quot;https://codeberg.org/IPMITool/ipmitool&quot;&gt;https://codeberg.org/IPMITool/ipmitool&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;主要是有些OEM的服务器FRU信息比较乱，需要二次修改。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Linux" scheme="https://songxwn.com/categories/Linux/"/>
+    
+    
+    <category term="esxi" scheme="https://songxwn.com/tags/esxi/"/>
+    
+    <category term="ipmi" scheme="https://songxwn.com/tags/ipmi/"/>
+    
+    <category term="linux" scheme="https://songxwn.com/tags/linux/"/>
+    
+  </entry>
   
   <entry>
     <title>Panabit 派网设备配置 iWAN VPN服务</title>
@@ -576,30 +605,6 @@
     <category term="centec" scheme="https://songxwn.com/tags/centec/"/>
     
     <category term="RoCEv2" scheme="https://songxwn.com/tags/RoCEv2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>关闭Ubuntu 默认开启的自动安全更新</title>
-    <link href="https://songxwn.com/Ubuntu-auto-update/"/>
-    <id>https://songxwn.com/Ubuntu-auto-update/</id>
-    <published>2024-01-26T10:42:59.000Z</published>
-    <updated>2024-03-26T09:40:22.004Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;Ubuntu 和 Debian 应该从很早版本开始预装unattended-upgrades 包，并开启自动更新有&lt;strong&gt;安全问题&lt;/strong&gt;的软件包。&lt;/p&gt;
-&lt;p&gt;（最小化安装不会安装此包）&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Linux" scheme="https://songxwn.com/categories/Linux/"/>
-    
-    
-    <category term="linux" scheme="https://songxwn.com/tags/linux/"/>
-    
-    <category term="Ubuntu" scheme="https://songxwn.com/tags/Ubuntu/"/>
-    
-    <category term="apt" scheme="https://songxwn.com/tags/apt/"/>
     
   </entry>
   
