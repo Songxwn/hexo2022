@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-03-27T10:35:41.212Z</updated>
+  <updated>2024-03-28T04:46:30.256Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>浪潮 M5系列服务器IPMI无法监控存储RAID卡问题.</title>
+    <link href="https://songxwn.com/IPMItool-M5-RAID/"/>
+    <id>https://songxwn.com/IPMItool-M5-RAID/</id>
+    <published>2024-03-28T03:54:00.000Z</published>
+    <updated>2024-03-28T04:46:30.256Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;浪潮的M5 代服务器，可能有Web BMC无法查看存储RAID&amp;#x2F;SAS卡状态的情况，可以通过以下方式修改。&lt;/p&gt;
+&lt;p&gt;修改完成后重启BMC即可生效。&lt;/p&gt;
+&lt;p&gt;ESXi IPMITools使用： &lt;a href=&quot;https://songxwn.com/ESXi8_IPMI/&quot; title=&quot;https://songxwn.com/ESXi8_IPMI/&quot;&gt;https://songxwn.com/ESXi8_IPMI&amp;#x2F;&lt;/a&gt;   （Linux也可以直接使用）&lt;/p&gt;
+&lt;p&gt;Linux &amp;#x2F; ESXi IPMITool下载： &lt;a href=&quot;https://songxwn.com/file/ipmitool&quot; title=&quot;https://songxwn.com/file/ipmitool&quot;&gt;https://songxwn.com/file/ipmitool&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Windows下载： &lt;a href=&quot;https://ipmiutil.sourceforge.net/&quot; title=&quot;https://ipmiutil.sourceforge.net/&quot;&gt;https://ipmiutil.sourceforge.net/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;官方开源地址：&lt;a href=&quot;https://codeberg.org/IPMITool/ipmitool&quot; title=&quot;https://codeberg.org/IPMITool/ipmitool&quot;&gt;https://codeberg.org/IPMITool/ipmitool&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Linux" scheme="https://songxwn.com/categories/Linux/"/>
+    
+    
+    <category term="esxi" scheme="https://songxwn.com/tags/esxi/"/>
+    
+    <category term="ipmi" scheme="https://songxwn.com/tags/ipmi/"/>
+    
+    <category term="linux" scheme="https://songxwn.com/tags/linux/"/>
+    
+  </entry>
   
   <entry>
     <title>IPMITool 修改服务器FRU信息</title>
@@ -576,35 +604,6 @@
     <category term="RoCEv2" scheme="https://songxwn.com/tags/RoCEv2/"/>
     
     <category term="RDMA" scheme="https://songxwn.com/tags/RDMA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>盛科交换机配置基于DSCP的RoCEv2-无损网络</title>
-    <link href="https://songxwn.com/switch-ROCEv2-DSCP/"/>
-    <id>https://songxwn.com/switch-ROCEv2-DSCP/</id>
-    <published>2024-02-04T10:47:24.000Z</published>
-    <updated>2024-03-26T09:40:22.017Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;当前HPC高性能计算、分布式存储、AI人工智能等应用采用RoCEv2网络替代传统的TCP&amp;#x2F;IP网络，来降低CPU的处理和延迟，提升应用的性能。然而，这些分布式高性能应用的特点是“多打一”的Incast流量模型，对于以太交换机，Incast流量易造成交换机内部队列缓存的瞬时突发拥塞甚至丢包，将会带来应用时延的增加和吞吐的下降，从而损害分布式应用的性能。因此，针对RoCEv2流量实现的智能流量分析功能，将对设备经过的RoCEv2流量通过ACL匹配特征报文，上送至TAP后分析其丢包、时延、吞吐和路径信息，实时监控RoCEv2网络状态。&lt;/p&gt;
-&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;p&gt;RDMA（Remote Direct Memory Access），远程直接内存访问功能，用于InfiniBand网络，是一种直接内存访问技术，它将数据直接从一台计算机的内存传输到另一台计算机，数据从一个系统快速移动到远程系统存储器中，无需双方操作系统的介入，不需要经过处理器耗时的处理，最终达到高带宽、低延迟和低资源利用率的效果。&lt;/p&gt;
-&lt;p&gt;RoCE（RDMA over Converged Ethernet），允许应用通过以太网实现远程内存访问的网络协议，是将RDMA技术运用到以太网上的协议。目前RoCE有两个协议版本，RoCEv1和RoCEv2。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="network" scheme="https://songxwn.com/categories/network/"/>
-    
-    
-    <category term="network" scheme="https://songxwn.com/tags/network/"/>
-    
-    <category term="vmware" scheme="https://songxwn.com/tags/vmware/"/>
-    
-    <category term="rdma" scheme="https://songxwn.com/tags/rdma/"/>
-    
-    <category term="centec" scheme="https://songxwn.com/tags/centec/"/>
-    
-    <category term="RoCEv2" scheme="https://songxwn.com/tags/RoCEv2/"/>
     
   </entry>
   

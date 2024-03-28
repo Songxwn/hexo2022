@@ -16,15 +16,15 @@
   <meta name="author" content="Song">
   <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
   
-    <meta name="description" content="简介FRU的技术最早使用在服务器等大型设备上，以IBM的水平最高，后来FRU技术被dell移植在PC上，接着联想等厂商也开始了FRU的步伐。现在连太和攒电脑的都使用FRU技术了 记录服务器的序列号、厂家名称、服务器型号、主板型号、资产编号等信息。 ESXi IPMITools使用： https:&#x2F;&#x2F;songxwn.com&#x2F;ESXi8_IPMI&#x2F;   （Linux也可以直接使用） Linu">
+    <meta name="description" content="简介浪潮的M5 代服务器，可能有Web BMC无法查看存储RAID&#x2F;SAS卡状态的情况，可以通过以下方式修改。 修改完成后重启BMC即可生效。 ESXi IPMITools使用： https:&#x2F;&#x2F;songxwn.com&#x2F;ESXi8_IPMI&#x2F;   （Linux也可以直接使用） Linux &#x2F; ESXi IPMITool下载： https:&#x2F;&#x2F;songxwn.com&#x2F;f">
 <meta property="og:type" content="article">
-<meta property="og:title" content="IPMITool 修改服务器FRU信息">
-<meta property="og:url" content="https://songxwn.com/IPMItool-FRU/index.html">
+<meta property="og:title" content="浪潮 M5系列服务器IPMI无法监控存储RAID卡问题.">
+<meta property="og:url" content="https://songxwn.com/IPMItool-M5-RAID/index.html">
 <meta property="og:site_name" content="Song&#96;s Blog">
-<meta property="og:description" content="简介FRU的技术最早使用在服务器等大型设备上，以IBM的水平最高，后来FRU技术被dell移植在PC上，接着联想等厂商也开始了FRU的步伐。现在连太和攒电脑的都使用FRU技术了 记录服务器的序列号、厂家名称、服务器型号、主板型号、资产编号等信息。 ESXi IPMITools使用： https:&#x2F;&#x2F;songxwn.com&#x2F;ESXi8_IPMI&#x2F;   （Linux也可以直接使用） Linu">
+<meta property="og:description" content="简介浪潮的M5 代服务器，可能有Web BMC无法查看存储RAID&#x2F;SAS卡状态的情况，可以通过以下方式修改。 修改完成后重启BMC即可生效。 ESXi IPMITools使用： https:&#x2F;&#x2F;songxwn.com&#x2F;ESXi8_IPMI&#x2F;   （Linux也可以直接使用） Linux &#x2F; ESXi IPMITool下载： https:&#x2F;&#x2F;songxwn.com&#x2F;f">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-03-27T03:54:00.000Z">
-<meta property="article:modified_time" content="2024-03-27T10:35:41.212Z">
+<meta property="article:published_time" content="2024-03-28T03:54:00.000Z">
+<meta property="article:modified_time" content="2024-03-28T04:46:30.256Z">
 <meta property="article:author" content="Song">
 <meta property="article:tag" content="esxi">
 <meta property="article:tag" content="ipmi">
@@ -35,7 +35,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>IPMITool 修改服务器FRU信息 - Song`s Blog</title>
+  <title>浪潮 M5系列服务器IPMI无法监控存储RAID卡问题. - Song`s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -242,7 +242,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="IPMITool 修改服务器FRU信息"></span>
+            <span id="subtitle" data-typed-text="浪潮 M5系列服务器IPMI无法监控存储RAID卡问题."></span>
           
         </div>
 
@@ -253,8 +253,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-03-27 11:54" pubdate>
-          2024年3月27日 中午
+        <time datetime="2024-03-28 11:54" pubdate>
+          2024年3月28日 中午
         </time>
       </span>
     
@@ -265,7 +265,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          309 字
+          198 字
         
       </span>
     
@@ -276,7 +276,7 @@
         
         
         
-          3 分钟
+          2 分钟
         
       </span>
     
@@ -334,12 +334,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">IPMITool 修改服务器FRU信息</h1>
+            <h1 id="seo-header">浪潮 M5系列服务器IPMI无法监控存储RAID卡问题.</h1>
             
               <p id="updated-time" class="note note-danger" style="">
                 
                   
-                    本文最后更新于 2024年3月27日 晚上
+                    本文最后更新于 2024年3月28日 下午
                   
                 
               </p>
@@ -347,16 +347,25 @@
             
               <div class="markdown-body">
                 
-                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>FRU的技术最早使用在服务器等大型设备上，以IBM的水平最高，后来FRU技术被dell移植在PC上，接着联想等厂商也开始了FRU的步伐。现在连太和攒电脑的都使用FRU技术了</p>
-<p>记录服务器的序列号、厂家名称、服务器型号、主板型号、资产编号等信息。</p>
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>浪潮的M5 代服务器，可能有Web BMC无法查看存储RAID&#x2F;SAS卡状态的情况，可以通过以下方式修改。</p>
+<p>修改完成后重启BMC即可生效。</p>
 <p>ESXi IPMITools使用： <a href="https://songxwn.com/ESXi8_IPMI/" title="https://songxwn.com/ESXi8_IPMI/">https://songxwn.com/ESXi8_IPMI&#x2F;</a>   （Linux也可以直接使用）</p>
 <p>Linux &#x2F; ESXi IPMITool下载： <a href="https://songxwn.com/file/ipmitool" title="https://songxwn.com/file/ipmitool">https://songxwn.com/file/ipmitool</a></p>
 <p>Windows下载： <a target="_blank" rel="noopener" href="https://ipmiutil.sourceforge.net/" title="https://ipmiutil.sourceforge.net/">https://ipmiutil.sourceforge.net/</a></p>
 <p>官方开源地址：<a target="_blank" rel="noopener" href="https://codeberg.org/IPMITool/ipmitool" title="https://codeberg.org/IPMITool/ipmitool">https://codeberg.org/IPMITool/ipmitool</a></p>
-<p>主要是有些OEM的服务器FRU信息比较乱，需要二次修改。</p>
 <span id="more"></span>
 
-<h1 id="IPMITool修改命令"><a href="#IPMITool修改命令" class="headerlink" title="IPMITool修改命令"></a>IPMITool修改命令</h1><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs text">ipmitool fru print 0<br># 打印当前的fru信息<br>ipmitool fru edit 0 field b 1 &quot;Board Product Nama&quot;<br># 修改主板名称<br>ipmitool fru edit 0 field b 2 &quot;&quot;.<br># 修改主板序列号<br>ipmitool fru edit 0 field b 0 &quot;Dela&quot;<br># 修改主板制造商<br>ipmitool fru edit 0 field b 3 &quot;Dela&quot;<br># 修改主板部件号<br><br><br><br><br>ipmitool fru edit 0 field p 0 &quot;Manufacturer Name&quot;<br># 修改产品制造商<br>ipmitool fru edit 0 field p 1 &quot;<br># 修改产品名字<br>ipmitool fru edit 0 field p 2 &quot;Product-Name&quot;<br># 修改产品部件号<br>ipmitool fru edit 0 field p 3 &quot;Product-Name&quot;<br># 修改产品版本号<br>ipmitool fru edit 0 field p 4 &quot;Product-Name&quot;<br># 修改产品序列号<br>ipmitool fru edit 0 field p 5 &quot;Product-Name&quot;<br># 修改产品资产标签<br><br><br><br>ipmitool fru edit 0 field c 0 &quot;Product-Name&quot;<br># 修改机箱部件编号<br>ipmitool fru edit 0 field c 1 &quot;Product-Name&quot;<br># 修改机箱机箱序列号<br></code></pre></td></tr></table></figure>
+<h2 id="打开ipmitool-配置"><a href="#打开ipmitool-配置" class="headerlink" title="打开ipmitool 配置"></a>打开ipmitool 配置</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">ipmitool raw 0x3c 0x3a 0x02 0x00/0x01/0x02/0x03/0xFE/0xFF<br># 通过ipmitool配置当前存储卡的类型。<br></code></pre></td></tr></table></figure>
+
+<p>0x00: LSI MegaRAID SAS -&gt;&gt;指的是LSI类型的RAID,3008IMR等</p>
+<p>0x01: PMC RAID-&gt;&gt;指的是PMC类型的RAID</p>
+<p>0x02: LSI SAS 类型1 -&gt;&gt;指的是老-代SAS卡; 3008IT(FW16.00.00.00以前版本),3008IR</p>
+<p>0x03:LSI SAS类型2 -&gt;&gt;指的是3008IT(FW16.00.00.00);9400-8i; 9400-16i;3408-8i</p>
+<p>0xFE;不监控raid卡;</p>
+<p>0xFF: 自动识别（默认）</p>
+<p>获取当前配置:</p>
+<p><code>ipmitool raw 0x3c 0x3b 0x02</code></p>
+
                 
               </div>
             
@@ -405,8 +414,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>IPMITool 修改服务器FRU信息</div>
-      <div>https://songxwn.com/IPMItool-FRU/</div>
+      <div>浪潮 M5系列服务器IPMI无法监控存储RAID卡问题.</div>
+      <div>https://songxwn.com/IPMItool-M5-RAID/</div>
     </div>
     <div class="license-meta">
       
@@ -418,13 +427,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年3月27日</div>
+          <div>2024年3月28日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年3月27日</div>
+          <div>2024年3月28日</div>
         </div>
       
       
@@ -455,18 +464,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/IPMItool-M5-RAID/" title="浪潮 M5系列服务器IPMI无法监控存储RAID卡问题.">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">浪潮 M5系列服务器IPMI无法监控存储RAID卡问题.</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Panabit-iwan/" title="Panabit 派网设备配置 iWAN VPN服务">
-                        <span class="hidden-mobile">Panabit 派网设备配置 iWAN VPN服务</span>
+                      <a href="/IPMItool-FRU/" title="IPMITool 修改服务器FRU信息">
+                        <span class="hidden-mobile">IPMITool 修改服务器FRU信息</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -583,7 +586,7 @@
       
         <a href="/IPMItool-FRU/" title="IPMITool 修改服务器FRU信息"
            class="list-group-item list-group-item-action
-           active">
+           ">
           <span class="category-post">IPMITool 修改服务器FRU信息</span>
         </a>
       
@@ -592,7 +595,7 @@
       
         <a href="/IPMItool-M5-RAID/" title="浪潮 M5系列服务器IPMI无法监控存储RAID卡问题."
            class="list-group-item list-group-item-action
-           ">
+           active">
           <span class="category-post">浪潮 M5系列服务器IPMI无法监控存储RAID卡问题.</span>
         </a>
       
