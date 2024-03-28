@@ -78,11 +78,11 @@
     <link href="https://songxwn.com/Panabit-iwan/"/>
     <id>https://songxwn.com/Panabit-iwan/</id>
     <published>2024-03-25T22:14:30.000Z</published>
-    <updated>2024-03-26T09:40:21.994Z</updated>
+    <updated>2024-03-28T09:16:01.939Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;Panabit SD-WAN作为优质高效的多分支组网解决方案，在组网的基础上，能够通过精细化的业务QoS保障，给用户带来安全顺畅的业务体验。其中，稳定高效的iWAN隧道作为SD-WAN的载体，是实现组网与优化的前提。&lt;/p&gt;
-&lt;p&gt;iWAN作为派网的私有协议，iWAN的承载平台，从一开始的Panabit网关，到后来的小派AP，再到之后的Windows和Linux系统*，延伸的范围越来越广。目前也开始支持Android平台。&lt;/p&gt;
+&lt;p&gt;iWAN作为派网的私有协议，iWAN的承载平台，从一开始的Panabit网关，到后来的小派AP，再到之后的Windows和Linux系统*，延伸的范围越来越广。目前也开始支持Android&amp;#x2F;iOS平台。&lt;/p&gt;
 &lt;p&gt;本教程讲解Panabit iWAN的服务搭建。&lt;/p&gt;
 &lt;p&gt;iWAN 安装客户端下载地址：&lt;a href=&quot;https://www.panabit.com/download&quot; title=&quot;https://www.panabit.com/download&quot;&gt;https://www.panabit.com/download&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;PS：iWAN第三方系统的客户端并不支持明细路由。&lt;/p&gt;</summary>
