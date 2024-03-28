@@ -6,7 +6,7 @@
   <link href="https://songxwn.com/atom.xml" rel="self"/>
   
   <link href="https://songxwn.com/"/>
-  <updated>2024-03-28T10:47:19.149Z</updated>
+  <updated>2024-03-28T10:49:44.541Z</updated>
   <id>https://songxwn.com/</id>
   
   <author>
@@ -21,11 +21,11 @@
     <link href="https://songxwn.com/VMware-vSAN-OSA/"/>
     <id>https://songxwn.com/VMware-vSAN-OSA/</id>
     <published>2024-03-28T11:01:40.000Z</published>
-    <updated>2024-03-28T10:47:19.149Z</updated>
+    <updated>2024-03-28T10:49:44.541Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;存储策略 (Storage Policy) 是管理员定义的一组规则，这组规则定义了数据对象在 &lt;a href=&quot;https://www.vmware.com/products/vsan.html&quot; title=&quot;vSAN&quot;&gt;vSAN&lt;/a&gt; 存储上是如何保存的，存储策略定义了数据存储的可靠性、访问性能等特性。vSAN 提供了基于存储策略的存储管理 SPBM (Storage Policy-Based Management)，管理员创建多个存储策略，利用 SPBM 来对 vSAN 存储进行灵活地管理，SPBM 是 vSAN 的一个重要特色。&lt;/p&gt;
-&lt;p&gt;本文简单介绍了vSAN 在OSA架构下，从vSphere 5.5版本开始到7.0，只支持OSA，8.0以后除了支持OSA外，还支持ESA(Express Storage Architecture)，ESA我另找机会向大家介绍。&lt;/p&gt;
+&lt;p&gt;本文简单介绍了vSAN 的OSA架构，从vSphere 5.5版本开始到7.0，只支持OSA，8.0以后除了支持OSA外，还支持ESA(Express Storage Architecture)。&lt;/p&gt;
 &lt;p&gt;OSA为传统架构，支持SSD+HDD的混合组，或者容量SSD+高速SSD的全闪存组。有容量和性能存储分层。&lt;/p&gt;
 &lt;p&gt;ESA为全新闪存架构，要求使用4块以上的NVME SSD，512G内存、25G网络。无存储分层。&lt;/p&gt;</summary>
     
