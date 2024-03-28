@@ -4,35 +4,6 @@
   
   
   <entry>
-    <title>浪潮 M5系列服务器IPMI无法监控存储RAID卡问题.</title>
-    <link href="/IPMItool-M5-RAID/"/>
-    <url>/IPMItool-M5-RAID/</url>
-    
-    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>浪潮的M5 代服务器，可能有Web BMC无法查看存储RAID&#x2F;SAS卡状态的情况，可以通过以下方式修改。</p><p>修改完成后重启BMC即可生效。</p><p>ESXi IPMITools使用： <a href="https://songxwn.com/ESXi8_IPMI/" title="https://songxwn.com/ESXi8_IPMI/">https://songxwn.com/ESXi8_IPMI&#x2F;</a>   （Linux也可以直接使用）</p><p>Linux &#x2F; ESXi IPMITool下载： <a href="https://songxwn.com/file/ipmitool" title="https://songxwn.com/file/ipmitool">https://songxwn.com/file/ipmitool</a></p><p>Windows下载： <a href="https://ipmiutil.sourceforge.net/" title="https://ipmiutil.sourceforge.net/">https://ipmiutil.sourceforge.net/</a></p><p>官方开源地址：<a href="https://codeberg.org/IPMITool/ipmitool" title="https://codeberg.org/IPMITool/ipmitool">https://codeberg.org/IPMITool/ipmitool</a></p><span id="more"></span><h2 id="打开ipmitool-配置"><a href="#打开ipmitool-配置" class="headerlink" title="打开ipmitool 配置"></a>打开ipmitool 配置</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">ipmitool raw 0x3c 0x3a 0x02 0x00/0x01/0x02/0x03/0xFE/0xFF<br># 通过ipmitool配置当前存储卡的类型。<br></code></pre></td></tr></table></figure><p>0x00: LSI MegaRAID SAS -&gt;&gt;指的是LSI类型的RAID,3008IMR等</p><p>0x01: PMC RAID-&gt;&gt;指的是PMC类型的RAID</p><p>0x02: LSI SAS 类型1 -&gt;&gt;指的是老-代SAS卡; 3008IT(FW16.00.00.00以前版本),3008IR</p><p>0x03:LSI SAS类型2 -&gt;&gt;指的是3008IT(FW16.00.00.00);9400-8i; 9400-16i;3408-8i</p><p>0xFE;不监控raid卡;</p><p>0xFF: 自动识别（默认）</p><p>获取当前配置:</p><p><code>ipmitool raw 0x3c 0x3b 0x02</code></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>Linux</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>esxi</tag>
-      
-      <tag>ipmi</tag>
-      
-      <tag>linux</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>VMware vSAN OSA存储策略-基于虚拟机的分布式对象存储</title>
     <link href="/VMware-vSAN-OSA/"/>
     <url>/VMware-vSAN-OSA/</url>
@@ -54,6 +25,35 @@
       <tag>vSAN</tag>
       
       <tag>HCL</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>浪潮 M5系列服务器IPMI无法监控存储RAID卡问题.</title>
+    <link href="/IPMItool-M5-RAID/"/>
+    <url>/IPMItool-M5-RAID/</url>
+    
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>浪潮的M5 代服务器，可能有Web BMC无法查看存储RAID&#x2F;SAS卡状态的情况，可以通过以下方式修改。</p><p>修改完成后重启BMC即可生效。</p><p>ESXi IPMITools使用： <a href="https://songxwn.com/ESXi8_IPMI/" title="https://songxwn.com/ESXi8_IPMI/">https://songxwn.com/ESXi8_IPMI&#x2F;</a>   （Linux也可以直接使用）</p><p>Linux &#x2F; ESXi IPMITool下载： <a href="https://songxwn.com/file/ipmitool" title="https://songxwn.com/file/ipmitool">https://songxwn.com/file/ipmitool</a></p><p>Windows下载： <a href="https://ipmiutil.sourceforge.net/" title="https://ipmiutil.sourceforge.net/">https://ipmiutil.sourceforge.net/</a></p><p>官方开源地址：<a href="https://codeberg.org/IPMITool/ipmitool" title="https://codeberg.org/IPMITool/ipmitool">https://codeberg.org/IPMITool/ipmitool</a></p><span id="more"></span><h2 id="打开ipmitool-配置"><a href="#打开ipmitool-配置" class="headerlink" title="打开ipmitool 配置"></a>打开ipmitool 配置</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">ipmitool raw 0x3c 0x3a 0x02 0x00/0x01/0x02/0x03/0xFE/0xFF<br># 通过ipmitool配置当前存储卡的类型。<br></code></pre></td></tr></table></figure><p>0x00: LSI MegaRAID SAS -&gt;&gt;指的是LSI类型的RAID,3008IMR等</p><p>0x01: PMC RAID-&gt;&gt;指的是PMC类型的RAID</p><p>0x02: LSI SAS 类型1 -&gt;&gt;指的是老-代SAS卡; 3008IT(FW16.00.00.00以前版本),3008IR</p><p>0x03:LSI SAS类型2 -&gt;&gt;指的是3008IT(FW16.00.00.00);9400-8i; 9400-16i;3408-8i</p><p>0xFE;不监控raid卡;</p><p>0xFF: 自动识别（默认）</p><p>获取当前配置:</p><p><code>ipmitool raw 0x3c 0x3b 0x02</code></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>esxi</tag>
+      
+      <tag>ipmi</tag>
+      
+      <tag>linux</tag>
       
     </tags>
     
