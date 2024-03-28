@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://songxwn.com/VMware-vSAN-OSA/</loc>
+    
+    <lastmod>2024-03-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://songxwn.com/Panabit-iwan/</loc>
     
     <lastmod>2024-03-28</lastmod>
@@ -1794,6 +1803,20 @@
   
   <url>
     <loc>https://songxwn.com/tags/iwan/</loc>
+    <lastmod>2024-03-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://songxwn.com/tags/vSAN/</loc>
+    <lastmod>2024-03-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://songxwn.com/tags/HCL/</loc>
     <lastmod>2024-03-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

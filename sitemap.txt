@@ -1,3 +1,4 @@
+https://songxwn.com/VMware-vSAN-OSA/
 https://songxwn.com/Panabit-iwan/
 https://songxwn.com/IPMItool-M5-RAID/
 https://songxwn.com/IPMItool-FRU/
@@ -224,6 +225,8 @@ https://songxwn.com/tags/sdwan/
 https://songxwn.com/tags/Panabit/
 https://songxwn.com/tags/VPN/
 https://songxwn.com/tags/iwan/
+https://songxwn.com/tags/vSAN/
+https://songxwn.com/tags/HCL/
 https://songxwn.com/categories/network/
 https://songxwn.com/categories/linux/
 https://songxwn.com/categories/VMware/

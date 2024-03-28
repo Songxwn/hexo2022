@@ -1,0 +1,928 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/images/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Song">
+  <meta name="keywords" content="计算机网络,Linux,network,服务器,elasticsearch">
+  
+    <meta name="description" content="简介存储策略 (Storage Policy) 是管理员定义的一组规则，这组规则定义了数据对象在 vSAN 存储上是如何保存的，存储策略定义了数据存储的可靠性、访问性能等特性。vSAN 提供了基于存储策略的存储管理 SPBM (Storage Policy-Based Management)，管理员创建多个存储策略，利用 SPBM 来对 vSAN 存储进行灵活地管理，SPBM 是 vSAN 的一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VMware vSAN OSA存储策略-基于虚拟机的分布式对象存储">
+<meta property="og:url" content="https://songxwn.com/VMware-vSAN-OSA/index.html">
+<meta property="og:site_name" content="Song&#96;s Blog">
+<meta property="og:description" content="简介存储策略 (Storage Policy) 是管理员定义的一组规则，这组规则定义了数据对象在 vSAN 存储上是如何保存的，存储策略定义了数据存储的可靠性、访问性能等特性。vSAN 提供了基于存储策略的存储管理 SPBM (Storage Policy-Based Management)，管理员创建多个存储策略，利用 SPBM 来对 vSAN 存储进行灵活地管理，SPBM 是 vSAN 的一个">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.songxwn.com/file/1193695c961b5651e7969.png">
+<meta property="og:image" content="https://img.songxwn.com/file/29b39c3070186fdbabbc7.png">
+<meta property="og:image" content="https://img.songxwn.com/file/9f96d3c56b48fa1ae353c.png">
+<meta property="og:image" content="https://img.songxwn.com/file/5ece29160d2ab9bc8c8ee.png">
+<meta property="og:image" content="https://img.songxwn.com/file/26b1eb2548f5d70604d44.png">
+<meta property="og:image" content="https://img.songxwn.com/file/bb7e0dd3374bdd117e411.png">
+<meta property="og:image" content="https://img.songxwn.com/file/bb1c8b13eefa5a9dc4ace.png">
+<meta property="article:published_time" content="2024-03-28T02:01:40.000Z">
+<meta property="article:modified_time" content="2024-03-28T10:42:57.320Z">
+<meta property="article:author" content="Song">
+<meta property="article:tag" content="vmware">
+<meta property="article:tag" content="vSAN">
+<meta property="article:tag" content="HCL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img.songxwn.com/file/1193695c961b5651e7969.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>VMware vSAN OSA存储策略-基于虚拟机的分布式对象存储 - Song`s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/scroll.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"songxwn.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":100,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":false,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Song`s Blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Song`s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/books/" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>书单</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss"></i>
+                <span>RSS</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://img.songxwn.com/file/9a6a3f4c572b478a6a538.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="VMware vSAN OSA存储策略-基于虚拟机的分布式对象存储"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-03-28 10:01" pubdate>
+          2024年3月28日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          29 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">VMware vSAN OSA存储策略-基于虚拟机的分布式对象存储</h1>
+            
+              <p id="updated-time" class="note note-danger" style="">
+                
+                  
+                    本文最后更新于 2024年3月28日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>存储策略 (Storage Policy) 是管理员定义的一组规则，这组规则定义了数据对象在 <a target="_blank" rel="noopener" href="https://www.vmware.com/products/vsan.html" title="vSAN">vSAN</a> 存储上是如何保存的，存储策略定义了数据存储的可靠性、访问性能等特性。vSAN 提供了基于存储策略的存储管理 SPBM (Storage Policy-Based Management)，管理员创建多个存储策略，利用 SPBM 来对 vSAN 存储进行灵活地管理，SPBM 是 vSAN 的一个重要特色。</p>
+<p>本文简单介绍了vSAN 在OSA架构下，从vSphere 5.5版本开始到7.0，只支持OSA，8.0以后除了支持OSA外，还支持ESA(Express Storage Architecture)，ESA我另找机会向大家介绍。</p>
+<p>OSA为传统架构，支持SSD+HDD的混合组，或者容量SSD+高速SSD的全闪存组。有容量和性能存储分层。</p>
+<p>ESA为全新闪存架构，要求使用4块以上的NVME SSD，512G内存、25G网络。无存储分层。</p>
+<span id="more"></span>
+
+<h1 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h1><p>据说啊OSA架构是借鉴了路坦力（Nutanix）的设计，大概是2013年，SSD的价格还很贵，这个设计就是利用SSD的高性能，作为读写缓存，提升超融合存储的性能，算是个划时代的产品。VMware的vSAN借鉴了这个思路，当年路坦力的产品依附在VMware平台上，而VMware几乎是抄袭了路坦力，把路坦力气的嘚嘚的，最后导致路坦力和VMware翻脸。</p>
+<h1 id="vSAN-基于虚拟机为对象的超融合分布式存储"><a href="#vSAN-基于虚拟机为对象的超融合分布式存储" class="headerlink" title="vSAN 基于虚拟机为对象的超融合分布式存储"></a>vSAN 基于虚拟机为对象的超融合分布式存储</h1><h2 id="Distributed-RAID"><a href="#Distributed-RAID" class="headerlink" title="Distributed RAID:"></a>Distributed RAID:</h2><p>vSAN将数据按一定的规则（Storage Policy）分布到集群各个物理主机上，确保数据可以在发生主机或存储设备故障的时候可以恢复，类似于磁盘整理上的RAID技术，可以理解成分布式的RAID</p>
+<h2 id="Objects"><a href="#Objects" class="headerlink" title="Objects:"></a>Objects:</h2><p>vSAN是一个对象存储，虚拟机是由多个对象组成，如虚拟机磁盘（VMDK），存储虚拟机配置的VM home namespace，namespace这种对象，可以理解成目录，vSAN的性能数据，ISO文件，内容库这些都是以namesapce的类型存储的；当虚拟开机的时候，VM swap object会被创建；当故障发生的时候，vSAN会创建叫“durablility componet”的对象，以存储新写入的数据。</p>
+<p>每个虚拟机都可以应用一个存储策略，这代表每台虚拟机冗余方法都可以不一样。而数据分布也是每台都是不同，分布在不同容量硬盘上。</p>
+<h2 id="Component"><a href="#Component" class="headerlink" title="Component"></a>Component</h2><p>为了Object可以在故障的时候恢复，所以vSAN将Object切成更小的块（chunk），一个object由多个componet构成，可以理解为下图</p>
+<h1 id="重要的存储策略概念"><a href="#重要的存储策略概念" class="headerlink" title="重要的存储策略概念"></a>重要的存储策略概念</h1><h2 id="对象磁盘条带数-Number-of-disk-stripes-per-object"><a href="#对象磁盘条带数-Number-of-disk-stripes-per-object" class="headerlink" title="对象磁盘条带数 (Number of disk stripes per object)"></a>对象磁盘条带数 (Number of disk stripes per object)</h2><p>把虚机对象分成多个条带 (stripe) 分布存储在多个硬盘上，这样有助于提高数据读取的性能。在下图的例子中，所示的虚机被分为两个条带 a 和 b 进行存储；因为同时又采用了 Raid-1，所以虚机对象又被保存了两个副本，一个副本在服务器 ESX01 的磁盘组中，另一个副本存放在位于服务器 ESX02 和 ESX03 上的磁盘组中。<strong>（其实就相当于 RAID 10</strong>）</p>
+<p>对象条带数实际上就是 Raid-0 的概念，只不过我们在定义 Raid-0 的配置时，更多使用的是条带宽度 (stripe width) 的概念，条带宽度是指每一块条带块的大小，条带数量取决于组成 Raid-0 阵列的磁盘数量。vSAN 中对象条带数缺省为1 (建议不要改动这个值)，最大值为12。把这个值设置成大于1能够提高系统性能，但是会引起更多的资源消耗。</p>
+<p><img src="https://img.songxwn.com/file/1193695c961b5651e7969.png" srcset="/img/loading.gif" lazyload alt="vSAN-RAID1+0"></p>
+<h2 id="读缓存预留-Flash-read-cache-reservation"><a href="#读缓存预留-Flash-read-cache-reservation" class="headerlink" title="读缓存预留 (Flash read cache reservation %)"></a>读缓存预留 (Flash read cache reservation %)</h2><p>无论是机械硬盘和 SSD 组成的混合架构，还是由高速NVME SSD 和普通SAS&#x2F;SATA SSD 组成的全闪存架构，vSAN 都会把两种设备中性能更高的那种设备用作读写缓存（全闪只会用于写缓存），从而来提高整个系统的性能。这个参数指定了为虚机对象保留的缓存 SSD 空间占比 (相对于虚机大小)，缺省为0% ；建议一般情况下不要改动这个值，仅当特定情况下需要提高性能时才改动。</p>
+<p>vSAN OSA 混合硬盘组里面的缓存盘划分写缓冲区（30%）和读缓存区（70%）。</p>
+<p>vSAN OSA 全闪存硬盘里面的缓存盘只用于写缓存，最高利用容量为 600G &#x2F; 1.6TB。（vSAN8 可扩展到1.6TB）</p>
+<p>vSAN OSA 缓存和容量硬盘比应该是 1&#x2F;10。</p>
+<h2 id="对象空间预留-Object-space-reservation"><a href="#对象空间预留-Object-space-reservation" class="headerlink" title="对象空间预留 (Object space reservation  %)"></a>对象空间预留 (Object space reservation  %)</h2><p>vSphere 在创建虚机时虚拟硬盘有三种格式可以选择：</p>
+<ul>
+<li><p>Thick Provision Lazy Zeroed（厚置延迟置零）：一开始就分配足额空间给虚拟硬盘，但是等真正写入数据时才初始化（写 0）；</p>
+</li>
+<li><p>Thick Provision Eager Zeroed（厚置快速置零）：一开始就分配足额空间给虚拟硬盘，并且完全初始化（写 0），性能最优；</p>
+</li>
+<li><p>Thin Provision（精简置备）：根据虚拟硬盘的实际使用来分配空间，但在性能上要比上面两种差一些。</p>
+</li>
+</ul>
+<p>一般为了节省存储空间的话，会使用精简置备。</p>
+<p>对象空间预留参数定义了创建虚机对象时，如果虚机采用的是 Thin Provision 方式的话，必须为虚机保留的存储空间比例 (相对于虚机的大小)。</p>
+<h2 id="可以忍受的故障数-FTT-Failure-to-Tolerate"><a href="#可以忍受的故障数-FTT-Failure-to-Tolerate" class="headerlink" title="可以忍受的故障数 FTT (Failure to Tolerate)"></a>可以忍受的故障数 FTT (Failure to Tolerate)</h2><p>FTT (Failure to Tolerate) 是定义数据保护等级的一个重要参数，FTT &#x3D; 1 意味着可以忍受一个节点的故障。跟 FTT 紧密相关的另一个参数是数据保护方法 FTM (Failure Tolerance Method)，FTM 也定义了数据布局的方式，vSAN 中的 FTM 主要有 Raid-1、Raid-5 和 Raid-6 这几种。</p>
+<p>Raid-1 就是镜像 (Mirroring)，在另一台服务器的磁盘组上保存数据的副本，当其中一台服务器发生故障时，也可以保证数据不丢失。下图展示了 Raid-1  的工作原理，同一个数据对象存在两个副本分别存放在两台服务器上，这种情况下对应 FTT &#x3D; 1。</p>
+<p><img src="https://img.songxwn.com/file/29b39c3070186fdbabbc7.png" srcset="/img/loading.gif" lazyload></p>
+<p>Raid-5 跟传统的 Raid 5 磁盘阵列类的概念类似，只不过阵列不是由同一台服务器上磁盘组成，而是由多台服务器上的磁盘组成，通过增加奇偶校验块来提高数据的容错能力。Raid-5 最少要求4个服务器节点，可以实现 FTT &#x3D; 1 的容错要求。跟 Raid-1 相比，Raid-5 可以至少节省 30% 的存储空间。(在OSA架构下，性能会有一定下降。)</p>
+<p><img src="https://img.songxwn.com/file/9f96d3c56b48fa1ae353c.png" srcset="/img/loading.gif" lazyload></p>
+<p>Raid-6 的工作原理跟 Raid-5 类似，只不过采用了双份的奇偶校验块，从而使数据的容错能力进一步提高。Raid-6 最少要求6个服务器节点，可以实现 FTT &#x3D; 2 的容错要求。跟 Raid-1 相比，Raid-6 可以至少节省 50% 的存储空间。(在OSA架构下，性能会有一定下降。)</p>
+<p><img src="https://img.songxwn.com/file/5ece29160d2ab9bc8c8ee.png" srcset="/img/loading.gif" lazyload></p>
+<p>vSAN 中的 Raid-5&#x2F;6 也称之为纠删码 (Erasure Coding)，我们可以把它理解成一种跨服务器的 Raid 阵列实现。</p>
+<p>在ESA架构中 Raid-5&#x2F;6 的性能被优化到和RAID1 接近。</p>
+<h2 id="IOPS-Input-Output-Per-Second-限制"><a href="#IOPS-Input-Output-Per-Second-限制" class="headerlink" title="IOPS (Input &#x2F; Output Per Second) 限制"></a>IOPS (Input &#x2F; Output Per Second) 限制</h2><p>IOPS 是衡量存储性能的一个重要指标，vSAN 通过为虚机指定 IOPS 限制值，来控制虚机可以获得的存储访问 QoS (Quality of Service) 服务质量等级。通过这个值的设定可以限制某些非关键应用虚机对于 vSAN 性能的占用，从而保证关键应用虚机的存储访问性能。</p>
+<h2 id="校验和-checksum-验证"><a href="#校验和-checksum-验证" class="headerlink" title="校验和 (checksum) 验证"></a>校验和 (checksum) 验证</h2><p>校验和 (checksum) 是在数据处理和数据通信领域中，用于校验数据正确性的一种方法：把数据的各个位数累加起来，在处理数据结束之后根据这个数值判断是否接收到的数据是否正确，如果数值匹配那么说明数据被正确地处理了。校验和通常是以十六进制为数制表示的形式来进行计算，如十六进制串: 0102030405060708 的校验和是 24 (十六进制，十进制累加结果为36)。</p>
+<p>vSAN 在写入数据时同时也写入该数据的校验和，作为日后比对的依据。打开该功能时，vSAN 在后台执行磁盘扫描 (Disk Scrubbing)，如果通过校验和验证发现了错误，则重建数据，能够自动检测和解决静态磁盘错误 (silent disk errors)。</p>
+<h2 id="强制调配-Force-Provisioning"><a href="#强制调配-Force-Provisioning" class="headerlink" title="强制调配 (Force Provisioning)"></a>强制调配 (Force Provisioning)</h2><p>当存储策略中设定的规则不能满足时，vSAN 也可以强制为虚机分配存储空间，保证在一些极端条件下 (如存储空间不够) 也能够为虚机分配空间，让系统能够正常地运行下去。</p>
+<h1 id="存储策略的定义和使用"><a href="#存储策略的定义和使用" class="headerlink" title="存储策略的定义和使用"></a>存储策略的定义和使用</h1><h2 id="定义存储策略"><a href="#定义存储策略" class="headerlink" title="定义存储策略"></a>定义存储策略</h2><p>存储策略必须在虚机创建之前建立，这样才可以在虚机创建时选择使用；当然 vSAN 有缺省的存储策略，如果没什么特殊需求的话，就可以使用缺省的策略。下图示意了虚机存储策略是如何被创建的，创建之后就可以在 web client 管理控制台中看到 vSAN 集群中现有的存储策略。</p>
+<p><img src="https://img.songxwn.com/file/26b1eb2548f5d70604d44.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="使用存储策略"><a href="#使用存储策略" class="headerlink" title="使用存储策略"></a>使用存储策略</h2><p>接下来就可以在创建虚机的时候指定它所使用的存储策略了，或是修改现有虚机的存储策略。下图示意了修改一个虚机存储策略的过程，管理员修改了虚机的存储策略后，vSAN 会根据新的策略来调整虚机数据的存储布局，以符合新的存储策略的要求。</p>
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><p><img src="https://img.songxwn.com/file/bb7e0dd3374bdd117e411.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="检查存储策略的合规性-Compliant"><a href="#检查存储策略的合规性-Compliant" class="headerlink" title="检查存储策略的合规性 (Compliant)"></a>检查存储策略的合规性 (Compliant)</h2><p>管理员也可以去检查虚机对象的存储是否符合存储策略的规定，合规 (Compliant) 的意思就是 vSAN 存储满足了存储策略定义的要求。在存储空间资源短缺的情况下，也会产生不合规的情况，例如要求采用镜像来保存虚机对象，如果其他服务器上没有足够空间的话，结果只保存了一份虚机对象副本。如果出现不合规情况的话，就意味着数据对象没有得到应有的安全保护，也有可能是存储策略设置得不合理，管理员就要立即采取行动，找出造成违规的原因。</p>
+<p><img src="https://img.songxwn.com/file/bb1c8b13eefa5a9dc4ace.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="vSAN规划注意"><a href="#vSAN规划注意" class="headerlink" title="vSAN规划注意"></a>vSAN规划注意</h1><ul>
+<li><p>至少单台物理服务器256G 内存以上。</p>
+</li>
+<li><p>每台服务器CPU是同型号，最少是同代。建议近三年发布的。</p>
+</li>
+<li><p>要求有单独的接入交换机（方便网络接入）。</p>
+</li>
+<li><p>要求集群数量最少三台，推荐为四台以上。</p>
+</li>
+<li><p>vSAN 集群网络之间延迟要求小于1毫秒，最好独立VLAN。</p>
+</li>
+<li><p>要求有单独两块硬盘做RAID1 作为系统盘，独立于vSAN。</p>
+</li>
+<li><p>vSAN 至少要求一个SSD+一个HDD，推荐为两块SDD 作为缓存层，两块HDD作为容量层，作为两个硬盘组。</p>
+</li>
+<li><p>缓存硬盘和容量硬盘的总容量比应该为1:10</p>
+</li>
+<li><p>vSAN网络要求10G起步，推荐使用25G*2</p>
+</li>
+<li><p>缓存盘和容量盘要求直通或RAID0，推荐用SAS卡接入，有一定队列深度要求。</p>
+</li>
+<li><p>集群中所有vSAN主机相互访问延迟不应该大于1MS.</p>
+</li>
+<li><p>网卡要求四个10G网卡，其中两个作为管理、虚拟机迁移、vSAN网络。其他两个为业务网卡。</p>
+</li>
+<li><p>单个阵列卡，RAID和直通模式不能混用，否则vSAN会有问题。vSAN告警</p>
+</li>
+<li><p>vSAN 规定每个磁盘组最少需要一块SSD作为缓存+一块HDD&#x2F;SSD作为容量层，最多一块+7块HDD&#x2F;SSD作为容量层。每台主机不能多于 5 个磁盘组。（vSAN会占用内存、 HA也会预留内存）</p>
+</li>
+<li><p>vSAN缓存盘，30%作为写缓存 70%作为读缓存。每个磁盘组仅可以有一个缓存盘。</p>
+</li>
+<li><p>vSAN OSA 混合硬盘组，缓存层和容量层的大小比应该最小为 1:10</p>
+</li>
+<li><p>vSAN OSA 全闪存硬盘组，缓存盘最大利用率为600G。可增加使用到1.6TB</p>
+</li>
+<li><p>vSAN ESA 架构，需要每台至少有512G内存，四个NVME SSD，两个25G网卡。</p>
+</li>
+<li><p>vSAN可以部署RDMA 增加性能，但需要网卡+交换机支持。</p>
+</li>
+</ul>
+<p>硬件兼容性查询：<a target="_blank" rel="noopener" href="https://www.vmware.com/resources/compatibility/search.php" title="https://www.vmware.com/resources/compatibility/search.php">https://www.vmware.com/resources/compatibility/search.php</a></p>
+<h1 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h1><p>将 VMware vSphere &#x2F; vSAN 软件与 Intel 的最新硬件平台技术相结合，可以为用户交付最佳的超融合架构平台，帮助用户简化数据中心管理，降低采购和运维成本，轻松应对企业在数字化转型中面对的各种挑战。（AMD目前的服务器CPU性价比更高。）</p>
+<ul>
+<li><p>VMware vSAN 是最佳的存储方案平台，具有管理简便、高性能、低成本、易扩展的特点，在 vSAN 平台上可以支持任何类型的应用。</p>
+</li>
+<li><p>Intel 至强处理器提供最强计算能力，基于傲腾 (Optane) 和 3D NAND 技术的固态盘是理想的高速缓存，以太网融合网卡提供稳定的网络带宽和低网络延迟。(傲腾 产品线已经被放弃了。)</p>
+</li>
+</ul>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p><a target="_blank" rel="noopener" href="https://blogs.vmware.com/china/2018/12/29/vsan-%E5%AD%98%E5%82%A8%E7%AD%96%E7%95%A5%E6%BC%94%E7%A4%BA/" title="https://blogs.vmware.com/china/2018/12/29/vsan-%E5%AD%98%E5%82%A8%E7%AD%96%E7%95%A5%E6%BC%94%E7%A4%BA/">https://blogs.vmware.com/china/2018/12/29/vsan-%E5%AD%98%E5%82%A8%E7%AD%96%E7%95%A5%E6%BC%94%E7%A4%BA/</a></p>
+<p><a target="_blank" rel="noopener" href="https://communities.vmware.com/t5/VMware-vSAN-Discussions/cache-size-in-vSAN-6-2/td-p/2225513" title="https://communities.vmware.com/t5/VMware-vSAN-Discussions/cache-size-in-vSAN-6-2/td-p/2225513">https://communities.vmware.com/t5/VMware-vSAN-Discussions/cache-size-in-vSAN-6-2/td-p/2225513</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/686508940" title="https://zhuanlan.zhihu.com/p/686508940">https://zhuanlan.zhihu.com/p/686508940</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/VMware/" class="category-chain-item">VMware</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/vmware/" class="print-no-link">#vmware</a>
+      
+        <a href="/tags/vSAN/" class="print-no-link">#vSAN</a>
+      
+        <a href="/tags/HCL/" class="print-no-link">#HCL</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>VMware vSAN OSA存储策略-基于虚拟机的分布式对象存储</div>
+      <div>https://songxwn.com/VMware-vSAN-OSA/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Song</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年3月28日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年3月28日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/IPMItool-M5-RAID/" title="浪潮 M5系列服务器IPMI无法监控存储RAID卡问题.">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">浪潮 M5系列服务器IPMI无法监控存储RAID卡问题.</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/IPMItool-FRU/" title="IPMITool 修改服务器FRU信息">
+                        <span class="hidden-mobile">IPMITool 修改服务器FRU信息</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments">
+      
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script>
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          Fluid.utils.createCssLink('https://lib.baomitu.com/disqusjs/1.3.0/disqusjs.css');
+          Fluid.utils.createScript('https://lib.baomitu.com/disqusjs/1.3.0/disqus.js', function() {
+            new DisqusJS({
+              shortname: 'songxwn',
+              apikey: ''
+            });
+          });
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="VMware"
+        id="heading-56079badd056a19303cc26e6a4fcc7e0" role="tab" data-toggle="collapse" href="#collapse-56079badd056a19303cc26e6a4fcc7e0"
+        aria-expanded="true"
+      >
+        VMware
+        <span class="list-group-count">(1)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-56079badd056a19303cc26e6a4fcc7e0"
+           role="tabpanel" aria-labelledby="heading-56079badd056a19303cc26e6a4fcc7e0">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/VMware-vSAN-OSA/" title="VMware vSAN OSA存储策略-基于虚拟机的分布式对象存储"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">VMware vSAN OSA存储策略-基于虚拟机的分布式对象存储</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <a href="https://www.foreverblog.cn/go.html" target="_blank"> <img src="https://img.foreverblog.cn/wormhole_1_tp.gif" alt="" style="width:auto;height:32px;" title="穿梭虫洞-随机访问十年之约友链博客"></a>,<a href="https://www.vultr.com/?ref=7199488" target="_blank"> <img src="https://www.vultr.com/media/logo_ondark.svg" alt="" style="width:auto;height:32px;" title="注册vultr获取免费10美元体验额度"></a>,<a href="https://url.cn/eTx2WPml" target="_blank"> <img src="https://s3.bmp.ovh/imgs/2023/05/06/989aea4d82987ca9.png" alt="" style="width:auto;height:32px;" title="【腾讯云】云服务器、云数据库、COS、CDN、短信等云产品特惠热卖中"></a>
+        </div>
+      </div>
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
